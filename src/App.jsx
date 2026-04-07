@@ -48,6 +48,9 @@ import DriverHome from './pages/Driver/Home';
 // Warehouse pages
 import WarehouseDashboard from './pages/Warehouse/Dashboard';
 
+// Not Found
+import NotFound from './pages/NotFound';
+
 function App() {
   return (
     <Router>
@@ -102,6 +105,9 @@ function App() {
         <Route path="/warehouse" element={<WarehouseLayout />}>
           <Route index element={<WarehouseDashboard />} />
         </Route>
+
+        {/* Catch-all 404 Route */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
