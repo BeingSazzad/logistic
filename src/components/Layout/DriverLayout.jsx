@@ -31,10 +31,12 @@ export default function DriverLayout() {
               </p>
             </div>
           </div>
-          <button className="relative p-2 text-gray-400">
-            <Bell size={20} />
-            <span className="absolute top-2 right-2 w-2 h-2 bg-yellow-400 rounded-full" />
-          </button>
+          <div className="flex gap-1.5">
+            <NavLink to="/driver/messages" className={({ isActive }) => `relative p-2 rounded-xl transition-all ${isActive ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}>
+              <Bell size={20} />
+              <span className="absolute top-2 right-2 w-2 h-2 bg-[#FACC15] rounded-full animate-pulse" />
+            </NavLink>
+          </div>
         </div>
 
         {/* Scrollable page content */}

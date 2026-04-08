@@ -14,11 +14,16 @@ export default function AdminFleetManagement() {
   return (
     <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
       
-      {/* Updated Header - Matching Reference Style */}
+      {/* Standardized Header */}
       <div className="flex justify-between items-center mb-2 px-2">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Fleet Management</h1>
-          <p className="text-sm text-gray-500 mt-1">Manage vehicles, trailers, fuel logs, and maintenance schedules.</p>
+        <div className="flex items-center gap-4">
+          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-[#111] shadow-sm">
+            <Truck size={20} />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Fleet Management</h1>
+            <p className="text-sm text-gray-500 mt-1">Manage vehicles, trailers, fuel logs, and maintenance schedules.</p>
+          </div>
         </div>
         <button 
           onClick={() => navigate('/admin/fleet/add')} 
@@ -32,21 +37,21 @@ export default function AdminFleetManagement() {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 px-2 mb-2">
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Active Fleet</p><p className="text-2xl font-black text-gray-900 mt-0.5">124</p></div>
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-gray-50 text-gray-400"><Truck size={20}/></div>
+        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between">
+          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest leading-tight">Active Fleet</p><p className="text-2xl font-black text-gray-900 mt-1.5 leading-none">124</p></div>
+          <div className="w-10 h-10 rounded border border-gray-100 flex items-center justify-center bg-gray-50 text-gray-400"><Truck size={20}/></div>
         </div>
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">In Maintenance</p><p className="text-2xl font-black text-red-600 mt-0.5">8</p></div>
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-red-50 text-red-500"><Wrench size={20}/></div>
+        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between">
+          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest leading-tight">In Maintenance</p><p className="text-2xl font-black text-red-600 mt-1.5 leading-none">8</p></div>
+          <div className="w-10 h-10 rounded border border-red-100 flex items-center justify-center bg-red-50 text-red-500"><Wrench size={20}/></div>
         </div>
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Service Due</p><p className="text-2xl font-black text-yellow-600 mt-0.5">12</p></div>
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-yellow-50 text-yellow-600"><AlertTriangle size={20}/></div>
+        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between">
+          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest leading-tight">Service Due</p><p className="text-2xl font-black text-amber-600 mt-1.5 leading-none">12</p></div>
+          <div className="w-10 h-10 rounded border border-amber-100 flex items-center justify-center bg-amber-50 text-amber-600"><AlertTriangle size={20}/></div>
         </div>
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Fuel Efficiency</p><p className="text-2xl font-black text-blue-600 mt-0.5">16.4<span className="text-sm font-bold text-gray-400 tracking-tighter">L</span></p></div>
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-blue-50 text-blue-500"><Droplet size={20}/></div>
+        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between">
+          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest leading-tight">Fuel Efficiency</p><p className="text-2xl font-black text-blue-600 mt-1.5 leading-none">16.4<span className="text-sm font-bold text-gray-400 tracking-tighter">L</span></p></div>
+          <div className="w-10 h-10 rounded border border-blue-100 flex items-center justify-center bg-blue-50 text-blue-500"><Droplet size={20}/></div>
         </div>
       </div>
 
@@ -54,24 +59,24 @@ export default function AdminFleetManagement() {
       <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
         
         {/* Filter Bar */}
-        <div className="p-5 border-b border-gray-100 flex justify-between items-center">
-           <div className="relative w-[320px]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
+        <div className="p-5 border-b border-gray-100 flex justify-between items-center bg-[#FAFAFA]">
+           <div className="relative w-[320px] group">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#FFCC00] transition-colors" size={16} />
               <input 
                 type="text" 
                 placeholder="Search by Reg, ID or Status..." 
-                className="w-full bg-white border border-gray-200 rounded-lg py-2 pl-9 pr-4 text-sm focus:outline-none transition-all" 
+                className="w-full bg-white border border-gray-200 rounded-lg py-2.5 pl-10 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 focus:border-[#FFCC00] transition-all shadow-sm" 
               />
            </div>
            
-           <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50">
-              Sort By <ChevronDown size={16} className="text-gray-400" />
+           <button className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 shadow-sm rounded-lg text-xs font-bold uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-colors">
+              Sort By <ChevronDown size={14} className="text-gray-400" />
            </button>
         </div>
 
         <div className="overflow-x-auto">
            <table className="w-full text-left">
-             <thead className="bg-[#FAFAFA] text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+             <thead className="bg-[#FAFAFA] text-[10px] font-bold text-gray-500 uppercase tracking-widest border-b border-gray-100">
                <tr>
                  <th className="px-6 py-4">Vehicle ID & Reg</th>
                  <th className="px-6 py-4">Type & Capacity</th>
@@ -115,11 +120,11 @@ export default function AdminFleetManagement() {
                    <td className="px-6 py-5">
                       <div className="text-sm font-bold text-gray-700">{v.fuel}</div>
                    </td>
-                   <td className="px-6 py-5 text-right">
-                      <button className="text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors uppercase tracking-widest">
-                        Manage
-                      </button>
-                   </td>
+                    <td className="px-6 py-4 text-right">
+                       <button className="text-[10px] font-bold text-blue-600 hover:text-white border border-blue-200 hover:bg-blue-600 hover:border-blue-600 px-3 py-1.5 rounded-lg transition-colors uppercase tracking-widest">
+                         Manage
+                       </button>
+                    </td>
                  </tr>
                ))}
              </tbody>

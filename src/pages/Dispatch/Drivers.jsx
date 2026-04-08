@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { 
   Search, MapPin, Phone, Star, AlertCircle, Filter, 
   ArrowDownUp, MessageSquare, Clock, ShieldCheck, 
-  ExternalLink, UserCog
+  UserCog, Plus, Users, ChevronDown
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function DispatchDrivers() {
-  const drivers = [
+  const navigate = useNavigate();
+  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState('All');
+  const [sortKey, setSortKey] = useState('name');
+  const [sortOrder, setSortOrder] = useState('asc');
+
+  const rawDrivers = [
     { id: 'DRV-102', name: 'Jack Taylor',   phone: '+61 411 000 001', rank: 'Senior', status: 'On Duty', assigned: 'SHP-20481', rating: 4.8, shift: '06:00 - 18:00', compliance: 'Valid' },
     { id: 'DRV-105', name: 'Liam Smith',   phone: '+61 412 000 002', rank: 'Regular',status: 'On Duty', assigned: 'SHP-20482', rating: 4.5, shift: '06:00 - 18:00', compliance: 'Valid' },
     { id: 'DRV-118', name: 'Noah Williams',    phone: '+61 413 000 003', rank: 'Regular',status: 'Delay Alert', assigned: 'SHP-20483', rating: 4.2, shift: '08:00 - 20:00', compliance: 'Warning' },
@@ -14,114 +21,172 @@ export default function DispatchDrivers() {
     { id: 'DRV-145', name: 'Lucas Jones', phone: '+61 415 000 005', rank: 'Senior', status: 'Off Duty',  assigned: '-', rating: 4.9, shift: 'Night Shift', compliance: 'Valid' },
   ];
 
-  const getStatusColor = (status) => {
-    switch(status) {
-      case 'On Duty': return 'bg-emerald-50 text-emerald-600 border-emerald-100';
-      case 'Delay Alert': return 'bg-red-50 text-red-600 border-red-100 animate-pulse';
-      case 'In Break': return 'bg-amber-50 text-amber-600 border-amber-100';
-      case 'Off Duty': return 'bg-gray-100 text-gray-500 border-transparent opacity-60';
-      default: return 'bg-gray-50 text-gray-500 border-gray-100';
-    }
-  };
+  const filteredDrivers = useMemo(() => {
+    return rawDrivers.filter(drv => {
+      const matchesFilter = filter === 'All' || drv.status === filter;
+      const searchStr = `${drv.id} ${drv.name} ${drv.phone}`.toLowerCase();
+      const matchesSearch = searchStr.includes(search.toLowerCase());
+      return matchesFilter && matchesSearch;
+    }).sort((a, b) => {
+      const aVal = a[sortKey];
+      const bVal = b[sortKey];
+      if (sortOrder === 'asc') return aVal > bVal ? 1 : -1;
+      return aVal < bVal ? 1 : -1;
+    });
+  }, [filter, search, sortKey, sortOrder]);
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
       
-      {/* ── 1. Dispatch Resource Header ── */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <h1 className="text-2xl font-black text-gray-900 tracking-tight flex items-center gap-3">
-             <div className="p-2 bg-yellow-400 rounded-xl shadow-sm">
-                <UserCog size={24} className="text-black" />
-             </div>
-             Driver Directory
-          </h1>
-          <p className="text-sm font-bold text-gray-400 mt-1 uppercase tracking-widest">Active Fleet Operators • Live Status</p>
-        </div>
-        <div className="flex gap-2">
-           <button className="btn bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 shadow-sm font-bold px-4">
-              Export Fleet List
-           </button>
-        </div>
-      </div>
-
-      {/* ── 2. Unified Resource Control ── */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex flex-col sm:flex-row justify-between gap-4 items-center bg-gray-50/20">
-         <div className="relative w-full max-w-sm">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
-            <input type="text" placeholder="Search driver by name, ID or rank..." className="input pl-9 w-full bg-white border-gray-200" />
-         </div>
-         <div className="flex gap-2 w-full sm:w-auto">
-            <button className="btn bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 flex items-center gap-2 flex-1 sm:flex-none">
-              <ArrowDownUp size={14}/> 
-              <span className="text-xs font-bold">Sort Status</span>
-            </button>
-            <button className="btn bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 flex items-center gap-2 flex-1 sm:flex-none">
-              <Filter size={14}/> 
-              <span className="text-xs font-bold">Filters</span>
-            </button>
-         </div>
-      </div>
-
-      {/* ── 3. High Density Cards ── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {drivers.map(drv => (
-          <div key={drv.id} className="card bg-white p-6 border border-gray-100 shadow-sm hover:border-[#FACC15] transition-all relative group flex flex-col">
-            
-            {/* Compliance Badge */}
-            <div className={`absolute top-0 right-0 p-2.5 rounded-bl-3xl ${drv.compliance === 'Valid' ? 'bg-emerald-50 text-emerald-500' : 'bg-red-50 text-red-500 animate-bounce'}`}>
-               {drv.compliance === 'Valid' ? <ShieldCheck size={18} /> : <AlertCircle size={18} />}
-            </div>
-
-            <div className="flex items-start gap-4 mb-6">
-               <div className="w-16 h-16 rounded-2xl bg-gray-900 flex items-center justify-center text-xl font-black text-yellow-400 shadow-xl relative shrink-0">
-                  {drv.name.split(' ').map(n=>n[0]).join('')}
-                  <div className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white ${drv.status === 'On Duty' ? 'bg-emerald-500' : 'bg-gray-300'}`}></div>
-               </div>
-               <div className="min-w-0 pr-6">
-                  <h3 className="font-black text-gray-900 text-lg leading-tight truncate">{drv.name}</h3>
-                  <div className="flex items-center gap-2 mt-1">
-                     <span className="text-[10px] uppercase font-black tracking-widest text-[#FACC15] bg-gray-900 px-2 py-0.5 rounded shadow-sm">{drv.rank}</span>
-                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">ID: {drv.id}</span>
-                  </div>
-               </div>
-            </div>
-
-            <div className="flex-1 space-y-3.5 mb-6">
-               <div className="flex justify-between items-center bg-gray-50/50 p-2.5 rounded-xl border border-gray-50">
-                  <span className="text-[10px] font-black uppercase text-gray-400 tracking-widest flex items-center gap-1.5"><Clock size={12}/> Shift</span>
-                  <span className="text-xs font-black text-gray-700">{drv.shift}</span>
-               </div>
-               <div className="flex justify-between items-center px-1">
-                  <span className="text-[10px] font-black uppercase text-gray-400 tracking-widest flex items-center gap-1.5"><MapPin size={12}/> Current Flow</span>
-                  <span className={`text-xs font-black ${drv.assigned === '-' ? 'text-gray-300' : 'text-gray-900'}`}>{drv.assigned}</span>
-               </div>
-               <div className="flex justify-between items-center px-1">
-                  <span className="text-[10px] font-black uppercase text-gray-400 tracking-widest flex items-center gap-1.5"><Star size={12} className="text-yellow-500 fill-yellow-500"/> Performance</span>
-                  <span className="text-xs font-black text-yellow-600">{drv.rating} / 5.0</span>
-               </div>
-            </div>
-
-            <div className="mt-auto space-y-3">
-               <div className={`w-full text-center py-2 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] border ${getStatusColor(drv.status)}`}>
-                  {drv.status}
-               </div>
-
-               <div className="flex gap-2">
-                  <button className="flex-1 bg-gray-900 hover:bg-black text-white p-3 rounded-xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
-                     <MessageSquare size={16} /> <span className="text-xs font-black uppercase tracking-widest">Chat</span>
-                  </button>
-                  <button className="flex-1 bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 p-3 rounded-xl shadow-sm transition-all active:scale-95 flex items-center justify-center gap-2">
-                     <Phone size={16} /> <span className="text-xs font-black uppercase tracking-widest">Call</span>
-                  </button>
-                  <button className="bg-yellow-400 hover:bg-yellow-500 text-black p-3 rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center">
-                     <ExternalLink size={18} />
-                  </button>
-               </div>
-            </div>
-
+      {/* Standardized Header */}
+      <div className="flex justify-between items-center mb-2 px-2">
+        <div className="flex items-center gap-4">
+          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-[#111] shadow-sm">
+            <Users size={20} />
           </div>
-        ))}
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Driver Directory</h1>
+            <p className="text-sm text-gray-500 mt-1">Active Fleet Operators and Live Status Monitoring</p>
+          </div>
+        </div>
+        <div className="flex gap-3">
+          <button className="bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 px-6 py-2.5 rounded-lg font-bold transition-all shadow-sm">
+             Export CSV
+          </button>
+          <button className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm">
+             <Plus size={18} strokeWidth={3} /> Add Driver
+          </button>
+        </div>
+      </div>
+
+      <div className="w-full h-px bg-gray-200/60 mb-2"></div>
+
+      {/* Modern High-Density Table Card */}
+      <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
+        
+        {/* Filter Bar */}
+        <div className="p-5 border-b border-gray-100 flex flex-col xl:flex-row justify-between items-center gap-4 bg-[#FAFAFA]">
+           <div className="flex bg-gray-100 p-1 rounded-lg border border-gray-200/60 w-full xl:w-auto overflow-x-auto shadow-sm">
+             {['All', 'On Duty', 'In Break', 'Delay Alert', 'Off Duty'].map((tab) => (
+               <button 
+                 key={tab}
+                 onClick={() => setFilter(tab)}
+                 className={`px-4 py-2 text-[11px] font-bold uppercase tracking-widest rounded transition-all whitespace-nowrap ${filter === tab ? 'bg-white text-gray-900 shadow-sm border border-gray-200/50' : 'text-gray-500 hover:text-gray-700 border border-transparent'}`}
+               >
+                 {tab}
+               </button>
+             ))}
+           </div>
+
+           <div className="flex flex-col md:flex-row items-center gap-4 w-full xl:w-auto">
+             <div className="relative w-full md:w-[320px]">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#FFCC00] transition-colors" size={16} />
+                <input 
+                  type="text" 
+                  value={search}
+                  onChange={e => setSearch(e.target.value)}
+                  placeholder="Find ID, name or phone..." 
+                  className="w-full bg-white border border-gray-200 rounded-lg py-2.5 pl-10 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 focus:border-[#FFCC00] transition-all shadow-sm" 
+                />
+             </div>
+             
+             <div className="relative w-full md:w-auto">
+                <select 
+                  value={sortKey} 
+                  onChange={(e) => setSortKey(e.target.value)}
+                  className="w-full md:w-auto appearance-none bg-white border border-gray-200 text-gray-700 text-sm font-bold rounded-lg pl-10 pr-12 py-2.5 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 transition-all cursor-pointer shadow-sm"
+                >
+                  <option value="name">Sort: Driver Name</option>
+                  <option value="id">Sort: Driver ID</option>
+                  <option value="rating">Sort: By Rating</option>
+                  <option value="rank">Sort: By Rank</option>
+                </select>
+                <ArrowDownUp size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                <ChevronDown size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+             </div>
+           </div>
+        </div>
+
+        <div className="overflow-x-auto">
+           <table className="w-full text-left">
+             <thead className="bg-[#FAFAFA] text-[10px] font-bold text-gray-500 uppercase tracking-widest border-b border-gray-100">
+               <tr>
+                 <th className="px-6 py-4">Driver Details</th>
+                 <th className="px-6 py-4">Current Shift</th>
+                 <th className="px-6 py-4">Status & Assignment</th>
+                 <th className="px-6 py-4">Compliance</th>
+                 <th className="px-6 py-4 text-right">Actions</th>
+               </tr>
+             </thead>
+             <tbody className="divide-y divide-gray-100">
+               {filteredDrivers.map(drv => (
+                 <tr className="hover:bg-gray-50 transition-all cursor-pointer group" key={drv.id} onClick={() => navigate(`/dispatch/drivers/${drv.id}`)}>
+                   <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                         <div className="w-10 h-10 rounded border-2 border-transparent bg-[#111] flex items-center justify-center text-[#FFCC00] font-black text-xs shrink-0 group-hover:border-[#FFCC00] transition-colors">
+                            {drv.name.split(' ').map(n=>n[0]).join('')}
+                         </div>
+                         <div>
+                            <div className="font-bold text-[#111] text-sm flex items-center gap-2">
+                               {drv.name}
+                               <span className="text-[9px] uppercase font-bold tracking-widest text-[#111] border border-gray-200 bg-white px-1.5 py-0.5 rounded shadow-sm">{drv.rank}</span>
+                            </div>
+                            <div className="text-[10px] font-bold text-gray-400 tracking-widest uppercase mt-0.5">{drv.id} • {drv.phone}</div>
+                         </div>
+                      </div>
+                   </td>
+                   <td className="px-6 py-4">
+                      <div className="flex items-center gap-2 text-xs font-bold text-gray-600">
+                         <Clock size={14} className="text-gray-400"/>
+                         {drv.shift}
+                      </div>
+                      <div className="flex items-center gap-1.5 mt-1 text-[10px] font-bold text-yellow-600">
+                         <Star size={10} className="fill-yellow-500" /> {drv.rating} / 5.0
+                      </div>
+                   </td>
+                   <td className="px-6 py-4">
+                      <div className="flex flex-col gap-1.5">
+                        <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md border w-fit uppercase tracking-widest ${
+                           drv.status === 'On Duty' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 
+                           drv.status === 'Delay Alert' ? 'bg-[#FEF2F2] text-[#DC2626] border-[#FEE2E2] animate-pulse' : 
+                           drv.status === 'In Break' ? 'bg-amber-50 text-amber-600 border-amber-100' :
+                           'bg-gray-100 text-gray-600 border-gray-200'
+                        }`}>
+                           {drv.status}
+                        </span>
+                        <div className={`text-[10px] uppercase font-bold mt-0.5 flex items-center gap-1.5 tracking-widest ${drv.assigned === '-' ? 'text-gray-400' : 'text-gray-700 font-black'}`}>
+                           <MapPin size={10} /> {drv.assigned === '-' ? 'No Active Job' : drv.assigned}
+                        </div>
+                      </div>
+                   </td>
+                   <td className="px-6 py-4">
+                      <div className="flex items-center gap-2">
+                         {drv.compliance === 'Valid' ? (
+                           <span className="flex items-center gap-1.5 text-[10px] font-bold text-emerald-600 bg-[#F0FDF4] border border-[#DCFCE7] uppercase tracking-widest px-2.5 py-1 rounded-md">
+                             <ShieldCheck size={12}/> Valid
+                           </span>
+                         ) : (
+                           <span className="flex items-center gap-1.5 text-[10px] font-bold text-red-600 bg-[#FEF2F2] border border-[#FEE2E2] uppercase tracking-widest px-2.5 py-1 rounded-md">
+                             <AlertCircle size={12}/> Needs Renewal
+                           </span>
+                         )}
+                      </div>
+                   </td>
+                   <td className="px-6 py-4 text-right">
+                      <div className="flex items-center justify-end gap-2">
+                        <button className="text-[10px] font-bold text-gray-500 border border-gray-200 hover:bg-gray-50 hover:text-gray-900 px-3 py-2 rounded-lg transition-colors uppercase tracking-widest flex items-center gap-2 shadow-sm">
+                          <Phone size={14}/> Call
+                        </button>
+                        <button onClick={(e) => { e.stopPropagation(); navigate('/dispatch/messages'); }} className="text-[10px] font-bold text-black border border-[#E6B800] bg-[#FFCC00] hover:bg-[#E6B800] hover:border-[#CC9900] px-3 py-2 rounded-lg transition-colors uppercase tracking-widest flex items-center gap-2 shadow-sm">
+                          <MessageSquare size={14}/> Chat
+                        </button>
+                      </div>
+                   </td>
+                 </tr>
+               ))}
+             </tbody>
+           </table>
+        </div>
       </div>
     </div>
   );

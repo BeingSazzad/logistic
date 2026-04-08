@@ -58,6 +58,7 @@ import DriverJobs        from './pages/Driver/Jobs';
 import DriverPay         from './pages/Driver/Pay';
 import DriverExpenses    from './pages/Driver/Expenses';
 import DriverProfile     from './pages/Driver/Profile';
+import DriverMessages    from './pages/Driver/Messages';
 
 // ── Warehouse ────────────────────────────────────────────────────
 import WarehouseDashboard from './pages/Warehouse/Dashboard';
@@ -139,6 +140,7 @@ function App() {
           <Route path="jobs/create" element={<DispatchCreateJob />} />
           <Route path="tracking"     element={<DispatchTracking />} />
           <Route path="drivers"      element={<DispatchDrivers />} />
+          <Route path="drivers/:driverId" element={<AdminDriverDetail />} />
           <Route path="messages"     element={<DispatchMessages />} />
         </Route>
 
@@ -151,6 +153,7 @@ function App() {
           <Route path="pay"          element={<DriverPay />} />
           <Route path="expenses"     element={<DriverExpenses />} />
           <Route path="profile"      element={<DriverProfile />} />
+          <Route path="messages"     element={<DriverMessages />} />
         </Route>
 
         {/* ── WAREHOUSE ── */}

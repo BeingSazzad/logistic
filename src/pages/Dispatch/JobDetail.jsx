@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { 
   ArrowLeft, MapPin, CheckCircle2, Circle, AlertTriangle, 
   Printer, Share2, ClipboardList, Truck, Box, 
-  User, Calendar, Clock, ChevronRight, FileCheck 
+  User, Calendar, Clock, ChevronRight, FileCheck, Route, FileText
 } from 'lucide-react';
 
 export default function DispatchJobDetail() {
@@ -18,7 +18,7 @@ export default function DispatchJobDetail() {
     consignor: {
       name: 'Global Traders PTY (Guest)',
       address: 'Warehouse 4, 12 Botany Rd, Alexandria NSW 2015',
-      contact: 'Liam O’Neil (+61 2 9283 1122)',
+      contact: "Liam O'Neil (+61 2 9283 1122)",
       type: 'Pickup'
     },
     consignee: {
@@ -43,79 +43,87 @@ export default function DispatchJobDetail() {
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto pb-24 px-6">
+    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
       
-      {/* ── Header Area ── */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
-        <div className="flex items-center gap-6">
-           <button 
-             onClick={() => navigate('/dispatch/jobs')}
-             className="w-12 h-12 flex items-center justify-center bg-white border-2 border-gray-50 rounded-2xl text-gray-400 hover:text-gray-900 transition-all shadow-xl shadow-gray-200/20 group"
-           >
-             <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-           </button>
-           <div>
-              <div className="flex items-center gap-3">
-                 <h1 className="text-3xl font-black text-gray-900 tracking-tighter">{job.id}</h1>
-                 <span className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border border-blue-100 bg-blue-50 text-blue-600 shadow-sm`}>
-                    ● {job.status}
-                 </span>
-                 {job.priority === 'High' && (
-                    <span className="px-3 py-1 bg-red-50 text-red-600 text-[9px] font-black uppercase rounded-lg border border-red-100 animate-pulse">Priority</span>
-                 )}
-              </div>
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-2">Manifest Registered: April 08, 2026 • 11:42 PM</p>
-           </div>
+      {/* Standardized Header */}
+      <div className="flex justify-between items-center mb-2 px-2">
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={() => navigate('/dispatch/jobs')}
+            className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-all shadow-sm"
+          >
+            <ArrowLeft size={20} />
+          </button>
+          <div>
+            <div className="flex items-center gap-3">
+               <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{job.id}</h1>
+               <span className="text-[10px] font-bold px-2 py-1 rounded bg-[#F0FDF4] text-[#16A34A] border border-[#DCFCE7] uppercase tracking-widest flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#16A34A]"></span> {job.status}
+               </span>
+               {job.priority === 'High' && (
+                  <span className="text-[10px] font-bold px-2 py-1 rounded bg-red-50 text-red-600 border border-red-100 uppercase tracking-widest animate-pulse">
+                     Priority
+                  </span>
+               )}
+            </div>
+            <p className="text-[11px] text-gray-500 mt-1 uppercase tracking-widest font-medium">Manifest Registered: April 08, 2026 • 11:42 PM</p>
+          </div>
         </div>
-        
-        <div className="flex gap-3 w-full md:w-auto">
-           <button className="flex-1 md:flex-none btn bg-white border-2 border-gray-100 text-gray-600 hover:border-gray-900 transition-all flex items-center justify-center gap-2 font-black uppercase text-[10px] tracking-widest py-4 px-6 rounded-2xl">
+        <div className="flex gap-3">
+           <button className="bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 px-5 py-2.5 rounded-lg font-bold transition-all shadow-sm flex items-center justify-center gap-2">
               <Printer size={16}/> Print POD
            </button>
-           <button className="flex-1 md:flex-none btn bg-gray-900 text-[#FACC15] hover:bg-black transition-all flex items-center justify-center gap-2 font-black uppercase text-[10px] tracking-widest py-4 px-8 rounded-2xl shadow-xl shadow-yellow-400/10">
-              <Share2 size={16}/> Track Live
+           <button className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm group">
+              <Share2 size={16} strokeWidth={2.5}/> Track Live
            </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <div className="w-full h-px bg-gray-200/60 mb-2"></div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 px-2">
         
-        {/* ── LEFT: The Physical Flow (Origin/Dest) ── */}
-        <div className="lg:col-span-8 space-y-8">
+        {/* ── LEFT: The Physical Flow (Origin/Dest) Col-span-2 ── */}
+        <div className="lg:col-span-2 space-y-6">
            
            {/* Manifest Cards: Origin & Destination */}
-           <div className="bg-white rounded-[2.5rem] border-2 border-gray-50 shadow-2xl p-10 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gray-50 rounded-bl-[100px] -z-0 opacity-50"></div>
-              
-              <div className="relative z-10 space-y-12">
+           <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden relative">
+              <div className="p-5 border-b border-gray-100 bg-[#FAFAFA] flex items-center gap-3">
+                 <Route className="text-[#FFCC00]" size={18} />
+                 <div>
+                    <h2 className="text-sm font-bold text-[#111] uppercase tracking-wide">Transit Route</h2>
+                 </div>
+              </div>
+              <div className="p-6">
                  {/* Pickup Node */}
-                 <div className="flex gap-8">
-                    <div className="w-14 h-14 rounded-3xl bg-yellow-400 flex items-center justify-center text-black shadow-xl shrink-0 group">
-                       <MapPin size={24} className="group-hover:scale-110 transition-transform"/>
+                 <div className="flex gap-6">
+                    <div className="relative">
+                       <div className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-400 shrink-0 z-10 relative">
+                          <Circle size={14} strokeWidth={3} />
+                       </div>
+                       {/* Connector Line */}
+                       <div className="absolute top-10 bottom-[-1.5rem] left-1/2 -translate-x-1/2 border-l-2 border-dashed border-gray-200 z-0"></div>
                     </div>
-                    <div className="space-y-2">
-                       <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">{job.consignor.type}</p>
-                       <h3 className="text-xl font-black text-gray-900 leading-tight">{job.consignor.name}</h3>
-                       <p className="text-sm font-bold text-gray-600">{job.consignor.address}</p>
-                       <div className="pt-2 flex items-center gap-2 text-[11px] font-black text-blue-600 uppercase tracking-widest cursor-pointer hover:underline">
+                    <div className="space-y-1.5 pb-8 pt-1">
+                       <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{job.consignor.type} Location</p>
+                       <h3 className="text-lg font-black text-gray-900 leading-tight">{job.consignor.name}</h3>
+                       <p className="text-sm font-medium text-gray-600">{job.consignor.address}</p>
+                       <div className="pt-1.5 flex items-center gap-1.5 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
                           <User size={12}/> {job.consignor.contact}
                        </div>
                     </div>
                  </div>
 
-                 {/* Visual Connector */}
-                 <div className="ml-7 h-12 border-l-4 border-dashed border-gray-100"></div>
-
                  {/* Delivery Node */}
-                 <div className="flex gap-8">
-                    <div className="w-14 h-14 rounded-3xl bg-gray-900 flex items-center justify-center text-white shadow-xl shrink-0">
-                       <Truck size={24}/>
+                 <div className="flex gap-6">
+                    <div className="w-10 h-10 rounded-full bg-[#111] border border-gray-800 flex items-center justify-center text-white shrink-0 z-10 relative">
+                       <MapPin size={16} />
                     </div>
-                    <div className="space-y-2">
-                       <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">{job.consignee.type}</p>
-                       <h3 className="text-xl font-black text-gray-900 leading-tight">{job.consignee.name}</h3>
-                       <p className="text-sm font-bold text-gray-600">{job.consignee.address}</p>
-                       <div className="pt-2 flex items-center gap-2 text-[11px] font-black text-emerald-600 uppercase tracking-widest cursor-pointer hover:underline">
+                    <div className="space-y-1.5 pt-1">
+                       <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{job.consignee.type} Location</p>
+                       <h3 className="text-lg font-black text-gray-900 leading-tight">{job.consignee.name}</h3>
+                       <p className="text-sm font-medium text-gray-600">{job.consignee.address}</p>
+                       <div className="pt-1.5 flex items-center gap-1.5 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
                           <User size={12}/> {job.consignee.contact}
                        </div>
                     </div>
@@ -124,88 +132,103 @@ export default function DispatchJobDetail() {
            </div>
 
            {/* Cargo Specification Card */}
-           <div className="bg-gray-50 rounded-[2.5rem] border-2 border-white shadow-xl p-10 flex flex-col md:flex-row gap-10">
-              <div className="w-20 h-20 rounded-[2rem] bg-white text-violet-600 flex items-center justify-center shadow-lg shrink-0 border-2 border-violet-50">
-                 <Box size={32}/>
-              </div>
-              <div className="flex-1 space-y-6">
+           <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
+              <div className="p-5 border-b border-gray-100 bg-[#FAFAFA] flex items-center gap-3">
+                 <Box className="text-gray-400" size={18} />
                  <div>
-                    <h3 className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-2">Freight Declaration</h3>
-                    <p className="text-lg font-black text-gray-900 leading-relaxed">{job.cargo.description}</p>
+                    <h2 className="text-sm font-bold text-[#111] uppercase tracking-wide">Freight Declaration</h2>
                  </div>
-                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div>
-                       <p className="text-[10px] font-black text-gray-400 uppercase mb-1">Packaging</p>
-                       <p className="text-xs font-black text-gray-900">{job.cargo.packaging}</p>
+              </div>
+              <div className="p-6">
+                 <div className="mb-6">
+                    <p className="text-base font-black text-gray-900 leading-relaxed">{job.cargo.description}</p>
+                 </div>
+                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="bg-gray-50 p-3 rounded-lg border border-gray-100/50">
+                       <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Packaging</p>
+                       <p className="text-sm font-bold text-gray-900">{job.cargo.packaging}</p>
                     </div>
-                    <div>
-                       <p className="text-[10px] font-black text-gray-400 uppercase mb-1">Total Weight</p>
-                       <p className="text-xs font-black text-gray-900">{job.cargo.weight}</p>
+                    <div className="bg-gray-50 p-3 rounded-lg border border-gray-100/50">
+                       <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Total Weight</p>
+                       <p className="text-sm font-bold text-gray-900">{job.cargo.weight}</p>
                     </div>
-                    <div>
-                       <p className="text-[10px] font-black text-gray-400 uppercase mb-1">Value</p>
-                       <p className="text-xs font-black text-emerald-600 uppercase tracking-widest">{job.cargo.value}</p>
+                    <div className="bg-gray-50 p-3 rounded-lg border border-gray-100/50">
+                       <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Value</p>
+                       <p className="text-sm font-black text-green-600 uppercase tracking-widest">{job.cargo.value}</p>
                     </div>
-                    <div>
-                       <p className="text-[10px] font-black text-gray-400 uppercase mb-1">Handling</p>
-                       <p className="text-[9px] font-black text-red-500 uppercase tracking-widest inline-block border border-red-100 bg-red-50 px-2 py-0.5 rounded">Fragile</p>
+                    <div className="bg-gray-50 p-3 rounded-lg border border-gray-100/50">
+                       <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Handling</p>
+                       <p className="text-[9px] font-bold text-red-500 uppercase tracking-widest inline-block border border-red-100 bg-red-50 px-2 py-0.5 rounded leading-tight">Fragile</p>
                     </div>
                  </div>
               </div>
            </div>
         </div>
 
-        {/* ── RIGHT: Deployment Specs & Controls ── */}
-        <div className="lg:col-span-4 space-y-8">
+        {/* ── RIGHT: Deployment Specs & Controls Col-span-1 ── */}
+        <div className="lg:col-span-1 space-y-6">
            
            {/* Fleet Status Card */}
-           <div className="bg-white rounded-[2.5rem] border-2 border-gray-50 shadow-2xl p-10 space-y-8">
-              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 border-b border-gray-50 pb-5">Operational Chain</h3>
+           <div className="bg-[#111] rounded-xl p-6 text-white shadow-sm border border-gray-800 relative overflow-hidden group">
+              <div className="absolute -right-6 -top-6 w-32 h-32 bg-gray-800/50 rounded-full blur-3xl group-hover:bg-gray-700/50 transition-all"></div>
+              <h3 className="text-xs font-bold uppercase tracking-widest mb-6 text-gray-300 flex items-center gap-2 relative z-10">
+                 <Truck size={16}/> Operational Chain
+              </h3>
               
-              <div className="space-y-6">
-                 <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-gray-900 text-[#FACC15] flex items-center justify-center font-black text-sm shadow-lg">JT</div>
-                    <div>
-                       <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Driver</p>
-                       <p className="text-sm font-black text-gray-900">{job.fleet.driver}</p>
+              <div className="space-y-5 relative z-10">
+                 <div>
+                    <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-1.5"><User size={12}/> Assigned Driver</label>
+                    <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10" >
+                      <div className="w-8 h-8 rounded shrink-0 bg-[#FFCC00] flex items-center justify-center text-black text-[10px] font-black">
+                        JT
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold text-white">{job.fleet.driver}</p>
+                        <p className="text-[10px] text-gray-400 font-medium uppercase tracking-widest hover:underline cursor-pointer">View Profile</p>
+                      </div>
                     </div>
                  </div>
 
-                 <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shadow-inner">
-                       <Truck size={20}/>
-                    </div>
-                    <div>
-                       <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Equipment</p>
-                       <p className="text-sm font-black text-gray-900">{job.fleet.vehicle}</p>
+                 <div>
+                    <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-1.5"><Truck size={12}/> Equipment Asset</label>
+                    <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10">
+                       <div className="w-8 h-8 rounded shrink-0 bg-blue-500/20 text-blue-400 flex items-center justify-center border border-blue-500/30">
+                          <Truck size={14}/>
+                       </div>
+                       <div>
+                          <p className="text-sm font-bold text-white">{job.fleet.vehicle}</p>
+                          <p className="text-[10px] text-gray-400 font-medium uppercase tracking-widest hover:underline cursor-pointer">View Asset</p>
+                       </div>
                     </div>
                  </div>
 
-                 <div className="pt-6 mt-6 border-t border-gray-50 space-y-4">
+                 <div className="pt-4 mt-2 border-t border-gray-800 space-y-4">
                     <div className="flex justify-between items-center">
-                       <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Target ETA</span>
-                       <span className="text-xs font-black text-gray-900 bg-yellow-400 px-3 py-1 rounded-lg shadow-sm">April 10 • 08:30 AM</span>
+                       <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Target ETA</span>
+                       <span className="text-xs font-black text-black bg-[#FFCC00] px-2 py-1 rounded shadow-sm">{job.fleet.eta}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                       <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Network Node</span>
-                       <span className="text-[10px] font-black text-white bg-blue-600 px-3 py-1 rounded-lg uppercase tracking-tighter">SYDNEY-HUB-A1</span>
+                       <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Network Node</span>
+                       <span className="text-[9px] font-bold text-white bg-blue-600 px-2 py-1 rounded uppercase tracking-widest">SYDNEY-HUB-A1</span>
                     </div>
                  </div>
               </div>
            </div>
 
            {/* Quick Actions / Document Control */}
-           <div className="bg-gray-50 rounded-[2.5rem] border-2 border-white p-10 space-y-6">
-              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-gray-400">Governance</h3>
-              <div className="flex flex-col gap-3">
-                 <button className="w-full py-4 bg-white border border-gray-100 rounded-2xl text-[10px] font-black uppercase tracking-widest text-gray-600 hover:text-gray-900 hover:border-gray-900 transition-all flex items-center justify-center gap-3">
-                    <ClipboardList size={16}/> Load Manifest
+           <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
+              <div className="p-4 border-b border-gray-100 bg-[#FAFAFA] text-center">
+                 <h2 className="text-xs font-bold text-[#111] uppercase tracking-wide flex items-center justify-center gap-2"><FileText size={14} className="text-gray-400"/> Document Control</h2>
+              </div>
+              <div className="p-5 flex flex-col gap-3">
+                 <button className="w-full py-3 bg-white border border-gray-200 rounded-lg text-[10px] font-bold uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
+                    <ClipboardList size={14}/> Load Manifest
                  </button>
-                 <button className="w-full py-4 bg-white border border-gray-100 rounded-2xl text-[10px] font-black uppercase tracking-widest text-gray-600 hover:text-gray-900 hover:border-gray-900 transition-all flex items-center justify-center gap-3">
-                    <FileCheck size={16}/> Pre-Departure Signoff
+                 <button className="w-full py-3 bg-white border border-gray-200 rounded-lg text-[10px] font-bold uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
+                    <FileCheck size={14}/> Pre-Departure Signoff
                  </button>
-                 <button className="w-full py-4 bg-red-50 border border-red-100 rounded-2xl text-[10px] font-black uppercase tracking-widest text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center gap-3">
-                    <AlertTriangle size={16}/> Report Exception
+                 <button className="w-full py-3 bg-red-50 border border-red-100 rounded-lg text-[10px] font-bold uppercase tracking-widest text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center gap-2 mt-2">
+                    <AlertTriangle size={14}/> Report Exception
                  </button>
               </div>
            </div>

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   ArrowLeft, Star, MapPin, Phone, Mail, Edit3, Save, X,
-  FileText, ShieldCheck, ShieldAlert, Truck, Clock,
-  AlertTriangle, CheckCircle2, Package, Route, TrendingUp
+  FileText, ShieldCheck, Truck, Clock, AlertTriangle, 
+  CheckCircle2, Package, Route, TrendingUp, Search
 } from 'lucide-react';
 
 const driver = {
@@ -31,6 +31,7 @@ const driver = {
 
 export default function AdminDriverDetail() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [editing, setEditing] = useState(false);
   const [editedName, setEditedName] = useState(driver.name);
   const [editedPhone, setEditedPhone] = useState(driver.phone);
@@ -38,227 +39,284 @@ export default function AdminDriverDetail() {
   const [editedDepot, setEditedDepot] = useState(driver.depot);
 
   return (
-    <div className="w-full max-w-7xl mx-auto pb-16">
-      {/* Header */}
-      <div className="flex items-center gap-4 mb-6">
-        <button onClick={() => navigate('/admin/drivers')}
-          className="flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-gray-900 transition-colors">
-          <ArrowLeft size={16} /> Back to Drivers
-        </button>
-      </div>
-
-      <div className="flex justify-between items-start mb-6">
-        <div className="flex items-center gap-5">
-          <div className="w-16 h-16 rounded-2xl bg-yellow-400 flex items-center justify-center text-black font-black text-2xl shadow-lg">
-            {driver.avatar}
-          </div>
-          <div>
-            <div className="flex items-center gap-3">
-              <h1 className="text-2xl font-bold text-gray-900 tracking-tight">{editedName}</h1>
-              <span className={`badge ${driver.status === 'On Trip' ? 'badge-green' : 'badge-gray'} font-bold`}>
-                ● {driver.status}
-              </span>
-            </div>
-            <p className="text-sm text-gray-500 mt-1">{driver.id} — {driver.vehicle.type} • {driver.vehicle.reg}</p>
+    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
+      
+      {/* ── 1. Standardized Header ── */}
+      <div className="flex justify-between items-center mb-2 px-2">
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={() => navigate(location.pathname.includes('/dispatch') ? '/dispatch/drivers' : '/admin/drivers')}
+            className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-all shadow-sm shrink-0"
+          >
+            <ArrowLeft size={20} />
+          </button>
+          <div className="flex items-center gap-4">
+             <div className="w-12 h-12 rounded-xl bg-[#111] flex items-center justify-center text-[#FFCC00] font-black text-xl shadow-sm border border-gray-800 shrink-0">
+               {driver.avatar}
+             </div>
+             <div>
+               <div className="flex items-center gap-3">
+                  <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{editedName}</h1>
+                  <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md border uppercase tracking-widest leading-none ${driver.status === 'On Trip' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 'bg-gray-100 text-gray-600 border-gray-200'}`}>
+                    {driver.status}
+                  </span>
+               </div>
+               <p className="text-[11px] text-gray-500 mt-1 uppercase tracking-widest font-medium">
+                  {driver.id} • {driver.vehicle.type}
+               </p>
+             </div>
           </div>
         </div>
         <div className="flex gap-3">
           {editing ? (
             <>
-              <button onClick={() => setEditing(false)} className="btn bg-gray-100 text-gray-600 hover:bg-gray-200"><X size={16}/> Cancel</button>
-              <button onClick={() => setEditing(false)} className="btn btn-primary"><Save size={16}/> Save Changes</button>
+              <button 
+                 onClick={() => setEditing(false)} 
+                 className="bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 px-6 py-2.5 rounded-lg font-bold transition-all shadow-sm flex items-center gap-2"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={() => setEditing(false)} 
+                className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm"
+              >
+                <Save size={16} strokeWidth={2.5}/> Save Changes
+              </button>
             </>
           ) : (
-            <button onClick={() => setEditing(true)} className="btn btn-dark"><Edit3 size={16}/> Edit Profile</button>
+            <button 
+              onClick={() => setEditing(true)} 
+              className="bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 px-6 py-2.5 rounded-lg font-bold transition-all shadow-sm flex items-center gap-2"
+            >
+              <Edit3 size={16}/> Edit Profile
+            </button>
           )}
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+      <div className="w-full h-px bg-gray-200/60 mb-2"></div>
 
-        {/* LEFT: Profile & Edit */}
-        <div className="flex flex-col gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 px-2">
+
+        {/* ── LEFT: Profile & Configuration ── */}
+        <div className="flex flex-col gap-6">
+          
           {/* Contact Info */}
-          <div className="card bg-white p-5 shadow-sm">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Contact Details</h3>
-            <div className="flex flex-col gap-4">
+          <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
+            <div className="p-4 border-b border-gray-100 bg-[#FAFAFA]">
+               <h3 className="text-xs font-bold text-[#111] uppercase tracking-wide flex items-center gap-2"><FileText size={14} className="text-gray-400"/> Contact Details</h3>
+            </div>
+            
+            <div className="p-5 flex flex-col gap-5">
               <div>
-                <label className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1 block">Full Name</label>
-                {editing ? <input className="input" value={editedName} onChange={e => setEditedName(e.target.value)}/> : <p className="text-sm font-bold text-gray-800">{editedName}</p>}
+                <label className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1.5 block ml-1">Full Name</label>
+                {editing ? (
+                  <input className="w-full bg-white border border-gray-200 focus:border-[#FFCC00] rounded-lg py-2.5 px-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20" value={editedName} onChange={e => setEditedName(e.target.value)}/> 
+                ) : (
+                  <p className="text-sm font-bold text-[#111] px-1">{editedName}</p>
+                )}
               </div>
               <div>
-                <label className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1 block flex items-center gap-1"><Phone size={10}/> Phone</label>
-                {editing ? <input className="input" value={editedPhone} onChange={e => setEditedPhone(e.target.value)}/> : <p className="text-sm font-medium text-gray-700">{editedPhone}</p>}
+                <label className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1.5 block flex items-center gap-1.5 ml-1"><Phone size={12}/> Phone</label>
+                {editing ? (
+                  <input className="w-full bg-white border border-gray-200 focus:border-[#FFCC00] rounded-lg py-2.5 px-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20" value={editedPhone} onChange={e => setEditedPhone(e.target.value)}/> 
+                ) : (
+                  <p className="text-sm font-medium text-gray-700 px-1">{editedPhone}</p>
+                )}
               </div>
               <div>
-                <label className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1 block flex items-center gap-1"><Mail size={10}/> Email</label>
-                <p className="text-sm font-medium text-gray-700">{driver.email}</p>
+                <label className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1.5 block flex items-center gap-1.5 ml-1"><Mail size={12}/> Email</label>
+                <p className="text-sm font-medium text-gray-700 px-1">{driver.email}</p>
               </div>
               <div>
-                <label className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1 block flex items-center gap-1"><MapPin size={10}/> Address</label>
-                <p className="text-sm font-medium text-gray-700">{driver.address}</p>
+                <label className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1.5 block flex items-center gap-1.5 ml-1"><MapPin size={12}/> Address</label>
+                <p className="text-sm font-medium text-gray-700 px-1">{driver.address}</p>
               </div>
             </div>
           </div>
 
-          {/* Assignment */}
-          <div className="card bg-white p-5 shadow-sm">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Operational Assignment</h3>
-            <div className="flex flex-col gap-4">
+          {/* Operational Settings (Dark mode equivalent design) */}
+          <div className="bg-[#111] rounded-xl p-6 text-white shadow-sm border border-gray-800 relative overflow-hidden group">
+            <div className="absolute -right-6 -top-6 w-32 h-32 bg-[#FFCC00]/10 rounded-full blur-3xl group-hover:bg-[#FFCC00]/20 transition-all"></div>
+            <h3 className="text-xs font-bold uppercase tracking-widest mb-6 text-[#FFCC00] flex items-center gap-2 relative z-10">
+               Operational Assignment
+            </h3>
+            
+            <div className="space-y-5 relative z-10">
               <div>
-                <label className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1 block">Assigned Depot</label>
-                {editing
-                  ? <select className="input" value={editedDepot} onChange={e => setEditedDepot(e.target.value)}><option>Sydney Central Depot</option><option>Melbourne North Hub</option><option>Brisbane Port Facility</option></select>
-                  : <p className="text-sm font-bold text-gray-800">{editedDepot}</p>
-                }
+                <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Assigned Depot</label>
+                {editing ? (
+                  <select className="w-full bg-white/10 border border-white/20 rounded-lg py-2.5 px-4 text-sm font-medium text-white appearance-none focus:outline-none focus:border-[#FFCC00]/50" value={editedDepot} onChange={e => setEditedDepot(e.target.value)}>
+                     <option className="text-black">Sydney Central Depot</option>
+                     <option className="text-black">Melbourne North Hub</option>
+                     <option className="text-black">Brisbane Port Facility</option>
+                  </select>
+                ) : (
+                  <p className="text-sm font-bold text-white">{editedDepot}</p>
+                )}
               </div>
               <div>
-                <label className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1 block">Shift Type</label>
-                {editing
-                  ? <select className="input" value={editedShift} onChange={e => setEditedShift(e.target.value)}><option>Full-time Permanent</option><option>Casual</option><option>Contractor (Subby)</option></select>
-                  : <p className="text-sm font-bold text-gray-800">{editedShift}</p>
-                }
+                <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Shift Type</label>
+                {editing ? (
+                  <select className="w-full bg-white/10 border border-white/20 rounded-lg py-2.5 px-4 text-sm font-medium text-white appearance-none focus:outline-none focus:border-[#FFCC00]/50" value={editedShift} onChange={e => setEditedShift(e.target.value)}>
+                     <option className="text-black">Full-time Permanent</option>
+                     <option className="text-black">Casual</option>
+                     <option className="text-black">Contractor (Subby)</option>
+                  </select>
+                ) : (
+                  <p className="text-sm font-bold text-white">{editedShift}</p>
+                )}
               </div>
-              <div>
-                <label className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1 block">Current Vehicle</label>
-                <div className="flex items-center gap-2 p-2.5 bg-gray-50 rounded-lg border border-gray-100">
-                  <Truck size={14} className="text-gray-500"/>
-                  <span className="text-sm font-bold text-gray-800">{driver.vehicle.id}</span>
-                  <span className="text-xs text-gray-500 font-mono">{driver.vehicle.reg}</span>
+              <div className="pt-2 border-t border-gray-800">
+                <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-1.5"><Truck size={12}/> Asset Pairing</label>
+                <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/10">
+                  <div className="flex items-center gap-3">
+                     <span className="text-sm font-bold text-white">{driver.vehicle.id}</span>
+                     <span className="text-[10px] text-gray-400 uppercase tracking-widest">{driver.vehicle.reg}</span>
+                  </div>
+                  <button className="text-[10px] text-[#FFCC00] font-bold uppercase tracking-widest hover:underline">View</button>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Compliance Docs */}
-          <div className="card bg-white p-5 shadow-sm">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2"><FileText size={12}/> Legal & Compliance</h3>
-            <div className="flex flex-col gap-3">
-              <div className="p-3 rounded-xl border border-green-200 bg-green-50">
-                <div className="flex justify-between items-center">
+          <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
+            <div className="p-4 border-b border-gray-100 bg-[#FAFAFA]">
+               <h3 className="text-xs font-bold text-[#111] uppercase tracking-wide flex items-center gap-2"><ShieldCheck size={14} className="text-emerald-500"/> Legal & Compliance</h3>
+            </div>
+            <div className="p-5 flex flex-col gap-4">
+              <div className="p-4 rounded-xl border border-emerald-100 bg-emerald-50/50">
+                <div className="flex justify-between items-start">
                   <div>
-                    <p className="text-xs font-black text-green-700 uppercase tracking-widest">Driver's License</p>
-                    <p className="text-sm font-bold text-gray-900 mt-1">{driver.license.type}</p>
-                    <p className="text-xs font-mono text-gray-500 mt-0.5">{driver.license.number}</p>
+                    <p className="text-[10px] font-black text-emerald-600 uppercase tracking-widest mb-1.5">Driver's License</p>
+                    <p className="text-sm font-bold text-gray-900">{driver.license.type}</p>
+                    <p className="text-xs font-medium text-gray-500 mt-0.5">{driver.license.number}</p>
                   </div>
-                  <ShieldCheck size={22} className="text-green-500"/>
+                  <CheckCircle2 size={18} className="text-emerald-500"/>
                 </div>
-                <div className="mt-2 pt-2 border-t border-green-200 flex justify-between">
-                  <span className="text-[10px] text-green-600 font-bold uppercase">Expires</span>
-                  <span className="text-[10px] font-bold text-gray-700">{driver.license.expiry}</span>
+                <div className="mt-4 pt-3 border-t border-emerald-100/50 flex justify-between items-center">
+                  <span className="text-[10px] text-emerald-600/80 font-bold uppercase tracking-widest">Expiration</span>
+                  <span className="text-[10px] font-black text-gray-800">{driver.license.expiry}</span>
                 </div>
               </div>
 
-              <div className="p-3 rounded-xl border border-green-200 bg-green-50">
-                <div className="flex justify-between items-center">
+              <div className="p-4 rounded-xl border border-emerald-100 bg-emerald-50/50">
+                <div className="flex justify-between items-start">
                   <div>
-                    <p className="text-xs font-black text-green-700 uppercase tracking-widest">Medical Certificate</p>
-                    <p className="text-sm font-bold text-gray-900 mt-1">Fitness for Duty (Dept. Transport)</p>
+                    <p className="text-[10px] font-black text-emerald-600 uppercase tracking-widest mb-1.5">Medical Certificate</p>
+                    <p className="text-sm font-bold text-gray-900">Fitness for Duty</p>
+                    <p className="text-xs font-medium text-gray-500 mt-0.5">Dept. Transport</p>
                   </div>
-                  <ShieldCheck size={22} className="text-green-500"/>
+                  <CheckCircle2 size={18} className="text-emerald-500"/>
                 </div>
-                <div className="mt-2 pt-2 border-t border-green-200 flex justify-between">
-                  <span className="text-[10px] text-green-600 font-bold uppercase">Expires</span>
-                  <span className="text-[10px] font-bold text-gray-700">{driver.medical.expiry}</span>
+                <div className="mt-4 pt-3 border-t border-emerald-100/50 flex justify-between items-center">
+                  <span className="text-[10px] text-emerald-600/80 font-bold uppercase tracking-widest">Expiration</span>
+                  <span className="text-[10px] font-black text-gray-800">{driver.medical.expiry}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* RIGHT: Status, Route, Shipments */}
-        <div className="lg:col-span-2 flex flex-col gap-5">
+        {/* ── RIGHT: Status, Route, Shipments ── */}
+        <div className="lg:col-span-2 flex flex-col gap-6">
 
           {/* Performance KPIs */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="card p-4 bg-white shadow-sm text-center">
-              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Completed</p>
-              <p className="text-2xl font-black text-gray-900 mt-1">{driver.stats.completedShipments}</p>
-              <p className="text-[10px] text-gray-500 font-bold">Total Shipments</p>
+            <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] text-center flex flex-col justify-center">
+              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1.5">Delivered</p>
+              <p className="text-3xl font-black text-gray-900">{driver.stats.completedShipments}</p>
             </div>
-            <div className="card p-4 bg-white shadow-sm text-center">
-              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">On-Time Rate</p>
-              <p className="text-2xl font-black text-green-600 mt-1">{driver.stats.onTimeRate}</p>
-              <p className="text-[10px] text-gray-500 font-bold">Delivery SLA</p>
+            <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] text-center flex flex-col justify-center">
+              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1.5">On-Time</p>
+              <p className="text-3xl font-black text-emerald-500">{driver.stats.onTimeRate}</p>
             </div>
-            <div className="card p-4 bg-white shadow-sm text-center">
-              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Avg Rating</p>
-              <p className="text-2xl font-black text-yellow-500 mt-1 flex items-center justify-center gap-1">{driver.stats.avgRating} <Star size={16} className="fill-yellow-500"/></p>
-              <p className="text-[10px] text-gray-500 font-bold">Customer Score</p>
+            <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] text-center flex flex-col justify-center">
+              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1.5">Rating</p>
+              <p className="text-3xl font-black text-[#FFCC00] flex items-center justify-center gap-1">{driver.stats.avgRating} <Star size={18} className="fill-[#FFCC00]"/></p>
             </div>
-            <div className="card p-4 bg-white shadow-sm text-center">
-              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Delays</p>
-              <p className="text-2xl font-black text-orange-500 mt-1">{driver.stats.delayedShipments}</p>
-              <p className="text-[10px] text-gray-500 font-bold">Late Deliveries</p>
+            <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] text-center flex flex-col justify-center">
+              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1.5">Delays</p>
+              <p className="text-3xl font-black text-red-500">{driver.stats.delayedShipments}</p>
             </div>
           </div>
 
           {/* Current Active Shipment / Live Route */}
-          <div className="card bg-white p-5 shadow-sm border-l-4 border-l-green-500">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="font-bold text-gray-900 flex items-center gap-2"><Route size={16}/> Current Active Shipment</h3>
-              <span className="badge badge-green font-bold">● Live</span>
+          <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 relative overflow-hidden">
+            <div className="absolute left-0 top-0 bottom-0 w-1 bg-emerald-500"></div>
+            
+            <div className="p-6 border-b border-gray-100 bg-[#FAFAFA] flex justify-between items-center pl-7">
+              <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2 uppercase tracking-wide"><Route size={16} className="text-emerald-500"/> Live Assignment</h3>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-700 border border-emerald-200 uppercase tracking-widest flex items-center gap-1.5 shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Active
+              </span>
             </div>
-            <div className="flex flex-col gap-4">
+            
+            <div className="p-6 pl-7 flex flex-col gap-6">
               <div className="flex justify-between items-start">
                 <div>
-                  <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1">Job Reference</p>
-                  <p className="text-lg font-black text-gray-900">{driver.currentShipment.id}</p>
+                  <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Shipment Reference</p>
+                  <p className="text-xl font-black text-gray-900">{driver.currentShipment.id}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1">ETA</p>
-                  <p className="text-lg font-black text-gray-900 flex items-center gap-1"><Clock size={14}/> {driver.currentShipment.eta}</p>
+                  <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Current ETA</p>
+                  <p className="text-xl font-black text-gray-900 flex items-center gap-1.5"><Clock size={16} className="text-[#FFCC00]"/> {driver.currentShipment.eta}</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100">
-                <MapPin size={16} className="text-yellow-500 shrink-0"/>
+              <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 shadow-sm">
+                <MapPin size={20} className="text-[#111] shrink-0 outline outline-4 outline-white rounded-full bg-white"/>
                 <div>
-                  <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">Route</p>
-                  <p className="font-bold text-gray-900 text-sm">{driver.currentShipment.route}</p>
+                  <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-0.5">Route Path</p>
+                  <p className="font-bold text-gray-900 text-[15px]">{driver.currentShipment.route}</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100">
-                <Package size={16} className="text-blue-500 shrink-0"/>
+              <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 shadow-sm">
+                <Package size={20} className="text-[#FFCC00] shrink-0"/>
                 <div>
-                  <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">Load Weight</p>
-                  <p className="font-bold text-gray-900 text-sm">{driver.currentShipment.load}</p>
+                  <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-0.5">Payload Measurement</p>
+                  <p className="font-bold text-gray-900 text-[15px]">{driver.currentShipment.load}</p>
                 </div>
               </div>
 
               {/* Progress Bar */}
-              <div>
-                <div className="flex justify-between mb-2">
-                  <span className="text-xs font-bold text-gray-500">Route Progress</span>
-                  <span className="text-xs font-bold text-green-600">{driver.currentShipment.progress}% Complete</span>
+              <div className="pt-2">
+                <div className="flex justify-between mb-2.5">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Route Progress</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600">{driver.currentShipment.progress}% Complete</span>
                 </div>
-                <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
-                  <div className="h-full bg-green-500 rounded-full transition-all" style={{ width: `${driver.currentShipment.progress}%` }}></div>
+                <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden shadow-inner">
+                  <div className="h-full bg-emerald-500 rounded-full transition-all" style={{ width: `${driver.currentShipment.progress}%` }}></div>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Recent Shipments History */}
-          <div className="card bg-white shadow-sm">
-            <div className="p-5 border-b border-gray-100 flex justify-between items-center">
-              <h3 className="font-bold text-gray-900 flex items-center gap-2"><TrendingUp size={16}/> Recent Job History</h3>
-              <button className="text-xs font-bold text-blue-600 hover:underline">View All Shipments</button>
+          <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
+            <div className="p-5 border-b border-gray-100 flex justify-between items-center bg-[#FAFAFA]">
+              <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2 uppercase tracking-wide"><TrendingUp size={16} className="text-gray-400"/> Job History</h3>
+              <button className="text-[10px] font-bold text-blue-600 hover:text-blue-800 hover:underline uppercase tracking-widest">View All</button>
             </div>
-            <div className="divide-y divide-gray-50">
+            <div className="divide-y divide-gray-100">
               {driver.recentShipments.map(job => (
-                <div key={job.id} className="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors">
+                <div key={job.id} className="flex items-center justify-between p-5 hover:bg-gray-50 transition-colors group cursor-pointer" onClick={() => navigate(`/admin/shipments/${job.id}`)}>
                   <div className="flex items-center gap-4">
-                    <div className={`w-2.5 h-2.5 rounded-full ${job.status === 'In Transit' ? 'bg-yellow-400 animate-pulse' : 'bg-green-500'}`}></div>
+                    <div className={`w-2.5 h-2.5 rounded-full shadow-sm ${job.status === 'In Transit' ? 'bg-[#FFCC00] animate-pulse' : 'bg-emerald-500'}`}></div>
                     <div>
-                      <p className="font-bold text-gray-900 text-sm">{job.id}</p>
-                      <p className="text-xs text-gray-500 font-medium">{job.route}</p>
+                      <p className="font-bold text-[#111] text-sm group-hover:text-blue-600 transition-colors">{job.id}</p>
+                      <p className="text-[11px] text-gray-500 font-medium tracking-tight mt-0.5">{job.route}</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <span className={`badge text-[10px] ${job.status === 'In Transit' ? 'badge-yellow' : 'badge-green'}`}>{job.status}</span>
-                    <p className="text-[10px] text-gray-400 font-bold mt-1">{job.date}</p>
+                    <span className={`text-[9px] font-bold px-2 py-0.5 rounded border uppercase tracking-widest leading-none block w-max ml-auto ${
+                      job.status === 'In Transit' ? 'bg-amber-50 text-amber-700 border-amber-100' : 'bg-emerald-50 text-emerald-700 border-emerald-100'
+                    }`}>
+                       {job.status}
+                    </span>
+                    <p className="text-[10px] text-gray-400 font-bold mt-2 uppercase tracking-widest">{job.date}</p>
                   </div>
                 </div>
               ))}

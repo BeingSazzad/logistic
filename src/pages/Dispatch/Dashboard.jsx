@@ -18,9 +18,9 @@ function StatusBadge({ status }) {
     'In Transit': 'bg-[#EFF6FF] text-[#2563EB] border-[#DBEAFE]',
     'At Pickup':  'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]',
     'Delayed':    'bg-[#FEF2F2] text-[#DC2626] border-[#FEE2E2]',
-    'Pending':    'bg-gray-50 text-gray-500 border-gray-200',
+    'Pending':    'bg-gray-100 text-gray-500 border-gray-200',
   };
-  return <span className={`text-[10px] font-bold px-3 py-1 rounded-md border inline-block w-max ${map[status] ?? 'bg-gray-50'}`}>{status}</span>;
+  return <span className={`text-[10px] font-bold px-2.5 py-1 rounded border uppercase tracking-widest leading-none inline-block w-max ${map[status] ?? 'bg-gray-50'}`}>{status}</span>;
 }
 
 export default function DispatchDashboard() {
@@ -30,11 +30,16 @@ export default function DispatchDashboard() {
   return (
     <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
       
-      {/* ── Updated Header ── */}
+      {/* ── Standardized Header ── */}
       <div className="flex justify-between items-center mb-2 px-2">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Operation Control</h1>
-          <p className="text-sm text-gray-500 mt-1 flex items-center gap-2">Live Fleet Activity • Shift: <span className="font-bold text-gray-900">06:00 - 18:00</span></p>
+        <div className="flex items-center gap-4">
+          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-[#111] shadow-sm">
+            <Navigation size={20} />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Operation Control</h1>
+            <p className="text-sm text-gray-500 mt-1 flex items-center gap-2">Live Fleet Activity • Shift: <span className="font-bold text-gray-900">06:00 - 18:00</span></p>
+          </div>
         </div>
         <div className="flex gap-3">
            <button className="bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm">
@@ -53,21 +58,21 @@ export default function DispatchDashboard() {
 
       {/* ── KPI Cards ── */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 px-2 mb-2">
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Active Shipments</p><p className="text-2xl font-black text-gray-900 mt-0.5">42</p></div>
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-blue-50 text-blue-500"><Package size={20}/></div>
+        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between">
+          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest leading-tight">Active Shipments</p><p className="text-2xl font-black text-gray-900 mt-1.5 leading-none">42</p></div>
+          <div className="w-10 h-10 rounded border border-blue-100 flex items-center justify-center bg-blue-50 text-blue-500"><Package size={20}/></div>
         </div>
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Drivers On Duty</p><p className="text-2xl font-black text-gray-900 mt-0.5">18 <span className="text-sm text-gray-400 tracking-tighter">/24</span></p></div>
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-emerald-50 text-emerald-500"><Truck size={20}/></div>
+        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between">
+          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest leading-tight">Drivers On Duty</p><p className="text-2xl font-black text-gray-900 mt-1.5 leading-none">18 <span className="text-sm text-gray-400 tracking-tighter">/24</span></p></div>
+          <div className="w-10 h-10 rounded border border-emerald-100 flex items-center justify-center bg-emerald-50 text-emerald-500"><Truck size={20}/></div>
         </div>
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Avg ETA Variance</p><p className="text-2xl font-black text-amber-500 mt-0.5">+4<span className="text-sm font-bold text-gray-400 tracking-tighter">m</span></p></div>
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-amber-50 text-amber-500"><Clock size={20}/></div>
+        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between">
+          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest leading-tight">Avg ETA Variance</p><p className="text-2xl font-black text-amber-500 mt-1.5 leading-none">+4<span className="text-sm font-bold text-gray-400 tracking-tighter">m</span></p></div>
+          <div className="w-10 h-10 rounded border border-amber-100 flex items-center justify-center bg-amber-50 text-amber-500"><Clock size={20}/></div>
         </div>
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">POD Completed</p><p className="text-2xl font-black text-gray-900 mt-0.5">92%</p></div>
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-violet-50 text-violet-500"><CheckCircle2 size={20}/></div>
+        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between">
+          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest leading-tight">POD Completed</p><p className="text-2xl font-black text-gray-900 mt-1.5 leading-none">92%</p></div>
+          <div className="w-10 h-10 rounded border border-violet-100 flex items-center justify-center bg-violet-50 text-violet-500"><CheckCircle2 size={20}/></div>
         </div>
       </div>
 
@@ -78,24 +83,24 @@ export default function DispatchDashboard() {
         <div className="lg:col-span-2 flex flex-col gap-4">
            <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden flex flex-col h-full">
               
-              <div className="p-5 border-b border-gray-100 flex justify-between items-center">
-                 <div className="relative w-[320px]">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
+              <div className="p-5 border-b border-gray-100 flex justify-between items-center bg-[#FAFAFA]">
+                 <div className="relative w-[320px] group">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#FFCC00] transition-colors" size={16} />
                     <input 
                       type="text" 
                       placeholder="Filter by Driver, ID or Area..." 
-                      className="w-full bg-white border border-gray-200 rounded-lg py-2 pl-9 pr-4 text-sm focus:outline-none transition-all" 
+                      className="w-full bg-white border border-gray-200 rounded-lg py-2.5 pl-10 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 focus:border-[#FFCC00] transition-all shadow-sm" 
                     />
                  </div>
                  
-                 <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50">
-                    Sort By <ChevronDown size={16} className="text-gray-400" />
+                 <button className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 shadow-sm rounded-lg text-xs font-bold uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-colors">
+                    Sort By <ChevronDown size={14} className="text-gray-400" />
                  </button>
               </div>
 
               <div className="overflow-x-auto flex-1">
                  <table className="w-full text-left">
-                    <thead className="bg-[#FAFAFA] text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                    <thead className="bg-[#FAFAFA] text-[10px] font-bold text-gray-500 uppercase tracking-widest border-b border-gray-100">
                        <tr>
                           <th className="px-6 py-4">Shipment</th>
                           <th className="px-6 py-4">Logistics Flow</th>
@@ -105,32 +110,32 @@ export default function DispatchDashboard() {
                     </thead>
                     <tbody className="divide-y divide-gray-100">
                        {jobs.map(job => (
-                          <tr key={job.id} className="hover:bg-gray-50/50 transition-colors group cursor-pointer" onClick={() => navigate(`/dispatch/jobs/${job.id}`)}>
-                             <td className="px-6 py-5">
-                                <div className="font-bold text-[#111] text-[15px]">{job.id}</div>
-                                <div className="text-[11px] text-gray-400 font-medium tracking-tight mt-0.5 truncate max-w-[150px]">{job.customer}</div>
+                          <tr key={job.id} className="hover:bg-gray-50 transition-colors group cursor-pointer" onClick={() => navigate(`/dispatch/jobs/${job.id}`)}>
+                             <td className="px-6 py-4">
+                                <div className="font-bold text-[#111] text-sm">{job.id}</div>
+                                <div className="text-[10px] text-gray-400 uppercase font-bold tracking-widest mt-0.5 truncate max-w-[150px]">{job.customer}</div>
                              </td>
-                             <td className="px-6 py-5">
-                                <p className="text-sm font-bold text-gray-700 mb-2">{job.route}</p>
+                             <td className="px-6 py-4">
+                                <p className="text-xs font-bold text-gray-700 mb-1.5">{job.route}</p>
                                 <div className="flex items-center gap-3">
                                    <StatusBadge status={job.status} />
-                                   <span className="text-[10px] font-bold text-gray-400 uppercase flex items-center gap-1"><Clock size={10}/> {job.eta}</span>
+                                   <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1.5"><Clock size={12}/> {job.eta}</span>
                                 </div>
                              </td>
-                             <td className="px-6 py-5">
+                             <td className="px-6 py-4">
                                 <div className="flex items-center gap-3">
-                                   <div className="w-9 h-9 bg-gray-50 border border-gray-200 rounded flex items-center justify-center font-bold text-gray-400 text-xs shrink-0">
+                                   <div className={`w-9 h-9 rounded border-2 border-transparent flex items-center justify-center font-black text-[10px] shrink-0 transition-colors ${job.driver === 'Unassigned' ? 'bg-red-50 text-red-500 border border-red-100' : 'bg-[#111] text-[#FFCC00] group-hover:border-[#FFCC00]'}`}>
                                       {job.driver === 'Unassigned' ? '?' : job.driver[0]}
                                    </div>
                                    <div>
-                                      <div className={`text-sm font-bold ${job.driver === 'Unassigned' ? 'text-red-500' : 'text-[#111]'}`}>{job.driver}</div>
-                                      <div className={`text-[10px] uppercase font-medium mt-0.5 ${job.vehicle === '-' ? 'text-gray-300' : 'text-gray-400'}`}>{job.vehicle}</div>
+                                      <div className={`text-xs font-bold leading-tight ${job.driver === 'Unassigned' ? 'text-red-500' : 'text-[#111]'}`}>{job.driver}</div>
+                                      <div className={`text-[9px] uppercase font-bold tracking-widest mt-0.5 ${job.vehicle === '-' ? 'text-gray-300' : 'text-gray-400'}`}>{job.vehicle}</div>
                                    </div>
                                 </div>
                              </td>
-                             <td className="px-6 py-5 text-right">
-                                <button className="text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors uppercase tracking-widest" onClick={(e)=>{e.stopPropagation(); navigate(`/dispatch/jobs/${job.id}`);}}>
-                                   Manage details
+                             <td className="px-6 py-4 text-right">
+                                <button className="text-[10px] font-bold text-blue-600 hover:text-white border border-blue-200 hover:bg-blue-600 hover:border-blue-600 px-3 py-1.5 rounded-lg transition-colors uppercase tracking-widest" onClick={(e)=>{e.stopPropagation(); navigate(`/dispatch/jobs/${job.id}`);}}>
+                                   Manage Details
                                 </button>
                              </td>
                           </tr>
@@ -145,19 +150,21 @@ export default function DispatchDashboard() {
         <div className="flex flex-col gap-6">
            
            {/* Map Preview Placeholder */}
-           <div className="bg-[#111] rounded-xl p-6 h-64 shadow-sm border border-gray-800 relative overflow-hidden group cursor-pointer" onClick={() => navigate('/dispatch/tracking')}>
-              <div className="absolute inset-0 opacity-20 pointer-events-none">
+           <div className="bg-[#111] rounded-xl p-6 h-64 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-800 relative overflow-hidden group cursor-pointer hover:border-gray-700 transition-colors" onClick={() => navigate('/dispatch/tracking')}>
+              <div className="absolute inset-0 opacity-20 pointer-events-none transition-opacity group-hover:opacity-30">
                  <div className="absolute top-1/2 left-0 w-full h-px bg-[#FFCC00]/50 rotate-12"></div>
                  <div className="absolute top-0 left-1/2 w-px h-full bg-[#FFCC00]/50 -rotate-45"></div>
-                 <div className="absolute top-1/4 left-1/4 w-3 h-3 rounded-full bg-[#FFCC00] shadow-[0_0_15px_#FFCC00]"></div>
-                 <div className="absolute bottom-1/3 right-1/4 w-3 h-3 rounded-full bg-blue-500 shadow-[0_0_15px_#3B82F6]"></div>
+                 <div className="absolute top-1/4 left-1/4 w-3 h-3 rounded-full bg-[#FFCC00] shadow-[0_0_15px_#FFCC00] animate-pulse"></div>
+                 <div className="absolute bottom-1/3 right-1/4 w-3 h-3 rounded-full bg-blue-500 shadow-[0_0_15px_#3B82F6] animate-pulse"></div>
               </div>
               <div className="relative z-10 flex flex-col justify-between h-full">
                  <div className="flex justify-between items-start">
                     <h4 className="text-xs font-bold uppercase text-white tracking-widest flex items-center gap-2">
                        <MapPin size={14} className="text-[#FFCC00]"/> Network Map
                     </h4>
-                    <span className="text-[10px] font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded border border-emerald-400/20 uppercase tracking-widest">Live Connect</span>
+                    <span className="text-[10px] font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded border border-emerald-400/20 uppercase tracking-widest flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Live Connect
+                    </span>
                  </div>
                  <div className="text-center">
                     <button className="bg-white/10 hover:bg-white/20 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-2.5 rounded-lg transition-all backdrop-blur-sm border border-white/10">Open Dashboard</button>
@@ -166,7 +173,7 @@ export default function DispatchDashboard() {
            </div>
 
            {/* Urgent Alerts */}
-           <div className="bg-white rounded-xl border border-red-100 shadow-sm p-6 flex flex-col gap-4">
+           <div className="bg-white rounded-xl border border-red-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] p-6 flex flex-col gap-4">
               <h4 className="text-xs font-bold text-red-500 uppercase tracking-widest flex items-center gap-2 mb-2">
                  <ShieldAlert size={16}/> Exception Board
               </h4>
@@ -176,7 +183,7 @@ export default function DispatchDashboard() {
                    { msg: 'Unassigned load SHP-20484 near timeout.', time: '12m ago', level: 'Warning' }
                  ].map((a, i) => (
                    <div key={i} className="flex gap-3 items-start p-3 bg-red-50/30 rounded-lg border border-red-50">
-                      <div className={`mt-1.5 w-2 h-2 shrink-0 rounded-full ${a.level === 'Critical' ? 'bg-red-500' : 'bg-amber-500'}`}></div>
+                      <div className={`mt-1.5 w-2 h-2 shrink-0 rounded-full animate-pulse ${a.level === 'Critical' ? 'bg-red-500' : 'bg-amber-500'}`}></div>
                       <div>
                          <p className="text-xs font-bold text-[#111] leading-snug">{a.msg}</p>
                          <p className="text-[10px] font-bold text-gray-400 mt-1 uppercase tracking-widest">{a.time} • {a.level}</p>

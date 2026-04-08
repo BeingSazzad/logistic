@@ -32,7 +32,7 @@ export default function DispatchTracking() {
            <button className="btn bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 flex items-center gap-2 shadow-sm font-bold">
               <Layers size={14}/> Base Layers
            </button>
-           <button className="btn bg-[#111] text-[#FACC15] border-transparent hover:bg-black flex items-center gap-2 shadow-xl font-bold px-6">
+           <button className="btn bg-[#111] text-[#FFCC00] border-transparent hover:bg-black flex items-center gap-2 shadow-xl font-bold px-6">
               <Maximize2 size={14}/> Full Screen
            </button>
         </div>
@@ -43,9 +43,9 @@ export default function DispatchTracking() {
         {/* ── 2. Telemetry Sidebar ── */}
         <div className="w-full lg:w-[400px] flex flex-col bg-white rounded-3xl border border-gray-100 shadow-xl shrink-0 overflow-hidden">
           <div className="p-6 border-b border-gray-100 bg-gray-50/50">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
-              <input type="text" placeholder="Ping driver or vessel ID..." className="input pl-9 w-full bg-white border-transparent focus:bg-white focus:border-yellow-400 shadow-inner rounded-xl transition" />
+            <div className="relative group">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#FFCC00] transition-colors" size={16} />
+              <input type="text" placeholder="Ping driver or vessel ID..." className="input pl-9 w-full bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 focus:border-[#FFCC00] shadow-inner rounded-xl transition-all" />
             </div>
             <div className="flex gap-2 mt-4">
               <div className="flex-1 flex flex-col items-center justify-center p-3 bg-emerald-50 text-emerald-700 rounded-2xl border border-emerald-100 shadow-sm relative overflow-hidden group">
@@ -66,7 +66,7 @@ export default function DispatchTracking() {
               <div 
                 key={v.id} 
                 onClick={() => setSelectedVehicle(v)}
-                className={`p-6 border-b border-gray-50 transition-all cursor-pointer relative overflow-hidden ${selectedVehicle?.id === v.id ? 'bg-white shadow-[inset_4px_0_0_0_#FACC15]' : 'hover:bg-white/80'}`}
+                className={`p-6 border-b border-gray-50 transition-all cursor-pointer relative overflow-hidden ${selectedVehicle?.id === v.id ? 'bg-white shadow-[inset_4px_0_0_0_#FFCC00]' : 'hover:bg-white/80'}`}
               >
                 <div className="flex justify-between items-start mb-3 relative z-10">
                   <div className="flex items-center gap-3">
@@ -75,7 +75,7 @@ export default function DispatchTracking() {
                      </div>
                      <div>
                         <p className="font-black text-gray-900 text-sm tracking-tight">{v.id}</p>
-                        <p className="text-[10px] font-black text-[#FACC15] bg-gray-900 px-2 py-0.5 rounded shadow-sm inline-block mt-1 uppercase tracking-widest">{v.driver}</p>
+                        <p className="text-[10px] font-black text-[#FFCC00] bg-gray-900 px-2 py-0.5 rounded shadow-sm inline-block mt-1 uppercase tracking-widest">{v.driver}</p>
                      </div>
                   </div>
                   <div className="text-right">
@@ -88,7 +88,7 @@ export default function DispatchTracking() {
                   <div className="flex items-center gap-2 text-xs font-bold text-gray-600 bg-gray-50 p-2 rounded-lg">
                     <Navigation size={12} className="text-blue-500" /> {v.speed}
                   </div>
-                  <div className="flex items-center gap-2 text-xs font-black text-gray-900 bg-yellow-50/50 border border-yellow-100 p-2 rounded-lg">
+                  <div className="flex items-center gap-2 text-xs font-black text-gray-900 bg-[#FFCC00]/10 border border-[#FFCC00]/20 p-2 rounded-lg">
                     <Clock size={12} className="text-yellow-600" /> {v.eta} INV
                   </div>
                 </div>
@@ -108,9 +108,9 @@ export default function DispatchTracking() {
            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)] pointer-events-none"></div>
 
            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-             <div className="w-24 h-24 rounded-full border border-yellow-400/20 flex items-center justify-center animate-[ping_3s_infinite] absolute"></div>
+             <div className="w-24 h-24 rounded-full border border-[#FFCC00]/20 flex items-center justify-center animate-[ping_3s_infinite] absolute"></div>
              <div className="text-center relative z-10 px-12">
-               <Crosshair size={48} strokeWidth={1} className="text-yellow-400/20 mx-auto mb-6" />
+               <Crosshair size={48} strokeWidth={1} className="text-[#FFCC00]/20 mx-auto mb-6" />
                <h4 className="text-white font-black text-xl tracking-tight mb-2">Satellite Telemetry Locked</h4>
                <p className="text-gray-500 text-sm max-w-sm mx-auto font-medium">Coordinate synchronization active. Select a vehicle from the telemetry board to focus tracking.</p>
              </div>
@@ -121,8 +121,8 @@ export default function DispatchTracking() {
               <div className="bg-gray-900/80 backdrop-blur-md border border-white/10 p-4 rounded-3xl shadow-2xl pointer-events-auto">
                  <div className="flex items-center gap-4">
                     <div className="flex flex-col">
-                       <span className="text-[9px] font-black text-yellow-400 uppercase tracking-widest mb-1">Active HUB</span>
-                       <span className="text-sm font-black text-white px-3 py-1 bg-yellow-400/10 border border-yellow-400/20 rounded-xl shadow-inner">SYDNEY_METRO_A</span>
+                       <span className="text-[9px] font-black text-[#FFCC00] uppercase tracking-widest mb-1">Active HUB</span>
+                       <span className="text-sm font-black text-white px-3 py-1 bg-[#FFCC00]/10 border border-[#FFCC00]/20 rounded-xl shadow-inner">SYDNEY_METRO_A</span>
                     </div>
                     <div className="w-px h-10 bg-white/10"></div>
                     <div className="flex flex-col">
@@ -149,12 +149,12 @@ export default function DispatchTracking() {
            {/* Selected Vehicle Detail HUD (Bottom) */}
            {selectedVehicle && (
              <div className="absolute inset-x-6 bottom-6 flex justify-center pointer-events-none animate-in slide-in-from-bottom-6 transition-all">
-                <div className="bg-gray-900/90 backdrop-blur-2xl border border-yellow-400/30 p-8 rounded-[3rem] shadow-[0_0_50px_rgba(0,0,0,0.5)] pointer-events-auto max-w-4xl w-full flex items-center gap-10">
-                   <div className="w-24 h-24 rounded-full border-4 border-yellow-400 flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(250,204,21,0.2)]">
-                      <Truck size={40} className="text-yellow-400" />
+                <div className="bg-gray-900/90 backdrop-blur-2xl border border-[#FFCC00]/30 p-8 rounded-[3rem] shadow-[0_0_50px_rgba(0,0,0,0.5)] pointer-events-auto max-w-4xl w-full flex items-center gap-10">
+                   <div className="w-24 h-24 rounded-full border-4 border-[#FFCC00] flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(255,204,0,0.2)]">
+                      <Truck size={40} className="text-[#FFCC00]" />
                    </div>
                    <div className="flex-1 min-w-0">
-                      <h4 className="text-2xl font-black text-white tracking-tighter truncate capitalize">{selectedVehicle.driver} <span className="text-yellow-400 text-sm ml-2 px-3 py-1 bg-yellow-400/10 rounded-full border border-yellow-400/20">{selectedVehicle.id}</span></h4>
+                      <h4 className="text-2xl font-black text-white tracking-tighter truncate capitalize">{selectedVehicle.driver} <span className="text-[#FFCC00] text-sm ml-2 px-3 py-1 bg-[#FFCC00]/10 rounded-full border border-[#FFCC00]/20">{selectedVehicle.id}</span></h4>
                       <p className="text-gray-400 text-sm font-medium mt-1 mb-6 flex items-center gap-1.5 truncate"><MapPin size={14} className="text-gray-600"/> {selectedVehicle.loc}</p>
                       
                       <div className="grid grid-cols-3 gap-6">
@@ -171,7 +171,7 @@ export default function DispatchTracking() {
                       </div>
                    </div>
                    <div className="flex flex-col gap-3">
-                      <button className="bg-[#FACC15] hover:bg-yellow-500 text-black px-8 py-3 rounded-2xl font-black uppercase text-xs tracking-[0.15em] flex items-center gap-2 shadow-[0_0_20px_rgba(250,204,21,0.3)] transition-all active:scale-95">
+                      <button className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-8 py-3 rounded-2xl font-black uppercase text-xs tracking-[0.15em] flex items-center gap-2 shadow-[0_0_20px_rgba(255,204,0,0.3)] transition-all active:scale-95">
                          <Phone size={14}/> Open COMMS
                       </button>
                       <button className="bg-white/5 hover:bg-white/10 text-white px-8 py-3 rounded-2xl font-black uppercase text-xs tracking-[0.15em] border border-white/10 transition-all active:scale-95">

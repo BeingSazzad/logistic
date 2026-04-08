@@ -4,6 +4,7 @@ import { Package, Search, Filter, Plus, Clock, CheckCircle2, AlertTriangle, Truc
 
 export default function AdminShipments() {
   const navigate = useNavigate();
+  const [filter, setFilter] = useState('All');
   const [search, setSearch] = useState('');
   const [sortKey, setSortKey] = useState('id');
   const [sortOrder, setSortOrder] = useState('desc');
@@ -17,24 +18,44 @@ export default function AdminShipments() {
 
   const filteredShipments = useMemo(() => {
     return rawShipments.filter(shp => {
+      const matchesFilter = filter === 'All' || shp.status === filter;
       const searchStr = `${shp.id} ${shp.customer} ${shp.origin} ${shp.dest} ${shp.driver}`.toLowerCase();
-      return searchStr.includes(search.toLowerCase());
+      const matchesSearch = searchStr.includes(search.toLowerCase());
+      return matchesFilter && matchesSearch;
     }).sort((a, b) => {
       const aVal = a[sortKey];
       const bVal = b[sortKey];
       if (sortOrder === 'asc') return aVal > bVal ? 1 : -1;
       return aVal < bVal ? 1 : -1;
     });
-  }, [search, sortKey, sortOrder]);
+  }, [filter, search, sortKey, sortOrder]);
+
+  const toggleSort = () => {
+    if (sortKey === 'id') {
+      setSortKey('customer');
+      setSortOrder('asc');
+    } else if (sortKey === 'customer') {
+      setSortKey('progress');
+      setSortOrder('desc');
+    } else {
+      setSortKey('id');
+      setSortOrder('desc');
+    }
+  };
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
       
-      {/* Updated Header - Matching Reference Style */}
+      {/* Standardized Header */}
       <div className="flex justify-between items-center mb-2 px-2">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Active Shipments</h1>
-          <p className="text-sm text-gray-500 mt-1">Real-time status tracking and lifecycle management for all active freight.</p>
+        <div className="flex items-center gap-4">
+          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-[#111] shadow-sm">
+            <Package size={20} />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Active Shipments</h1>
+            <p className="text-sm text-gray-500 mt-1">Real-time status tracking and lifecycle management for all active freight.</p>
+          </div>
         </div>
         <button 
           onClick={() => navigate('/dispatch/jobs/create')} 
@@ -46,20 +67,20 @@ export default function AdminShipments() {
 
       <div className="w-full h-px bg-gray-200/60 mb-2"></div>
 
-      {/* KPI HUD - Simplified Clean Cards */}
+      {/* KPI HUD */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 px-2 mb-2">
         {[
-          { label: 'Total Volume', value: '1,204', icon: Package, color: 'text-blue-600', bg: 'bg-blue-50' },
-          { label: 'On Road Now', value: '84', icon: Truck, color: 'text-indigo-600', bg: 'bg-indigo-50' },
-          { label: 'Exceptions', value: '3', icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-50' },
-          { label: 'Delivered Today', value: '412', icon: CheckCircle2, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+          { label: 'Total Volume', value: '1,204', icon: Package, color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-100' },
+          { label: 'On Road Now', value: '84', icon: Truck, color: 'text-indigo-600', bg: 'bg-indigo-50', border: 'border-indigo-100' },
+          { label: 'Exceptions', value: '3', icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-50', border: 'border-red-100' },
+          { label: 'Delivered Today', value: '412', icon: CheckCircle2, color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-100' },
         ].map((kpi, i) => (
-          <div key={i} className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
+          <div key={i} className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between">
             <div>
-              <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">{kpi.label}</p>
-              <p className="text-2xl font-black text-gray-900 mt-0.5">{kpi.value}</p>
+              <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest leading-tight">{kpi.label}</p>
+              <p className="text-2xl font-black text-gray-900 mt-1.5 leading-none">{kpi.value}</p>
             </div>
-            <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${kpi.bg} ${kpi.color}`}>
+            <div className={`w-10 h-10 rounded border ${kpi.border} flex items-center justify-center ${kpi.bg} ${kpi.color}`}>
               <kpi.icon size={20} />
             </div>
           </div>
@@ -70,26 +91,51 @@ export default function AdminShipments() {
       <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
         
         {/* Filter Bar */}
-        <div className="p-5 border-b border-gray-100 flex justify-between items-center">
-           <div className="relative w-[320px]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
-              <input 
-                type="text" 
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-                placeholder="Find SHP- ID, origins or customers..." 
-                className="w-full bg-white border border-gray-200 rounded-lg py-2 pl-9 pr-4 text-sm focus:outline-none transition-all" 
-              />
+        <div className="p-5 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 bg-[#FAFAFA]">
+           <div className="flex bg-gray-100 p-1 rounded-lg border border-gray-200/60 w-full md:w-auto shadow-sm">
+             {['All', 'In Transit', 'At Pickup', 'Delivered', 'Exception'].map((tab) => (
+               <button 
+                 key={tab}
+                 onClick={() => setFilter(tab)}
+                 className={`px-4 py-2 text-[11px] font-bold uppercase tracking-widest rounded transition-all whitespace-nowrap ${filter === tab ? 'bg-white text-gray-900 shadow-sm border border-gray-200/50' : 'text-gray-500 hover:text-gray-700 border border-transparent'}`}
+               >
+                 {tab}
+               </button>
+             ))}
            </div>
-           
-           <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50">
-              Sort By <ChevronDown size={16} className="text-gray-400" />
-           </button>
+
+           <div className="flex items-center gap-4 w-full md:w-auto">
+             <div className="relative flex-1 md:w-[320px] group">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#FFCC00] transition-colors" size={16} />
+                <input 
+                  type="text" 
+                  value={search}
+                  onChange={e => setSearch(e.target.value)}
+                  placeholder="Find SHP- ID, origins or customers..." 
+                  className="w-full bg-white border border-gray-200 rounded-lg py-2.5 pl-10 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 focus:border-[#FFCC00] transition-all shadow-sm" 
+                />
+             </div>
+             
+             <div className="relative">
+                <select 
+                  value={sortKey} 
+                  onChange={(e) => setSortKey(e.target.value)}
+                  className="appearance-none bg-white border border-gray-200 text-gray-700 text-xs font-bold rounded-lg pl-9 pr-10 py-2.5 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 transition-all cursor-pointer shadow-sm uppercase tracking-widest"
+                >
+                  <option value="id">Sort: Manifest ID</option>
+                  <option value="customer">Sort: Customer Info</option>
+                  <option value="progress">Sort: Delivery Progress</option>
+                  <option value="origin">Sort: Origin Location</option>
+                </select>
+                <ArrowDownUp size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+             </div>
+           </div>
         </div>
 
         <div className="overflow-x-auto">
            <table className="w-full text-left">
-             <thead className="bg-[#FAFAFA] text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+             <thead className="bg-[#FAFAFA] text-[10px] font-bold text-gray-500 uppercase tracking-widest border-b border-gray-100">
                <tr>
                  <th className="px-6 py-4">Manifest Reference</th>
                  <th className="px-6 py-4">Route / Trajectory</th>
@@ -141,8 +187,8 @@ export default function AdminShipments() {
                          </div>
                       </div>
                    </td>
-                   <td className="px-6 py-5 text-right">
-                      <button className="text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors uppercase tracking-widest">
+                   <td className="px-6 py-4 text-right">
+                      <button className="text-[10px] font-bold text-blue-600 hover:text-white border border-blue-200 hover:bg-blue-600 hover:border-blue-600 px-3 py-1.5 rounded-lg transition-colors uppercase tracking-widest">
                         Manage
                       </button>
                    </td>

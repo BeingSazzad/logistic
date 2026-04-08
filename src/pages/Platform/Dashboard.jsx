@@ -86,7 +86,7 @@ export default function PlatformDashboard() {
                <div>
                   <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest">Global Velocity Matrix</h3>
                </div>
-               <button className="flex items-center gap-2 px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs font-bold text-gray-600 shadow-sm">
+               <button onClick={() => setYear(year === 2026 ? 2025 : 2026)} className="flex items-center gap-2 px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs font-bold text-gray-600 shadow-sm hover:bg-gray-50">
                   FY-{year} <ChevronDown size={14} />
                </button>
             </div>
