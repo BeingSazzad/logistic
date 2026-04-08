@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+// Deployment: Vercel-Ready v1.0.1
 import './App.css';
 
 // ── Layouts ──────────────────────────────────────────────────────
