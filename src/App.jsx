@@ -44,6 +44,7 @@ import AdminBranches        from './pages/Admin/Branches';
 // ── Dispatch ─────────────────────────────────────────────────────
 import DispatchDashboard from './pages/Dispatch/Dashboard';
 import DispatchJobs      from './pages/Dispatch/Jobs';
+import DispatchJobDetail  from './pages/Dispatch/JobDetail';
 import DispatchCreateJob from './pages/Dispatch/CreateJob';
 import DispatchTracking  from './pages/Dispatch/Tracking';
 import DispatchDrivers   from './pages/Dispatch/Drivers';
@@ -133,8 +134,9 @@ function App() {
         {/* ── DISPATCH ── */}
         <Route path="/dispatch" element={<DispatchLayout />}>
           <Route index element={<DispatchDashboard />} />
-          <Route path="jobs"         element={<DispatchJobs />} />
-          <Route path="jobs/create"  element={<DispatchCreateJob />} />
+          <Route path="jobs" element={<DispatchJobs />} />
+          <Route path="jobs/:id" element={<DispatchJobDetail />} />
+          <Route path="jobs/create" element={<DispatchCreateJob />} />
           <Route path="tracking"     element={<DispatchTracking />} />
           <Route path="drivers"      element={<DispatchDrivers />} />
           <Route path="messages"     element={<DispatchMessages />} />
