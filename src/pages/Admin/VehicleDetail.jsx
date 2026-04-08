@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   ArrowLeft, Edit3, Save, X, Truck, Gauge, Wrench,
   Droplet, MapPin, User, AlertTriangle, CheckCircle2,
-  Clock, Route, TrendingUp, Package, Settings
+  Clock, Route, TrendingUp, Package, Settings, Camera, Upload, AlignLeft
 } from 'lucide-react';
 
 const vehicle = {
@@ -11,19 +11,21 @@ const vehicle = {
   reg: 'XQG-984',
   type: 'Heavy Truck (Semi)',
   make: 'Kenworth T610',
+  year: '2023',
   vin: '1XKDP4TX8EJ123456',
   cap: '20t',
   fuelType: 'Diesel',
   status: 'Active',
   depot: 'Sydney Central Depot',
   assignedDriver: { id: 'DRV-102', name: 'Jack Taylor' },
-  currentJob: { id: 'JOB-20481', route: 'Sydney Port → Blacktown DC', progress: 65 },
+  currentShipment: { id: 'SHP-20481', route: 'Sydney Port → Blacktown DC', progress: 65 },
   odometer: '184,220 km',
   fuelLog: [
     { date: 'Today 09:14', litres: '120L', cost: '$228.00', station: 'Caltex Chullora' },
     { date: '06 Apr 07:30', litres: '95L',  cost: '$180.50', station: 'BP Matraville' },
     { date: '04 Apr 14:00', litres: '108L', cost: '$205.20', station: 'Shell Penrith' },
   ],
+  notes: 'Vehicle primarily used for long-haul routes. No smoking in cabin.',
   service: {
     lastService: '18 Feb 2026 @ 180,000 km',
     nextService: 'In 4,500 km (~188,720 km)',
@@ -41,6 +43,14 @@ export default function AdminVehicleDetail() {
   const [editing, setEditing] = useState(false);
   const [editedStatus, setEditedStatus] = useState(vehicle.status);
   const [editedDepot, setEditedDepot] = useState(vehicle.depot);
+  const [photo, setPhoto] = useState(null);
+  const [notes, setNotes] = useState(vehicle.notes);
+
+  const handlePhotoUpload = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setPhoto(URL.createObjectURL(e.target.files[0]));
+    }
+  };
 
   return (
     <div className="w-full max-w-7xl mx-auto pb-16">
@@ -52,15 +62,26 @@ export default function AdminVehicleDetail() {
       {/* Hero Header */}
       <div className="flex justify-between items-start mb-6">
         <div className="flex items-center gap-5">
-          <div className="w-16 h-16 rounded-2xl bg-gray-900 flex items-center justify-center shadow-xl">
-            <Truck size={32} className="text-yellow-400"/>
+          <div className="relative w-20 h-20 rounded-2xl bg-gray-900 flex items-center justify-center shadow-xl overflow-hidden group">
+            {photo ? (
+              <img src={photo} alt="Vehicle" className="w-full h-full object-cover" />
+            ) : (
+              <Truck size={36} className="text-yellow-400"/>
+            )}
+            {editing && (
+              <label className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">
+                <Camera size={16} className="text-white mb-1" />
+                <span className="text-[9px] font-bold text-white uppercase">Change</span>
+                <input type="file" className="hidden" accept="image/*" onChange={handlePhotoUpload} />
+              </label>
+            )}
           </div>
           <div>
             <div className="flex items-center gap-3">
               <h1 className="text-2xl font-bold text-gray-900 tracking-tight">{vehicle.id} — {vehicle.make}</h1>
               <span className={`badge font-bold ${editedStatus === 'Active' ? 'badge-green' : 'bg-red-100 text-red-700 border border-red-200'}`}>● {editedStatus}</span>
             </div>
-            <p className="text-sm text-gray-500 mt-1 flex items-center gap-2 font-mono">{vehicle.reg} · {vehicle.type} · {vehicle.cap} cap</p>
+            <p className="text-sm text-gray-500 mt-1 flex items-center gap-2 font-mono">{vehicle.reg} · {vehicle.type} · {vehicle.cap} cap · {vehicle.year}</p>
           </div>
         </div>
         <div className="flex gap-3">
@@ -79,19 +100,22 @@ export default function AdminVehicleDetail() {
 
         {/* LEFT COLUMN */}
         <div className="flex flex-col gap-5">
-          {/* Specs */}
+
+          {/* Vehicle Specs — matches AddVehicle: Identification + Specs sections */}
           <div className="card bg-white p-5 shadow-sm">
             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-1.5"><Settings size={12}/> Vehicle Specs</h3>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="flex flex-col gap-3">
               {[
+                { label: 'Registration', value: vehicle.reg },
                 { label: 'Make & Model', value: vehicle.make },
+                { label: 'Year', value: vehicle.year },
                 { label: 'Category', value: vehicle.type },
-                { label: 'VIN', value: vehicle.vin, mono: true },
+                { label: 'VIN / Chassis', value: vehicle.vin, mono: true },
                 { label: 'Fuel Type', value: vehicle.fuelType },
-                { label: 'Payload Cap.', value: `${vehicle.cap}` },
+                { label: 'Payload Cap.', value: vehicle.cap },
                 { label: 'Odometer', value: vehicle.odometer },
               ].map(item => (
-                <div key={item.label} className="bg-gray-50 p-2.5 rounded-lg border border-gray-100 col-span-2">
+                <div key={item.label} className="bg-gray-50 p-2.5 rounded-lg border border-gray-100">
                   <p className="text-[9px] text-gray-400 font-bold uppercase tracking-widest">{item.label}</p>
                   <p className={`text-sm font-bold text-gray-900 mt-0.5 ${item.mono ? 'font-mono text-xs' : ''}`}>{item.value}</p>
                 </div>
@@ -99,7 +123,7 @@ export default function AdminVehicleDetail() {
             </div>
           </div>
 
-          {/* Operational Config */}
+          {/* Operational Config — matches AddVehicle: Operational Status section */}
           <div className="card bg-white p-5 shadow-sm">
             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Operational Config</h3>
             <div className="flex flex-col gap-4">
@@ -129,6 +153,23 @@ export default function AdminVehicleDetail() {
               </div>
             </div>
           </div>
+
+          {/* Other Info — matches AddVehicle: Other Information section */}
+          <div className="card bg-white p-5 shadow-sm">
+            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-1.5"><AlignLeft size={12}/> Other Information</h3>
+            {editing ? (
+              <textarea
+                className="input min-h-[100px] resize-y w-full text-sm"
+                value={notes}
+                onChange={e => setNotes(e.target.value)}
+                placeholder="Additional notes about this vehicle..."
+              />
+            ) : (
+              <div className="p-3 bg-gray-50 rounded-lg border border-gray-100">
+                <p className="text-sm text-gray-700 whitespace-pre-wrap">{notes || 'No additional notes provided.'}</p>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* RIGHT COLUMN */}
@@ -144,16 +185,16 @@ export default function AdminVehicleDetail() {
               <MapPin size={16} className="text-yellow-500 shrink-0"/>
               <div>
                 <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">Active Route</p>
-                <p className="font-bold text-gray-900 text-sm">{vehicle.currentJob.route}</p>
+                <p className="font-bold text-gray-900 text-sm">{vehicle.currentShipment.route}</p>
               </div>
             </div>
             <div>
               <div className="flex justify-between mb-1.5">
                 <span className="text-xs font-bold text-gray-500">Route Completion</span>
-                <span className="text-xs font-bold text-green-600">{vehicle.currentJob.progress}%</span>
+                <span className="text-xs font-bold text-green-600">{vehicle.currentShipment.progress}%</span>
               </div>
               <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
-                <div className="h-full bg-green-500 rounded-full" style={{ width: `${vehicle.currentJob.progress}%` }}></div>
+                <div className="h-full bg-green-500 rounded-full" style={{ width: `${vehicle.currentShipment.progress}%` }}></div>
               </div>
             </div>
           </div>

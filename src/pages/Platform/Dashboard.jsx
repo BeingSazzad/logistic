@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Building2, TrendingUp, Activity, Users, ArrowRight, Download, Filter } from 'lucide-react';
+import { 
+  Building2, TrendingUp, Activity, Users, 
+  ArrowRight, Download, Filter, Zap, 
+  ShieldCheck, Globe, Server, Database 
+} from 'lucide-react';
 
 const yearlyData = {
   2026: {
@@ -16,10 +20,10 @@ const yearlyData = {
 };
 
 const tenants = [
-  { id: 'T-001', name: 'HERO Logistics Pty Ltd',  status: 'active',    plan: 'Pro',       shipments: 342, mrr: 149,  trial: null },
-  { id: 'T-002', name: 'FastMove AU',              status: 'trial',     plan: 'Starter',   shipments: 47,  mrr: 0,    trial: 3 },
-  { id: 'T-003', name: 'OzFreight Co',             status: 'active',    plan: 'Enterprise',shipments: 1240,mrr: 599,  trial: null },
-  { id: 'T-004', name: 'SunState Transport',       status: 'active',    plan: 'Pro',       shipments: 198, mrr: 149,  trial: null },
+  { id: 'T-001', name: 'HERO Logistics Pty Ltd',  status: 'active',    plan: 'Pro',       shipments: 342, mrr: 149,  logo: 'HL' },
+  { id: 'T-002', name: 'FastMove AU',              status: 'trial',     plan: 'Starter',   shipments: 47,  mrr: 0,    logo: 'FM' },
+  { id: 'T-003', name: 'OzFreight Co',             status: 'active',    plan: 'Enterprise',shipments: 1240,mrr: 599,  logo: 'OZ' },
+  { id: 'T-004', name: 'SunState Transport',       status: 'active',    plan: 'Pro',       shipments: 198, mrr: 149,  logo: 'SS' },
 ];
 
 export default function PlatformDashboard() {
@@ -30,90 +34,137 @@ export default function PlatformDashboard() {
   const maxIncome = Math.max(...data.income);
   const maxUsers = Math.max(...data.users);
 
-  const totalMRR = tenants.reduce((s, t) => s + t.mrr, 0);
-
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto">
-      <div className="flex justify-between items-end">
+    <div className="flex flex-col gap-8 w-full max-w-7xl mx-auto pb-16">
+      
+      {/* ── 1. Strategic Platform Header ── */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Platform Overview</h1>
-          <p className="text-sm text-gray-500 mt-1">Multi-tenant health & yearly revenue</p>
+          <h1 className="text-3xl font-black text-gray-900 tracking-tighter flex items-center gap-3">
+             <Globe className="text-blue-500" size={32}/> Platform Architecture
+          </h1>
+          <p className="text-sm font-bold text-gray-400 mt-1 uppercase tracking-[0.2em] flex items-center gap-2">
+             Global Hub • <span className="text-emerald-500 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Systems Nominal</span>
+          </p>
+        </div>
+        <div className="flex items-center gap-4 bg-white px-6 py-3 rounded-[2rem] border border-gray-100 shadow-sm">
+           <div className="flex flex-col items-center">
+              <Server size={14} className="text-gray-400 mb-1"/>
+              <span className="text-[10px] font-black uppercase text-gray-900">API 99.9%</span>
+           </div>
+           <div className="w-px h-6 bg-gray-100"></div>
+           <div className="flex flex-col items-center">
+              <Database size={14} className="text-gray-400 mb-1"/>
+              <span className="text-[10px] font-black uppercase text-gray-900">DB 14ms</span>
+           </div>
         </div>
       </div>
 
-      {/* KPIs */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* ── 2. Growth Intelligence Row ── */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         {[
-          { label: 'Active Tenants', value: tenants.filter(t=>t.status==='active').length, icon: Building2, color: 'text-yellow-600', bg: 'bg-yellow-50' },
-          { label: 'Total MRI / Month', value: `$${totalMRR}`, icon: TrendingUp, color: 'text-blue-600', bg: 'bg-blue-50' },
-          { label: 'Total Users', value: '1,120', icon: Users, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-          { label: 'Platform Status', value: 'Operational', icon: Activity, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-        ].map(s => (
-          <div key={s.label} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
-            <div className="flex justify-between items-start mb-3">
-              <span className="text-sm text-gray-500 font-medium">{s.label}</span>
-              <div className={`w-8 h-8 rounded-md ${s.bg} flex items-center justify-center`}><s.icon size={16} className={s.color} /></div>
-            </div>
-            <p className="text-2xl font-bold text-gray-900">{s.value}</p>
+          { label: 'Active Ecosystems', val: '124', sub: '+12 this month', color: 'blue', icon: Building2 },
+          { label: 'Global MRI (MRR)', val: '$84,200', sub: 'Target: $100K', color: 'emerald', icon: TrendingUp },
+          { label: 'Total Fleet Ops', val: '4,120', sub: 'Across all nodes', color: 'violet', icon: Users },
+          { label: 'Active Sessions', val: '942', sub: 'Peak: 1,240', color: 'amber', icon: Zap },
+        ].map((k, i) => (
+          <div key={i} className="card bg-white p-6 border border-gray-100 shadow-sm hover:border-[#FACC15] transition-all group relative overflow-hidden">
+             <div className="flex flex-col justify-between h-full relative z-10">
+                <div className="flex justify-between items-start">
+                   <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{k.label}</span>
+                   <div className={`p-2.5 rounded-2xl bg-${k.color}-50 text-${k.color}-600`}>
+                      <k.icon size={18} />
+                   </div>
+                </div>
+                <h3 className="text-3xl font-black text-gray-900 mt-5">{k.val}</h3>
+                <p className="text-[10px] font-bold text-gray-400 mt-1 uppercase tracking-tighter">{k.sub}</p>
+             </div>
+             <div className={`absolute -right-4 -bottom-4 w-20 h-20 bg-${k.color}-400 opacity-5 rounded-full blur-2xl`}></div>
           </div>
         ))}
       </div>
 
-      {/* Yearly Summary Chart */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
-        <div className="flex justify-between items-center mb-6">
-          <div>
-            <h3 className="font-bold text-gray-900">Yearly Summary</h3>
-            <div className="flex items-center gap-4 mt-2 text-xs font-semibold">
-              <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-yellow-500 inline-block" /> Income ($)</span>
-              <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-blue-300 inline-block" /> Users Count</span>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+         
+         {/* ── 3. Unified Global Statistics ── */}
+         <div className="lg:col-span-2 bg-white rounded-[2.5rem] border border-gray-100 shadow-xl overflow-hidden min-h-[450px] flex flex-col">
+            <div className="px-8 py-6 border-b border-gray-50 flex justify-between items-center bg-gray-50/20">
+               <div>
+                  <h3 className="text-xs font-black text-gray-900 uppercase tracking-[0.2em] mb-1">Global Velocity Matrix</h3>
+                  <div className="flex items-center gap-4 text-[10px] font-black uppercase text-gray-400">
+                     <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-[#FACC15]"></span> Revenue</span>
+                     <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-blue-300"></span> Users</span>
+                  </div>
+               </div>
+               <select className="input py-1.5 px-4 text-xs font-black bg-white border-gray-200 rounded-xl outline-none" value={year} onChange={(e) => setYear(Number(e.target.value))}>
+                  <option value={2026}>FY-2026</option>
+                  <option value={2025}>FY-2025</option>
+               </select>
             </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <select className="input text-sm py-1.5 px-3 min-w-[100px]" value={year} onChange={(e) => setYear(Number(e.target.value))}>
-              <option value={2026}>2026</option>
-              <option value={2025}>2025</option>
-            </select>
-          </div>
-        </div>
+            
+            <div className="p-8 flex-1 flex items-end gap-3 h-full pb-10">
+               {data.months.map((m, i) => {
+                 const hIncome = Math.max(15, (data.income[i] / maxIncome) * 100);
+                 const hUsers = Math.max(10, (data.users[i] / maxUsers) * 100);
+                 return (
+                   <div key={m} className="flex-1 flex flex-col items-center gap-4 group">
+                      <div className="flex-1 w-full bg-gray-50/50 rounded-2xl relative overflow-hidden p-1 flex items-end gap-1">
+                         <div className="flex-1 bg-[#FACC15] rounded-xl group-hover:bg-yellow-500 transition-colors shadow-lg shadow-yellow-400/10" style={{ height: `${hIncome}%` }}></div>
+                         <div className="flex-1 bg-blue-200 rounded-xl group-hover:bg-blue-400 transition-colors" style={{ height: `${hUsers}%` }}></div>
+                      </div>
+                      <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{m}</span>
+                   </div>
+                 )
+               })}
+            </div>
+         </div>
 
-        <div className="flex items-end gap-2 sm:gap-4 h-64 mt-4 relative">
-          {data.months.map((m, i) => {
-            const hIncome = Math.max(10, (data.income[i] / maxIncome) * 100);
-            const hUsers = Math.max(10, (data.users[i] / maxUsers) * 100);
-            return (
-              <div key={m} className="flex-1 flex flex-col items-center gap-2 group">
-                <div className="w-full flex gap-1 items-end h-[200px]" title={`Income: $${data.income[i]} | Users: ${data.users[i]}`}>
-                  <div className="flex-1 bg-yellow-500 rounded-t-sm hover:bg-yellow-600 transition-colors" style={{ height: `${hIncome}%` }} />
-                  <div className="flex-1 bg-blue-300 rounded-t-sm hover:bg-blue-400 transition-colors" style={{ height: `${hUsers}%` }} />
-                </div>
-                <span className="text-[10px] sm:text-xs text-gray-500 font-semibold">{m}</span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      
-      {/* Tenants Table Snippet */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-        <div className="p-5 border-b border-gray-100 flex justify-between items-center">
-          <h3 className="font-bold text-gray-900">Recent Tenants Activity</h3>
-          <button onClick={() => navigate('/platform/tenants')} className="text-sm text-yellow-600 font-semibold hover:underline flex items-center gap-1">
-            View All <ArrowRight size={14} />
-          </button>
-        </div>
-        <div className="divide-y divide-gray-50">
-          {tenants.map(t => (
-            <div key={t.id} className="flex items-center justify-between px-5 py-4 hover:bg-gray-50 transition-colors">
-              <div>
-                <p className="font-semibold text-sm text-gray-900">{t.name}</p>
-                <p className="text-xs text-gray-500 mt-0.5">{t.plan} · {t.shipments} shipments/mo</p>
-              </div>
-              <button onClick={() => navigate(`/platform/tenants/${t.id}`)} className="btn btn-dark text-xs py-1.5 px-3">Manage</button>
+         {/* ── 4. Ecosystem Activity Feed ── */}
+         <div className="flex flex-col gap-6">
+            <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-xl overflow-hidden flex flex-col">
+               <div className="px-8 py-6 border-b border-gray-50 bg-gray-50/20 flex justify-between items-center">
+                  <h3 className="text-xs font-black text-gray-900 uppercase tracking-[0.2em]">Tenant Nodes</h3>
+                  <button className="text-[10px] font-black text-blue-500 uppercase tracking-widest hover:underline">View Map Mode</button>
+               </div>
+               <div className="divide-y divide-gray-50">
+                  {tenants.map(t => (
+                    <div key={t.id} className="p-6 flex items-center justify-between hover:bg-gray-50 transition-all cursor-pointer group">
+                       <div className="flex items-center gap-4">
+                          <div className="w-12 h-12 rounded-2xl bg-gray-900 flex items-center justify-center font-black text-[#FACC15] text-xs shadow-lg group-hover:scale-105 transition-transform">
+                             {t.logo}
+                          </div>
+                          <div>
+                             <p className="font-black text-gray-900 text-sm tracking-tight leading-none mb-1.5">{t.name}</p>
+                             <div className="flex items-center gap-2">
+                                <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded border ${t.status === 'active' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-amber-50 text-amber-600 border-amber-100'}`}>{t.status}</span>
+                                <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">{t.plan} Plan</span>
+                             </div>
+                          </div>
+                       </div>
+                       <div className="text-right flex flex-col items-end gap-1">
+                          <span className="text-xs font-black text-gray-900">${t.mrr}</span>
+                          <span className="text-[9px] font-bold text-gray-400 uppercase">{t.shipments} Manifests</span>
+                       </div>
+                    </div>
+                  ))}
+               </div>
+               <button onClick={() => navigate('/platform/tenants')} className="w-full py-5 bg-gray-50 text-gray-400 font-black uppercase text-[10px] tracking-widest hover:bg-gray-100 hover:text-gray-900 transition-all">Open Directory Architecture →</button>
             </div>
-          ))}
-        </div>
+            
+            {/* Quick Status Pill */}
+            <div className="bg-emerald-50 p-6 rounded-[2rem] border border-emerald-100 flex items-center gap-4">
+               <div className="w-12 h-12 bg-emerald-500 rounded-3xl flex items-center justify-center text-white shadow-xl shadow-emerald-500/20">
+                  <ShieldCheck size={24}/>
+               </div>
+               <div>
+                  <p className="text-xs font-black text-emerald-900 uppercase tracking-tight">Security Hardening Level: Max</p>
+                  <p className="text-[9px] font-bold text-emerald-700 uppercase mt-0.5">Isolated Multi-Tenant Clusters Encrypted</p>
+               </div>
+            </div>
+         </div>
+
       </div>
+
     </div>
   );
 }

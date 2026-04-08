@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { 
   Building2, Shield, Bell, CreditCard, Key, 
-  MapPin, Globe, Mail, Phone, Lock, Save 
+  MapPin, Globe, Mail, Phone, Lock, Save, User, Sliders
 } from 'lucide-react';
 
 const navTabs = [
+  { id: 'profile', label: 'My Account', icon: User },
   { id: 'company', label: 'Company Profile', icon: Building2 },
   { id: 'security', label: 'Safety & Security', icon: Shield },
   { id: 'billing', label: 'Subscription & Billing', icon: CreditCard },
@@ -12,7 +13,7 @@ const navTabs = [
 ];
 
 export default function AdminSettings() {
-  const [activeTab, setActiveTab] = useState('company');
+  const [activeTab, setActiveTab] = useState('profile');
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
@@ -48,7 +49,67 @@ export default function AdminSettings() {
 
         {/* Right Content Area */}
         <div className="flex-1 w-full flex flex-col gap-6">
-          
+
+          {/* Personal Profile Tab */}
+          {activeTab === 'profile' && (
+            <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-2">
+              {/* Account Details */}
+              <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                <div className="p-6 border-b border-gray-100 bg-gray-50/50">
+                  <h3 className="font-bold text-gray-900 text-lg">Personal Details</h3>
+                  <p className="text-sm text-gray-500 mt-0.5">Manage your super admin credentials.</p>
+                </div>
+                <div className="p-6 space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2">Full Name</label>
+                      <input type="text" className="input w-full" defaultValue="Jack Taylor" />
+                    </div>
+                    <div>
+                      <label className="text-xs font-black text-gray-400 flex items-center gap-2 uppercase tracking-widest block mb-2">
+                        <Mail size={14} /> Login Email
+                      </label>
+                      <input 
+                        type="email" 
+                        className="input w-full bg-gray-50 text-gray-500 cursor-not-allowed border-gray-200" 
+                        readOnly 
+                        defaultValue="admin@hero.com.au" 
+                        title="Contact Platform Support to change login email."
+                      />
+                      <p className="text-[10px] text-gray-400 mt-1.5">Email is fixed for Super Admins. Contact platform support if you need to transfer ownership.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Change Password */}
+              <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                <div className="p-6 border-b border-gray-100 bg-gray-50/50 flex items-center gap-3">
+                  <Lock size={20} className="text-gray-400" />
+                  <div>
+                    <h3 className="font-bold text-gray-900 text-lg">Change Password</h3>
+                    <p className="text-sm text-gray-500 mt-0.5">Keep your account secure.</p>
+                  </div>
+                </div>
+                <div className="p-6 space-y-4 max-w-md">
+                  <div>
+                    <label className="text-xs font-bold text-gray-700 block mb-2">Current Password</label>
+                    <input type="password" className="input w-full" placeholder="••••••••" />
+                  </div>
+                  <div>
+                    <label className="text-xs font-bold text-gray-700 block mb-2">New Password</label>
+                    <input type="password" className="input w-full" placeholder="New Password" />
+                  </div>
+                  <div>
+                    <label className="text-xs font-bold text-gray-700 block mb-2">Confirm New Password</label>
+                    <input type="password" className="input w-full" placeholder="Confirm Password" />
+                  </div>
+                  <button className="btn btn-dark w-full mt-2">Update Password</button>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Company Profile Tab */}
           {activeTab === 'company' && (
             <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden animate-in fade-in slide-in-from-bottom-2">
@@ -69,6 +130,28 @@ export default function AdminSettings() {
                   <div>
                     <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2">Primary Industry</label>
                     <select className="input w-full"><option>Road Freight & Transport</option></select>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                  <div>
+                    <label className="text-xs font-black text-gray-400 flex items-center gap-2 uppercase tracking-widest block mb-2">
+                      <Mail size={14} /> Primary Contact Email
+                    </label>
+                    <input 
+                      type="email" 
+                      className="input w-full bg-gray-50 text-gray-500 cursor-not-allowed border-gray-200" 
+                      readOnly 
+                      defaultValue="admin@hero.com.au" 
+                      title="Please contact Platform Support to change the primary email address."
+                    />
+                    <p className="text-[10px] text-gray-400 mt-1.5">Email cannot be changed directly. Contact support.</p>
+                  </div>
+                  <div>
+                    <label className="text-xs font-black text-gray-400 flex items-center gap-2 uppercase tracking-widest block mb-2">
+                      <Phone size={14} /> Contact Phone
+                    </label>
+                    <input type="tel" className="input w-full" defaultValue="+61 412 345 678" />
                   </div>
                 </div>
                 
@@ -113,7 +196,7 @@ export default function AdminSettings() {
                   ))}
                 </div>
               </div>
-              
+
               <div className="bg-[#111] rounded-2xl p-6 text-white border border-gray-800">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-yellow-400">

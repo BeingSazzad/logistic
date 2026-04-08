@@ -20,7 +20,6 @@ import AdminFleetManagement from './pages/Admin/FleetManagement';
 import AdminDriverManagement from './pages/Admin/DriverManagement';
 import AdminUsers           from './pages/Admin/Users';
 import AdminJobsConfig      from './pages/Admin/JobsConfig';
-import AdminWarehouses      from './pages/Admin/Warehouses';
 import AdminCustomers       from './pages/Admin/Customers';
 import AdminFinance         from './pages/Admin/Finance';
 import AdminMessaging       from './pages/Admin/Messaging';
@@ -31,12 +30,15 @@ import AdminIntegrations    from './pages/Admin/Integrations';
 import AdminAuditLogs       from './pages/Admin/AuditLogs';
 import AdminAddVehicle      from './pages/Admin/AddVehicle';
 import AdminAddDriver       from './pages/Admin/AddDriver';
-import AdminAddWarehouse    from './pages/Admin/AddWarehouse';
 import AdminAddCustomer     from './pages/Admin/AddCustomer';
 import AdminInviteUser      from './pages/Admin/AddUser';
 import AdminDriverDetail    from './pages/Admin/DriverDetail';
 import AdminVehicleDetail   from './pages/Admin/VehicleDetail';
 import AdminSettings        from './pages/Admin/Settings';
+import AdminShipments       from './pages/Admin/Shipments';
+import AdminShipmentDetail  from './pages/Admin/ShipmentDetail';
+import AdminExceptions      from './pages/Admin/Exceptions';
+import AdminBranches        from './pages/Admin/Branches';
 
 // ── Dispatch ─────────────────────────────────────────────────────
 import DispatchDashboard from './pages/Dispatch/Dashboard';
@@ -110,9 +112,11 @@ function App() {
           <Route path="drivers/:driverId" element={<AdminDriverDetail />} />
           <Route path="users"           element={<AdminUsers />} />
           <Route path="users/invite"    element={<AdminInviteUser />} />
+          <Route path="shipments"       element={<AdminShipments />} />
+          <Route path="shipments/:id"   element={<AdminShipmentDetail />} />
+          <Route path="exceptions"      element={<AdminExceptions />} />
           <Route path="jobs-config"     element={<AdminJobsConfig />} />
-          <Route path="warehouses"      element={<AdminWarehouses />} />
-          <Route path="warehouses/add"  element={<AdminAddWarehouse />} />
+          <Route path="branches"        element={<AdminBranches />} />
           <Route path="customers"       element={<AdminCustomers />} />
           <Route path="customers/add"   element={<AdminAddCustomer />} />
           <Route path="finance"         element={<AdminFinance />} />

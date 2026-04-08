@@ -19,13 +19,13 @@ const driver = {
   license: { type: 'NSW HC (Heavy Combination)', number: 'HR-4412', expiry: '12 Sep 2026', status: 'Valid' },
   medical: { expiry: '15 Oct 2026', status: 'Valid' },
   vehicle: { id: 'TRK-102', reg: 'XQG-984', type: 'Heavy Truck' },
-  currentJob: { id: 'JOB-20481', route: 'Sydney Port → Blacktown DC', progress: 65, eta: '3:45 PM', load: '18.4t' },
-  stats: { completedJobs: 284, onTimeRate: '96.2%', avgRating: 4.8, delayedJobs: 11 },
-  recentJobs: [
-    { id: 'JOB-20481', route: 'Sydney Port → Blacktown DC', status: 'In Transit', date: 'Today' },
-    { id: 'JOB-20477', route: 'Chullora DC → Richmond Depot', status: 'Delivered', date: 'Yesterday' },
-    { id: 'JOB-20469', route: 'Port Botany → Penrith Hub', status: 'Delivered', date: '05 Apr' },
-    { id: 'JOB-20461', route: 'Blacktown DC → Newcastle Depot', status: 'Delivered', date: '04 Apr' },
+  currentShipment: { id: 'SHP-20481', route: 'Sydney Port → Blacktown DC', progress: 65, eta: '3:45 PM', load: '18.4t' },
+  stats: { completedShipments: 284, onTimeRate: '96.2%', avgRating: 4.8, delayedShipments: 11 },
+  recentShipments: [
+    { id: 'SHP-20481', route: 'Sydney Port → Blacktown DC', status: 'In Transit', date: 'Today' },
+    { id: 'SHP-20477', route: 'Chullora DC → Richmond Depot', status: 'Delivered', date: 'Yesterday' },
+    { id: 'SHP-20469', route: 'Port Botany → Penrith Hub', status: 'Delivered', date: '05 Apr' },
+    { id: 'SHP-20461', route: 'Blacktown DC → Newcastle Depot', status: 'Delivered', date: '04 Apr' },
   ]
 };
 
@@ -166,15 +166,15 @@ export default function AdminDriverDetail() {
           </div>
         </div>
 
-        {/* RIGHT: Status, Route, Jobs */}
+        {/* RIGHT: Status, Route, Shipments */}
         <div className="lg:col-span-2 flex flex-col gap-5">
 
           {/* Performance KPIs */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="card p-4 bg-white shadow-sm text-center">
               <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Completed</p>
-              <p className="text-2xl font-black text-gray-900 mt-1">{driver.stats.completedJobs}</p>
-              <p className="text-[10px] text-gray-500 font-bold">Total Jobs</p>
+              <p className="text-2xl font-black text-gray-900 mt-1">{driver.stats.completedShipments}</p>
+              <p className="text-[10px] text-gray-500 font-bold">Total Shipments</p>
             </div>
             <div className="card p-4 bg-white shadow-sm text-center">
               <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">On-Time Rate</p>
@@ -188,26 +188,26 @@ export default function AdminDriverDetail() {
             </div>
             <div className="card p-4 bg-white shadow-sm text-center">
               <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Delays</p>
-              <p className="text-2xl font-black text-orange-500 mt-1">{driver.stats.delayedJobs}</p>
+              <p className="text-2xl font-black text-orange-500 mt-1">{driver.stats.delayedShipments}</p>
               <p className="text-[10px] text-gray-500 font-bold">Late Deliveries</p>
             </div>
           </div>
 
-          {/* Current Active Job / Live Route */}
+          {/* Current Active Shipment / Live Route */}
           <div className="card bg-white p-5 shadow-sm border-l-4 border-l-green-500">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="font-bold text-gray-900 flex items-center gap-2"><Route size={16}/> Current Active Job</h3>
+              <h3 className="font-bold text-gray-900 flex items-center gap-2"><Route size={16}/> Current Active Shipment</h3>
               <span className="badge badge-green font-bold">● Live</span>
             </div>
             <div className="flex flex-col gap-4">
               <div className="flex justify-between items-start">
                 <div>
                   <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1">Job Reference</p>
-                  <p className="text-lg font-black text-gray-900">{driver.currentJob.id}</p>
+                  <p className="text-lg font-black text-gray-900">{driver.currentShipment.id}</p>
                 </div>
                 <div className="text-right">
                   <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1">ETA</p>
-                  <p className="text-lg font-black text-gray-900 flex items-center gap-1"><Clock size={14}/> {driver.currentJob.eta}</p>
+                  <p className="text-lg font-black text-gray-900 flex items-center gap-1"><Clock size={14}/> {driver.currentShipment.eta}</p>
                 </div>
               </div>
 
@@ -215,7 +215,7 @@ export default function AdminDriverDetail() {
                 <MapPin size={16} className="text-yellow-500 shrink-0"/>
                 <div>
                   <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">Route</p>
-                  <p className="font-bold text-gray-900 text-sm">{driver.currentJob.route}</p>
+                  <p className="font-bold text-gray-900 text-sm">{driver.currentShipment.route}</p>
                 </div>
               </div>
 
@@ -223,7 +223,7 @@ export default function AdminDriverDetail() {
                 <Package size={16} className="text-blue-500 shrink-0"/>
                 <div>
                   <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">Load Weight</p>
-                  <p className="font-bold text-gray-900 text-sm">{driver.currentJob.load}</p>
+                  <p className="font-bold text-gray-900 text-sm">{driver.currentShipment.load}</p>
                 </div>
               </div>
 
@@ -231,23 +231,23 @@ export default function AdminDriverDetail() {
               <div>
                 <div className="flex justify-between mb-2">
                   <span className="text-xs font-bold text-gray-500">Route Progress</span>
-                  <span className="text-xs font-bold text-green-600">{driver.currentJob.progress}% Complete</span>
+                  <span className="text-xs font-bold text-green-600">{driver.currentShipment.progress}% Complete</span>
                 </div>
                 <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
-                  <div className="h-full bg-green-500 rounded-full transition-all" style={{ width: `${driver.currentJob.progress}%` }}></div>
+                  <div className="h-full bg-green-500 rounded-full transition-all" style={{ width: `${driver.currentShipment.progress}%` }}></div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Recent Jobs History */}
+          {/* Recent Shipments History */}
           <div className="card bg-white shadow-sm">
             <div className="p-5 border-b border-gray-100 flex justify-between items-center">
               <h3 className="font-bold text-gray-900 flex items-center gap-2"><TrendingUp size={16}/> Recent Job History</h3>
-              <button className="text-xs font-bold text-blue-600 hover:underline">View All Jobs</button>
+              <button className="text-xs font-bold text-blue-600 hover:underline">View All Shipments</button>
             </div>
             <div className="divide-y divide-gray-50">
-              {driver.recentJobs.map(job => (
+              {driver.recentShipments.map(job => (
                 <div key={job.id} className="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center gap-4">
                     <div className={`w-2.5 h-2.5 rounded-full ${job.status === 'In Transit' ? 'bg-yellow-400 animate-pulse' : 'bg-green-500'}`}></div>

@@ -1,42 +1,105 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Outlet, NavLink, useNavigate } from 'react-router-dom';
+import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, Building2, Truck, Users, UserCog, Settings2, Warehouse,
-  Briefcase, DollarSign, MessageSquare, BarChart2, Bell, Zap, Shield, Key, Link as LinkIcon, LogOut, HelpCircle
+  Briefcase, DollarSign, MessageSquare, BarChart2, Bell, Zap, Shield, Key, Link as LinkIcon, LogOut, HelpCircle, Settings,
+  ChevronDown, ChevronRight, Package, Network
 } from 'lucide-react';
 
-const navItems = [
-  { to: '/admin',               label: 'Dashboard',          icon: LayoutDashboard, end: true },
-  { to: '/admin/company',       label: 'Company Setup',      icon: Building2 },
-  { to: '/admin/fleet',         label: 'Fleet Management',   icon: Truck },
-  { to: '/admin/drivers',       label: 'Driver Management',  icon: Users },
-  { to: '/admin/users',         label: 'Users & Roles',      icon: UserCog },
-  { to: '/admin/jobs-config',   label: 'Jobs Config',        icon: Settings2 },
-  { to: '/admin/warehouses',    label: 'Warehouses',         icon: Warehouse },
-  { to: '/admin/customers',     label: 'Customers',          icon: Briefcase },
-  { to: '/admin/finance',       label: 'Finance Overview',   icon: DollarSign },
-  { to: '/admin/messaging',     label: 'Messaging',          icon: MessageSquare },
-  { to: '/admin/reports',       label: 'Reports Analytics',  icon: BarChart2 },
-  { to: '/admin/notifications', label: 'Notifications',      icon: Bell },
-  { to: '/admin/integrations',  label: 'Integrations',       icon: LinkIcon },
-  { to: '/admin/audit',         label: 'Audit Logs',         icon: Key },
-  { to: '/admin/helpline',      label: 'Platform Helpline',  icon: HelpCircle },
+const navGroups = [
+  {
+    type: 'link', label: 'Dashboard', icon: LayoutDashboard, to: '/admin', end: true
+  },
+  {
+    type: 'group', label: 'Operations', icon: Package,
+    items: [
+      { to: '/admin/shipments',     label: 'Shipments' },
+      { to: '/admin/exceptions',    label: 'Exceptions' },
+      { to: '/admin/customers',     label: 'Customers' },
+      { to: '/admin/jobs-config',   label: 'Jobs Config' },
+    ]
+  },
+  {
+    type: 'group', label: 'Network', icon: Network,
+    items: [
+      { to: '/admin/branches',      label: 'Branches' },
+      { to: '/admin/fleet',         label: 'Fleet Management' },
+      { to: '/admin/drivers',       label: 'Driver Management' },
+    ]
+  },
+  {
+    type: 'link', label: 'Financial Control', icon: DollarSign, to: '/admin/finance'
+  },
+  {
+    type: 'group', label: 'Settings', icon: Settings,
+    items: [
+      { to: '/admin/company',       label: 'Company Setup' },
+      { to: '/admin/users',         label: 'Users & Roles' },
+      { to: '/admin/messaging',     label: 'Messaging' },
+      { to: '/admin/reports',       label: 'Reports Analytics' },
+      { to: '/admin/notifications', label: 'Notifications' },
+      { to: '/admin/integrations',  label: 'Integrations' },
+      { to: '/admin/audit',         label: 'Audit Logs' },
+      { to: '/admin/helpline',      label: 'Platform Helpline' },
+      { to: '/admin/settings',      label: 'System Settings' },
+    ]
+  }
 ];
 
 function SideNavItem({ to, label, Icon, end }) {
   return (
     <NavLink to={to} end={end} className="group">
       {({ isActive }) => (
-        <div className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-bold transition-all cursor-pointer ${
+        <div className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold transition-all cursor-pointer ${
           isActive 
             ? 'bg-[#FACC15] text-[#000]' 
-            : 'text-gray-400 group-hover:text-white group-hover:bg-white/5'
+            : 'text-gray-400 hover:text-white hover:bg-white/5'
         }`}>
-          <Icon size={16} className={isActive ? 'text-black' : 'text-gray-500 group-hover:text-white'} />
+          <Icon size={18} className={isActive ? 'text-black' : 'text-gray-500 group-hover:text-white transition-colors'} />
           <span>{label}</span>
         </div>
       )}
     </NavLink>
+  );
+}
+
+function NavGroup({ group }) {
+  const [open, setOpen] = useState(true);
+  const location = useLocation();
+
+  if (group.type === 'link') {
+    return <SideNavItem to={group.to} label={group.label} Icon={group.icon} end={group.end} />;
+  }
+
+  const isChildActive = group.items.some(item => location.pathname === item.to || location.pathname.startsWith(item.to + '/'));
+
+  return (
+    <div className="mb-0.5">
+      <button onClick={() => setOpen(!open)} className={`w-full flex items-center justify-between px-3 py-2 text-gray-400 hover:text-white group transition-colors rounded-lg mb-1 ${isChildActive && !open ? 'bg-white/5' : ''}`}>
+        <div className="flex items-center gap-2">
+          <group.icon size={15} className={`transition-colors ${isChildActive ? 'text-[#FACC15]' : 'text-gray-500 group-hover:text-white'}`} />
+          <span className={`text-[11px] font-black uppercase tracking-widest ${isChildActive ? 'text-white' : ''}`}>{group.label}</span>
+        </div>
+        {open ? <ChevronDown size={14} className="opacity-50" /> : <ChevronRight size={14} className="opacity-50" />}
+      </button>
+      {open && (
+        <div className="flex flex-col gap-0.5">
+          {group.items.map(item => (
+            <NavLink key={item.to} to={item.to}>
+              {({ isActive }) => (
+                <div className={`flex items-center gap-3 ml-[22px] px-3 py-1.5 rounded-md text-[13px] font-bold transition-all border-l-2 cursor-pointer ${
+                  isActive 
+                    ? 'border-[#FACC15] text-[#FACC15]' 
+                    : 'border-transparent text-gray-400 hover:text-white hover:border-white/20'
+                }`}>
+                  <span>{item.label}</span>
+                </div>
+              )}
+            </NavLink>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -74,9 +137,9 @@ export default function AdminLayout() {
         </div>
 
         {/* Nav */}
-        <nav className="flex flex-col gap-0.5 px-3 pt-4 pb-4 flex-1">
-          {navItems.map(({ to, label, icon, end }) => (
-            <SideNavItem key={to} to={to} label={label} Icon={icon} end={end} />
+        <nav className="flex flex-col gap-1.5 px-3 pt-4 pb-4 flex-1">
+          {navGroups.map((g, i) => (
+            <NavGroup key={i} group={g} />
           ))}
         </nav>
 

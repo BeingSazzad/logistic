@@ -58,7 +58,7 @@ export default function AdminJobsMonitor() {
              </thead>
              <tbody className="divide-y divide-gray-50 text-sm">
                {allJobs.map(job => (
-                 <tr hover="bg-gray-50" key={job.id}>
+                 <tr className="hover:bg-gray-50 transition-colors" key={job.id}>
                    <td className="px-6 py-4 font-bold text-gray-900">{job.id}</td>
                    <td className="px-6 py-4 text-gray-600">{job.tenant}</td>
                    <td className="px-6 py-4 text-gray-600">{job.driver}</td>

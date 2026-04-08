@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Truck, Search, Plus, Filter, AlertTriangle, Droplet, Wrench } from 'lucide-react';
+import { Truck, Search, Plus, Filter, AlertTriangle, Droplet, Wrench, ArrowDownUp } from 'lucide-react';
 
 export default function AdminFleetManagement() {
   const navigate = useNavigate();
@@ -45,12 +45,21 @@ export default function AdminFleetManagement() {
 
       {/* Table */}
       <div className="card bg-white mt-2">
-        <div className="p-4 border-b border-gray-100 flex justify-between">
-           <div className="relative w-72">
+        <div className="p-4 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-gray-50/30">
+           <div className="relative w-full sm:w-80">
              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
-             <input type="text" placeholder="Search by ID, Reg or Type..." className="input pl-9" />
+             <input type="text" placeholder="Search by Reg, ID or Status..." className="input pl-9 w-full bg-white border-gray-200" />
            </div>
-           <button className="btn btn-dark"><Filter size={16}/> Filters</button>
+           <div className="flex gap-2 w-full sm:w-auto">
+             <button className="btn bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 flex items-center gap-2 flex-1 sm:flex-none">
+               <ArrowDownUp size={14}/> 
+               <span className="text-xs font-bold">Sort</span>
+             </button>
+             <button className="btn bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 flex items-center gap-2 flex-1 sm:flex-none">
+               <Filter size={14}/> 
+               <span className="text-xs font-bold">Filters <span className="bg-red-500 text-white text-[9px] px-1.5 py-0.5 rounded ml-1">1</span></span>
+             </button>
+           </div>
         </div>
         <div className="overflow-x-auto">
            <table className="w-full text-left text-sm">
@@ -66,7 +75,7 @@ export default function AdminFleetManagement() {
              </thead>
              <tbody className="divide-y divide-gray-50">
                {fleet.map(v => (
-                 <tr hover="bg-gray-50" key={v.id}>
+                 <tr className="hover:bg-gray-50 transition-colors" key={v.id}>
                    <td className="px-6 py-4">
                      <div className="font-bold text-gray-900">{v.id}</div>
                      <div className="text-xs font-mono text-gray-500">{v.reg}</div>

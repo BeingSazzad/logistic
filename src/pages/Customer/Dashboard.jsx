@@ -1,91 +1,165 @@
 import React from 'react';
-import { Package, MapPin, ChevronRight, Clock, CheckCircle2, Truck, AlertTriangle } from 'lucide-react';
+import { 
+  Package, MapPin, ChevronRight, Clock, 
+  CheckCircle2, Truck, AlertTriangle, Search,
+  Navigation, Zap, ArrowRight, Wallet
+} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
-const shipments = [
-  { id: 'J-2026-1260', origin: 'Sydney NSW', dest: 'Melbourne VIC', status: 'In Transit', eta: 'Today, 17:30', progress: 65, alert: false },
-  { id: 'J-2026-1268', origin: 'Melbourne VIC', dest: 'Adelaide SA', status: 'En Route to Pickup', eta: 'Tomorrow, 09:00', progress: 20, alert: false },
-  { id: 'J-2026-1241', origin: 'Brisbane QLD', dest: 'Sydney NSW', status: 'Delayed +45 min', eta: 'Today, 19:15', progress: 50, alert: true },
-  { id: 'J-2026-1195', origin: 'Sydney NSW', dest: 'Canberra ACT', status: 'Delivered', eta: 'Delivered 7 Apr', progress: 100, alert: false },
-];
-
-const statusStyle = {
-  'In Transit':            { color: 'text-blue-600',    bg: 'bg-blue-50',    icon: Truck },
-  'En Route to Pickup':   { color: 'text-yellow-600',  bg: 'bg-yellow-50',  icon: Clock },
-  'Delayed +45 min':      { color: 'text-red-600',     bg: 'bg-red-50',     icon: AlertTriangle },
-  'Delivered':            { color: 'text-emerald-600', bg: 'bg-emerald-50', icon: CheckCircle2 },
-};
 
 export default function CustomerDashboard() {
   const navigate = useNavigate();
+
+  const shipments = [
+    { id: 'SHP-9042', origin: 'Sydney Terminal', dest: 'Melbourne Hub', status: 'In Transit', eta: '5:30 PM', progress: 65, alert: false, type: 'Freight' },
+    { id: 'SHP-9048', origin: 'Melbourne WH-B', dest: 'Adelaide Port', status: 'At Pickup', eta: '9:00 AM', progress: 15, alert: false, type: 'LTL' },
+    { id: 'SHP-9031', origin: 'Brisbane Hub', dest: 'Sydney Terminal', status: 'Delayed +45m', eta: '7:15 PM', progress: 45, alert: true, type: 'Express' },
+  ];
+
   return (
-    <div className="flex flex-col gap-8">
-      {/* Welcome */}
-      <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 text-white">
-        <p className="text-yellow-400 text-sm font-bold uppercase tracking-wider mb-2">Welcome back</p>
-        <h1 className="text-2xl font-bold mb-1">Woolworths Group Logistics</h1>
-        <p className="text-gray-400 text-sm">You have {shipments.filter(s=>s.status!=='Delivered').length} active shipments today</p>
-        <div className="flex gap-4 mt-6">
-          {[
-            { label: 'Active', value: shipments.filter(s=>s.status!=='Delivered').length, color: 'text-yellow-400' },
-            { label: 'Delivered MTD', value: 47, color: 'text-emerald-400' },
-            { label: 'Outstanding Invoices', value: '$4,887', color: 'text-red-400' },
-          ].map(s => (
-            <div key={s.label} className="bg-white/10 px-4 py-3 rounded-xl">
-              <p className={`text-xl font-black ${s.color}`}>{s.value}</p>
-              <p className="text-gray-400 text-xs mt-0.5">{s.label}</p>
+    <div className="flex flex-col gap-8 w-full max-w-7xl mx-auto pb-12">
+      
+      {/* ── 1. Brand & Account Header ── */}
+      <div className="bg-gray-900 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-2xl">
+         <div className="absolute right-0 top-0 w-80 h-80 bg-[#FACC15] opacity-5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+         
+         <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+            <div>
+               <p className="text-[#FACC15] text-[11px] font-black uppercase tracking-[0.3em] mb-3">Certified Partner Dashboard</p>
+               <h1 className="text-4xl font-black tracking-tighter">Acme Distribution Group</h1>
+               <div className="flex items-center gap-4 mt-6">
+                  <div className="flex -space-x-2">
+                     {[1,2,3].map(i => <div key={i} className="w-8 h-8 rounded-full border-2 border-gray-900 bg-gray-800"></div>)}
+                  </div>
+                  <p className="text-sm font-bold text-gray-400">Manage 14 team members • Level 4 Tier</p>
+               </div>
             </div>
-          ))}
-        </div>
+            <div className="flex flex-col gap-4 w-full md:w-auto">
+               <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-white/5 backdrop-blur-md p-4 rounded-3xl border border-white/10 shadow-inner">
+                     <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest block mb-1">Active Shipments</span>
+                     <span className="text-2xl font-black text-[#FACC15]">03</span>
+                  </div>
+                  <div className="bg-white/5 backdrop-blur-md p-4 rounded-3xl border border-white/10 shadow-inner">
+                     <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest block mb-1">Monthly Volume</span>
+                     <span className="text-2xl font-black text-white">412</span>
+                  </div>
+               </div>
+               <button onClick={() => navigate('/customer/tracking')} className="bg-[#FACC15] hover:bg-yellow-500 text-black py-4 px-8 rounded-3xl font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 transition-all active:scale-95 shadow-xl shadow-yellow-400/20">
+                  <Navigation size={16}/> Live Fleet HUD
+               </button>
+            </div>
+         </div>
       </div>
 
-      {/* Shipments */}
-      <div>
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-bold text-gray-900">My Shipments</h2>
-          <button onClick={() => navigate('/customer/tracking')} className="text-sm text-yellow-600 font-semibold hover:underline flex items-center gap-1">
-            Open live map <ChevronRight size={15} />
-          </button>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {shipments.map(s => {
-            const cfg = statusStyle[s.status] || statusStyle['In Transit'];
-            return (
-              <div key={s.id} className={`bg-white rounded-2xl border shadow-sm p-5 hover:shadow-md transition-all cursor-pointer ${s.alert ? 'border-red-200' : 'border-gray-100'}`}>
-                <div className="flex justify-between items-start mb-3">
+      {/* ── 2. Real-time Tracking Grid ── */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+         
+         {/* Live Shipment List */}
+         <div className="lg:col-span-2 space-y-5">
+            <div className="flex justify-between items-end px-2">
+               <div>
+                  <h2 className="text-xl font-black text-gray-900 tracking-tight">Active Logistics Flow</h2>
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Real-time status updates from fleet</p>
+               </div>
+               <button className="text-xs font-black text-yellow-600 uppercase tracking-widest hover:underline flex items-center gap-1">Full Tracking View <ArrowRight size={14}/></button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+               {shipments.map(s => (
+                  <div key={s.id} onClick={() => navigate('/customer/tracking')} className={`bg-white rounded-[2rem] border p-6 flex flex-col gap-6 hover:shadow-2xl transition-all cursor-pointer group active:scale-[0.98] ${s.alert ? 'border-red-100 bg-red-50/10' : 'border-gray-50'}`}>
+                     <div className="flex justify-between items-start">
+                        <div className="flex items-center gap-3">
+                           <div className={`w-10 h-10 rounded-2xl flex items-center justify-center border shadow-sm ${s.alert ? 'bg-red-50 text-red-500 border-red-100' : 'bg-gray-50 text-gray-400 border-gray-100'}`}>
+                              <Truck size={18} />
+                           </div>
+                           <div>
+                              <p className="font-black text-gray-900 text-sm tracking-tight">{s.id}</p>
+                              <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{s.type}</span>
+                           </div>
+                        </div>
+                        <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border ${s.status === 'Delivered' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : s.alert ? 'bg-red-50 text-red-500 border-red-200 animate-pulse' : 'bg-blue-50 text-blue-600 border-blue-100'}`}>
+                           {s.status}
+                        </span>
+                     </div>
+
+                     <div className="flex flex-col gap-3">
+                        <div className="flex items-center gap-3">
+                           <div className="w-1.5 h-1.5 rounded-full bg-gray-300"></div>
+                           <p className="text-xs font-bold text-gray-700 truncate">{s.origin}</p>
+                        </div>
+                        <div className="w-px h-3 bg-gray-100 ml-[0.25rem]"></div>
+                        <div className="flex items-center gap-3">
+                           <div className="w-1.5 h-1.5 rounded-full bg-yellow-400 shadow-sm"></div>
+                           <p className="text-xs font-bold text-gray-900 truncate">{s.dest}</p>
+                        </div>
+                     </div>
+
+                     <div className="mt-auto">
+                        <div className="flex justify-between items-end mb-2">
+                           <span className="text-[10px] font-black uppercase text-gray-400 tracking-widest flex items-center gap-1.5"><Clock size={12}/> Progress</span>
+                           <span className="text-[10px] font-black text-gray-900 tracking-widest">ETA: {s.eta}</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-gray-50 rounded-full overflow-hidden border border-gray-100/50">
+                           <div className={`h-full transition-all duration-1000 ${s.alert ? 'bg-red-500' : 'bg-[#FACC15]'}`} style={{ width: `${s.progress}%` }}></div>
+                        </div>
+                     </div>
+                  </div>
+               ))}
+               
+               {/* Add New Quick Card */}
+               <div className="bg-gray-50 border border-dashed border-gray-200 rounded-[2rem] p-6 flex flex-col items-center justify-center text-center gap-4 hover:bg-gray-100 transition-colors cursor-pointer group">
+                  <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-gray-300 group-hover:text-yellow-500 group-hover:scale-110 transition-all shadow-sm">
+                     <Zap size={24}/>
+                  </div>
                   <div>
-                    <p className="font-bold text-gray-900 text-sm">{s.id}</p>
-                    <div className="flex items-center gap-1.5 text-xs text-gray-500 mt-0.5">
-                      <MapPin size={11} /> {s.origin} → {s.dest}
-                    </div>
+                     <p className="text-sm font-black text-gray-900 uppercase tracking-tight">Need another load?</p>
+                     <p className="text-[10px] font-bold text-gray-400 uppercase mt-1">Instant Manifest Creation</p>
                   </div>
-                  <span className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full ${cfg.bg} ${cfg.color} flex items-center gap-1`}>
-                    <cfg.icon size={10} /> {s.status}
-                  </span>
-                </div>
-                <div className="mb-3">
-                  <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
-                    <div className={`h-full rounded-full transition-all ${s.progress === 100 ? 'bg-emerald-500' : s.alert ? 'bg-red-400' : 'bg-yellow-400'}`} style={{ width: `${s.progress}%` }} />
+               </div>
+            </div>
+         </div>
+
+         {/* Sidebar: Financial & Support */}
+         <div className="space-y-8">
+            
+            {/* Payment Prompt */}
+            <div className="bg-white rounded-[2.5rem] border border-red-100 p-8 shadow-xl shadow-red-500/5 flex flex-col gap-6 relative overflow-hidden">
+               <div className="absolute top-0 right-0 p-4">
+                  <AlertTriangle className="text-red-500 opacity-20" size={48} />
+               </div>
+               <div>
+                  <h3 className="text-xs font-black text-red-500 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                     <Wallet size={14}/> Outstanding Balance
+                  </h3>
+                  <p className="text-4xl font-black text-gray-900 tracking-tighter">$4,887.50</p>
+                  <p className="text-[10px] font-bold text-gray-400 mt-2 uppercase tracking-widest">Across 3 Unpaid Invoices</p>
+               </div>
+               <button onClick={() => navigate('/customer/invoices')} className="w-full bg-[#111] hover:bg-black text-white py-4 rounded-2xl font-black uppercase text-xs tracking-widest transition-all active:scale-95 flex items-center justify-center gap-3">
+                  Resolve Now <ArrowRight size={14}/>
+               </button>
+            </div>
+
+            {/* Quick Support */}
+            <div className="bg-gray-50 rounded-[2.5rem] p-8 border border-gray-100">
+               <h3 className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-6">Concierge Support</h3>
+               <div className="space-y-4">
+                  <div className="flex items-center gap-4 bg-white p-4 rounded-3xl shadow-sm border border-gray-100">
+                     <div className="w-10 h-10 rounded-2xl bg-blue-500 flex items-center justify-center text-white shrink-0">
+                        <CheckCircle2 size={20}/>
+                     </div>
+                     <div>
+                        <p className="text-xs font-black text-gray-900 uppercase">Live Assistance</p>
+                        <p className="text-[10px] font-bold text-gray-400 uppercase">Average response: 2m</p>
+                     </div>
                   </div>
-                </div>
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-gray-500 flex items-center gap-1"><Clock size={11} /> {s.eta}</span>
-                  <button className="text-yellow-600 font-bold hover:underline">Track →</button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+                  <button className="w-full py-3.5 text-xs font-black text-gray-900 uppercase tracking-widest border-2 border-gray-200 rounded-2xl hover:bg-white transition-all">Open Helpline</button>
+               </div>
+            </div>
+
+         </div>
+
       </div>
 
-      {/* Quick invoice prompt */}
-      <div className="bg-red-50 border border-red-200 rounded-2xl p-5 flex items-center justify-between">
-        <div>
-          <p className="font-bold text-red-800">Outstanding Invoice Due</p>
-          <p className="text-sm text-red-600 mt-0.5">INV-2026-1238 · $980.50 · Due 15 Apr</p>
-        </div>
-        <button onClick={() => navigate('/customer/invoices')} className="btn btn-primary">Pay Now →</button>
-      </div>
     </div>
   );
 }

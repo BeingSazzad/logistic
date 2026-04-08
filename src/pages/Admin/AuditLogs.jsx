@@ -43,7 +43,7 @@ export default function AdminAuditLogs() {
              </thead>
              <tbody className="divide-y divide-gray-50">
                {logs.map(log => (
-                 <tr hover="bg-gray-50" key={log.id} className="group cursor-default">
+                 <tr className="hover:bg-gray-50 group cursor-default" key={log.id}>
                    <td className="px-6 py-5 font-mono text-[10px] text-gray-400 font-bold group-hover:text-yellow-600 transition-colors uppercase">{log.id}</td>
                    <td className="px-6 py-5">
                      <div className="font-bold text-gray-900 text-sm">{log.user}</div>

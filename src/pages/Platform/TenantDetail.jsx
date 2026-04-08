@@ -101,11 +101,11 @@ export default function TenantDetail() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="text-xs text-gray-500 font-semibold mb-1.5 block">Email</label>
-                <input className="input bg-gray-50" readOnly defaultValue={company.email} />
+                <input className="input bg-white" defaultValue={company.email} />
               </div>
               <div>
                 <label className="text-xs text-gray-500 font-semibold mb-1.5 block">Phone</label>
-                <input className="input bg-gray-50" readOnly defaultValue={company.phone} />
+                <input className="input bg-white" defaultValue={company.phone} />
               </div>
             </div>
             

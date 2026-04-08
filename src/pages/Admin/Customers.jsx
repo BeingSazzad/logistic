@@ -45,7 +45,7 @@ export default function AdminCustomers() {
              </thead>
              <tbody className="divide-y divide-gray-50">
                {clients.map(c => (
-                 <tr hover="bg-gray-50" key={c.id}>
+                 <tr className="hover:bg-gray-50 transition-colors" key={c.id}>
                    <td className="px-6 py-4">
                      <div className="font-bold text-gray-900 flex items-center gap-2"><Building2 size={14} className="text-gray-400"/> {c.name}</div>
                      <div className="text-xs text-gray-500 mt-0.5">{c.id}</div>
@@ -62,7 +62,7 @@ export default function AdminCustomers() {
                      <span className={`badge ${c.status === 'Active' ? 'badge-green' : 'bg-red-100 text-red-700'}`}>{c.status}</span>
                    </td>
                    <td className="px-6 py-4 text-right">
-                     <button className="text-blue-600 font-semibold hover:underline text-xs">Edit Terms</button>
+                     <button onClick={() => navigate('/admin/customers/add')} className="text-blue-600 font-semibold hover:underline text-xs">Edit Terms</button>
                    </td>
                  </tr>
                ))}
