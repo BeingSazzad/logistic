@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
-import { House, Map, FileText, User, Bell, Zap } from 'lucide-react';
+import { House, Map, FileText, User, Bell, Zap, Receipt } from 'lucide-react';
 
 export default function DriverLayout() {
   return (
@@ -45,10 +45,11 @@ export default function DriverLayout() {
         {/* Bottom nav */}
         <div className="absolute bottom-0 left-0 right-0 h-[68px] bg-white border-t border-gray-100 flex items-center justify-around px-4 shrink-0">
           {[
-            { to: '/driver', label: 'Home', icon: House, end: true },
-            { to: '/driver/route', label: 'Route', icon: Map },
-            { to: '/driver/expenses', label: 'Expenses', icon: FileText },
-            { to: '/driver/profile', label: 'Profile', icon: User },
+            { to: '/driver',           label: 'Home',     icon: House,     end: true },
+            { to: '/driver/jobs',      label: 'Jobs',     icon: Map },
+            { to: '/driver/pay',       label: 'Pay',      icon: FileText },
+            { to: '/driver/expenses',  label: 'Expenses', icon: Receipt },
+            { to: '/driver/profile',   label: 'Profile',  icon: User },
           ].map(({ to, label, icon: Icon, end }) => (
             <NavLink
               key={to}

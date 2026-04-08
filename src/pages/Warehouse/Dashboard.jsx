@@ -16,7 +16,7 @@ export default function WarehouseDashboard() {
   ];
 
   return (
-    <div className="flex flex-col gap-6 max-w-[1200px] mx-auto pb-12">
+    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto mx-auto pb-12">
       {/* ── Header ── */}
       <div className="flex justify-between items-end">
         <div>

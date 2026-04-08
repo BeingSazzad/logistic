@@ -3,10 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { Zap, Eye, EyeOff } from 'lucide-react';
 
 const roles = [
-  { value: 'admin',     label: 'Admin — Company Oversight & Governance' },
-  { value: 'dispatch',  label: 'Dispatch — Core Operations Workspace' },
+  { value: 'platform',  label: 'Platform Owner — SaaS Management Console' },
+  { value: 'admin',     label: 'Super Admin — Company Oversight & Governance' },
+  { value: 'dispatch',  label: 'Dispatcher — Core Operations Workspace' },
+  { value: 'accounts',  label: 'Accounts — Finance & Billing Control' },
   { value: 'warehouse', label: 'Warehouse — Floor & Inventory Management' },
   { value: 'driver',    label: 'Driver — Mobile PWA App' },
+  { value: 'customer',  label: 'Customer Portal — Tracking & Invoices' },
 ];
 
 export default function Login() {

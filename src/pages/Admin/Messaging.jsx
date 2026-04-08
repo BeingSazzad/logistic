@@ -1,100 +1,125 @@
-import React from 'react';
-import { Search, Filter, MessageSquare, Phone, MoreVertical, Send, ShieldAlert, User } from 'lucide-react';
+import React, { useState } from 'react';
+import { 
+  Search, MessageCircle, AlertCircle, CheckCircle2, 
+  Send, User, Terminal, Plus, ShieldAlert, Phone, MoreVertical
+} from 'lucide-react';
+
+const internalTickets = [
+  { id: 'TKT-701', user: 'Jack Taylor', role: 'Driver', issue: 'App crashing on route sync', priority: 'High', status: 'Open', time: '12 mins ago' },
+  { id: 'TKT-702', user: 'Sarah Mitchell', role: 'Dispatch', issue: 'Need vehicle re-assignment permission', priority: 'Medium', status: 'Open', time: '2 hrs ago' },
+  { id: 'TKT-699', user: 'Noah Williams', role: 'Driver', issue: 'License verification stalled', priority: 'High', status: 'Resolved', time: '1 day ago' },
+];
 
 export default function AdminMessaging() {
-  const conversations = [
-    { id: 'CHAT-01', user: 'Jack Taylor',  role: 'Driver', context: 'JOB-20481', msg: 'Almost there, but traffic is heavy near the harbour bridge.', status: 'Active' },
-    { id: 'CHAT-02', user: 'Sarah Mitchell', role: 'Dispatch', context: 'Global Hub', msg: 'Can we re-assign TRL-44 for tomorrow?', status: 'Active' },
-    { id: 'CHAT-03', user: 'Noah Williams', role: 'Driver', context: 'Compliance', msg: 'My license verification is still pending.', status: 'Alert' },
-  ];
+  const [selectedTicket, setSelectedTicket] = useState(internalTickets[0]);
+  const [replyText, setReplyText] = useState('');
 
   return (
-    <div className="flex flex-col h-[calc(100vh-8rem)] bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden font-sans">
-      <div className="flex h-full">
-        
-        {/* Left Col: Master Inbox List */}
-        <div className="w-[380px] bg-gray-50/50 border-r border-gray-100 flex flex-col shrink-0">
-          <div className="p-6 border-b border-gray-200 shrink-0 bg-white shadow-sm z-10">
-             <h2 className="text-xl font-bold text-gray-900 mb-4">Global Inbox Oversight</h2>
-             <div className="relative mb-3">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
-                <input type="text" placeholder="Search across all chats..." className="input pl-9" />
-             </div>
-             <div className="flex gap-2">
-                <button className="flex-1 btn btn-dark text-[10px] py-1.5 uppercase font-bold tracking-widest">Active Trades</button>
-                <button className="flex-1 btn  text-[10px] py-1.5 bg-gray-100 text-gray-500 uppercase font-bold tracking-widest hover:bg-gray-200">Alerts Only</button>
-             </div>
-          </div>
-          
-          <div className="flex-1 overflow-y-auto">
-             {conversations.map(chat => (
-               <div key={chat.id} className="p-5 border-b border-gray-100 hover:bg-white cursor-pointer group hover:border-l-4 hover:border-l-yellow-400 transition-all relative">
-                  <div className="flex justify-between items-start mb-1.5">
-                     <span className="font-bold text-gray-900 flex items-center gap-2"><User size={14} className="text-gray-400" /> {chat.user}</span>
-                     <span className="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">10:45 AM</span>
-                  </div>
-                  <div className="flex items-center gap-2 mb-2">
-                     <span className="text-[10px] uppercase font-black text-gray-400 tracking-widest">{chat.role}</span>
-                     <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
-                     <span className="text-[10px] text-yellow-600 font-bold">{chat.context}</span>
-                  </div>
-                  <p className="text-xs text-gray-500 font-medium leading-relaxed truncate group-hover:whitespace-normal">{chat.msg}</p>
-                  {chat.status === 'Alert' && <div className="absolute top-1/2 -translate-y-1/2 right-4"><ShieldAlert size={16} className="text-red-500 animate-pulse" /></div>}
-               </div>
-             ))}
-          </div>
+    <div className="flex flex-col h-[calc(100vh-8rem)] w-full max-w-7xl mx-auto space-y-4">
+      
+      {/* ── Header ── */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0">
+        <div>
+           <h1 className="text-2xl font-black text-gray-900 tracking-tight">Company Help Desk</h1>
+           <p className="text-sm text-gray-500 font-medium">Internal support management for drivers and dispatchers.</p>
         </div>
+        <button className="btn btn-primary px-6 py-2.5 text-xs font-black uppercase tracking-widest shadow-lg flex items-center gap-2">
+           <Plus size={14} /> New Manual Ticket
+        </button>
+      </div>
 
-        {/* Right Col: Admin Eavesdrop / Join Window */}
-        <div className="flex-1 flex flex-col bg-white">
-           <div className="h-[72px] border-b border-gray-100 px-6 flex items-center justify-between shrink-0 bg-white">
-             <div className="flex items-center gap-3">
-               <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold border border-red-200">NW</div>
-               <div>
-                  <h3 className="font-bold text-gray-900 text-sm">Noah Williams <span className="text-gray-400 ml-1 font-normal">• Driver</span></h3>
-                  <p className="text-xs text-red-500 font-bold flex items-center gap-1"><ShieldAlert size={10}/> Priority: Compliance Violation</p>
-               </div>
-             </div>
-             <div className="flex gap-3">
-                <button className="btn btn-dark text-xs py-2 px-6 flex items-center gap-2">Join Secretly <div className="w-2 h-2 rounded-full bg-red-500"></div></button>
-                <button className="p-2 border border-gray-100 hover:bg-gray-50 rounded-lg"><Phone size={18} className="text-gray-400"/></button>
-                <button className="p-2 border border-gray-100 hover:bg-gray-50 rounded-lg"><MoreVertical size={18} className="text-gray-400"/></button>
-             </div>
+      {/* ── Main Layout ── */}
+      <div className="flex-1 bg-white rounded-3xl border border-gray-100 shadow-xl overflow-hidden flex min-h-0">
+        
+        {/* Left: Ticket Sidebar */}
+        <div className="w-[360px] border-r border-gray-50 flex flex-col shrink-0 bg-gray-50/20">
+           <div className="p-6 border-b border-gray-100 bg-white">
+              <div className="relative">
+                 <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                 <input type="text" placeholder="Search team member or status..." className="input pl-9 text-xs py-3" />
+              </div>
            </div>
            
-           {/* Chat messages Area */}
-           <div className="flex-1 overflow-y-auto p-8 bg-gray-50/20 flex flex-col gap-6">
-              <div className="text-center opacity-50 px-8">
-                 <span className="text-[10px] uppercase font-bold text-gray-400 border border-gray-200 px-4 py-1.5 rounded-full tracking-widest">Admin is eavesdropping</span>
-              </div>
+           <div className="flex-1 overflow-y-auto divide-y divide-gray-50">
+              {internalTickets.map(t => (
+                <div 
+                  key={t.id} 
+                  onClick={() => setSelectedTicket(t)}
+                  className={`p-6 cursor-pointer transition-all hover:bg-white relative ${selectedTicket?.id === t.id ? 'bg-white shadow-[inset_4px_0_0_0_#FACC15]' : ''}`}
+                >
+                   <div className="flex justify-between items-start mb-2">
+                      <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest">{t.id}</span>
+                      <span className="text-[10px] text-gray-400 font-bold">{t.time}</span>
+                   </div>
+                   <h4 className="text-sm font-bold text-gray-900 mb-1 leading-tight">{t.issue}</h4>
+                   <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5">
+                         <div className="w-4 h-4 rounded-full bg-gray-200 flex items-center justify-center text-[8px] font-bold text-gray-600">{t.user[0]}</div>
+                         <span className="text-[10px] font-bold text-gray-500">{t.user}</span>
+                      </div>
+                      <span className="w-1 h-1 bg-gray-200 rounded-full"></span>
+                      <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-full ${t.priority === 'High' ? 'bg-red-50 text-red-600' : 'bg-gray-50 text-gray-600'}`}>{t.priority}</span>
+                   </div>
+                </div>
+              ))}
+           </div>
+        </div>
 
-              <div className="flex flex-col gap-1 max-w-[75%]">
-                 <div className="bg-white border border-gray-100 p-4 rounded-3xl rounded-tl-none shadow-sm text-sm text-gray-700 leading-relaxed font-medium">
-                    Hello, checking in on my license verification. It was supposed to be verified by now. I can't start my next trip without it.
+        {/* Right: Conversation */}
+        <div className="flex-1 flex flex-col bg-white overflow-hidden">
+           {/* Detail Header */}
+           <div className="p-6 border-b border-gray-50 flex justify-between items-center bg-white shrink-0 shadow-sm z-10">
+              <div className="flex items-center gap-4">
+                 <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 border border-gray-100 ${selectedTicket.status === 'Resolved' ? 'bg-emerald-50 text-emerald-600' : 'bg-yellow-50 text-yellow-600'}`}>
+                    {selectedTicket.status === 'Resolved' ? <CheckCircle2 size={24} /> : <AlertCircle size={24} />}
                  </div>
-                 <span className="text-[10px] text-gray-400 ml-1 font-bold">10:30 AM</span>
+                 <div>
+                    <h3 className="text-lg font-black text-gray-900 tracking-tight">{selectedTicket.issue}</h3>
+                    <p className="text-xs text-gray-500 font-bold uppercase tracking-widest">{selectedTicket.user} • {selectedTicket.role}</p>
+                 </div>
               </div>
-
-              <div className="flex flex-col gap-1 max-w-[75%] self-end">
-                 <div className="bg-gray-900 p-4 rounded-3xl rounded-tr-none shadow-sm text-sm text-white leading-relaxed font-normal">
-                    Hi Noah, sorry for the wait. The system is currently waiting for the official TMR (Transport & Main Roads) database sync. Sarah is looking into it now.
-                 </div>
-                 <span className="text-[10px] text-gray-400 mr-2 font-bold text-right">10:35 AM ✓✓</span>
+              <div className="flex gap-2">
+                 <button className="p-2.5 border border-gray-100 hover:bg-gray-50 rounded-xl text-gray-400 transition-colors"><Phone size={18} /></button>
+                 <button className="btn btn-dark text-[10px] font-black uppercase tracking-widest px-6 shadow-sm">Mark Solved</button>
               </div>
            </div>
 
-           {/* Admin Input Bar */}
-           <div className="p-5 border-t border-gray-100 bg-white">
-              <div className="flex gap-3 items-center">
-                 <div className="flex-1 relative">
-                    <textarea 
-                      placeholder="Send message as SYSTEM ADMIN..." 
-                      className="w-full h-[52px] min-h-[52px] bg-red-50/20 border border-red-100 rounded-2xl px-6 py-3.5 text-sm font-semibold text-gray-700 focus:outline-none focus:border-red-400 focus:bg-white transition-all uppercase placeholder:text-red-300" 
-                    />
+           {/* Messages History */}
+           <div className="flex-1 overflow-y-auto p-8 flex flex-col gap-6 bg-gray-50/10">
+              
+              <div className="flex flex-col gap-2 max-w-[80%] items-start">
+                 <div className="bg-gray-100 text-gray-800 p-5 rounded-3xl rounded-tl-none border border-gray-200 text-sm leading-relaxed font-medium">
+                    {selectedTicket.issue}. This is preventing me from finishing the delivery sync for JOB-2048. Is there a known issue with the Sydney Metro server?
                  </div>
-                 <button className="bg-red-500 hover:bg-red-600 text-white w-[52px] h-[52px] flex items-center justify-center rounded-2xl shadow-lg transition-transform active:scale-90 shrink-0">
-                    <Send size={20} />
-                 </button>
+                 <span className="text-[10px] text-gray-400 font-bold px-2">{selectedTicket.user} • 10:45 AM</span>
+              </div>
+
+              <div className="flex flex-col gap-2 self-end max-w-[80%] items-end">
+                 <div className="bg-[#111] text-white p-5 rounded-3xl rounded-tr-none shadow-xl text-sm leading-relaxed">
+                    Hey {selectedTicket.user.split(' ')[0]}, I've just checked the status page. There was a minor blip in the API gateway. I've force-synced your session from here. Please try again now.
+                 </div>
+                 <span className="text-[10px] text-gray-400 font-bold flex items-center gap-1 px-2">Sent By Michael (Admin) <CheckCircle2 size={10} className="text-emerald-500" /></span>
+              </div>
+
+              <div className="text-center my-4">
+                 <span className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-300">New message below</span>
+              </div>
+           </div>
+
+           {/* Input Section */}
+           <div className="p-6 border-t border-gray-50 bg-white shrink-0">
+              <div className="relative">
+                 <textarea 
+                   value={replyText}
+                   onChange={(e) => setReplyText(e.target.value)}
+                   placeholder={`Message ${selectedTicket.user}...`} 
+                   className="input w-full min-h-[100px] resize-none pb-14 text-sm font-medium focus:bg-white focus:border-yellow-400 shadow-inner rounded-3xl"
+                 />
+                 <div className="absolute bottom-4 right-4 flex gap-3">
+                    <button className="bg-[#111] hover:bg-black text-[#FACC15] px-6 py-2.5 rounded-2xl shadow-xl flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-all active:scale-95">
+                       <Send size={14} /> Send Reply
+                    </button>
+                 </div>
               </div>
            </div>
         </div>

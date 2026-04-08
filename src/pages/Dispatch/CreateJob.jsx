@@ -6,7 +6,7 @@ export default function DispatchCreateJob() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col gap-6 max-w-[1000px] mx-auto pb-12">
+    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto mx-auto pb-12">
       {/* ── Header ── */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">

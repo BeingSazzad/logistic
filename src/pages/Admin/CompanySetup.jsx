@@ -3,7 +3,7 @@ import { Building2, Save, Globe, Phone, MapPin, Truck, Layout, Globe2 } from 'lu
 
 export default function AdminCompanySetup() {
   return (
-    <div className="flex flex-col gap-6 max-w-[1000px] mb-8">
+    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto mb-8">
       <div className="flex justify-between items-end mb-2">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Company Profile Setup</h1>

@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MapPin, Navigation, Phone, Clock, Package, CheckCircle } from 'lucide-react';
 
 export default function DriverHome() {
+  const navigate = useNavigate();
   const upcoming = [
     { id: 'JOB-20502', area: 'Parramatta, NSW', time: '11:45 AM', items: 3 },
     { id: 'JOB-20503', area: 'Chatswood, NSW',  time: '1:15 PM',  items: 7 },
@@ -54,7 +56,9 @@ export default function DriverHome() {
           </div>
 
           <div className="flex gap-3 mt-1">
-            <button className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 transition-all active:scale-95">
+            <button 
+              onClick={() => navigate('/driver/safety-check')}
+              className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 transition-all active:scale-95">
               <Navigation size={17} />
               Start Trip
             </button>
