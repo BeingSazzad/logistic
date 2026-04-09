@@ -47,53 +47,43 @@ export default function AdminUsers() {
     <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
       <div className="flex justify-between items-center mb-2 px-2">
         <div className="flex items-center gap-4">
-          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-[#111] shadow-sm">
+          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-100 rounded-hero-sm text-hero-dark shadow-sm">
             <User size={20} />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Identity & Access</h1>
-            <p className="text-sm text-gray-500 mt-1">Manage platform operators, roles, and branch permissions.</p>
+            <h1 className="hero-h1">Identity & Access</h1>
+            <p className="hero-body text-hero-neutral mt-1">Manage platform operators, roles, and branch permissions.</p>
           </div>
         </div>
-        <button onClick={() => navigate('/admin/users/invite')} className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm">
+        <button onClick={() => navigate('/admin/users/invite')} className="btn btn-primary">
           <UserPlus size={18} strokeWidth={3} /> Invite Operator
         </button>
       </div>
 
       <div className="w-full h-px bg-gray-200/60 mb-2"></div>
 
-      <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
-        <div className="p-5 border-b border-gray-100 flex flex-col xl:flex-row justify-between items-center gap-4 bg-[#FAFAFA]">
-          <div className="flex bg-gray-100 p-1 rounded-lg border border-gray-200/60 w-full xl:w-auto shadow-sm overflow-x-auto">
+      <div className="card !p-0 overflow-hidden">
+        <div className="p-5 border-b border-gray-100 flex flex-col xl:flex-row justify-between items-center gap-4 bg-gray-50/30">
+          <div className="flex bg-gray-100 p-1 rounded-hero-sm border border-gray-200/60 w-full xl:w-auto shadow-inner">
             {ROLE_TABS.map(tab => (
               <button key={tab} onClick={() => setRoleFilter(tab)}
-                className={`px-4 py-2 text-[11px] font-bold uppercase tracking-widest rounded transition-all whitespace-nowrap ${roleFilter === tab ? 'bg-white text-gray-900 shadow-sm border border-gray-200/50' : 'text-gray-500 hover:text-gray-700 border border-transparent'}`}>
+                className={`px-4 py-2 hero-metadata rounded transition-all whitespace-nowrap ${roleFilter === tab ? 'bg-white text-hero-dark shadow-sm ring-1 ring-gray-200' : 'text-hero-neutral hover:text-hero-dark'}`}>
                 {tab}
               </button>
             ))}
           </div>
           <div className="flex gap-3 w-full xl:w-auto">
-            <div className="relative flex-1 xl:w-72">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={15} />
+            <div className="relative flex-1 xl:w-72 group">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-hero-neutral group-focus-within:text-brand transition-colors" size={15} />
               <input type="text" value={search} onChange={e => setSearch(e.target.value)}
-                placeholder="Search name, email, branch..." className="w-full bg-white border border-gray-200 rounded-lg py-2.5 pl-10 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 focus:border-[#FFCC00] transition-all shadow-sm" />
-            </div>
-            <div className="relative">
-              <select value={sortKey} onChange={e => setSortKey(e.target.value)}
-                className="appearance-none bg-white border border-gray-200 text-gray-700 text-sm font-bold rounded-lg pl-9 pr-10 py-2.5 focus:outline-none shadow-sm cursor-pointer">
-                <option value="name">Sort: Name</option>
-                <option value="role">Sort: Role</option>
-                <option value="lastLogin">Sort: Last Login</option>
-              </select>
-              <ArrowDownUp size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
-              <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                placeholder="Search name, email, branch..." className="input pl-10 w-full" />
             </div>
           </div>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left">
-            <thead className="bg-[#FAFAFA] text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100">
+            <thead className="hero-table-header">
               <tr>
                 <th className="px-6 py-4">Operator</th>
                 <th className="px-6 py-4">Role</th>

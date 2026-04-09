@@ -19,24 +19,24 @@ export default function PODReview() {
     return (
       <div className="w-full max-w-7xl mx-auto flex flex-col gap-6">
         <div className="flex items-center gap-4">
-          <button onClick={() => setSelected(null)} className="text-sm text-gray-500 hover:text-gray-700 font-medium flex items-center gap-1">
+          <button onClick={() => setSelected(null)} className="flex items-center gap-2 text-sm font-semibold text-hero-neutral hover:text-hero-dark transition-colors">
             ← Back to Queue
           </button>
-          <h1 className="text-xl font-bold text-gray-900">POD Review — {pod.id}</h1>
+          <h1 className="hero-h1">POD Review — {pod.id}</h1>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left: Shipment Details */}
-          <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
-            <h3 className="font-bold text-gray-900 mb-4">Shipment Details</h3>
-            <div className="space-y-3 text-sm">
+          <div className="card p-6">
+            <h3 className="hero-card-title mb-4">Shipment Details</h3>
+            <div className="space-y-4">
               {[
                 ['Customer', pod.customer], ['Route', pod.route], ['Driver', pod.driver],
                 ['Invoice Value', pod.value], ['Delivery Window', pod.window], ['Actual Delivery', pod.delivered],
               ].map(([k, v]) => (
-                <div key={k} className="flex justify-between">
-                  <span className="text-gray-500">{k}</span>
-                  <span className="font-semibold text-gray-900">{v}</span>
+                <div key={k} className="flex justify-between border-b border-gray-50 pb-2">
+                  <span className="hero-metadata text-hero-neutral">{k}</span>
+                  <span className="text-sm font-bold text-hero-dark">{v}</span>
                 </div>
               ))}
             </div>
@@ -53,8 +53,8 @@ export default function PODReview() {
           </div>
 
           {/* Right: POD Verification */}
-          <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
-            <h3 className="font-bold text-gray-900 mb-4">Delivery Proof</h3>
+          <div className="card p-6">
+            <h3 className="hero-card-title mb-4">Delivery Proof</h3>
             <div className="grid grid-cols-2 gap-3 mb-4">
               {[1, 2].map(n => (
                 <div key={n} className="aspect-video bg-gray-100 rounded-xl flex flex-col items-center justify-center text-gray-400 border border-gray-200 hover:border-emerald-400 cursor-pointer transition-colors">
@@ -124,19 +124,19 @@ export default function PODReview() {
           <div className="flex gap-4">
             <button
               onClick={() => { setApproved(a => [...a, pod.id]); }}
-              className="btn btn-primary flex-1 py-3.5 text-base">
+              className="btn btn-primary flex-1 py-4 text-base">
               <CheckCircle2 size={18} /> Approve POD & Generate Invoice
             </button>
-            <button className="btn bg-gray-100 text-gray-700 hover:bg-gray-200 px-8">
+            <button className="btn btn-outline border-hero-neutral/20 text-hero-neutral px-8">
               Hold for Review
             </button>
           </div>
         ) : (
-          <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 text-center">
-            <CheckCircle2 size={32} className="text-emerald-500 mx-auto mb-2" />
-            <p className="font-bold text-emerald-800">POD Approved — Invoice Generated</p>
-            <p className="text-sm text-emerald-600 mt-1">Invoice sent to {pod.customer} · Driver notified</p>
-            <button onClick={() => setSelected(null)} className="btn btn-primary mt-4">Back to Queue</button>
+          <div className="bg-hero-success/10 border border-hero-success/20 rounded-hero-md p-6 text-center">
+            <CheckCircle2 size={32} className="text-hero-success mx-auto mb-2" />
+            <p className="font-bold text-hero-dark">POD Approved — Invoice Generated</p>
+            <p className="hero-body text-hero-neutral mt-1">Invoice sent to {pod.customer} · Driver notified</p>
+            <button onClick={() => setSelected(null)} className="btn btn-primary mt-6">Back to Queue</button>
           </div>
         )}
       </div>
@@ -145,45 +145,47 @@ export default function PODReview() {
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto">
-      <div className="flex justify-between items-end">
+      <div className="flex justify-between items-end px-2">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">POD Review Queue</h1>
-          <p className="text-sm text-gray-500 mt-1">{pods.length - approved.length} pending · {approved.length} approved today</p>
+          <h1 className="hero-h1">POD Review Queue</h1>
+          <p className="hero-metadata text-hero-neutral mt-1">{pods.length - approved.length} pending · {approved.length} approved today</p>
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="card !p-0 overflow-hidden">
         <div className="divide-y divide-gray-50">
           {pods.map(pod => {
             const isDone = approved.includes(pod.id);
             return (
-              <div key={pod.id} className={`p-5 flex items-center justify-between hover:bg-gray-50 transition-colors ${isDone ? 'opacity-50' : ''}`}>
+              <div key={pod.id} className={`p-6 flex items-center justify-between hover:bg-brand/5 transition-all ${isDone ? 'opacity-40 grayscale' : ''}`}>
                 <div className="flex items-start gap-4">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
-                    isDone ? 'bg-emerald-100' : pod.status === 'exception' ? 'bg-red-100' : 'bg-yellow-100'
+                  <div className={`w-10 h-10 rounded-hero-sm flex items-center justify-center shrink-0 border ${
+                    isDone ? 'bg-hero-success/10 text-hero-success border-hero-success/20' : 
+                    pod.status === 'exception' ? 'bg-hero-danger/10 text-hero-danger border-hero-danger/20 animate-pulse' : 
+                    'bg-brand/10 text-hero-dark border-brand/20'
                   }`}>
-                    {isDone ? <CheckCircle2 size={20} className="text-emerald-600" /> :
-                     pod.status === 'exception' ? <AlertCircle size={20} className="text-red-500" /> :
-                     <AlertCircle size={20} className="text-yellow-600" />}
+                    {isDone ? <CheckCircle2 size={20} /> :
+                     pod.status === 'exception' ? <AlertCircle size={20} /> :
+                     <AlertCircle size={20} />}
                   </div>
                   <div>
-                    <div className="flex items-center gap-2 mb-0.5">
-                      <span className="font-bold text-gray-900 text-sm">{pod.id}</span>
-                      <span className="text-gray-400">·</span>
-                      <span className="text-sm text-gray-700">{pod.customer}</span>
-                      {pod.toll > 0 && <span className="text-[10px] bg-orange-100 text-orange-700 font-bold px-2 py-0.5 rounded">TOLL ${pod.toll}</span>}
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="hero-card-title text-sm">{pod.id}</span>
+                      <span className="text-gray-300">·</span>
+                      <span className="text-sm font-bold text-hero-dark">{pod.customer}</span>
+                      {pod.toll > 0 && <span className="badge badge-blue">TOLL ${pod.toll}</span>}
                     </div>
-                    <p className="text-xs text-gray-500">{pod.route} · {pod.driver} · Delivered {pod.delivered}</p>
+                    <p className="hero-metadata text-hero-neutral lowercase">{pod.route} · {pod.driver} · {pod.delivered}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <span className="font-bold text-gray-900">{pod.value}</span>
+                <div className="flex items-center gap-6">
+                  <span className="text-sm font-black text-hero-dark">{pod.value}</span>
                   {!isDone ? (
-                    <button onClick={() => setSelected(pod.id)} className="btn btn-dark text-xs py-2">
+                    <button onClick={() => setSelected(pod.id)} className="btn btn-outline py-2 border-hero-neutral/20 text-xs">
                       Review <ChevronRight size={14} />
                     </button>
                   ) : (
-                    <span className="text-xs font-bold text-emerald-600">✓ Approved</span>
+                    <span className="badge badge-green">✓ Approved</span>
                   )}
                 </div>
               </div>
