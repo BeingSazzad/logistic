@@ -22,45 +22,45 @@ export default function AdminDashboard() {
     <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
       
       {/* Standardized Header */}
-      <div className="flex justify-between items-center mb-2 px-2">
+      <div className="flex justify-between items-center mb-6 px-2">
         <div className="flex items-center gap-4">
-          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-[#111] shadow-sm">
+          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-hero-sm text-hero-dark shadow-sm">
             <Blocks size={20} />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Main Dashboard</h1>
-            <p className="text-sm text-gray-500 mt-1">Overview of your branch performance and delivery activity.</p>
+            <h1 className="hero-h1">Main Dashboard</h1>
+            <p className="hero-body mt-1">Overview of your branch performance and delivery activity.</p>
           </div>
         </div>
         <div className="flex gap-3">
           <button 
             onClick={() => navigate('/admin/shipments')} 
-            className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm"
+            className="btn btn-primary"
           >
-            <Plus size={18} strokeWidth={3} /> Shipments Queue
+            <Plus size={16} strokeWidth={3} /> Shipments Queue
           </button>
         </div>
       </div>
 
-      <div className="w-full h-px bg-gray-200/60 mb-2"></div>
+      <div className="w-full h-px bg-gray-100 mb-6"></div>
 
       {/* ── KPI HUD ── */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 px-2">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 px-2">
         {[
           { label: 'Active Shipments', value: '428', trend: '+12%', icon: Package, color: 'text-blue-600', bg: 'bg-blue-50' },
           { label: 'Network Drivers', value: '142', trend: 'Live', icon: Users, color: 'text-indigo-600', bg: 'bg-indigo-50' },
-          { label: 'Operational Alerts', value: '03', trend: 'Critical', icon: ShieldAlert, color: 'text-red-600', bg: 'bg-red-50' },
-          { label: 'Active Branches', value: '03', trend: 'Global', icon: Globe, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+          { label: 'Operational Alerts', value: '03', trend: 'Critical', icon: ShieldAlert, color: 'text-hero-danger', bg: 'bg-hero-danger/10' },
+          { label: 'Active Branches', value: '03', trend: 'Global', icon: Globe, color: 'text-hero-success', bg: 'bg-hero-success/10' },
         ].map((kpi, i) => (
-          <div key={i} className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between group hover:shadow-md transition-all">
+          <div key={i} className="card p-5 flex items-center justify-between group hover:border-brand/40">
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none">{kpi.label}</p>
-                <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${kpi.bg} ${kpi.color}`}>{kpi.trend}</span>
+                <p className="hero-metadata leading-none text-hero-neutral">{kpi.label}</p>
+                <span className={`text-[9px] font-black px-1.5 py-0.5 rounded-hero-sm uppercase tracking-widest ${kpi.bg} ${kpi.color}`}>{kpi.trend}</span>
               </div>
-              <p className="text-3xl font-black text-gray-900 leading-none">{kpi.value}</p>
+              <p className="text-3xl font-black text-hero-dark leading-none">{kpi.value}</p>
             </div>
-            <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${kpi.bg} ${kpi.color} group-hover:scale-110 transition-transform`}>
+            <div className={`w-12 h-12 rounded-hero-sm flex items-center justify-center ${kpi.bg} ${kpi.color} group-hover:scale-110 transition-transform`}>
               <kpi.icon size={22} />
             </div>
           </div>
@@ -72,28 +72,28 @@ export default function AdminDashboard() {
         {/* Network Health Board (Pro Solution) */}
         <div className="lg:col-span-2 space-y-6">
            {/* Section Header */}
-           <div className="flex justify-between items-center px-1">
-              <h2 className="text-sm font-black text-gray-900 uppercase tracking-widest flex items-center gap-2">
-                 <Activity size={16} className="text-[#FFCC00]"/> Branch Performance
+           <div className="flex justify-between items-center px-1 mb-4">
+              <h2 className="hero-h2 flex items-center gap-2">
+                 <Activity size={14} className="text-brand"/> Branch Performance
               </h2>
-              <button className="text-[10px] font-bold text-gray-400 hover:text-black uppercase tracking-widest transition-colors flex items-center gap-1">
-                 View All Branches <ExternalLink size={12}/>
+              <button className="hero-metadata text-hero-neutral hover:text-hero-dark transition-colors flex items-center gap-1">
+                 View All Branches <ExternalLink size={10}/>
               </button>
            </div>
 
            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
-                { name: 'SYDNEY CENTRAL', manager: 'Sarah Mitchell', performance: 94, status: 'Optimal', parcels: 156, alerts: 0, color: '#FFCC00' },
-                { name: 'MELBOURNE HUB', manager: 'Jack Taylor', performance: 78, status: 'Attention', parcels: 92, alerts: 2, color: '#3B82F6' },
-                { name: 'BRISBANE DEPOT', manager: 'Oliver Brown', performance: 91, status: 'Optimal', parcels: 114, alerts: 0, color: '#10B981' },
+                { name: 'SYDNEY CENTRAL', manager: 'Sarah Mitchell', performance: 94, status: 'Optimal', parcels: 156, alerts: 0, color: 'hero-success' },
+                { name: 'MELBOURNE HUB', manager: 'Jack Taylor', performance: 78, status: 'Attention', parcels: 92, alerts: 2, color: 'brand' },
+                { name: 'BRISBANE DEPOT', manager: 'Oliver Brown', performance: 91, status: 'Optimal', parcels: 114, alerts: 0, color: 'hero-success' },
               ].map((br, i) => (
-                <div key={i} className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm hover:border-[#FFCC00]/50 transition-all cursor-pointer group">
+                <div key={i} className="card p-5 group hover:border-brand/40">
                    <div className="flex justify-between items-start mb-4">
                       <div>
-                         <h4 className="font-black text-gray-900 text-sm">{br.name}</h4>
-                         <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Manager: {br.manager}</p>
+                         <h4 className="hero-card-title">{br.name}</h4>
+                         <p className="hero-metadata text-hero-neutral">Manager: {br.manager}</p>
                       </div>
-                      <span className={`text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-widest ${br.status === 'Optimal' ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600 animate-pulse'}`}>
+                      <span className={`badge ${br.status === 'Optimal' ? 'badge-green' : 'badge-red animate-pulse'}`}>
                          {br.status}
                       </span>
                    </div>

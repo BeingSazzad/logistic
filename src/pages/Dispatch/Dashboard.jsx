@@ -15,13 +15,13 @@ const jobs = [
 
 function StatusBadge({ status }) {
   const map = {
-    'In Transit': 'bg-[#EFF6FF] text-[#2563EB] border-[#DBEAFE]',
-    'Arrived at Branch': 'bg-blue-50 text-blue-700 border-blue-200',
-    'Received at Branch': 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]',
-    'Delayed':    'bg-[#FEF2F2] text-[#DC2626] border-[#FEE2E2]',
-    'Unassigned': 'bg-gray-100 text-gray-500 border-gray-200',
+    'In Transit': 'badge-blue',
+    'Arrived at Branch': 'badge-blue',
+    'Received at Branch': 'badge-green',
+    'Delayed':    'badge-red',
+    'Unassigned': 'badge-gray',
   };
-  return <span className={`text-[10px] font-bold px-2.5 py-1 rounded border uppercase tracking-widest leading-none inline-block w-max ${map[status] ?? 'bg-gray-50'}`}>{status}</span>;
+  return <span className={`badge ${map[status] ?? 'badge-gray'}`}>{status}</span>;
 }
 
 export default function DispatchDashboard() {
@@ -33,14 +33,14 @@ export default function DispatchDashboard() {
     <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
       
       {/* ── Standardized Header ── */}
-      <div className="flex justify-between items-center mb-2 px-2">
+      <div className="flex justify-between items-center mb-6 px-2">
         <div className="flex items-center gap-4">
-          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-[#111] shadow-sm">
+          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-hero-sm text-hero-dark shadow-sm">
             <Navigation size={20} />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Fleet Operations</h1>
-            <p className="text-sm text-gray-500 mt-1 flex items-center gap-2">Live Fleet Activity • Shift: <span className="font-bold text-gray-900">06:00 - 18:00</span></p>
+            <h1 className="hero-h1">Fleet Operations</h1>
+            <p className="hero-body mt-1 flex items-center gap-2">Live Fleet Activity • Shift: <span className="font-bold text-hero-dark">06:00 - 18:00</span></p>
           </div>
         </div>
         <div className="flex gap-3">
@@ -49,15 +49,15 @@ export default function DispatchDashboard() {
                setAutoAssigning(true);
                setTimeout(() => setAutoAssigning(false), 2000);
              }}
-             className="bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm"
+             className="btn btn-outline"
            >
-              <Zap size={16}/> Auto-Assign
+              <Zap size={14}/> Auto-Assign
            </button>
            <button 
              onClick={() => navigate('/dispatch/jobs/create')} 
-             className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm"
+             className="btn btn-primary"
            >
-             <Plus size={18} strokeWidth={3} /> Create Shipment
+             <Plus size={16} strokeWidth={3} /> Create Shipment
           </button>
         </div>
       </div>
@@ -72,25 +72,25 @@ export default function DispatchDashboard() {
         </div>
       )}
 
-      <div className="w-full h-px bg-gray-200/60 mb-2"></div>
+      <div className="w-full h-px bg-gray-100 mb-6"></div>
 
       {/* ── KPI Cards ── */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 px-2 mb-2">
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest leading-tight">Active Shipments</p><p className="text-2xl font-black text-gray-900 mt-1.5 leading-none">42</p></div>
-          <div className="w-10 h-10 rounded border border-blue-100 flex items-center justify-center bg-blue-50 text-blue-500"><Package size={20}/></div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 px-2 mb-6">
+        <div className="card p-5 flex items-center justify-between">
+          <div><p className="hero-metadata leading-tight text-hero-neutral">Active Shipments</p><p className="text-2xl font-black text-hero-dark mt-1.5 leading-none">42</p></div>
+          <div className="w-10 h-10 rounded-hero-sm border border-blue-100 flex items-center justify-center bg-blue-50 text-blue-500"><Package size={20}/></div>
         </div>
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest leading-tight">Drivers On Duty</p><p className="text-2xl font-black text-gray-900 mt-1.5 leading-none">18 <span className="text-sm text-gray-400 tracking-tighter">/24</span></p></div>
-          <div className="w-10 h-10 rounded border border-emerald-100 flex items-center justify-center bg-emerald-50 text-emerald-500"><Truck size={20}/></div>
+        <div className="card p-5 flex items-center justify-between">
+          <div><p className="hero-metadata leading-tight text-hero-neutral">Drivers On Duty</p><p className="text-2xl font-black text-hero-dark mt-1.5 leading-none">18 <span className="text-sm text-hero-neutral tracking-tighter">/24</span></p></div>
+          <div className="w-10 h-10 rounded-hero-sm border border-hero-success/20 flex items-center justify-center bg-hero-success/10 text-hero-success"><Truck size={20}/></div>
         </div>
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest leading-tight">Average Delay</p><p className="text-2xl font-black text-amber-500 mt-1.5 leading-none">+4<span className="text-sm font-bold text-gray-400 tracking-tighter">m</span></p></div>
-          <div className="w-10 h-10 rounded border border-amber-100 flex items-center justify-center bg-amber-50 text-amber-500"><Clock size={20}/></div>
+        <div className="card p-5 flex items-center justify-between">
+          <div><p className="hero-metadata leading-tight text-hero-neutral">Average Delay</p><p className="text-2xl font-black text-hero-warning mt-1.5 leading-none">+4<span className="text-sm font-bold text-hero-neutral tracking-tighter">m</span></p></div>
+          <div className="w-10 h-10 rounded-hero-sm border border-hero-warning/20 flex items-center justify-center bg-hero-warning/10 text-hero-warning"><Clock size={20}/></div>
         </div>
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest leading-tight">Deliveries Completed</p><p className="text-2xl font-black text-gray-900 mt-1.5 leading-none">92%</p></div>
-          <div className="w-10 h-10 rounded border border-violet-100 flex items-center justify-center bg-violet-50 text-violet-500"><CheckCircle2 size={20}/></div>
+        <div className="card p-5 flex items-center justify-between">
+          <div><p className="hero-metadata leading-tight text-hero-neutral">Deliveries Completed</p><p className="text-2xl font-black text-hero-dark mt-1.5 leading-none">92%</p></div>
+          <div className="w-10 h-10 rounded-hero-sm border border-violet-100 flex items-center justify-center bg-violet-50 text-violet-500"><CheckCircle2 size={20}/></div>
         </div>
       </div>
 

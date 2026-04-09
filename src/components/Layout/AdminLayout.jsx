@@ -60,12 +60,12 @@ function SideNavItem({ to, label, Icon, end }) {
   return (
     <NavLink to={to} end={end} className="group">
       {({ isActive }) => (
-        <div className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold transition-all cursor-pointer ${
+        <div className={`flex items-center gap-3 px-4 py-2.5 rounded-hero-sm text-xs font-black uppercase tracking-widest transition-all cursor-pointer ${
           isActive 
-            ? 'bg-[#FACC15] text-[#000]' 
+            ? 'bg-brand text-hero-dark shadow-lg shadow-brand/20' 
             : 'text-gray-400 hover:text-white hover:bg-white/5'
         }`}>
-          <Icon size={18} className={isActive ? 'text-black' : 'text-gray-500 group-hover:text-white transition-colors'} />
+          <Icon size={16} className={isActive ? 'text-hero-dark' : 'text-hero-neutral group-hover:text-white transition-colors'} />
           <span>{label}</span>
         </div>
       )}
@@ -85,22 +85,22 @@ function NavGroup({ group }) {
 
   return (
     <div className="mb-0.5">
-      <button onClick={() => setOpen(!open)} className={`w-full flex items-center justify-between px-3 py-2 text-gray-400 hover:text-white group transition-colors rounded-lg mb-1 ${isChildActive && !open ? 'bg-white/5' : ''}`}>
+      <button onClick={() => setOpen(!open)} className={`w-full flex items-center justify-between px-3 py-2 text-gray-500 hover:text-white group transition-colors rounded-hero-sm mb-1 ${isChildActive && !open ? 'bg-white/5' : ''}`}>
         <div className="flex items-center gap-2">
-          <group.icon size={15} className={`transition-colors ${isChildActive ? 'text-[#FACC15]' : 'text-gray-500 group-hover:text-white'}`} />
-          <span className={`text-[11px] font-black uppercase tracking-widest ${isChildActive ? 'text-white' : ''}`}>{group.label}</span>
+          <group.icon size={14} className={`transition-colors ${isChildActive ? 'text-brand' : 'text-gray-600 group-hover:text-white'}`} />
+          <span className={`hero-metadata font-black ${isChildActive ? 'text-white' : ''}`}>{group.label}</span>
         </div>
-        {open ? <ChevronDown size={14} className="opacity-50" /> : <ChevronRight size={14} className="opacity-50" />}
+        {open ? <ChevronDown size={14} className="opacity-40" /> : <ChevronRight size={14} className="opacity-40" />}
       </button>
       {open && (
         <div className="flex flex-col gap-0.5">
           {group.items.map(item => (
             <NavLink key={item.to} to={item.to}>
               {({ isActive }) => (
-                <div className={`flex items-center gap-3 ml-[22px] px-3 py-1.5 rounded-md text-[13px] font-bold transition-all border-l-2 cursor-pointer ${
+                <div className={`flex items-center gap-3 ml-[18px] px-4 py-2 rounded-hero-sm text-[12px] font-black uppercase tracking-widest transition-all border-l-2 cursor-pointer ${
                   isActive 
-                    ? 'border-[#FACC15] text-[#FACC15]' 
-                    : 'border-transparent text-gray-400 hover:text-white hover:border-white/20'
+                    ? 'bg-brand/10 border-brand text-brand shadow-inner' 
+                    : 'text-gray-500 border-transparent hover:text-white hover:bg-white/5 hover:border-white/10'
                 }`}>
                   <span>{item.label}</span>
                 </div>

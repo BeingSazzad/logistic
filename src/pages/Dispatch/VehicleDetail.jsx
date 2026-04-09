@@ -51,10 +51,13 @@ export default function DispatchVehicleDetail() {
           </div>
         </div>
         <div className="flex gap-3">
-          <button className="bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 px-5 py-2.5 rounded-lg font-bold transition-all shadow-sm flex items-center gap-2">
+          <button className="btn btn-outline">
             <FileText size={16}/> Service Log
           </button>
-          <button className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm">
+          <button 
+            onClick={() => navigate(`/dispatch/tracking?id=${v.id}`)}
+            className="btn btn-primary"
+          >
             <MapPin size={16}/> Track Live
           </button>
         </div>

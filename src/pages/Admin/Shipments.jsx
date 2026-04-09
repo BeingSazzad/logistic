@@ -60,14 +60,14 @@ export default function AdminShipments() {
     <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
       
       {/* Standardized Header */}
-      <div className="flex justify-between items-center mb-2 px-2">
+      <div className="flex justify-between items-center mb-6 px-2">
         <div className="flex items-center gap-4">
-          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-[#111] shadow-sm">
+          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-hero-sm text-hero-dark shadow-sm">
             <Package size={20} />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Active Shipments</h1>
-            <p className="text-sm text-gray-500 mt-1">Real-time status tracking and lifecycle management for all active freight.</p>
+            <h1 className="hero-h1">Active Shipments</h1>
+            <p className="hero-body mt-1">Real-time status tracking and lifecycle management for all active freight.</p>
           </div>
         </div>
         <button 
@@ -75,13 +75,13 @@ export default function AdminShipments() {
             setShowCreateMock(true);
             setTimeout(() => setShowCreateMock(false), 3000);
           }} 
-          className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm"
+          className="btn btn-primary"
         >
-          <Plus size={18} strokeWidth={3} /> New Shipment
+          <Plus size={16} strokeWidth={3} /> New Shipment
         </button>
       </div>
 
-      <div className="w-full h-px bg-gray-200/60 mb-2"></div>
+      <div className="w-full h-px bg-gray-100 mb-6"></div>
 
       {showCreateMock && (
         <div className="fixed top-24 right-8 bg-[#111] text-[#FFCC00] px-6 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-3 animate-in slide-in-from-right border border-white/10">
@@ -94,19 +94,19 @@ export default function AdminShipments() {
       )}
 
       {/* KPI HUD */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 px-2 mb-2">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 px-2 mb-6">
         {[
           { label: 'Total Volume', value: '1,204', icon: Package, color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-100' },
           { label: 'On Road Now', value: '84', icon: Truck, color: 'text-indigo-600', bg: 'bg-indigo-50', border: 'border-indigo-100' },
-          { label: 'Exceptions', value: '3', icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-50', border: 'border-red-100' },
-          { label: 'Delivered Today', value: '412', icon: CheckCircle2, color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-100' },
+          { label: 'Exceptions', value: '3', icon: AlertTriangle, color: 'text-hero-danger', bg: 'bg-hero-danger/10', border: 'border-hero-danger/20' },
+          { label: 'Delivered Today', value: '412', icon: CheckCircle2, color: 'text-hero-success', bg: 'bg-hero-success/10', border: 'border-hero-success/20' },
         ].map((kpi, i) => (
-          <div key={i} className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between">
+          <div key={i} className="card p-5 flex items-center justify-between">
             <div>
-              <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest leading-tight">{kpi.label}</p>
-              <p className="text-2xl font-black text-gray-900 mt-1.5 leading-none">{kpi.value}</p>
+              <p className="hero-metadata leading-tight text-hero-neutral">{kpi.label}</p>
+              <p className="text-2xl font-black text-hero-dark mt-1.5 leading-none">{kpi.value}</p>
             </div>
-            <div className={`w-10 h-10 rounded border ${kpi.border} flex items-center justify-center ${kpi.bg} ${kpi.color}`}>
+            <div className={`w-10 h-10 rounded-hero-sm border ${kpi.border} flex items-center justify-center ${kpi.bg} ${kpi.color}`}>
               <kpi.icon size={20} />
             </div>
           </div>
@@ -117,13 +117,13 @@ export default function AdminShipments() {
       <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
         
         {/* Filter Bar */}
-        <div className="p-5 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 bg-[#FAFAFA]">
-           <div className="flex bg-gray-100 p-1 rounded-lg border border-gray-200/60 w-full md:w-auto shadow-sm">
-             {['All', 'In Transit', 'Arrived at Branch', 'Received at Branch', 'Exception', 'Delivered'].map((tab) => (
+        <div className="p-5 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 bg-gray-50/30">
+           <div className="flex bg-gray-100/50 p-1 rounded-hero-sm border border-gray-200/60 w-full md:w-auto shadow-inner">
+             {['All', 'In Transit', 'Arrived', 'Exception', 'Delivered'].map((tab) => (
                <button 
                  key={tab}
                  onClick={() => setFilter(tab)}
-                 className={`px-4 py-2 text-[11px] font-bold uppercase tracking-widest rounded transition-all whitespace-nowrap ${filter === tab ? 'bg-white text-gray-900 shadow-sm border border-gray-200/50' : 'text-gray-500 hover:text-gray-700 border border-transparent'}`}
+                 className={`px-4 py-2 hero-metadata rounded-hero-sm transition-all whitespace-nowrap ${filter === tab ? 'bg-white text-hero-dark shadow-sm border border-gray-200/50' : 'text-hero-neutral hover:text-hero-dark border border-transparent'}`}
                >
                  {tab}
                </button>
@@ -132,13 +132,13 @@ export default function AdminShipments() {
 
            <div className="flex items-center gap-4 w-full md:w-auto">
              <div className="relative flex-1 md:w-[320px] group">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#FFCC00] transition-colors" size={16} />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-hero-neutral group-focus-within:text-brand transition-colors" size={14} />
                 <input 
                   type="text" 
                   value={search}
                   onChange={e => setSearch(e.target.value)}
                   placeholder="Find SHP- ID, origins or customers..." 
-                  className="w-full bg-white border border-gray-200 rounded-lg py-2.5 pl-10 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 focus:border-[#FFCC00] transition-all shadow-sm" 
+                  className="input pl-10" 
                 />
              </div>
              
@@ -180,7 +180,7 @@ export default function AdminShipments() {
            )}
 
            <table className="w-full text-left">
-             <thead className="bg-[#FAFAFA] text-[10px] font-bold text-gray-500 uppercase tracking-widest border-b border-gray-100">
+             <thead className="hero-table-header">
                <tr>
                  <th className="px-6 py-4 w-4">
                     <input 

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Truck, MapPin, Clock, Navigation } from 'lucide-react';
 
 const trips = [
@@ -7,7 +8,17 @@ const trips = [
 ];
 
 export default function CustomerTracking() {
+  const [searchParams] = useSearchParams();
+  const trackId = searchParams.get('id');
+  
   const [selected, setSelected] = useState(trips[0]);
+
+  useEffect(() => {
+    if (trackId) {
+      const found = trips.find(t => t.id === trackId);
+      if (found) setSelected(found);
+    }
+  }, [trackId]);
   return (
     <div className="flex flex-col gap-6">
       <div>

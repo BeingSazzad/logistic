@@ -25,40 +25,40 @@ export default function AccountsDashboard() {
     <div className="flex flex-col gap-8 w-full max-w-7xl mx-auto">
       
       {/* Standardized Header */}
-      <div className="flex justify-between items-center mb-2 px-2">
+      <div className="flex justify-between items-center mb-6 px-2">
         <div className="flex items-center gap-4">
-          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-[#111] shadow-sm">
+          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-hero-sm text-hero-dark shadow-sm">
             <DollarSign size={20} />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Accounts Intelligence</h1>
-            <p className="text-sm text-gray-500 mt-1">Ledger overview, billing cycles, and payout management.</p>
+            <h1 className="hero-h1">Accounts Intelligence</h1>
+            <p className="hero-body mt-1">Ledger overview, billing cycles, and payout management.</p>
           </div>
         </div>
         <div className="flex gap-3">
-          <button onClick={() => navigate('/accounts/reports')} className="bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-5 py-2.5 rounded-lg font-bold text-sm transition-all shadow-sm">
+          <button onClick={() => navigate('/accounts/reports')} className="btn btn-outline">
              Audit Trail
           </button>
-          <button onClick={() => navigate('/accounts/invoices')} className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm">
-             <Receipt size={18}/> New Entry
+          <button onClick={() => navigate('/accounts/invoices')} className="btn btn-primary">
+             <Receipt size={16}/> New Entry
           </button>
         </div>
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 px-2 mb-2">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 px-2 mb-6">
         {financialSummary.map((k, i) => (
-          <div key={i} className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between group">
+          <div key={i} className="card p-5 flex items-center justify-between group">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest leading-tight">{k.label}</p>
+                <p className="hero-metadata leading-tight text-hero-neutral">{k.label}</p>
               </div>
               <div className="flex items-end gap-2">
-                 <p className="text-2xl font-black text-gray-900 leading-none">{k.val}</p>
-                 <span className={`text-[10px] font-bold pb-0.5 ${k.up ? 'text-emerald-500' : 'text-red-500'}`}>{k.diff}</span>
+                 <p className="text-2xl font-black text-hero-dark leading-none">{k.val}</p>
+                 <span className={`text-[10px] font-bold pb-0.5 ${k.up ? 'text-hero-success' : 'text-hero-danger'}`}>{k.diff}</span>
               </div>
             </div>
-            <div className={`w-10 h-10 rounded-lg flex items-center justify-center border border-gray-50 ${k.bg} ${k.color}`}>
+            <div className={`w-10 h-10 rounded-hero-sm flex items-center justify-center border border-gray-50 ${k.bg} ${k.color}`}>
               <k.icon size={20}/>
             </div>
           </div>
@@ -68,13 +68,13 @@ export default function AccountsDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
          
          {/* Ledger Highlights */}
-         <div className="lg:col-span-2 bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 p-6">
+         <div className="lg:col-span-2 card p-6">
             <div className="flex justify-between items-center mb-6">
                <div>
-                  <h3 className="text-xl font-black tracking-tight text-gray-900 uppercase">Recent Billings</h3>
-                  <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-2">Latest verified invoices for the current period</p>
+                  <h3 className="hero-h1 text-xl">Recent Billings</h3>
+                  <p className="hero-metadata text-hero-neutral mt-2">Latest verified invoices for the current period</p>
                </div>
-               <button onClick={() => navigate('/accounts/invoices')} className="text-xs font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg transition-colors shadow-sm">View All Ledger</button>
+               <button onClick={() => navigate('/accounts/invoices')} className="btn btn-outline py-2 px-4">View All Ledger</button>
             </div>
 
             <div className="space-y-4">

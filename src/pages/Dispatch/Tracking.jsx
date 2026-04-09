@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { 
   Map, Zap, Search, Truck, MapPin, Navigation, Clock, 
   Satellite, Layers, Maximize2, Crosshair, Bell, Info,
@@ -8,7 +8,16 @@ import { useAuth } from '../../context/AuthContext';
 
 export default function DispatchTracking() {
   const { user } = useAuth();
+  const [searchParams] = useSearchParams();
+  const vid = searchParams.get('id');
   const [selectedVehicle, setSelectedVehicle] = useState(null);
+
+  React.useEffect(() => {
+    if (vid) {
+      const found = activeVehicles.find(v => v.id === vid);
+      if (found) setSelectedVehicle(found);
+    }
+  }, [vid]);
 
   const activeVehicles = [
     { id: 'TRK-102', branchId: 'SYD-CENTRAL', driver: 'Jack Taylor', status: 'Moving', speed: '45 km/h', loc: 'Hume Highway, Goulburn', eta: '45 mins', carga: 'Perishables', temp: '-2°C' },

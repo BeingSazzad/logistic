@@ -145,8 +145,11 @@ export default function DispatchJobDetail() {
              Edit
           </button>
           {!isUnassigned || assigned ? (
-            <button className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm">
-              <Share2 size={16} strokeWidth={2.5}/> Live
+            <button 
+              onClick={() => window.open(`/customer/tracking?id=${job.id}`, '_blank')}
+              className="btn bg-brand hover:bg-brand-hover text-hero-dark font-black flex items-center gap-2 shadow-lg shadow-brand/20 transition-all active:scale-95"
+            >
+              <Share2 size={16} strokeWidth={3}/> Live Tracking
             </button>
           ) : (
             <button 

@@ -18,59 +18,88 @@
 }
 
 @layer components {
+  /* ── Typography System ── */
+  .hero-h1 {
+    @apply text-3xl font-black tracking-tight text-hero-dark;
+  }
+  .hero-h2 {
+    @apply text-xs font-black uppercase tracking-widest text-hero-neutral;
+  }
+  .hero-card-title {
+    @apply text-sm font-bold text-hero-dark;
+  }
+  .hero-body {
+    @apply text-[13px] font-medium text-gray-600;
+  }
+  .hero-metadata {
+    @apply text-[10px] font-bold uppercase tracking-widest;
+  }
+
   /* ── Badges ── */
   .badge {
-    @apply inline-flex items-center px-2 py-1 rounded text-xs font-semibold;
+    @apply inline-flex items-center px-2.5 py-1 rounded-hero-sm text-[10px] font-black uppercase tracking-widest border transition-all;
   }
   .badge-yellow {
-    @apply bg-yellow-50 text-yellow-700 border border-yellow-200;
+    @apply bg-brand/10 text-brand-hover border-brand/20;
   }
   .badge-blue {
-    @apply bg-indigo-50 text-indigo-600 border border-indigo-200;
+    @apply bg-blue-50 text-blue-600 border-blue-200;
   }
   .badge-orange {
-    @apply bg-orange-50 text-orange-600 border border-orange-200;
-  }
-  .badge-gray {
-    @apply bg-gray-100 text-gray-500 border border-gray-200;
+    @apply bg-orange-50 text-orange-600 border-orange-200;
   }
   .badge-green {
-    @apply bg-green-50 text-green-700 border border-green-200;
+    @apply bg-hero-success/10 text-hero-success border-hero-success/20;
+  }
+  .badge-red {
+    @apply bg-hero-danger/10 text-hero-danger border-hero-danger/20;
+  }
+  .badge-gray {
+    @apply bg-gray-100 text-hero-neutral border-gray-200;
   }
 
   /* ── Buttons ── */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all cursor-pointer;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-hero-sm text-xs font-black uppercase tracking-widest transition-all cursor-pointer select-none active:scale-95;
   }
   .btn-primary {
-    @apply bg-yellow-400 hover:bg-yellow-500 text-black font-bold shadow-sm;
+    @apply bg-brand text-hero-dark hover:bg-brand-hover shadow-sm;
   }
   .btn-dark {
-    @apply bg-gray-900 hover:bg-black text-white shadow-sm;
+    @apply bg-hero-dark text-white hover:bg-black shadow-sm;
+  }
+  .btn-outline {
+    @apply bg-white border border-gray-200 text-hero-neutral hover:bg-gray-50 hover:text-hero-dark shadow-sm;
   }
 
   /* ── Card ── */
   .card {
-    @apply bg-white rounded-xl border border-gray-100 overflow-hidden;
+    @apply bg-white rounded-hero-md border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] overflow-hidden transition-all;
   }
 
   /* ── Input ── */
   .input {
-    @apply w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 transition bg-white;
+    @apply w-full px-4 py-2.5 border border-gray-200 rounded-hero-sm text-sm font-medium outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition bg-white;
   }
 
-  /* ── Toggle Switch (Functional & Visual) ── */
+  /* ── Table Layout ── */
+  .hero-table-header {
+    @apply bg-gray-50/50 text-[10px] font-black text-hero-neutral uppercase tracking-widest border-b border-gray-100;
+  }
+  .hero-table-row {
+    @apply hover:bg-gray-50/50 transition-all cursor-pointer border-b border-gray-50 last:border-0;
+  }
+
+  /* ── Toggle Switch ── */
   .toggle {
-    @apply w-11 h-6 appearance-none bg-gray-300 rounded-full cursor-pointer relative transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-yellow-400/50 flex-shrink-0;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    @apply w-11 h-6 appearance-none bg-gray-200 rounded-full cursor-pointer relative transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-brand/50 flex-shrink-0;
   }
   .toggle::after {
     content: '';
-    @apply absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-300;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    @apply absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-300 shadow-sm;
   }
   .toggle:checked {
-    @apply bg-yellow-400;
+    @apply bg-brand;
   }
   .toggle:checked::after {
     @apply translate-x-5;

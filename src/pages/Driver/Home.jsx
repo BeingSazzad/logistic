@@ -18,40 +18,40 @@ export default function DriverHome() {
     <div className="p-5 flex flex-col gap-6 max-w-md mx-auto min-h-screen bg-gray-50 pb-20">
 
       {/* ── 1. Dynamic Status Bar ── */}
-      <div className="flex justify-between items-center bg-white p-2 rounded-[2rem] shadow-sm border border-gray-100">
+      <div className="flex justify-between items-center bg-white p-2 rounded-hero-lg shadow-sm border border-gray-100">
          <div className="flex items-center gap-3 pl-2">
-            <div className="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center overflow-hidden">
-               <User size={20} className="text-[#FACC15]" />
+            <div className="w-10 h-10 rounded-full bg-hero-dark border border-gray-800 flex items-center justify-center overflow-hidden">
+               <User size={20} className="text-brand" />
             </div>
             <div>
-               <p className="text-[10px] font-black uppercase text-gray-400 tracking-widest">Operator</p>
-               <p className="text-sm font-black text-gray-900 leading-none">Jack Taylor</p>
+               <p className="hero-metadata text-hero-neutral">Operator</p>
+               <p className="text-sm font-black text-hero-dark leading-none">Jack Taylor</p>
             </div>
          </div>
          <button 
            onClick={() => setIsOnline(!isOnline)}
-           className={`flex items-center gap-2 px-5 py-2.5 rounded-full transition-all active:scale-95 border ${isOnline ? 'bg-emerald-500 text-white border-emerald-400 shadow-lg shadow-emerald-500/20' : 'bg-white text-gray-400 border-gray-200'}`}
+           className={`btn rounded-full transition-all border ${isOnline ? 'bg-hero-success text-white border-hero-success/20 shadow-lg shadow-hero-success/20' : 'bg-white text-hero-neutral border-gray-200'}`}
          >
             <Zap size={14} className={isOnline ? 'fill-white' : ''} />
-            <span className="text-xs font-black uppercase tracking-widest">{isOnline ? 'Online' : 'Offline'}</span>
+            <span className="hero-metadata text-inherit">{isOnline ? 'Online' : 'Offline'}</span>
          </button>
       </div>
 
       {/* ── 2. The Hero: Active Manifest ── */}
-      <div className="bg-gray-900 rounded-[2.5rem] overflow-hidden shadow-2xl relative border border-white/5">
-        <div className="absolute -right-10 -top-10 w-48 h-48 bg-yellow-400 opacity-[0.03] rounded-full blur-3xl pointer-events-none"></div>
+      <div className="bg-hero-dark rounded-hero-lg overflow-hidden shadow-2xl relative border border-white/5">
+        <div className="absolute -right-10 -top-10 w-48 h-48 bg-brand opacity-[0.05] rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="p-7 relative z-10">
            <div className="flex justify-between items-start mb-6">
               <div className="flex flex-col gap-1">
                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse shadow-[0_0_8px_#FACC15]"></span>
-                    <span className="text-yellow-400 text-[9px] font-black uppercase tracking-[0.2em]">Next Logistics Flow</span>
+                    <span className="w-2 h-2 rounded-full bg-brand animate-pulse shadow-[0_0_8px_#FFCC00]"></span>
+                    <span className="text-brand hero-metadata tracking-[0.2em]">Next Logistics Flow</span>
                  </div>
                  <h2 className="text-2xl font-black text-white tracking-tighter mt-1">Acme Distribution</h2>
-                 <p className="text-gray-500 text-[10px] font-black tracking-widest uppercase">SHP-20481 • SYDNEY_B2B</p>
+                 <p className="text-gray-400 hero-metadata tracking-widest">SHP-20481 • SYDNEY_B2B</p>
               </div>
-              <div className="bg-white/5 backdrop-blur-md px-4 py-3 rounded-2xl border border-white/10 text-center shadow-inner">
+              <div className="bg-white/5 backdrop-blur-md px-4 py-3 rounded-hero-md border border-white/10 text-center shadow-inner">
                  <span className="text-gray-500 text-[8px] font-black uppercase tracking-widest block mb-0.5">ETA</span>
                  <span className="text-xl font-black text-white">10:30</span>
                  <span className="text-[9px] font-black text-gray-500 uppercase block">AM</span>

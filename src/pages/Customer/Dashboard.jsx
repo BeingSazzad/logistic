@@ -19,32 +19,32 @@ export default function CustomerDashboard() {
     <div className="flex flex-col gap-8 w-full max-w-7xl mx-auto pb-12">
       
       {/* ── 1. Brand & Account Header ── */}
-      <div className="bg-gray-900 rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-2xl">
-         <div className="absolute right-0 top-0 w-80 h-80 bg-[#FACC15] opacity-5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+      <div className="bg-hero-dark rounded-hero-lg p-10 text-white relative overflow-hidden shadow-2xl">
+         <div className="absolute right-0 top-0 w-80 h-80 bg-brand opacity-5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
          
          <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
             <div>
-               <p className="text-[#FACC15] text-[11px] font-black uppercase tracking-[0.3em] mb-3">Certified Partner Dashboard</p>
+               <p className="text-brand hero-metadata tracking-[0.3em] mb-3">Certified Partner Dashboard</p>
                <h1 className="text-4xl font-black tracking-tighter">Acme Distribution Group</h1>
                <div className="flex items-center gap-4 mt-6">
                   <div className="flex -space-x-2">
-                     {[1,2,3].map(i => <div key={i} className="w-8 h-8 rounded-full border-2 border-gray-900 bg-gray-800"></div>)}
+                     {[1,2,3].map(i => <div key={i} className="w-8 h-8 rounded-full border-2 border-hero-dark bg-gray-800"></div>)}
                   </div>
-                  <p className="text-sm font-bold text-gray-400">Manage 14 team members • Level 4 Tier</p>
+                  <p className="hero-body text-gray-400">Manage 14 team members • Level 4 Tier</p>
                </div>
             </div>
             <div className="flex flex-col gap-4 w-full md:w-auto">
                <div className="grid grid-cols-2 gap-3">
-                  <div className="bg-white/5 backdrop-blur-md p-4 rounded-3xl border border-white/10 shadow-inner">
-                     <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest block mb-1">Active Shipments</span>
-                     <span className="text-2xl font-black text-[#FACC15]">03</span>
+                  <div className="bg-white/5 backdrop-blur-md p-4 rounded-hero-md border border-white/10 shadow-inner">
+                     <span className="hero-metadata text-gray-500 block mb-1">Active Shipments</span>
+                     <span className="text-2xl font-black text-brand">03</span>
                   </div>
-                  <div className="bg-white/5 backdrop-blur-md p-4 rounded-3xl border border-white/10 shadow-inner">
-                     <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest block mb-1">Monthly Volume</span>
+                  <div className="bg-white/5 backdrop-blur-md p-4 rounded-hero-md border border-white/10 shadow-inner">
+                     <span className="hero-metadata text-gray-500 block mb-1">Monthly Volume</span>
                      <span className="text-2xl font-black text-white">412</span>
                   </div>
                </div>
-               <button onClick={() => navigate('/customer/tracking')} className="bg-[#FACC15] hover:bg-yellow-500 text-black py-4 px-8 rounded-3xl font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2 transition-all active:scale-95 shadow-xl shadow-yellow-400/20">
+               <button onClick={() => navigate('/customer/tracking')} className="btn bg-brand hover:bg-brand-hover text-hero-dark py-4 px-8 rounded-hero-md font-black shadow-lg shadow-brand/20">
                   <Navigation size={16}/> Live Fleet HUD
                </button>
             </div>

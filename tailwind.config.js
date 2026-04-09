@@ -7,13 +7,27 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: '#FACC15',
-        'brand-hover': '#FBBF24',
-        'brand-dark': '#D97706',
+        brand: {
+          DEFAULT: '#FFCC00',
+          hover: '#E6B800',
+          dark: '#111111',
+        },
+        hero: {
+          success: '#10B981',
+          warning: '#F59E0B',
+          danger: '#EF4444',
+          neutral: '#6B7280',
+          dark: '#111111',
+        }
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
       },
+      borderRadius: {
+        'hero-sm': '0.5rem',
+        'hero-md': '0.75rem',
+        'hero-lg': '1rem',
+      }
     },
   },
   plugins: [],
