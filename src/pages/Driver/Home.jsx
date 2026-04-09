@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   MapPin, Navigation, Phone, Clock, Package, 
-  CheckCircle2, Bell, User, Zap, AlertTriangle, ShieldCheck 
+  CheckCircle2, Bell, User, Zap, AlertTriangle, ShieldCheck, ChevronRight
 } from 'lucide-react';
 
 export default function DriverHome() {

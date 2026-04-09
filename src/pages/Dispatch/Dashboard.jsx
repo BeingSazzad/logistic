@@ -27,6 +27,7 @@ function StatusBadge({ status }) {
 export default function DispatchDashboard() {
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
+  const [autoAssigning, setAutoAssigning] = useState(false);
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
@@ -43,7 +44,13 @@ export default function DispatchDashboard() {
           </div>
         </div>
         <div className="flex gap-3">
-           <button className="bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm">
+           <button 
+             onClick={() => {
+               setAutoAssigning(true);
+               setTimeout(() => setAutoAssigning(false), 2000);
+             }}
+             className="bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm"
+           >
               <Zap size={16}/> Auto-Assign
            </button>
            <button 
@@ -54,6 +61,16 @@ export default function DispatchDashboard() {
           </button>
         </div>
       </div>
+
+      {autoAssigning && (
+        <div className="fixed top-24 right-8 bg-[#111] text-[#FFCC00] px-6 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-3 animate-in slide-in-from-right border border-white/10">
+           <Zap size={20} className="animate-pulse" />
+           <div>
+              <p className="text-sm font-black uppercase tracking-widest">Optimizing Routes</p>
+              <p className="text-xs font-bold text-gray-400">AI is assigning drivers based on proximity.</p>
+           </div>
+        </div>
+      )}
 
       <div className="w-full h-px bg-gray-200/60 mb-2"></div>
 

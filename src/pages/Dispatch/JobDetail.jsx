@@ -4,7 +4,7 @@ import {
   ArrowLeft, MapPin, CheckCircle2, Circle, AlertTriangle, 
   Printer, Share2, ClipboardList, Truck, Box, 
   User, Clock, FileCheck, Route, FileText, UserCheck,
-  Star, ChevronRight, X, Send
+  Star, ChevronRight, X, Send, PackageCheck
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -70,6 +70,8 @@ export default function DispatchJobDetail() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [smsNote, setSmsNote] = useState('');
   const [activeModal, setActiveModal] = useState(null);
+  const [showPodModal, setShowPodModal] = useState(false);
+  const [podStatus, setPodStatus] = useState('pending'); // pending, submitting, done
 
   const handleAssign = () => {
     if (!selectedDriver) return;
@@ -127,6 +129,12 @@ export default function DispatchJobDetail() {
           </div>
         </div>
         <div className="flex gap-3">
+          <button 
+            onClick={() => setShowPodModal(true)}
+            className="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-lg font-bold transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)] border border-emerald-400 flex items-center gap-2"
+          >
+            <PackageCheck size={16}/> Counter Handover 
+          </button>
           <button className="bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 px-4 py-2.5 rounded-lg font-bold transition-all shadow-sm flex items-center gap-2">
             <Printer size={16}/> Print
           </button>
@@ -576,6 +584,113 @@ export default function DispatchJobDetail() {
             <div className="p-6 border-t border-gray-100 shrink-0 flex justify-end gap-3 bg-red-50 rounded-b-2xl">
                <button onClick={() => setActiveModal(null)} className="px-5 py-2.5 text-sm font-bold text-gray-500 hover:text-gray-900">Cancel</button>
                <button onClick={() => setActiveModal(null)} className="px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-sm flex items-center gap-2"><Send size={16}/> Submit Report</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Collect POD Modal (Pro Level) */}
+      {showPodModal && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col">
+            
+            <div className="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-[#111]">
+              <div className="flex items-center gap-3">
+                 <div className="w-10 h-10 rounded-lg bg-[#FFCC00] flex items-center justify-center text-black">
+                    <PackageCheck size={20}/>
+                 </div>
+                 <div>
+                   <h2 className="text-lg font-black text-white tracking-tight uppercase">Handover Protocol</h2>
+                   <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">Secure Proof of Delivery</p>
+                 </div>
+              </div>
+              <button onClick={() => setShowPodModal(false)} className="w-8 h-8 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-white rounded-lg transition-colors">
+                <X size={18} />
+              </button>
+            </div>
+            
+            <div className="p-6 space-y-6 flex-1 overflow-y-auto">
+              {podStatus === 'done' ? (
+                 <div className="py-16 flex flex-col items-center justify-center text-center">
+                    <div className="w-20 h-20 bg-[#FFCC00] rounded-full flex items-center justify-center text-black mb-6 shadow-xl shadow-[#FFCC00]/20 animate-bounce">
+                       <CheckCircle2 size={40} />
+                    </div>
+                    <h3 className="text-2xl font-black text-gray-900 uppercase">Handover Authorized</h3>
+                    <p className="text-sm font-bold text-gray-500 mt-2 max-w-sm">Shipment officially marked as delivered. Documents forwarded to Audit Queue.</p>
+                 </div>
+              ) : (
+                <>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {/* Left Col: Receiver Details */}
+                    <div className="space-y-5">
+                       <div>
+                         <h4 className="text-xs font-black text-gray-900 uppercase tracking-widest border-b border-gray-100 pb-2 mb-4">Receiver Identity</h4>
+                       </div>
+                       <div className="space-y-1.5">
+                         <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Authority Type</label>
+                         <select className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/50 transition-all">
+                            <option>Direct Consignee</option>
+                            <option>Authorized Representative</option>
+                            <option>Company Staff</option>
+                         </select>
+                       </div>
+                       <div className="space-y-1.5">
+                         <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Full Name</label>
+                         <input type="text" placeholder="John Doe" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/50 transition-all" />
+                       </div>
+                       <div className="space-y-1.5">
+                         <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Govt ID / Verification PIN</label>
+                         <input type="text" placeholder="e.g. NID, Passport, Booking PIN" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/50 transition-all" />
+                       </div>
+                    </div>
+
+                    {/* Right Col: Evidence */}
+                    <div className="space-y-5">
+                       <div>
+                         <h4 className="text-xs font-black text-gray-900 uppercase tracking-widest border-b border-gray-100 pb-2 mb-4">Documentary Evidence</h4>
+                       </div>
+
+                       <div className="space-y-1.5">
+                         <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest flex justify-between">
+                            Signed Manifest / Paperwork <span className="text-blue-500 font-bold">Recommended</span>
+                         </label>
+                         <div className="w-full h-24 bg-blue-50/50 border-2 border-dashed border-blue-200 hover:border-blue-400 rounded-xl flex flex-col items-center justify-center text-blue-500 transition-colors cursor-pointer group">
+                             <UploadCloud size={24} className="group-hover:scale-110 transition-transform mb-1.5"/>
+                             <span className="text-[10px] font-bold uppercase tracking-widest">Upload Signed Document</span>
+                         </div>
+                       </div>
+
+                       <div className="space-y-1.5">
+                         <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Digital E-Signature (Optional)</label>
+                         <div className="w-full h-24 bg-gray-50 border border-gray-200 rounded-xl relative hover:border-gray-400 transition-colors cursor-crosshair flex items-center justify-center group overflow-hidden">
+                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest group-hover:opacity-0 transition-opacity">Draw Signature</span>
+                            <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+                               <FileSignature size={32}/>
+                            </div>
+                         </div>
+                       </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-6 mt-6 border-t border-gray-100 flex justify-end gap-3">
+                     <button onClick={() => setShowPodModal(false)} className="px-6 py-3 rounded-lg font-bold text-sm text-gray-600 hover:bg-gray-100 transition-all uppercase tracking-widest">
+                       Cancel
+                     </button>
+                     <button 
+                       onClick={() => {
+                          setPodStatus('submitting');
+                          setTimeout(() => {
+                             setPodStatus('done');
+                          }, 1000);
+                       }}
+                       disabled={podStatus === 'submitting'}
+                       className="px-8 py-3 bg-[#111] hover:bg-black text-[#FFCC00] rounded-lg font-black text-sm uppercase tracking-widest transition-all shadow-xl shadow-black/20 disabled:opacity-50 flex justify-center items-center gap-2"
+                     >
+                       {podStatus === 'submitting' ? <div className="w-5 h-5 border-2 border-[#FFCC00]/30 border-t-[#FFCC00] rounded-full animate-spin"/> : 'Authorize Handover'}
+                     </button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -14,34 +14,44 @@ const navGroups = [
     type: 'group', label: 'Operations', icon: Package,
     items: [
       { to: '/admin/shipments',     label: 'Shipments' },
-      { to: '/admin/exceptions',    label: 'Exceptions' },
+      { to: '/admin/exceptions',    label: 'Delivery Issues' },
       { to: '/admin/customers',     label: 'Customers' },
       { to: '/admin/jobs-config',   label: 'Jobs Config' },
-    ]
-  },
-  {
-    type: 'group', label: 'Network', icon: Network,
-    items: [
-      { to: '/admin/branches',      label: 'Branches' },
-      { to: '/admin/fleet',         label: 'Fleet Management' },
-      { to: '/admin/drivers',       label: 'Driver Management' },
     ]
   },
   {
     type: 'link', label: 'Financial Control', icon: DollarSign, to: '/admin/finance'
   },
   {
-    type: 'group', label: 'Settings', icon: Settings,
+    type: 'group', label: 'Network Control', icon: Network,
     items: [
-      { to: '/admin/company',       label: 'Company Setup' },
-      { to: '/admin/users',         label: 'Users & Roles' },
-      { to: '/admin/messaging',     label: 'Messaging' },
-      { to: '/admin/reports',       label: 'Reports Analytics' },
-      { to: '/admin/notifications', label: 'Notifications' },
-      { to: '/admin/integrations',  label: 'Integrations' },
-      { to: '/admin/audit',         label: 'Audit Logs' },
-      { to: '/admin/helpline',      label: 'Platform Helpline' },
-      { to: '/admin/settings',      label: 'System Settings' },
+      { to: '/admin/branches',      label: 'Branches' },
+      { to: '/admin/fleet',         label: 'Fleet' },
+      { to: '/admin/drivers',       label: 'Drivers' },
+    ]
+  },
+  {
+    type: 'group', label: 'Insights', icon: BarChart2,
+    items: [
+      { to: '/admin/reports',       label: 'Operational Analytics' },
+      { to: '/admin/audit',         label: 'System Audit Logs' },
+    ]
+  },
+  {
+    type: 'group', label: 'Help & Support', icon: MessageSquare,
+    items: [
+      { to: '/admin/messaging',     label: 'Messages' },
+      { to: '/admin/helpline',      label: 'Support' },
+    ]
+  },
+  {
+    type: 'group', label: 'General Settings', icon: Settings,
+    items: [
+      { to: '/admin/company',       label: 'Company Profile' },
+      { to: '/admin/users',         label: 'Users & Permissions' },
+      { to: '/admin/notifications', label: 'Alert Notifications' },
+      { to: '/admin/integrations',  label: 'API & Connections' },
+      { to: '/admin/settings',      label: 'System Config' },
     ]
   }
 ];

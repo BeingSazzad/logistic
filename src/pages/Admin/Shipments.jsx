@@ -1,23 +1,36 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Package, Search, Filter, Plus, Clock, CheckCircle2, AlertTriangle, Truck, ArrowDownUp, MapPin, ChevronDown } from 'lucide-react';
+import { Package, Search, Filter, Plus, Clock, CheckCircle2, AlertTriangle, Truck, ArrowDownUp, MapPin, ChevronDown, X } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
 
 export default function AdminShipments() {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [filter, setFilter] = useState('All');
   const [search, setSearch] = useState('');
   const [sortKey, setSortKey] = useState('id');
   const [sortOrder, setSortOrder] = useState('desc');
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [showCreateMock, setShowCreateMock] = useState(false);
+  
+  const toggleSelect = (id) => {
+    setSelectedIds(prev => prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]);
+  };
   
   const rawShipments = [
-    { id: 'SHP-9042', origin: 'Sydney Depot', dest: 'Melbourne Branch', customer: 'Acme Corp Logistics', status: 'In Transit', progress: 45, type: 'Heavy Load', driver: 'Jack Taylor', est: 'Today 4:00 PM' },
-    { id: 'SHP-9041', origin: 'Sydney Depot', dest: 'Penrith Branch', customer: 'Tech Solutions Ltd', status: 'Arrived at Branch', progress: 85, type: 'Parcel', driver: 'Sarah Mitchell', est: 'Awaiting Handover' },
-    { id: 'SHP-9039', origin: 'Brisbane Port', dest: 'Gold Coast Branch', customer: 'Global Traders Australia', status: 'Exception', progress: 60, type: 'Express', driver: 'Liam Smith', est: 'Delayed' },
-    { id: 'SHP-9035', origin: 'Adelaide Depot', dest: 'Sydney Depot', customer: 'Acme Corp Logistics', status: 'Received at Branch', progress: 100, type: 'Heavy Load', driver: 'Noah Williams', est: 'Completed' }
+    { id: 'SHP-9042', branchId: 'SYD-CENTRAL', origin: 'Sydney Depot', dest: 'Melbourne Branch', customer: 'Acme Corp Logistics', status: 'In Transit', progress: 45, type: 'Heavy Load', driver: 'Jack Taylor', est: 'Today 4:00 PM' },
+    { id: 'SHP-9041', branchId: 'SYD-CENTRAL', origin: 'Sydney Depot', dest: 'Penrith Branch', customer: 'Tech Solutions Ltd', status: 'Arrived at Branch', progress: 85, type: 'Parcel', driver: 'Sarah Mitchell', est: 'Awaiting Handover' },
+    { id: 'SHP-9039', branchId: 'MEL-HUB', origin: 'Brisbane Port', dest: 'Gold Coast Branch', customer: 'Global Traders Australia', status: 'Exception', progress: 60, type: 'Express', driver: 'Liam Smith', est: 'Delayed' },
+    { id: 'SHP-9035', branchId: 'SYD-CENTRAL', origin: 'Adelaide Depot', dest: 'Sydney Depot', customer: 'Acme Corp Logistics', status: 'Received at Branch', progress: 100, type: 'Heavy Load', driver: 'Noah Williams', est: 'Completed' }
   ];
 
+  const branchShipments = useMemo(() => {
+    if (user.role === 'Super Admin' || user.role === 'Platform Admin') return rawShipments;
+    return rawShipments.filter(shp => shp.branchId === user.branchId);
+  }, [user.role, user.branchId]);
+
   const filteredShipments = useMemo(() => {
-    return rawShipments.filter(shp => {
+    return branchShipments.filter(shp => {
       const matchesFilter = filter === 'All' || shp.status === filter;
       const searchStr = `${shp.id} ${shp.customer} ${shp.origin} ${shp.dest} ${shp.driver}`.toLowerCase();
       const matchesSearch = searchStr.includes(search.toLowerCase());
@@ -28,7 +41,7 @@ export default function AdminShipments() {
       if (sortOrder === 'asc') return aVal > bVal ? 1 : -1;
       return aVal < bVal ? 1 : -1;
     });
-  }, [filter, search, sortKey, sortOrder]);
+  }, [branchShipments, filter, search, sortKey, sortOrder]);
 
   const toggleSort = () => {
     if (sortKey === 'id') {
@@ -58,7 +71,10 @@ export default function AdminShipments() {
           </div>
         </div>
         <button 
-          onClick={() => navigate('/dispatch/jobs/create')} 
+          onClick={() => {
+            setShowCreateMock(true);
+            setTimeout(() => setShowCreateMock(false), 3000);
+          }} 
           className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm"
         >
           <Plus size={18} strokeWidth={3} /> New Shipment
@@ -66,6 +82,16 @@ export default function AdminShipments() {
       </div>
 
       <div className="w-full h-px bg-gray-200/60 mb-2"></div>
+
+      {showCreateMock && (
+        <div className="fixed top-24 right-8 bg-[#111] text-[#FFCC00] px-6 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-3 animate-in slide-in-from-right border border-white/10">
+           <Package size={20} className="animate-pulse" />
+           <div>
+              <p className="text-sm font-black uppercase tracking-widest">Restricted Action</p>
+              <p className="text-xs font-bold text-gray-400">Shipments must be created via the Booking API.</p>
+           </div>
+        </div>
+      )}
 
       {/* KPI HUD */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 px-2 mb-2">
@@ -133,25 +159,66 @@ export default function AdminShipments() {
            </div>
         </div>
 
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto relative">
+           {/* Floating Batch Action Bar */}
+           {selectedIds.length > 0 && (
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 bg-black text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-6 animate-in slide-in-from-top-4 duration-300 border border-white/10">
+                <div className="flex items-center gap-3 border-r border-white/20 pr-6">
+                   <div className="w-8 h-8 rounded-lg bg-[#FFCC00] text-black flex items-center justify-center font-black">{selectedIds.length}</div>
+                   <div>
+                     <span className="text-[10px] font-black uppercase tracking-widest text-[#FFCC00]">Shipments Selected</span>
+                     <p className="text-[9px] text-gray-500 font-bold uppercase">Ready for route assembly</p>
+                   </div>
+                </div>
+                <div className="flex gap-4">
+                   <button className="bg-[#FFCC00] hover:bg-yellow-400 text-black px-5 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all shadow-lg flex items-center gap-2">
+                      <Truck size={14} /> Create Dispatch List
+                   </button>
+                </div>
+                <button onClick={() => setSelectedIds([])} className="p-1 hover:bg-white/10 rounded-full transition-colors"><X size={16}/></button>
+              </div>
+           )}
+
            <table className="w-full text-left">
              <thead className="bg-[#FAFAFA] text-[10px] font-bold text-gray-500 uppercase tracking-widest border-b border-gray-100">
                <tr>
+                 <th className="px-6 py-4 w-4">
+                    <input 
+                       type="checkbox" 
+                       onChange={(e) => setSelectedIds(e.target.checked ? filteredShipments.map(j => j.id) : [])}
+                       checked={selectedIds.length === filteredShipments.length && filteredShipments.length > 0}
+                       className="w-4 h-4 rounded border-gray-300 accent-yellow-400"
+                    />
+                 </th>
                  <th className="px-6 py-4">Manifest Reference</th>
+                 <th className="px-6 py-4">Ownership</th>
                  <th className="px-6 py-4">Route / Trajectory</th>
                  <th className="px-6 py-4">Current State</th>
-                 <th className="px-6 py-4">Assignment</th>
                  <th className="px-6 py-4 text-right">Actions</th>
                </tr>
              </thead>
              <tbody className="divide-y divide-gray-100">
                {filteredShipments.map(shp => (
-                 <tr className="hover:bg-gray-50/50 transition-all cursor-pointer group" key={shp.id} onClick={() => navigate(`/admin/shipments/${shp.id}`)}>
-                   <td className="px-6 py-5">
+                 <tr className={`hover:bg-gray-50/50 transition-all cursor-pointer group ${selectedIds.includes(shp.id) ? 'bg-yellow-50/30 border-l-4 border-l-[#FFCC00]' : 'border-l-4 border-l-transparent'}`} key={shp.id} onClick={() => toggleSelect(shp.id)}>
+                   <td className="px-6 py-5" onClick={e => e.stopPropagation()}>
+                     <input 
+                       type="checkbox" 
+                       checked={selectedIds.includes(shp.id)}
+                       onChange={() => toggleSelect(shp.id)}
+                       className="w-4 h-4 rounded border-gray-300 accent-yellow-400 cursor-pointer"
+                     />
+                   </td>
+                   <td className="px-6 py-5" onClick={() => navigate(`/admin/shipments/${shp.id}`)}>
                       <div className="font-bold text-[#111] text-[15px]">{shp.id}</div>
                       <div className="text-[11px] text-gray-400 font-medium tracking-tight mt-0.5 truncate max-w-[160px]">{shp.customer}</div>
                    </td>
-                   <td className="px-6 py-5">
+                   <td className="px-6 py-5" onClick={() => navigate(`/admin/shipments/${shp.id}`)}>
+                      <div className="flex items-center gap-2">
+                         <div className="w-1.5 h-1.5 rounded-full bg-[#FFCC00]"></div>
+                         <span className="text-[10px] font-black uppercase tracking-widest text-[#111]">{shp.branchId}</span>
+                      </div>
+                   </td>
+                   <td className="px-6 py-5" onClick={() => navigate(`/admin/shipments/${shp.id}`)}>
                       <div className="flex flex-col gap-1 relative pl-4">
                          <div className="absolute left-0 top-1 bottom-1 w-px bg-gray-100"></div>
                          <div className="flex items-center gap-2 text-[10px] font-medium text-gray-400 uppercase">
@@ -162,7 +229,7 @@ export default function AdminShipments() {
                          </div>
                       </div>
                    </td>
-                   <td className="px-6 py-5">
+                   <td className="px-6 py-5" onClick={() => navigate(`/admin/shipments/${shp.id}`)}>
                       <div className="flex flex-col gap-1.5">
                         <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md border w-fit uppercase tracking-widest ${
                            shp.status === 'Delivered' || shp.status === 'Received at Branch' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 
@@ -177,20 +244,9 @@ export default function AdminShipments() {
                         </div>
                       </div>
                    </td>
-                   <td className="px-6 py-5">
-                      <div className="flex items-center gap-3">
-                         <div className="w-8 h-8 rounded bg-gray-900 text-[#FFCC00] flex items-center justify-center font-black text-[10px]">
-                            {shp.driver[0]}
-                         </div>
-                         <div>
-                            <div className="font-bold text-gray-900 text-sm">{shp.driver}</div>
-                            <div className="text-[10px] text-gray-400 uppercase font-medium">{shp.type} Load</div>
-                         </div>
-                      </div>
-                   </td>
                    <td className="px-6 py-4 text-right">
-                      <button className="text-[10px] font-bold text-blue-600 hover:text-white border border-blue-200 hover:bg-blue-600 hover:border-blue-600 px-3 py-1.5 rounded-lg transition-colors uppercase tracking-widest">
-                        Manage
+                      <button onClick={(e) => { e.stopPropagation(); navigate(`/admin/shipments/${shp.id}`); }} className="text-[10px] font-black text-[#111] hover:text-white border border-gray-200 hover:bg-black px-4 py-2 rounded-lg transition-all uppercase tracking-widest shadow-sm">
+                        View Audit
                       </button>
                    </td>
                  </tr>

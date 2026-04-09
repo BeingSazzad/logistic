@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   ArrowDownToLine, ArrowUpFromLine, Barcode,
   AlertOctagon, Move, History, Clock, 
@@ -6,6 +7,7 @@ import {
 } from 'lucide-react';
 
 export default function WarehouseDashboard() {
+  const navigate = useNavigate();
   const activeTasks = [
     { id: 'RCV-9042', type: 'Inbound',  items: 45,  vehicle: 'TRK-102', eta: '12:00 PM', gate: 'DOCK-4', priority: 'High' },
     { id: 'RCV-9043', type: 'Inbound',  items: 12,  vehicle: 'VAN-08',  eta: '12:45 PM', gate: 'DOCK-1', priority: 'Normal' },
@@ -44,7 +46,7 @@ export default function WarehouseDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 px-2">
         
         {/* Receive */}
-        <button className="lg:col-span-2 bg-[#FFCC00] hover:bg-[#E6B800] p-6 rounded-xl shadow-sm flex flex-col items-center justify-center text-center gap-3 group active:scale-95 transition-all">
+        <button onClick={() => navigate('/warehouse/inbound')} className="lg:col-span-2 bg-[#FFCC00] hover:bg-[#E6B800] p-6 rounded-xl shadow-sm flex flex-col items-center justify-center text-center gap-3 group active:scale-95 transition-all">
           <div className="w-12 h-12 rounded-lg bg-black/10 flex items-center justify-center group-hover:scale-110 transition-transform">
             <ArrowDownToLine size={26} strokeWidth={2.5} className="text-black" />
           </div>
@@ -54,8 +56,19 @@ export default function WarehouseDashboard() {
           </div>
         </button>
 
+        {/* Inventory Lookup */}
+        <button onClick={() => navigate('/warehouse/inventory')} className="lg:col-span-2 bg-white border border-gray-200 hover:border-[#FFCC00] hover:shadow-md p-6 rounded-xl shadow-sm flex flex-col items-center justify-center text-center gap-3 group transition-all">
+          <div className="w-12 h-12 rounded-lg bg-gray-50 text-gray-400 flex items-center justify-center group-hover:bg-[#FFFBEB] group-hover:text-[#F59E0B] transition-colors">
+            <Barcode size={26} strokeWidth={2} />
+          </div>
+          <div>
+            <h3 className="font-bold text-gray-900 text-sm">Inventory Lookup</h3>
+            <p className="text-[10px] font-bold text-gray-400 uppercase mt-0.5">Scan to locate parcel</p>
+          </div>
+        </button>
+
         {/* Dispatch */}
-        <button className="lg:col-span-2 bg-[#111] hover:bg-black p-6 rounded-xl shadow-sm flex flex-col items-center justify-center text-center gap-3 group active:scale-95 transition-all">
+        <button onClick={() => navigate('/warehouse/outbound')} className="lg:col-span-2 bg-[#111] hover:bg-black p-6 rounded-xl shadow-sm flex flex-col items-center justify-center text-center gap-3 group active:scale-95 transition-all">
           <div className="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center group-hover:scale-110 transition-transform text-[#FFCC00]">
             <ArrowUpFromLine size={26} strokeWidth={2.5} />
           </div>

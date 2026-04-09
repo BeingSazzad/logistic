@@ -78,7 +78,7 @@ export default function AdminUserDetail() {
             </>
           ) : (
             <button onClick={() => setEditing(true)} className="bg-[#111] hover:bg-black text-[#FFCC00] px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm">
-              <Shield size={16}/> Edit Access
+              <Shield size={16}/> Edit Profile &amp; Access
             </button>
           )}
         </div>

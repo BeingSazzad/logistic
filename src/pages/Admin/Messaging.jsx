@@ -13,6 +13,23 @@ const internalTickets = [
 export default function AdminMessaging() {
   const [selectedTicket, setSelectedTicket] = useState(internalTickets[0]);
   const [replyText, setReplyText] = useState('');
+  const [tickets, setTickets] = useState(internalTickets);
+  const [solvedToast, setSolvedToast] = useState(false);
+  const [sentToast, setSentToast] = useState(false);
+
+  const handleMarkSolved = () => {
+    setTickets(prev => prev.map(t => t.id === selectedTicket.id ? { ...t, status: 'Resolved' } : t));
+    setSelectedTicket(prev => ({ ...prev, status: 'Resolved' }));
+    setSolvedToast(true);
+    setTimeout(() => setSolvedToast(false), 2500);
+  };
+
+  const handleSendReply = () => {
+    if (!replyText.trim()) return;
+    setReplyText('');
+    setSentToast(true);
+    setTimeout(() => setSentToast(false), 2000);
+  };
 
   return (
     <div className="flex flex-col h-[calc(100vh-8rem)] w-full max-w-7xl mx-auto space-y-4">
@@ -28,6 +45,17 @@ export default function AdminMessaging() {
         </button>
       </div>
 
+      {solvedToast && (
+        <div className="fixed top-24 right-8 bg-emerald-600 text-white px-6 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-3 border border-emerald-700">
+           <CheckCircle2 size={18} /> <p className="text-sm font-black uppercase tracking-widest">Ticket Marked Resolved</p>
+        </div>
+      )}
+      {sentToast && (
+        <div className="fixed top-24 right-8 bg-[#111] text-[#FFCC00] px-6 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-3 border border-white/10">
+           <Send size={18} /> <p className="text-sm font-black uppercase tracking-widest">Reply Sent</p>
+        </div>
+      )}
+
       {/* ── Main Layout ── */}
       <div className="flex-1 bg-white rounded-3xl border border-gray-100 shadow-xl overflow-hidden flex min-h-0">
         
@@ -41,7 +69,7 @@ export default function AdminMessaging() {
            </div>
            
            <div className="flex-1 overflow-y-auto divide-y divide-gray-50">
-              {internalTickets.map(t => (
+              {tickets.map(t => (
                 <div 
                   key={t.id} 
                   onClick={() => setSelectedTicket(t)}
@@ -80,7 +108,7 @@ export default function AdminMessaging() {
               </div>
               <div className="flex gap-2">
                  <button className="p-2.5 border border-gray-100 hover:bg-gray-50 rounded-xl text-gray-400 transition-colors"><Phone size={18} /></button>
-                 <button className="btn btn-dark text-[10px] font-black uppercase tracking-widest px-6 shadow-sm">Mark Solved</button>
+                 <button onClick={handleMarkSolved} disabled={selectedTicket.status === 'Resolved'} className="btn btn-dark text-[10px] font-black uppercase tracking-widest px-6 shadow-sm disabled:opacity-40 disabled:cursor-not-allowed">Mark Solved</button>
               </div>
            </div>
 
@@ -116,7 +144,7 @@ export default function AdminMessaging() {
                    className="input w-full min-h-[100px] resize-none pb-14 text-sm font-medium focus:bg-white focus:border-yellow-400 shadow-inner rounded-3xl"
                  />
                  <div className="absolute bottom-4 right-4 flex gap-3">
-                    <button className="bg-[#111] hover:bg-black text-[#FACC15] px-6 py-2.5 rounded-2xl shadow-xl flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-all active:scale-95">
+                    <button onClick={handleSendReply} className="bg-[#111] hover:bg-black text-[#FACC15] px-6 py-2.5 rounded-2xl shadow-xl flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-all active:scale-95">
                        <Send size={14} /> Send Reply
                     </button>
                  </div>

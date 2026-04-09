@@ -1,157 +1,156 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
-  FileCheck, FileText, Receipt, Users, TrendingUp, 
-  AlertTriangle, CheckCircle2, Clock, ArrowRight,
-  DollarSign, BarChart3, ShieldAlert, Download,
-  Banknote, WalletCards
+  TrendingUp, TrendingDown, Clock, CheckCircle2, 
+  AlertCircle, DollarSign, ArrowUpRight, ArrowDownRight,
+  FileCheck, Receipt, Download, Filter, Search, ChevronRight
 } from 'lucide-react';
 
 export default function AccountsDashboard() {
   const navigate = useNavigate();
+  const financialSummary = [
+    { label: 'Total Receivables', val: '$842,500', diff: '+12.4%', up: true, icon: DollarSign, color: 'text-emerald-500', bg: 'bg-emerald-50' },
+    { label: 'Pending Payables', val: '$124,200', diff: '-2.1%', up: false, icon: Clock, color: 'text-amber-500', bg: 'bg-amber-50' },
+    { label: 'Net Profit (MTD)', val: '$32.1k', diff: '+8.4%', up: true, icon: TrendingUp, color: 'text-blue-500', bg: 'bg-blue-50' },
+    { label: 'POD Verification',  val: '42 Items', diff: 'Critical', up: false, icon: FileCheck, color: 'text-red-500', bg: 'bg-red-50' }
+  ];
 
-  const financeTasks = [
-    { id: 'ACT-90', label: '3 Invoices Overdue >60 Days', value: '$18,900', priority: 'Critical', action: 'Dunning Process', route: '/accounts/invoices' },
-    { id: 'ACT-91', label: '12 PODs Awaiting Audit', value: '12 Units', priority: 'High', action: 'Review Queue', route: '/accounts/pod-review' },
-    { id: 'ACT-92', label: 'Friday Driver Settlement', value: '$42,150', priority: 'Normal', action: 'Process Payout', route: '/accounts/settlements' },
+  const recentInvoices = [
+    { id: 'INV-1021', customer: 'Acme Corp', amount: '$42,500', status: 'Draft', date: 'Today' },
+    { id: 'INV-1020', customer: 'Tech Solutions', amount: '$12,800', status: 'Pending', date: '2h ago' },
+    { id: 'INV-1019', customer: 'Global Traders', amount: '$8,400', status: 'Approved', date: '5h ago' },
   ];
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
+    <div className="flex flex-col gap-8 w-full max-w-7xl mx-auto">
       
-      {/* ── 1. Executive Finance Header ── */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <h1 className="text-2xl font-black text-gray-900 tracking-tight flex items-center gap-3">
-             <Banknote className="text-emerald-500" size={24}/> Ledger Command
-          </h1>
-          <p className="text-sm font-bold text-gray-400 mt-1 uppercase tracking-widest flex items-center gap-2">
-             Cycle: <span className="text-gray-900">Q2-APR-2026</span> • Status: <span className="text-emerald-600 font-black">Balanced</span>
-          </p>
+      {/* Standardized Header */}
+      <div className="flex justify-between items-center mb-2 px-2">
+        <div className="flex items-center gap-4">
+          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-[#111] shadow-sm">
+            <DollarSign size={20} />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Accounts Intelligence</h1>
+            <p className="text-sm text-gray-500 mt-1">Ledger overview, billing cycles, and payout management.</p>
+          </div>
         </div>
-        <div className="flex gap-2">
-           <button className="btn bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 flex items-center gap-2 shadow-sm font-bold">
-              <Download size={16}/> Export Ledger
-           </button>
-           <button onClick={() => navigate('/accounts/reports')} className="btn btn-primary shadow-lg font-bold flex items-center gap-2 px-6">
-              <BarChart3 size={16}/> Full BI Analytics
-           </button>
+        <div className="flex gap-3">
+          <button onClick={() => navigate('/accounts/reports')} className="bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-5 py-2.5 rounded-lg font-bold text-sm transition-all shadow-sm">
+             Audit Trail
+          </button>
+          <button onClick={() => navigate('/accounts/invoices')} className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm">
+             <Receipt size={18}/> New Entry
+          </button>
         </div>
       </div>
 
-      {/* ── 2. The Big Numbers: Revenue Flow ── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-         {[
-           { label: 'PODs Pending Audit', val: '12', sub: 'Action required', color: 'amber', icon: FileCheck },
-           { label: 'Unbilled Revenue', val: '$14.2K', sub: 'Ready for invoice', color: 'blue', icon: FileText },
-           { label: 'Outstanding AR', val: '$127K', sub: 'Due in <30 days', color: 'emerald', icon: TrendingUp },
-           { label: 'Critical Overdue', val: '$18.9K', sub: '4 Accounts impacted', color: 'red', icon: AlertTriangle },
-         ].map((k, i) => (
-           <div key={i} className="card bg-white p-6 border border-gray-100 shadow-sm hover:border-[#FACC15] transition-all group relative overflow-hidden">
-              <div className="flex flex-col justify-between h-full relative z-10">
-                 <div className="flex justify-between items-start">
-                    <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{k.label}</span>
-                    <div className={`p-2 rounded-xl bg-${k.color}-50 text-${k.color}-600`}>
-                       <k.icon size={16} />
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 px-2 mb-2">
+        {financialSummary.map((k, i) => (
+          <div key={i} className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between group">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest leading-tight">{k.label}</p>
+              </div>
+              <div className="flex items-end gap-2">
+                 <p className="text-2xl font-black text-gray-900 leading-none">{k.val}</p>
+                 <span className={`text-[10px] font-bold pb-0.5 ${k.up ? 'text-emerald-500' : 'text-red-500'}`}>{k.diff}</span>
+              </div>
+            </div>
+            <div className={`w-10 h-10 rounded-lg flex items-center justify-center border border-gray-50 ${k.bg} ${k.color}`}>
+              <k.icon size={20}/>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+         
+         {/* Ledger Highlights */}
+         <div className="lg:col-span-2 bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 p-6">
+            <div className="flex justify-between items-center mb-6">
+               <div>
+                  <h3 className="text-xl font-black tracking-tight text-gray-900 uppercase">Recent Billings</h3>
+                  <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-2">Latest verified invoices for the current period</p>
+               </div>
+               <button onClick={() => navigate('/accounts/invoices')} className="text-xs font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg transition-colors shadow-sm">View All Ledger</button>
+            </div>
+
+            <div className="space-y-4">
+               {recentInvoices.map((inv, i) => (
+                 <div key={i} className="flex items-center justify-between p-4 bg-gray-50/50 rounded-lg border border-transparent hover:border-gray-200 hover:bg-white transition-all group">
+                    <div className="flex items-center gap-4">
+                       <div className="w-10 h-10 bg-white rounded-lg border border-gray-200 shadow-sm flex items-center justify-center font-bold text-[10px] text-gray-400 group-hover:text-black">
+                         #LOG
+                       </div>
+                       <div>
+                          <p className="text-sm font-black text-gray-900 uppercase">{inv.customer}</p>
+                          <p className="text-[10px] font-bold text-gray-400">{inv.id} • {inv.date}</p>
+                       </div>
+                    </div>
+                    <div className="flex items-center gap-8">
+                       <div className="text-right">
+                          <p className="text-sm font-black text-gray-900">{inv.amount}</p>
+                          <p className={`text-[9px] font-black uppercase tracking-widest ${inv.status === 'Approved' ? 'text-emerald-500' : 'text-amber-500'}`}>{inv.status}</p>
+                       </div>
+                       <ChevronRight size={16} className="text-gray-300 group-hover:text-black"/>
                     </div>
                  </div>
-                 <h3 className={`text-2xl font-black mt-4 text-${k.color}-600`}>{k.val}</h3>
-                 <p className="text-[10px] font-bold text-gray-400 mt-1 uppercase">{k.sub}</p>
-              </div>
-              <div className={`absolute -right-4 -bottom-4 w-20 h-20 bg-${k.color}-400 opacity-5 rounded-full blur-2xl`}></div>
-           </div>
-         ))}
-      </div>
-
-      {/* ── 3. Operational Financials ── */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-         
-         {/* Live Action Queue */}
-         <div className="lg:col-span-2 flex flex-col gap-4">
-            <div className="bg-white rounded-[2rem] border border-gray-100 shadow-xl overflow-hidden min-h-[400px]">
-               <div className="px-8 py-6 border-b border-gray-50 bg-gray-50/20 flex justify-between items-center">
-                  <h3 className="font-black text-gray-900 text-xs tracking-[0.2em] uppercase flex items-center gap-3">
-                     <ShieldAlert size={16} className="text-red-500" /> Administrative Priorities
-                  </h3>
-               </div>
-               <div className="divide-y divide-gray-50">
-                  {financeTasks.map(task => (
-                     <div key={task.id} className="p-8 flex items-center justify-between hover:bg-gray-50/50 transition-all cursor-pointer group">
-                        <div className="flex items-center gap-6">
-                           <div className={`w-1.5 h-10 rounded-full ${task.priority === 'Critical' ? 'bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.3)]' : task.priority === 'High' ? 'bg-amber-500' : 'bg-blue-500'}`}></div>
-                           <div className="min-w-0">
-                              <h4 className="text-sm font-black text-gray-900 tracking-tight">{task.label}</h4>
-                              <div className="flex items-center gap-3 mt-1.5">
-                                 <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{task.value} Volume</span>
-                                 <span className="w-1 h-1 bg-gray-200 rounded-full"></span>
-                                 <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded border ${task.priority === 'Critical' ? 'bg-red-50 text-red-600 border-red-100' : 'bg-gray-100 text-gray-500 border-gray-200'}`}>{task.priority} Priority</span>
-                              </div>
-                           </div>
-                        </div>
-                        <button onClick={() => navigate(task.route)} className="flex items-center gap-2 px-6 py-3 bg-gray-900 text-[#FACC15] rounded-xl text-[10px] font-black uppercase tracking-[0.15em] opacity-0 group-hover:opacity-100 transition-all shadow-xl active:scale-95">
-                           {task.action} <ArrowRight size={14}/>
-                        </button>
-                     </div>
-                  ))}
-               </div>
+               ))}
             </div>
          </div>
 
-         {/* Margin & Settlement Tracker */}
+         {/* Actionable Alerts (Pro UX) */}
          <div className="flex flex-col gap-6">
-            
-            {/* Real-time Profitability */}
-            <div className="bg-[#111] rounded-[2.5rem] p-8 text-white shadow-2xl relative overflow-hidden group">
-               <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-400/5 rounded-full blur-3xl group-hover:bg-emerald-400/10 transition-all duration-700"></div>
-               <h4 className="text-[11px] font-black uppercase text-gray-500 tracking-[0.2em] mb-6">Net Yield Efficiency</h4>
-               <div className="flex items-end justify-between gap-4 mb-4">
-                  <div className="flex flex-col">
-                     <span className="text-4xl font-black text-white">35.8%</span>
-                     <span className="text-[10px] font-bold text-gray-400 uppercase mt-1 tracking-widest">Gross Profit Margin</span>
+            <div className="bg-gray-900 rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] p-6 text-white relative overflow-hidden group">
+               <div className="absolute top-0 right-0 w-32 h-32 bg-[#FFCC00]/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
+               <h3 className="text-xs font-black uppercase tracking-wider text-[#FFCC00] mb-8 flex items-center gap-2 leading-none">
+                  <TrendingDown size={14} className="animate-bounce" /> Settlement Pulse
+               </h3>
+               
+               <div className="space-y-6 relative z-10">
+                  <div className="flex justify-between items-end border-b border-white/10 pb-4">
+                     <div>
+                        <p className="text-[9px] font-black text-gray-500 uppercase mb-1">Total Payouts Due</p>
+                        <p className="text-2xl font-black">$18,400</p>
+                     </div>
+                     <span onClick={() => navigate('/accounts/settlements')} className="text-[9px] font-black text-[#FFCC00] uppercase underline cursor-pointer hover:text-yellow-300 transition-colors">Reconcile</span>
                   </div>
-                  <div className="text-right">
-                     <span className="text-xs font-black text-emerald-400">+2.4% vs LY</span>
+                  <div className="flex justify-between items-end border-b border-white/10 pb-4">
+                     <div>
+                        <p className="text-[9px] font-black text-gray-500 uppercase mb-1">Unverified PODs</p>
+                        <p className="text-2xl font-black">12 Items</p>
+                     </div>
+                     <span onClick={() => navigate('/accounts/pod-review')} className="text-[9px] font-black text-[#FFCC00] uppercase underline cursor-pointer hover:text-yellow-300 transition-colors">Verify Now</span>
                   </div>
                </div>
-               <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                  <div className="h-full bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.4)]" style={{ width: '35.8%' }}></div>
-               </div>
-               <div className="mt-8 pt-8 border-t border-white/5 space-y-4">
-                  {[
-                    { label: 'Gross Revenue', val: '$486.5K', pos: true },
-                    { label: 'Direct Costs', val: '-$312.4K', pos: false },
-                    { label: 'Settlement Liability', val: '$42.1K', pos: false },
-                  ].map((x, i) => (
-                    <div key={i} className="flex justify-between items-center px-1">
-                       <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{x.label}</span>
-                       <span className={`text-xs font-black ${x.pos ? 'text-white' : 'text-red-400'}`}>{x.val}</span>
-                    </div>
-                  ))}
-               </div>
+
+               <button onClick={() => navigate('/accounts/settlements')} className="w-full mt-6 py-2.5 bg-[#FFCC00] text-black rounded-lg font-bold text-sm shadow-sm hover:bg-[#E6B800] transition-all">
+                  Process All Settlements
+               </button>
             </div>
 
-            {/* Payout Progress */}
-            <div className="bg-white rounded-[2rem] border border-gray-100 shadow-sm p-8">
-               <h4 className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
-                  <WalletCards size={16} className="text-violet-500"/> Settlement Phase
-               </h4>
-               <div className="space-y-6">
+            <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 p-6">
+               <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 bg-blue-50 shadow-sm border border-blue-100 rounded-lg flex items-center justify-center text-blue-500">
+                     <TrendingUp size={20}/>
+                  </div>
                   <div>
-                     <div className="flex justify-between items-center mb-2">
-                        <span className="text-[10px] font-black text-gray-900 uppercase tracking-tight">Driver Payout Cycle</span>
-                        <span className="text-xs font-black text-gray-400">75%</span>
-                     </div>
-                     <div className="w-full h-1.5 bg-gray-50 border border-gray-100 rounded-full overflow-hidden">
-                        <div className="h-full bg-violet-500" style={{ width: '75%' }}></div>
-                     </div>
+                     <h4 className="text-sm font-black text-gray-900 uppercase tracking-tight">Tax Projection</h4>
+                     <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Quarterly Forecast</p>
                   </div>
-                  <div className="p-4 bg-gray-50 rounded-2xl flex items-start gap-4 border border-gray-100">
-                     <Clock size={18} className="text-violet-400 mt-1 shrink-0" />
-                     <p className="text-[11px] font-bold text-gray-600 leading-relaxed uppercase tracking-tight">System is currently aggregating Friday's bank files for 142 drivers.</p>
+               </div>
+               <div className="space-y-3">
+                  <div className="flex justify-between text-xs font-bold text-gray-600 uppercase">
+                     <span>GST (Estimated)</span>
+                     <span className="text-gray-900">$4,120</span>
+                  </div>
+                  <div className="w-full h-1.5 bg-gray-50 rounded-full overflow-hidden border border-gray-100">
+                     <div className="h-full bg-blue-500" style={{ width: '65%' }}></div>
                   </div>
                </div>
             </div>
-
          </div>
 
       </div>

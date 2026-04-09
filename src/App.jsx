@@ -40,6 +40,7 @@ import AdminShipments       from './pages/Admin/Shipments';
 import AdminShipmentDetail  from './pages/Admin/ShipmentDetail';
 import AdminExceptions      from './pages/Admin/Exceptions';
 import AdminBranches        from './pages/Admin/Branches';
+import AdminAddBranch       from './pages/Admin/AddBranch';
 import AdminBranchDetail    from './pages/Admin/BranchDetail';
 import AdminCustomerDetail  from './pages/Admin/CustomerDetail';
 import AdminUserDetail      from './pages/Admin/UserDetail';
@@ -128,6 +129,7 @@ function App() {
           <Route path="exceptions"      element={<AdminExceptions />} />
           <Route path="jobs-config"     element={<AdminJobsConfig />} />
           <Route path="branches"        element={<AdminBranches />} />
+          <Route path="branches/add"    element={<AdminAddBranch />} />
           <Route path="branches/:id"    element={<AdminBranchDetail />} />
           <Route path="customers"       element={<AdminCustomers />} />
           <Route path="customers/add"   element={<AdminAddCustomer />} />

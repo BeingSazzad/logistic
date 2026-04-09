@@ -4,7 +4,7 @@ import {
   Package, Search, Filter, Plus, Clock,
   MapPin, ChevronDown, AlertTriangle,
   CheckCircle2, UserCheck, Inbox, Zap,
-  ArrowRight, AlertCircle, Users
+  ArrowRight, AlertCircle, Users, Lock, ShieldCheck, X
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -186,14 +186,21 @@ export default function DispatchJobs() {
         <div className="overflow-x-auto relative">
           {/* Floating Batch Action Bar */}
           {selectedIds.length > 0 && (
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 bg-black text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-6 animate-in slide-in-from-top-4 duration-300 border border-white/10">
+             <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 bg-black text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-6 animate-in slide-in-from-top-4 duration-300 border border-white/10">
                <div className="flex items-center gap-3 border-r border-white/20 pr-6">
                   <div className="w-8 h-8 rounded-lg bg-[#FFCC00] text-black flex items-center justify-center font-black">{selectedIds.length}</div>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Parcels Selected</span>
+                  <div>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-[#FFCC00]">Operations Ready</span>
+                    <p className="text-[9px] text-gray-500 font-bold uppercase">Ready for inter-branch transfer</p>
+                  </div>
                </div>
                <div className="flex gap-4">
-                  <button className="text-xs font-black uppercase tracking-widest hover:text-[#FFCC00] transition-colors">Assign Driver</button>
-                  <button className="text-xs font-black uppercase tracking-widest hover:text-[#FFCC00] transition-colors">Print Batch Sheet</button>
+                  <button className="bg-white/10 hover:bg-[#FFCC00] hover:text-black text-white px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2">
+                     <Lock size={12} className="inline"/> Dispatch &amp; Lock IDs
+                  </button>
+                  <button className="bg-[#FFCC00] text-black hover:bg-yellow-300 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all">
+                     Create Dispatch List
+                  </button>
                </div>
                <button onClick={() => setSelectedIds([])} className="p-1 hover:bg-white/10 rounded-full transition-colors"><X size={16}/></button>
             </div>
@@ -272,12 +279,19 @@ export default function DispatchJobs() {
                     )}
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <button
-                      onClick={e => { e.stopPropagation(); navigate(`/dispatch/jobs/${job.id}`); }}
-                      className="text-[10px] font-black border border-gray-200 px-4 py-1.5 rounded-lg transition-all uppercase tracking-widest hover:bg-gray-50 bg-white"
-                    >
-                      Details
-                    </button>
+                    <div className="flex items-center justify-end gap-3">
+                      {job.queue !== 'unassigned' && (
+                         <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 shadow-inner" title="Locked for Transit">
+                            <Lock size={14} />
+                         </div>
+                      )}
+                      <button
+                        onClick={e => { e.stopPropagation(); navigate(`/dispatch/jobs/${job.id}`); }}
+                        className="text-[10px] font-black border border-gray-200 px-4 py-1.5 rounded-lg transition-all uppercase tracking-widest hover:bg-gray-50 bg-white"
+                      >
+                        Details
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}

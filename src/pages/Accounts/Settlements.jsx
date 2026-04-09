@@ -16,11 +16,16 @@ export default function Settlements() {
   return (
     <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
 
-      {/* Header */}
+      {/* Standardized Header */}
       <div className="flex justify-between items-center mb-2 px-2">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Driver Settlements</h1>
-          <p className="text-sm text-gray-500 mt-1">Pay Period: 7 Apr – 13 Apr 2026 &nbsp;·&nbsp; Batch due Friday</p>
+        <div className="flex items-center gap-4">
+          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-[#111] shadow-sm">
+            <Users size={20} />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Driver Settlements</h1>
+            <p className="text-sm text-gray-500 mt-1">Pay Period: 7 Apr – 13 Apr 2026 &nbsp;·&nbsp; Batch due Friday</p>
+          </div>
         </div>
         {!processed ? (
           <button

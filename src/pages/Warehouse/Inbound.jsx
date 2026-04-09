@@ -63,24 +63,24 @@ function HandoverModal({ handover, onClose, onConfirm }) {
         {/* Header */}
         <div className="p-6 border-b border-gray-100 flex justify-between items-center shrink-0 bg-[#FAFAFA] rounded-t-2xl">
            <div>
-              <h3 className="text-xl font-bold text-gray-900 tracking-tight">Smart Handover Verification</h3>
-              <p className="text-xs text-gray-500 mt-1 uppercase tracking-widest font-bold">Trip ID: {handover.id} • {handover.origin}</p>
+              <h3 className="text-xl font-bold text-gray-900 tracking-tight">Manual Receive Board</h3>
+              <p className="text-xs text-gray-500 mt-1 uppercase tracking-widest font-bold">Branch: SYD-CENTRAL-DEPOT • {handover.id}</p>
            </div>
            <button onClick={onClose} className="p-2 hover:bg-gray-200 rounded-full text-gray-400 transition-colors"><X size={20}/></button>
         </div>
         
         <div className="p-6 overflow-y-auto flex-1 flex flex-col gap-6">
            {/* Smart Scanner Simulation */}
-           <div className={`border-2 rounded-xl p-5 shadow-inner transition-colors ${scanStatus.state === 'error' ? 'bg-red-50 border-red-200' : scanStatus.state === 'warning' ? 'bg-yellow-50 border-yellow-200' : scanStatus.state === 'success' ? 'bg-emerald-50 border-emerald-200' : 'bg-gray-50 border-gray-200'}`}>
+           <div className={`border-2 rounded-xl p-5 shadow-inner transition-colors ${scanStatus.state === 'error' ? 'bg-red-50 border-red-200' : scanStatus.state === 'warning' ? 'bg-yellow-50 border-yellow-200' : scanStatus.state === 'success' ? 'bg-emerald-50 border-emerald-200' : 'bg-gray-900 border-gray-800'}`}>
              <div className="flex justify-between items-center mb-2">
-               <label className="text-[10px] font-bold uppercase text-gray-500 tracking-widest block">Scan Shipment Barcode</label>
-               <span className={`text-[10px] font-bold uppercase tracking-widest ${scanStatus.state === 'error' ? 'text-red-600' : scanStatus.state === 'warning' ? 'text-yellow-600' : scanStatus.state === 'success' ? 'text-emerald-600' : 'text-gray-400'}`}>
-                  {scanStatus.msg || 'Awaiting Input...'}
+               <label className="text-[10px] font-bold uppercase text-gray-400 tracking-widest block">Type Parcel ID Manually</label>
+               <span className={`text-[10px] font-bold uppercase tracking-widest ${scanStatus.state === 'error' ? 'text-red-400' : scanStatus.state === 'warning' ? 'text-yellow-400' : scanStatus.state === 'success' ? 'text-emerald-400' : 'text-gray-500'}`}>
+                  {scanStatus.msg || 'Ready for Entry...'}
                </span>
              </div>
              <div className="relative">
-               <Scan className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
-               <input type="text" autoFocus value={scanInput} onChange={e => setScanInput(e.target.value)} onKeyDown={handleScan} placeholder="Scan or type ID and press Enter..." className="w-full bg-white border border-gray-200 rounded-lg py-3 pl-11 pr-4 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#FFCC00] shadow-sm transition-all" />
+               <Scan className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
+               <input type="text" autoFocus value={scanInput} onChange={e => setScanInput(e.target.value)} onKeyDown={handleScan} placeholder="Enter Parcel ID (e.g. SHP-9001)..." className="w-full bg-[#111] border border-gray-800 rounded-lg py-3.5 pl-11 pr-4 text-sm font-black text-[#FFCC00] focus:outline-none focus:ring-2 focus:ring-[#FFCC00] shadow-2xl transition-all" />
              </div>
            </div>
 
@@ -135,13 +135,17 @@ function HandoverModal({ handover, onClose, onConfirm }) {
            </span>
            <div className="flex gap-3">
              <button onClick={onClose} className="px-5 py-2.5 text-xs font-bold text-gray-500 hover:text-gray-900 transition-colors uppercase tracking-widest">Save Draft</button>
-             <button 
-               onClick={onConfirm} 
-               disabled={!isComplete}
-               className={`px-6 py-2.5 text-xs uppercase tracking-widest font-bold rounded-lg shadow-sm flex items-center gap-2 transition-all ${isComplete ? 'bg-black hover:bg-gray-800 text-[#FFCC00]' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}
-             >
-               <ShieldCheck size={16}/> Confirm Handover
-             </button>
+               <div className="flex items-center gap-2 text-emerald-600">
+                  <ShieldCheck size={16}/>
+                  <span className="text-[10px] font-black uppercase tracking-widest">Enforcing Chain of Custody</span>
+               </div>
+               <button 
+                onClick={onConfirm} 
+                disabled={!isComplete}
+                className={`px-8 py-3 text-xs uppercase tracking-[0.15em] font-black rounded-xl shadow-xl flex items-center gap-3 transition-all ${isComplete ? 'bg-[#FFCC00] hover:bg-[#E6B800] text-black active:scale-95' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}
+              >
+                Confirm Receive & Close Batch
+              </button>
            </div>
         </div>
       </div>

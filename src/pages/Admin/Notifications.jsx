@@ -1,13 +1,15 @@
-import React from 'react';
-import { Bell, Search, Plus, Filter, MessageSquare, AlertCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { Bell, Search, Plus, Filter, MessageSquare, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 export default function AdminNotifications() {
-  const alerts = [
-    { id: 'ALT-112', type: 'Driver Alert',  message: 'Driver Jack Taylor has been inactive for > 4 hours during shift.', time: '12 mins ago', priority: 'High' },
-    { id: 'ALT-111', type: 'Job Delayed',    message: 'Job JOB-20483 has missed its delivery window by 30 mins.', time: '45 mins ago', priority: 'Medium' },
-    { id: 'ALT-110', type: 'Payment Alert', message: 'Customer Global Traders has overdue balance of $85K.',  time: '2 hrs ago',  priority: 'Critical' },
-    { id: 'ALT-109', type: 'Docs Expired',   message: 'Driver Noah Williams license expired today.',       time: '4 hrs ago',  priority: 'Critical' },
-  ];
+  const [alerts, setAlerts] = useState([
+    { id: 'ALT-112', type: 'Driver Alert',  message: 'Driver Jack Taylor has been inactive for > 4 hours during shift.', time: '12 mins ago', priority: 'High', resolved: false },
+    { id: 'ALT-111', type: 'Job Delayed',    message: 'Job JOB-20483 has missed its delivery window by 30 mins.', time: '45 mins ago', priority: 'Medium', resolved: false },
+    { id: 'ALT-110', type: 'Payment Alert', message: 'Customer Global Traders has overdue balance of $85K.',  time: '2 hrs ago',  priority: 'Critical', resolved: false },
+    { id: 'ALT-109', type: 'Docs Expired',   message: 'Driver Noah Williams license expired today.',       time: '4 hrs ago',  priority: 'Critical', resolved: false },
+  ]);
+
+  const resolve = (id) => setAlerts(prev => prev.map(a => a.id === id ? { ...a, resolved: true } : a));
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto">
@@ -33,10 +35,11 @@ export default function AdminNotifications() {
            {alerts.map(alt => (
              <div key={alt.id} className="p-5 border-b border-gray-50 last:border-b-0 flex items-start gap-4 hover:bg-gray-50/50 transition truncate group relative cursor-pointer">
                <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 shadow-inner ${
+                 alt.resolved ? 'bg-emerald-50 text-emerald-500' :
                  alt.priority === 'Critical' ? 'bg-red-50 text-red-500' : 
                  alt.priority === 'High' ? 'bg-orange-50 text-orange-500' : 'bg-blue-50 text-blue-500'
                }`}>
-                 {alt.priority === 'Critical' ? <AlertCircle size={20}/> : <Bell size={20}/> }
+                 {alt.resolved ? <CheckCircle2 size={20}/> : alt.priority === 'Critical' ? <AlertCircle size={20}/> : <Bell size={20}/>}
                </div>
                <div className="flex-1 min-w-0 pr-4">
                  <div className="flex items-center gap-3 mb-1">
@@ -52,7 +55,10 @@ export default function AdminNotifications() {
                  <span className="text-[10px] text-gray-400 font-bold mt-2 inline-block uppercase tracking-wider">{alt.time}</span>
                </div>
                <div className="absolute top-1/2 -translate-y-1/2 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                 <button className="btn btn-dark text-xs py-1.5 px-4 font-bold rounded-full">Resolve / Join Chat</button>
+                 {alt.resolved 
+                   ? <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest flex items-center gap-1"><CheckCircle2 size={12}/> Resolved</span>
+                   : <button onClick={() => resolve(alt.id)} className="btn btn-dark text-xs py-1.5 px-4 font-bold rounded-full">Resolve</button>
+                 }
                </div>
              </div>
            ))}
