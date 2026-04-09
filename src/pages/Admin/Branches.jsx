@@ -24,7 +24,7 @@ export default function AdminBranches() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {branches.map(branch => (
-          <div key={branch.id} className="card bg-white shadow-sm border border-gray-100 hover:border-[#FACC15] transition-colors relative overflow-hidden group flex flex-col">
+          <div key={branch.id} onClick={() => navigate(`/admin/branches/${branch.id}`)} className="card bg-white shadow-sm border border-gray-100 hover:border-[#FACC15] cursor-pointer transition-colors relative overflow-hidden group flex flex-col">
             <div className={`h-1.5 w-full absolute top-0 left-0 ${branch.type === 'Primary Hub' ? 'bg-[#FACC15]' : 'bg-gray-300'}`}></div>
             
             <div className="p-6 flex-1">

@@ -9,6 +9,7 @@ const navItems = [
   { to: '/platform',               label: 'Dashboard',      icon: LayoutDashboard, end: true },
   { to: '/platform/tenants',       label: 'Tenants',        icon: Building2 },
   { to: '/platform/transactions',  label: 'Transactions',   icon: Receipt },
+  { to: '/platform/subscriptions', label: 'Subscriptions',  icon: CreditCard },
   { to: '/platform/support',       label: 'Support',        icon: HeadphonesIcon },
   { to: '/platform/analytics',     label: 'Analytics',      icon: BarChart3 },
   { to: '/platform/settings',      label: 'Settings',       icon: Settings },

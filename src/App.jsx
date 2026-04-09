@@ -40,6 +40,9 @@ import AdminShipments       from './pages/Admin/Shipments';
 import AdminShipmentDetail  from './pages/Admin/ShipmentDetail';
 import AdminExceptions      from './pages/Admin/Exceptions';
 import AdminBranches        from './pages/Admin/Branches';
+import AdminBranchDetail    from './pages/Admin/BranchDetail';
+import AdminCustomerDetail  from './pages/Admin/CustomerDetail';
+import AdminUserDetail      from './pages/Admin/UserDetail';
 
 // ── Dispatch ─────────────────────────────────────────────────────
 import DispatchDashboard from './pages/Dispatch/Dashboard';
@@ -82,6 +85,7 @@ import PlatformDashboard      from './pages/Platform/Dashboard';
 import PlatformTenants        from './pages/Platform/Tenants';
 import PlatformTenantDetail   from './pages/Platform/TenantDetail';
 import PlatformAnalytics      from './pages/Platform/Analytics';
+import PlatformSubscriptions  from './pages/Platform/Subscriptions';
 import PlatformSupport        from './pages/Platform/Support';
 import PlatformSupportDetail  from './pages/Platform/SupportDetail';
 import PlatformTransactions   from './pages/Platform/Transactions';
@@ -117,13 +121,16 @@ function App() {
           <Route path="drivers/:driverId" element={<AdminDriverDetail />} />
           <Route path="users"           element={<AdminUsers />} />
           <Route path="users/invite"    element={<AdminInviteUser />} />
+          <Route path="users/:id"       element={<AdminUserDetail />} />
           <Route path="shipments"       element={<AdminShipments />} />
           <Route path="shipments/:id"   element={<AdminShipmentDetail />} />
           <Route path="exceptions"      element={<AdminExceptions />} />
           <Route path="jobs-config"     element={<AdminJobsConfig />} />
           <Route path="branches"        element={<AdminBranches />} />
+          <Route path="branches/:id"    element={<AdminBranchDetail />} />
           <Route path="customers"       element={<AdminCustomers />} />
           <Route path="customers/add"   element={<AdminAddCustomer />} />
+          <Route path="customers/:id"   element={<AdminCustomerDetail />} />
           <Route path="finance"         element={<AdminFinance />} />
           <Route path="messaging"       element={<AdminMessaging />} />
           <Route path="reports"         element={<AdminReports />} />
@@ -186,6 +193,7 @@ function App() {
           <Route path="tenants/new"     element={<PlatformTenants />} />
           <Route path="tenants/:id"     element={<PlatformTenantDetail />} />
           <Route path="analytics"       element={<PlatformAnalytics />} />
+          <Route path="subscriptions"   element={<PlatformSubscriptions />} />
           <Route path="support"         element={<PlatformSupport />} />
           <Route path="support/:id"     element={<PlatformSupportDetail />} />
           <Route path="transactions"    element={<PlatformTransactions />} />

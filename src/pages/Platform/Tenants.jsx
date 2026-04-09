@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { CheckCircle2, XCircle, Clock, Plus, Search, Building2, ChevronDown } from 'lucide-react';
 
 const tenants = [
@@ -10,16 +11,27 @@ const tenants = [
 ];
 
 export default function Tenants() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [search, setSearch] = useState('');
-  const [showWizard, setShowWizard] = useState(false);
+  const [showWizard, setShowWizard] = useState(location.pathname.endsWith('/new'));
   const [wizardStep, setWizardStep] = useState(1);
+
+  useEffect(() => {
+    if (location.pathname.endsWith('/new')) {
+      setShowWizard(true);
+      setWizardStep(1);
+    } else {
+      setShowWizard(false);
+    }
+  }, [location.pathname]);
 
   const filtered = tenants.filter(t => t.name.toLowerCase().includes(search.toLowerCase()));
 
   if (showWizard) {
     return (
       <div className="max-w-lg mx-auto pb-12">
-        <button onClick={() => { setShowWizard(false); setWizardStep(1); }} className="text-sm font-bold text-gray-500 hover:text-gray-900 mb-6 flex items-center gap-2 transition-colors border px-3 py-1.5 rounded-lg border-gray-200">← Back</button>
+        <button onClick={() => { setShowWizard(false); setWizardStep(1); navigate('/platform/tenants'); }} className="text-sm font-bold text-gray-500 hover:text-gray-900 mb-6 flex items-center gap-2 transition-colors border px-3 py-1.5 rounded-lg border-gray-200">← Back</button>
         <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-8">
           <div className="flex gap-1 mb-8">
             {[1,2,3,4].map(s => <div key={s} className={`flex-1 h-1.5 rounded-full ${s <= wizardStep ? 'bg-[#FFCC00]' : 'bg-gray-100'}`} />)}
