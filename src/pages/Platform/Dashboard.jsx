@@ -40,18 +40,18 @@ export default function PlatformDashboard() {
       {/* Updated Header - Matching Reference Style */}
       <div className="flex justify-between items-center mb-2 px-2">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Platform Overview</h1>
-          <p className="text-sm text-gray-500 mt-1 flex items-center gap-2">System Center • <span className="text-emerald-500 font-bold flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> All Systems Online</span></p>
+          <h1 className="hero-h1">Platform Overview</h1>
+          <p className="hero-body text-hero-neutral mt-1 flex items-center gap-2">System Center • <span className="text-hero-success font-bold flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-hero-success animate-pulse"></span> All Systems Online</span></p>
         </div>
-        <div className="flex items-center gap-4 bg-white px-5 py-2.5 rounded-lg border border-gray-200 shadow-sm">
+        <div className="flex items-center gap-4 bg-white px-5 py-2.5 rounded-hero-sm border border-gray-100 shadow-sm">
            <div className="flex flex-col items-center">
-              <span className="text-[10px] font-bold uppercase text-gray-500 flex items-center gap-1"><Server size={10}/> API Status</span>
-              <span className="text-xs font-black text-[#111]">99.9%</span>
+              <span className="hero-metadata text-hero-neutral flex items-center gap-1"><Server size={10}/> API Status</span>
+              <span className="text-xs font-black text-hero-dark">99.9%</span>
            </div>
-           <div className="w-px h-6 bg-gray-200"></div>
+           <div className="w-px h-6 bg-gray-100"></div>
            <div className="flex flex-col items-center">
-              <span className="text-[10px] font-bold uppercase text-gray-500 flex items-center gap-1"><Database size={10}/> Load Speed</span>
-              <span className="text-xs font-black text-[#111]">14ms</span>
+              <span className="hero-metadata text-hero-neutral flex items-center gap-1"><Database size={10}/> Load Speed</span>
+              <span className="text-xs font-black text-hero-dark">14ms</span>
            </div>
         </div>
       </div>
@@ -60,21 +60,21 @@ export default function PlatformDashboard() {
 
       {/* KPI Cards - Clean Style */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 px-2 mb-2">
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between group">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Registered Companies</p><p className="text-2xl font-black text-gray-900 mt-0.5 group-hover:text-[#FFCC00] transition-colors">124</p></div>
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-gray-50 text-gray-400"><Building2 size={20}/></div>
+        <div className="card p-5 flex items-center justify-between group">
+          <div><p className="hero-metadata text-hero-neutral">Registered Companies</p><p className="text-2xl font-black text-hero-dark mt-0.5 group-hover:text-brand transition-colors">124</p></div>
+          <div className="w-10 h-10 rounded-hero-sm flex items-center justify-center bg-gray-50 text-hero-neutral"><Building2 size={20}/></div>
         </div>
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between group">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Monthly Revenue (MRR)</p><p className="text-2xl font-black text-gray-900 mt-0.5 group-hover:text-emerald-500 transition-colors">$84.2K</p></div>
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-gray-50 text-gray-400"><TrendingUp size={20}/></div>
+        <div className="card p-5 flex items-center justify-between group">
+          <div><p className="hero-metadata text-hero-neutral">Monthly Revenue (MRR)</p><p className="text-2xl font-black text-hero-dark mt-0.5 group-hover:text-hero-success transition-colors">$84.2K</p></div>
+          <div className="w-10 h-10 rounded-hero-sm flex items-center justify-center bg-gray-50 text-hero-neutral"><TrendingUp size={20}/></div>
         </div>
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between group">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Total Deliveries</p><p className="text-2xl font-black text-gray-900 mt-0.5 group-hover:text-violet-500 transition-colors">4,120</p></div>
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-gray-50 text-gray-400"><Users size={20}/></div>
+        <div className="card p-5 flex items-center justify-between group">
+          <div><p className="hero-metadata text-hero-neutral">Total Deliveries</p><p className="text-2xl font-black text-hero-dark mt-0.5 group-hover:text-indigo-500 transition-colors">4,120</p></div>
+          <div className="w-10 h-10 rounded-hero-sm flex items-center justify-center bg-gray-50 text-hero-neutral"><Users size={20}/></div>
         </div>
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between group">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Live Users</p><p className="text-2xl font-black text-gray-900 mt-0.5 group-hover:text-blue-500 transition-colors">942</p></div>
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-gray-50 text-gray-400"><Zap size={20}/></div>
+        <div className="card p-5 flex items-center justify-between group">
+          <div><p className="hero-metadata text-hero-neutral">Live Users</p><p className="text-2xl font-black text-hero-dark mt-0.5 group-hover:text-blue-500 transition-colors">942</p></div>
+          <div className="w-10 h-10 rounded-hero-sm flex items-center justify-center bg-gray-50 text-hero-neutral"><Zap size={20}/></div>
         </div>
       </div>
 

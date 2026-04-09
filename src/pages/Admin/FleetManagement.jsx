@@ -37,17 +37,17 @@ export default function AdminFleetManagement() {
       {/* Header */}
       <div className="flex justify-between items-center mb-2 px-2">
         <div className="flex items-center gap-4">
-          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-[#111] shadow-sm">
+          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-100 rounded-hero-sm text-hero-dark shadow-sm">
             <Truck size={20} />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Vehicles & Fleet</h1>
-            <p className="text-sm text-gray-500 mt-1">Manage trucks, vans, and trailers across all branches.</p>
+            <h1 className="hero-h1">Vehicles & Fleet</h1>
+            <p className="hero-body text-hero-neutral mt-1">Manage trucks, vans, and trailers across all branches.</p>
           </div>
         </div>
         <button 
           onClick={() => navigate('/admin/fleet/add')} 
-          className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm active:scale-95"
+          className="btn btn-primary"
         >
           <Plus size={18} strokeWidth={3} /> Add Vehicle
         </button>
@@ -59,34 +59,34 @@ export default function AdminFleetManagement() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 px-2 mb-2">
          {[
            { label: 'Fleet Usage', value: '84%', icon: Activity, color: 'text-blue-600', bg: 'bg-blue-50' },
-           { label: 'Needs Maintenance', value: '08 Trucks', icon: Wrench, color: 'text-red-600', bg: 'bg-red-50' },
-           { label: 'Safety Check', value: '100%', icon: ShieldCheck, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+           { label: 'Needs Maintenance', value: '08 Trucks', icon: Wrench, color: 'text-hero-danger', bg: 'bg-red-50' },
+           { label: 'Safety Check', value: '100%', icon: ShieldCheck, color: 'text-hero-success', bg: 'bg-emerald-50' },
            { label: 'Fuel Cost', value: '$1.42/km', icon: Droplet, color: 'text-amber-600', bg: 'bg-amber-50' },
          ].map((stat, i) => (
-           <div key={i} className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between group hover:border-[#FFCC00] transition-colors">
+           <div key={i} className="card p-5 flex items-center justify-between group hover:border-brand transition-colors">
               <div>
-                 <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none mb-2">{stat.label}</p>
-                 <p className="text-2xl font-black text-gray-900 leading-none">{stat.value}</p>
+                 <p className="hero-metadata text-hero-neutral mb-2">{stat.label}</p>
+                 <p className="text-2xl font-black text-hero-dark leading-none">{stat.value}</p>
               </div>
-              <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${stat.bg} ${stat.color} border border-gray-100`}>
+              <div className={`w-11 h-11 rounded-hero-sm flex items-center justify-center ${stat.bg} ${stat.color} border border-gray-50`}>
                  <stat.icon size={20}/>
               </div>
            </div>
          ))}
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="card !rounded-hero-md shadow-sm border border-gray-100 overflow-hidden">
         
         {/* Filter Bar */}
-        <div className="p-5 border-b border-gray-100 flex flex-wrap justify-between items-center bg-[#FAFAFA] gap-4">
+        <div className="hero-table-header p-5 border-b border-gray-100 flex flex-wrap justify-between items-center gap-4">
            <div className="relative w-full md:w-[320px] group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#FFCC00] transition-colors" size={16} />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-hero-neutral group-focus-within:text-brand transition-colors" size={16} />
               <input 
                 type="text" 
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder="Search Reg, ID or Branch..." 
-                className="w-full bg-white border border-gray-200 rounded-lg py-2.5 pl-10 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 focus:border-[#FFCC00] transition-all shadow-sm" 
+                className="input pl-10 w-full" 
               />
            </div>
            
@@ -95,7 +95,7 @@ export default function AdminFleetManagement() {
               <div className="relative">
                 <button 
                   onClick={() => setShowFilterDropdown(!showFilterDropdown)}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all shadow-sm ${statusFilter !== 'All' ? 'bg-[#FFCC00] text-black' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'}`}
+                  className={`btn py-2 px-4 shadow-sm ${statusFilter !== 'All' ? 'btn-primary' : 'btn-outline border-hero-neutral/20 text-hero-neutral'}`}
                 >
                    <Filter size={14}/> {statusFilter === 'All' ? 'Filter Status' : statusFilter}
                 </button>

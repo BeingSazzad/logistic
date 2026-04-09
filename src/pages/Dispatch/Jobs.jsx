@@ -77,17 +77,17 @@ export default function DispatchJobs() {
       {/* ── Header ── */}
       <div className="flex justify-between items-center mb-2 px-2">
         <div className="flex items-center gap-4">
-          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-[#111] shadow-sm">
+          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-100 rounded-hero-sm text-hero-dark shadow-sm">
             <Package size={20} />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Shipment Queue</h1>
-            <p className="text-sm text-gray-500 mt-1">{user.branchName} · Live dispatch operations and exception management</p>
+            <h1 className="hero-h1">Shipment Queue</h1>
+            <p className="hero-body text-hero-neutral mt-1">{user.branchName} · Live dispatch operations and exception management</p>
           </div>
         </div>
         <button
           onClick={() => navigate('/dispatch/jobs/create')}
-          className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm active:scale-95"
+          className="btn btn-primary"
         >
           <Plus size={18} strokeWidth={3} /> Create Shipment
         </button>
@@ -105,19 +105,16 @@ export default function DispatchJobs() {
               key={q.id}
               onClick={() => setQueue(q.id)}
               className={`flex flex-col items-start p-5 rounded-xl border-2 transition-all text-left ${
-                isActive
-                  ? `${q.bg} ${q.border} shadow-md`
-                  : 'bg-white border-gray-100 hover:border-gray-200 shadow-sm hover:shadow-md'
-              }`}
-            >
-              <div className="flex items-center justify-between w-full mb-3">
-                <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${isActive ? `${q.bg} ${q.color}` : 'bg-gray-100 text-gray-400'} border ${isActive ? q.border : 'border-gray-200'}`}>
-                  <q.icon size={18} />
-                </div>
-                <span className={`text-2xl font-black ${isActive ? q.color : 'text-gray-900'}`}>{count}</span>
+            <button key={q.id} onClick={() => setQueue(q.id)}
+              className={`card p-5 text-left flex flex-col gap-2 transition-all group overflow-hidden ${isActive ? 'ring-2 ring-brand border-brand shadow-lg ' + q.bg : 'hover:border-brand/40'}`}>
+              <div className="flex justify-between items-center relative z-10">
+                <q.icon size={20} className={isActive ? q.color : 'text-hero-neutral'} />
+                <span className={`text-xl font-black ${isActive ? 'text-hero-dark' : 'text-hero-neutral'}`}>{counts[q.id]}</span>
               </div>
-              <p className={`text-xs font-black uppercase tracking-widest ${isActive ? q.color : 'text-gray-500'}`}>{q.label}</p>
-              <p className="text-[10px] text-gray-400 mt-1 font-medium leading-snug">{q.desc}</p>
+              <div className="relative z-10 mt-1">
+                <p className={`hero-card-title ${isActive ? 'text-hero-dark' : 'text-hero-neutral'}`}>{q.label}</p>
+                <p className="hero-metadata leading-tight text-hero-neutral group-hover:text-hero-dark transition-colors">{q.desc}</p>
+              </div>
             </button>
           );
         })}
@@ -148,15 +145,19 @@ export default function DispatchJobs() {
             <div className="relative">
               <button 
                 onClick={() => setShowFilter(!showFilter)}
-                className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 shadow-sm rounded-lg text-xs font-bold uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-colors"
+                className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 shadow-sm rounded-lg text-xs font-bold uppercase tracking-widest text-gray-600 hover:bg-gr          <div className="flex items-center gap-3">
+            <div className="relative">
+              <button 
+                onClick={() => setShowFilter(!showFilter)}
+                className="btn btn-outline py-2.5 px-4"
               >
                 <Filter size={14} /> Filter <ChevronDown size={14} className={`transition-transform ${showFilter ? 'rotate-180' : ''}`} />
               </button>
               {showFilter && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-hero-md shadow-xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
                   <div className="py-1">
                     {['All Priorities', 'High Priority', 'Medium Priority', 'Critical Only'].map((opt) => (
-                      <button key={opt} onClick={() => setShowFilter(false)} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-yellow-50 hover:text-yellow-700 transition-colors font-medium border-b border-gray-50 last:border-0">{opt}</button>
+                      <button key={opt} onClick={() => setShowFilter(false)} className="w-full text-left px-4 py-2 text-sm text-hero-dark hover:bg-brand/5 hover:text-hero-dark transition-colors font-medium border-b border-gray-50 last:border-0">{opt}</button>
                     ))}
                   </div>
                 </div>
@@ -166,39 +167,42 @@ export default function DispatchJobs() {
             <div className="relative">
               <button 
                 onClick={() => setShowSort(!showSort)}
-                className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 shadow-sm rounded-lg text-xs font-bold uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-colors"
+                className="btn btn-outline py-2.5 px-4"
               >
-                Sort <ChevronDown size={14} className={`transition-transform ${showSort ? 'rotate-180' : ''}`} />
+                <ChevronDown size={14} className={`mr-2 transition-transform ${showSort ? 'rotate-180' : ''}`} /> Sort
               </button>
               {showSort && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-hero-md shadow-xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
                   <div className="py-1">
                     {['ID (Asc)', 'ID (Desc)', 'Customer Name', 'Earliest Pickup'].map((opt) => (
-                      <button key={opt} onClick={() => setShowSort(false)} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-yellow-50 hover:text-yellow-700 transition-colors font-medium border-b border-gray-50 last:border-0">{opt}</button>
+                      <button key={opt} onClick={() => setShowSort(false)} className="w-full text-left px-4 py-2 text-sm text-hero-dark hover:bg-brand/5 hover:text-hero-dark transition-colors font-medium border-b border-gray-50 last:border-0">{opt}</button>
                     ))}
                   </div>
                 </div>
               )}
             </div>
           </div>
+        </div>   </div>
+          </div>
         </div>
 
         <div className="overflow-x-auto relative">
           {/* Floating Batch Action Bar */}
+          {/* Floating Batch Action Bar */}
           {selectedIds.length > 0 && (
-             <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 bg-black text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-6 animate-in slide-in-from-top-4 duration-300 border border-white/10">
+             <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 bg-hero-dark text-white px-6 py-4 rounded-hero-lg shadow-2xl flex items-center gap-6 animate-in slide-in-from-top-4 duration-300 border border-white/10">
                <div className="flex items-center gap-3 border-r border-white/20 pr-6">
-                  <div className="w-8 h-8 rounded-lg bg-[#FFCC00] text-black flex items-center justify-center font-black">{selectedIds.length}</div>
+                  <div className="w-8 h-8 rounded-hero-sm bg-brand text-hero-dark flex items-center justify-center font-black">{selectedIds.length}</div>
                   <div>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-[#FFCC00]">Operations Ready</span>
-                    <p className="text-[9px] text-gray-500 font-bold uppercase">Ready for inter-branch transfer</p>
+                    <span className="hero-metadata text-brand">Operations Ready</span>
+                    <p className="text-[9px] text-gray-400 font-bold uppercase">Ready for inter-branch transfer</p>
                   </div>
                </div>
                <div className="flex gap-4">
-                  <button className="bg-white/10 hover:bg-[#FFCC00] hover:text-black text-white px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2">
+                  <button className="bg-white/10 hover:bg-brand hover:text-hero-dark text-white px-4 py-2 rounded-hero-sm text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2">
                      <Lock size={12} className="inline"/> Dispatch &amp; Lock IDs
                   </button>
-                  <button className="bg-[#FFCC00] text-black hover:bg-yellow-300 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all">
+                  <button className="btn btn-primary py-2 px-4 !rounded-hero-sm text-[10px]">
                      Create Dispatch List
                   </button>
                </div>
@@ -207,14 +211,14 @@ export default function DispatchJobs() {
           )}
 
           <table className="w-full text-left">
-            <thead className="bg-[#FAFAFA] text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100">
+            <thead className="hero-table-header">
               <tr>
                 <th className="px-6 py-4 w-4">
                    <input 
                       type="checkbox" 
                       onChange={(e) => setSelectedIds(e.target.checked ? filtered.map(j => j.id) : [])}
                       checked={selectedIds.length === filtered.length && filtered.length > 0}
-                      className="w-4 h-4 rounded border-gray-300 accent-yellow-400"
+                      className="w-4 h-4 rounded-hero-sm border-gray-300 accent-brand cursor-pointer"
                    />
                 </th>
                 <th className="px-6 py-4">Shipment Reference</th>
