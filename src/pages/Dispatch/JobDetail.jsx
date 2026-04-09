@@ -317,15 +317,20 @@ export default function DispatchJobDetail() {
               <div>
                 <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Assigned Driver</label>
                 {(assigned || !isUnassigned) ? (
-                  <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10">
-                    <div className="w-9 h-9 rounded shrink-0 bg-[#FFCC00] flex items-center justify-center text-black text-[10px] font-black shadow">
-                      {assigned ? selectedDriver?.initials : (job.fleet?.driverInitials || 'JT')}
+                    <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10">
+                      <div className="w-9 h-9 rounded shrink-0 bg-[#FFCC00] flex items-center justify-center text-black text-[10px] font-black shadow">
+                        {assigned ? selectedDriver?.initials : (job.fleet?.driverInitials || 'JT')}
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold text-white">{assigned ? selectedDriver?.name : job.fleet?.driver}</p>
+                        <button
+                          onClick={() => navigate(`/dispatch/drivers/${assigned ? selectedDriver?.id : 'DRV-102'}`)}
+                          className="text-[10px] text-[#FFCC00] uppercase tracking-widest font-black hover:underline"
+                        >
+                          View Profile →
+                        </button>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm font-bold text-white">{assigned ? selectedDriver?.name : job.fleet?.driver}</p>
-                      <p className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">View Profile</p>
-                    </div>
-                  </div>
                 ) : (
                   <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg text-center">
                     <p className="text-amber-400 text-[10px] font-black uppercase tracking-widest">No Driver Assigned</p>
@@ -343,7 +348,12 @@ export default function DispatchJobDetail() {
                     </div>
                     <div>
                       <p className="text-sm font-bold text-white">{assigned ? selectedDriver?.vehicle : job.fleet?.vehicle}</p>
-                      <p className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">View Asset</p>
+                      <button
+                        onClick={() => navigate(`/dispatch/vehicles/${assigned ? selectedDriver?.vehicle : 'TRK-102'}`)}
+                        className="text-[10px] text-[#FFCC00] uppercase tracking-widest font-black hover:underline"
+                      >
+                        View Asset →
+                      </button>
                     </div>
                   </div>
                 ) : (
