@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, Package, DollarSign, Network,
-  BarChart2, MessageSquare, Settings, Shield
+  BarChart2, MessageSquare, Settings, Shield, ShieldCheck
 } from 'lucide-react';
 import SidebarLayout from './SidebarLayout';
 
@@ -38,6 +38,13 @@ const navConfig = [
     items: [
       { to: '/admin/messaging', label: 'Company Help Desk' },
       { to: '/admin/helpline',  label: 'Support' },
+    ]
+  },
+  {
+    type: 'group', label: 'Compliance', icon: ShieldCheck,
+    items: [
+      { to: '/admin/safety-checklists', label: 'Safety Checklists' },
+      { to: '/admin/jobs-config',       label: 'Global Shipment Monitor' },
     ]
   },
   {
