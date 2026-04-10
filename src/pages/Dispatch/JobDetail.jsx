@@ -108,7 +108,7 @@ export default function DispatchJobDetail() {
       <div className="flex justify-between items-center mb-2 px-2">
         <div className="flex items-center gap-4">
           <button
-            onClick={() => navigate('/dispatch/jobs')}
+            onClick={() => navigate('/dispatch/shipments')}
             className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-all shadow-sm"
           >
             <ArrowLeft size={20} />
@@ -139,7 +139,7 @@ export default function DispatchJobDetail() {
             <Printer size={16}/> Print
           </button>
           <button 
-            onClick={() => navigate(`/dispatch/jobs/edit/${job.id}`)}
+            onClick={() => navigate(`/dispatch/shipments/edit/${job.id}`)}
             className="bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 px-4 py-2.5 rounded-lg font-bold transition-all shadow-sm flex items-center gap-2"
           >
              Edit
@@ -153,7 +153,7 @@ export default function DispatchJobDetail() {
             </button>
           ) : (
             <button 
-              onClick={() => { if(window.confirm('Are you sure you want to cancel this shipment? This cannot be undone.')) navigate('/dispatch/jobs') }}
+              onClick={() => { if(window.confirm('Are you sure you want to cancel this shipment? This cannot be undone.')) navigate('/dispatch/shipments') }}
               className="bg-red-50 border border-red-100 text-red-600 hover:bg-red-100 px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm"
             >
               Cancel 

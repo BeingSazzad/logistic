@@ -150,9 +150,9 @@ function App() {
         {/* ── DISPATCH ── */}
         <Route path="/dispatch" element={<DispatchLayout />}>
           <Route index element={<DispatchDashboard />} />
-          <Route path="jobs" element={<DispatchJobs />} />
-          <Route path="jobs/:id" element={<DispatchJobDetail />} />
-          <Route path="jobs/create" element={<DispatchCreateJob />} />
+          <Route path="shipments" element={<DispatchJobs />} />
+          <Route path="shipments/:id" element={<DispatchJobDetail />} />
+          <Route path="shipments/create" element={<DispatchCreateJob />} />
           <Route path="tracking"     element={<DispatchTracking />} />
           <Route path="drivers"      element={<DispatchDrivers />} />
           <Route path="drivers/add"  element={<AdminAddDriver />} />
@@ -169,8 +169,8 @@ function App() {
           <Route index element={<DriverHome />} />
           <Route path="safety-check" element={<DriverSafetyCheck />} />
           <Route path="active"       element={<DriverActiveTrip />} />
-          <Route path="jobs"         element={<DriverJobs />} />
-          <Route path="jobs/:id"     element={<DriverJobDetail />} />
+          <Route path="shipments"     element={<DriverJobs />} />
+          <Route path="shipments/:id" element={<DriverJobDetail />} />
           <Route path="pay"          element={<DriverPay />} />
           <Route path="expenses"     element={<DriverExpenses />} />
           <Route path="profile"      element={<DriverProfile />} />

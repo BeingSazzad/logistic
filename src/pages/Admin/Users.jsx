@@ -55,7 +55,7 @@ export default function AdminUsers() {
             <p className="hero-body text-hero-neutral mt-1">Manage platform operators, roles, and branch permissions.</p>
           </div>
         </div>
-        <button onClick={() => navigate('/admin/users/invite')} className="btn btn-primary">
+        <button onClick={() => navigate('/admin/users/add')} className="btn btn-primary">
           <UserPlus size={18} strokeWidth={3} /> Invite Operator
         </button>
       </div>

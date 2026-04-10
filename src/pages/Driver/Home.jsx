@@ -14,7 +14,7 @@ export default function DriverHome() {
     e.preventDefault();
     if (searchQuery.trim()) {
       // Navigate to job detail if search matches pattern
-      navigate(`/driver/jobs/${searchQuery.trim()}`);
+      navigate(`/driver/shipments/${searchQuery.trim()}`);
     }
   };
 
@@ -145,7 +145,7 @@ export default function DriverHome() {
         <h3 className="text-sm font-bold text-gray-800 ml-1">Upcoming Jobs</h3>
         <div className="flex flex-col gap-3">
           {upcoming.map((job) => (
-            <div key={job.id} onClick={() => navigate('/driver/jobs')} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex items-center justify-between group active:scale-[0.98] transition-all cursor-pointer">
+            <div key={job.id} onClick={() => navigate('/driver/shipments')} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex items-center justify-between group active:scale-[0.98] transition-all cursor-pointer">
               <div className="flex items-center gap-4 min-w-0">
                 <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-500 shrink-0 border border-gray-100 group-hover:bg-[#FACC15] group-hover:text-black group-hover:border-transparent transition-colors">
                   <Package size={18} />

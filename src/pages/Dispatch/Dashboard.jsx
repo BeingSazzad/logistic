@@ -156,7 +156,7 @@ export default function DispatchDashboard() {
                     <tbody className="divide-y divide-gray-100">
                        {filteredAndSortedJobs.length > 0 ? (
                          filteredAndSortedJobs.map(job => (
-                           <tr key={job.id} className="hover:bg-gray-50 transition-colors group cursor-pointer" onClick={() => navigate(`/dispatch/jobs/${job.id}`)}>
+                           <tr key={job.id} className="hover:bg-gray-50 transition-colors group cursor-pointer" onClick={() => navigate(`/dispatch/shipments/${job.id}`)}>
                               <td className="px-6 py-4">
                                  <div className="font-bold text-[#111] text-sm">{job.id}</div>
                                  <div className="text-[10px] text-gray-400 uppercase font-bold tracking-widest mt-0.5 truncate max-w-[150px]">{job.customer}</div>
@@ -188,7 +188,7 @@ export default function DispatchDashboard() {
                                        Check-in Hub
                                     </button>
                                  ) : (
-                                    <button className="text-[10px] font-black text-blue-600 hover:text-white border border-blue-200 hover:bg-blue-600 px-4 py-2 rounded-lg transition-all shadow-sm uppercase tracking-widest whitespace-nowrap" onClick={(e)=>{e.stopPropagation(); navigate(`/dispatch/jobs/${job.id}`);}}>
+                                    <button className="text-[10px] font-black text-blue-600 hover:text-white border border-blue-200 hover:bg-blue-600 px-4 py-2 rounded-lg transition-all shadow-sm uppercase tracking-widest whitespace-nowrap" onClick={(e)=>{e.stopPropagation(); navigate(`/dispatch/shipments/${job.id}`);}}>
                                        Manage Next Leg
                                     </button>
                                  )}

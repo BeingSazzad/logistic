@@ -5,9 +5,9 @@ import { House, Map, FileText, User, Bell, Zap, Receipt } from 'lucide-react';
 // Driver layout keeps the mobile phone frame — it is intentionally different
 // as it simulates a native phone app, not a desktop portal.
 const bottomNav = [
-  { to: '/driver',          label: 'Driver Dashboard',     icon: House,    end: true },
-  { to: '/driver/jobs',     label: 'Active Shipments',     icon: Map },
-  // { to: '/driver/pay',      label: 'Pay',      icon: FileText }, // Hidden: Fixed salary based drivers
+  { to: '/driver',          label: 'Overview',     icon: House,    end: true },
+  { to: '/driver/shipments', label: 'Shipments',     icon: Map },
+  // { to: '/driver/pay',      label: 'Pay',      icon: FileText }, 
   { to: '/driver/expenses', label: 'Expenses', icon: Receipt },
   { to: '/driver/profile',  label: 'My Profile',  icon: User },
 ];

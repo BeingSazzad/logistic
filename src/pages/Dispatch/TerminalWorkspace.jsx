@@ -143,7 +143,7 @@ export default function TerminalWorkspace() {
              </div>
              <div className="divide-y divide-gray-100">
                 {sortList.map((item, idx) => (
-                  <div key={idx} className="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors cursor-pointer" onClick={() => navigate(`/dispatch/jobs/${item.id}`)}>
+                  <div key={idx} className="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors cursor-pointer" onClick={() => navigate(`/dispatch/shipments/${item.id}`)}>
                      <div className="flex items-center gap-4">
                         <div className={`w-8 h-8 rounded-hero-sm flex items-center justify-center ${item.type === 'Local' ? 'bg-hero-success/10 text-hero-success' : 'bg-blue-50 text-blue-600'}`}>
                            {item.type === 'Local' ? <MapPin size={16} /> : <ArrowRight size={16} />}
@@ -167,7 +167,7 @@ export default function TerminalWorkspace() {
               
               <div className="space-y-4">
                  {MOCK_INBOUND.filter(i => i.status === 'In Transit').map(item => (
-                   <div key={item.id} className="flex items-center justify-between group cursor-pointer" onClick={() => navigate(`/dispatch/jobs/${item.id}`)}>
+                   <div key={item.id} className="flex items-center justify-between group cursor-pointer" onClick={() => navigate(`/dispatch/shipments/${item.id}`)}>
                       <div className="flex items-center gap-3">
                          <div className="w-8 h-8 rounded-hero-sm bg-white/10 flex items-center justify-center text-gray-400 group-hover:text-hero-primary transition-all">
                             <Truck size={14} />
@@ -183,7 +183,7 @@ export default function TerminalWorkspace() {
               </div>
 
               <button 
-                 onClick={() => navigate('/dispatch/jobs')}
+                 onClick={() => navigate('/dispatch/shipments')}
                  className="w-full mt-6 py-2.5 bg-white/10 hover:bg-white/20 rounded-hero-sm text-xs font-bold uppercase tracking-widest transition-all"
               >
                  View Full Manifest

@@ -116,8 +116,8 @@ export default function Tenants() {
       {/* Updated Header - Matching Reference Style */}
       <div className="flex justify-between items-center mb-2 px-2">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Client Companies</h1>
-          <p className="text-sm text-gray-500 mt-1">Manage all companies using the platform and their accounts.</p>
+          <h1 className="hero-h1">Companies</h1>
+          <p className="hero-body text-hero-neutral mt-1">Manage all companies using the platform and their accounts.</p>
         </div>
         <button 
           onClick={() => navigate('/platform/tenants/new')} 

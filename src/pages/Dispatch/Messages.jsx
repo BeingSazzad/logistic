@@ -70,8 +70,8 @@ export default function DispatchMessages() {
             <MessageSquare size={20} />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Comms Hub</h1>
-            <p className="text-sm text-gray-500 mt-1">Real-time driver dispatch alerts, alerts and terminal broadcasts</p>
+            <h1 className="hero-h1">Communication Hub</h1>
+            <p className="hero-body text-hero-neutral mt-1">Real-time driver dispatch alerts and terminal broadcasts</p>
           </div>
         </div>
       </div>

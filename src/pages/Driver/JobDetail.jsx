@@ -94,7 +94,7 @@ export default function DriverJobDetail() {
       <div className="bg-white px-5 py-4 border-b border-gray-100 sticky top-0 z-50 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <button 
-            onClick={() => navigate('/driver/jobs')}
+            onClick={() => navigate('/driver/shipments')}
             className="w-10 h-10 flex items-center justify-center bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"
           >
             <ArrowLeft size={20} className="text-gray-900" />

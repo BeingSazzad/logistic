@@ -265,7 +265,7 @@ export default function DispatchJobs() {
                 <tr
                   key={job.id}
                   className={`hover:bg-gray-50/80 transition-all cursor-pointer group border-l-4 ${selectedIds.includes(job.id) ? 'border-l-[#FFCC00] bg-yellow-50/20' : 'border-l-transparent'}`}
-                  onClick={() => navigate(`/dispatch/jobs/${job.id}`)}
+                  onClick={() => navigate(`/dispatch/shipments/${job.id}`)}
                 >
                   <td className="px-6 py-4" onClick={e => e.stopPropagation()}>
                     <input 
@@ -321,7 +321,7 @@ export default function DispatchJobs() {
                          </div>
                       )}
                       <button
-                        onClick={e => { e.stopPropagation(); navigate(`/dispatch/jobs/${job.id}`); }}
+                        onClick={e => { e.stopPropagation(); navigate(`/dispatch/shipments/${job.id}`); }}
                         className="text-[10px] font-black border border-gray-200 px-4 py-1.5 rounded-lg transition-all uppercase tracking-widest hover:bg-gray-50 bg-white"
                       >
                         Details

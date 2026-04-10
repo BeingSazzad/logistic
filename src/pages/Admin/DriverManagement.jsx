@@ -42,8 +42,8 @@ export default function AdminDriverManagement() {
             <Users size={20} />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Driver Management</h1>
-            <p className="text-sm text-gray-500 mt-1">Manage fleet vehicle operators, credentials, and deployment zones.</p>
+            <h1 className="hero-h1">Drivers</h1>
+            <p className="hero-body text-hero-neutral mt-1">Manage fleet vehicle operators, credentials, and deployment zones.</p>
           </div>
         </div>
         <button 

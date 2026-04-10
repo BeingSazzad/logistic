@@ -89,7 +89,7 @@ export default function AdminShipments() {
             <Package size={20} />
           </div>
           <div>
-            <h1 className="hero-h1">Shipment Queue</h1>
+            <h1 className="hero-h1">Shipments</h1>
             <p className="hero-body text-hero-neutral mt-1">{user.role === 'Super Admin' ? 'Global network' : user.branchName} · Live cargo operations and exception management</p>
           </div>
         </div>
@@ -150,8 +150,8 @@ export default function AdminShipments() {
             </div>
 
           <div className="flex items-center gap-3">
-            <div className="relative">
-              <button 
+             <h1 className="hero-h1">Identity & Access</h1>
+          </div>    <button 
                 onClick={() => setShowFilter(!showFilter)}
                 className="btn btn-outline py-2.5 px-4"
               >

@@ -52,8 +52,8 @@ export default function DispatchDrivers() {
             <Users size={20} />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Driver Directory</h1>
-            <p className="text-sm text-gray-500 mt-1">Active Fleet Operators and Live Status Monitoring</p>
+            <h1 className="hero-h1">Roster Control</h1>
+            <p className="hero-body text-hero-neutral mt-1">Active Fleet Operators and Live Status Monitoring</p>
           </div>
         </div>
         <div className="flex gap-3">

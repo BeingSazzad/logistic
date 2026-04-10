@@ -144,7 +144,7 @@ export default function AdminBranchDetail() {
           </div>
         </div>
         <div className="flex gap-3">
-          <button onClick={() => navigate(`/admin/users/invite`)}
+          <button onClick={() => navigate(`/admin/users/add`)}
             className="btn btn-outline py-2.5 px-5 flex items-center gap-2">
             <UserPlus size={15}/> Add Staff
           </button>
@@ -312,7 +312,7 @@ export default function AdminBranchDetail() {
                 <button onClick={() => setActiveTab('authority')} className="w-full py-3 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl font-black text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 transition-all">
                   <Shield size={14}/> View Authority Roster
                 </button>
-                <button onClick={() => navigate('/admin/users/invite')} className="w-full py-3 bg-[#FFCC00]/10 hover:bg-[#FFCC00]/20 text-[#FFCC00] border border-[#FFCC00]/20 rounded-xl font-black text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 transition-all">
+                <button onClick={() => navigate('/admin/users/add')} className="w-full py-3 bg-[#FFCC00]/10 hover:bg-[#FFCC00]/20 text-[#FFCC00] border border-[#FFCC00]/20 rounded-xl font-black text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 transition-all">
                   <UserPlus size={14}/> Add Staff to Branch
                 </button>
               </div>
@@ -356,7 +356,7 @@ export default function AdminBranchDetail() {
                 <Shield size={14} className="text-gray-400"/>
                 <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Authority & Access Roster — {b.name}</h3>
               </div>
-              <button onClick={() => navigate('/admin/users/invite')} className="btn btn-primary py-2 px-4 text-xs">
+              <button onClick={() => navigate('/admin/users/add')} className="btn btn-primary py-2 px-4 text-xs">
                 <UserPlus size={13}/> Add Member
               </button>
             </div>
@@ -376,7 +376,7 @@ export default function AdminBranchDetail() {
                   <tr><td colSpan={6} className="px-6 py-16 text-center text-gray-400">
                     <Users size={36} strokeWidth={1} className="mx-auto mb-3"/>
                     <p className="text-sm font-bold">No authority members assigned to this branch</p>
-                    <button onClick={() => navigate('/admin/users/invite')} className="mt-3 btn btn-primary py-2 px-5 text-xs">Add First Member</button>
+                    <button onClick={() => navigate('/admin/users/add')} className="mt-3 btn btn-primary py-2 px-5 text-xs">Add First Member</button>
                   </td></tr>
                 ) : b.authority.map(u => (
                   <tr key={u.id} onClick={() => navigate(`/admin/users/${u.id}`)}

@@ -127,7 +127,7 @@ export default function DriverJobs() {
             <div className="mt-3 pt-3 border-t border-gray-50 flex justify-between items-center">
               <span className="text-sm font-black text-gray-900">{job.earnings}</span>
               <button 
-                onClick={() => navigate(`/driver/jobs/${job.id}`)}
+                onClick={() => navigate(`/driver/shipments/${job.id}`)}
                 className="flex items-center gap-1 text-xs font-bold text-yellow-600 hover:text-yellow-700 active:scale-95 transition-all"
               >
                 View Details <ChevronRight size={14} />
