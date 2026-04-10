@@ -108,13 +108,15 @@ export default function AdminDashboard() {
                       <div className="flex justify-between items-center pt-2">
                          <div className="flex items-center gap-4">
                             <div>
-                               <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest leading-none">In Transit</p>
-                               <p className="text-xs font-black text-gray-900 mt-1">{br.parcels}</p>
+                               <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest leading-none">Fleet Cap.</p>
+                               <p className="text-xs font-black text-gray-900 mt-1">{br.parcels} <span className="text-[9px] text-gray-400 font-medium">/ 200</span></p>
                             </div>
                             <div className="w-px h-6 bg-gray-100"></div>
                             <div>
-                               <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest leading-none">Excp.</p>
-                               <p className={`text-xs font-black mt-1 ${br.alerts > 0 ? 'text-red-500' : 'text-gray-900'}`}>{br.alerts}</p>
+                               <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest leading-none">Fleet Utilization</p>
+                               <p className={`text-xs font-black mt-1 ${br.alerts > 0 ? 'text-red-500' : 'text-emerald-600'}`}>
+                                 {br.alerts > 0 ? '72%' : '91%'}
+                               </p>
                             </div>
                          </div>
                          <button className="text-[9px] font-black text-white bg-black px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-all uppercase tracking-widest">View Details</button>
@@ -130,18 +132,57 @@ export default function AdminDashboard() {
            </div>
 
            {/* Revenue Pulse */}
-           <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm overflow-hidden relative">
-              <div className="absolute top-0 right-0 p-6"><TrendingUp size={48} className="text-gray-50 opacity-50"/></div>
-              <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest mb-6">Income Overview</h3>
-              <div className="flex items-end gap-1 h-32 w-full mb-4">
-                 {[40, 65, 45, 80, 55, 90, 70, 100, 85, 120, 95, 140, 110, 150, 130, 180, 155, 200, 175, 220].map((h, i) => (
-                   <div key={i} className="flex-1 bg-emerald-50 rounded-t-sm relative group cursor-pointer hover:bg-[#FFCC00] transition-colors" style={{ height: `${(h/220)*100}%` }}>
-                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-black text-white text-[9px] font-black px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap transition-all">
-                        ${h}k
-                      </div>
-                   </div>
-                 ))}
-              </div>
+            <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm overflow-hidden relative">
+               <div className="flex justify-between items-center mb-6">
+                  <div>
+                    <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest">Revenue Flow & Distribution</h3>
+                    <p className="hero-metadata text-hero-neutral mt-1">Network-wide income trends vs Branch contribution</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <select className="text-[10px] font-bold border border-gray-200 rounded px-2 py-1 bg-white outline-none">
+                      <option>All Branches</option>
+                      <option>SYDNEY CENTRAL</option>
+                      <option>MELBOURNE HUB</option>
+                    </select>
+                  </div>
+               </div>
+
+               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  {/* Left: Bar Growth */}
+                  <div className="md:col-span-2">
+                    <div className="flex items-end gap-1 h-32 w-full mb-4">
+                       {[40, 65, 45, 80, 55, 90, 70, 100, 85, 120, 95, 140, 110, 150, 130, 180, 155, 200, 175, 220].map((h, i) => (
+                         <div key={i} className="flex-1 bg-blue-50 rounded-t-sm relative group cursor-pointer hover:bg-brand transition-colors" style={{ height: `${(h/220)*100}%` }}>
+                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-black text-white text-[9px] font-black px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap transition-all z-20">
+                              ${h}k
+                            </div>
+                         </div>
+                       ))}
+                    </div>
+                  </div>
+
+                  {/* Right: Branch Contribution Ring */}
+                  <div className="flex flex-col justify-center border-l border-gray-50 pl-4">
+                     <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-4">Market Share</p>
+                     <div className="space-y-3">
+                        {[
+                          { b: 'SYD', pct: 45, color: 'bg-emerald-500' },
+                          { b: 'MEL', pct: 32, color: 'bg-brand' },
+                          { b: 'BNE', pct: 23, color: 'bg-blue-500' },
+                        ].map(m => (
+                          <div key={m.b} className="space-y-1">
+                             <div className="flex justify-between text-[10px] font-bold">
+                                <span>{m.b}</span>
+                                <span>{m.pct}%</span>
+                             </div>
+                             <div className="w-full h-1 bg-gray-100 rounded-full overflow-hidden">
+                                <div className={`h-full ${m.color}`} style={{ width: `${m.pct}%` }}></div>
+                             </div>
+                          </div>
+                        ))}
+                     </div>
+                  </div>
+               </div>
               <div className="flex justify-between items-center pt-4 border-t border-gray-50">
                 <div className="flex items-center gap-6">
                    <div>
