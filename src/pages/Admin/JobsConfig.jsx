@@ -88,7 +88,7 @@ export default function AdminJobsConfig() {
                    ))}
                 </div>
                 <div className="p-4 bg-gray-800 rounded-2xl text-[10px] text-gray-300 font-bold uppercase tracking-widest leading-relaxed">
-                   <p className="flex items-center gap-2"><Info size={14} className="text-brand"/> Automated validation is active. Non-compliant shipments will be flagged as "Exception" automatically after 30 minutes of delivery completion.</p>
+                   <p className="flex items-center gap-2"><Info size={14} className="text-brand"/> Automated validation is active. Non-compliant shipments will be flagged as a "Delivery Issue" automatically after 30 minutes of delivery completion.</p>
                 </div>
              </div>
           </div>
@@ -131,7 +131,7 @@ export default function AdminJobsConfig() {
               <div className="space-y-4">
                  {[
                    { label: 'Auto-Assign Near Drivers', enabled: true },
-                   { label: 'SMS Alerts on Exceptions', enabled: true },
+                   { label: 'SMS Alerts on Issues', enabled: true },
                    { label: 'Auto-Invoice on Delivery', enabled: false },
                    { label: 'E-Manifest Generation', enabled: true },
                  ].map((t, i) => (

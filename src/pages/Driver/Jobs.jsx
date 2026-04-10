@@ -6,7 +6,7 @@ const STATUS_STYLES = {
   'Completed': 'bg-green-100 text-green-700',
   'In Progress': 'bg-yellow-100 text-yellow-700',
   'Assigned': 'bg-blue-100 text-blue-700',
-  'Exception': 'bg-red-100 text-red-700',
+  'Issue': 'bg-red-100 text-red-700',
 };
 
 const jobs = [
@@ -47,7 +47,7 @@ const jobs = [
     to: 'Newcastle NSW',
     date: '4 Apr',
     items: '4 pallets · 960 kg',
-    status: 'Exception',
+    status: 'Issue',
     earnings: '$240.00',
   },
   {

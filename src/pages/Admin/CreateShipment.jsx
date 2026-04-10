@@ -256,12 +256,21 @@ export default function AdminCreateShipment() {
 
           {/* RECEIVER */}
           <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
-            <div className="p-5 border-b border-gray-100 bg-[#FAFAFA] flex items-center gap-3">
-              <Navigation className="text-blue-500" size={18} />
-              <div>
-                <h2 className="text-sm font-bold text-[#111] uppercase tracking-wide">Receiver Details</h2>
-                <p className="text-[10px] text-gray-400 font-medium uppercase mt-0.5">Where is this package going?</p>
+            <div className="p-5 border-b border-gray-100 bg-[#FAFAFA] flex items-center justify-between">
+              <div className="flex items-center gap-3">
+               <Navigation className="text-blue-500" size={18} />
+               <div>
+                 <h2 className="text-sm font-bold text-[#111] uppercase tracking-wide">Receiver Details</h2>
+                 <p className="text-[10px] text-gray-400 font-medium uppercase mt-0.5">Where is this package going?</p>
+               </div>
               </div>
+              {selectedSender && transferType === 'Direct' && (
+                <button
+                  className="text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg border border-blue-200 bg-blue-50 text-blue-600 hover:bg-blue-100 transition-all flex items-center gap-1.5"
+                >
+                  <MapPin size={12}/> Same as Sender
+                </button>
+              )}
             </div>
             <div className="p-6">
               {transferType === 'Branch' ? (

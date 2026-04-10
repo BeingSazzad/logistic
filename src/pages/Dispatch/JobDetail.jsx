@@ -324,7 +324,7 @@ export default function DispatchJobDetail() {
                 <FileCheck size={14}/> Driver Checklist
               </button>
               <button onClick={() => setActiveModal('exception')} className="w-full py-3 bg-red-50 border border-red-100 rounded-lg text-xs font-bold text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center gap-2 mt-2">
-                <AlertTriangle size={14}/> Report Exception
+                <AlertTriangle size={14}/> Report Issue
               </button>
             </div>
           </div>
@@ -497,7 +497,7 @@ export default function DispatchJobDetail() {
           <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl flex flex-col max-h-[85vh]" onClick={e => e.stopPropagation()}>
             <div className="p-6 border-b border-gray-100 flex justify-between items-center shrink-0">
                <div>
-                  <h3 className="text-xl font-bold text-red-600 tracking-tight flex items-center gap-2"><AlertTriangle size={20}/> Report Exception</h3>
+                  <h3 className="text-xl font-bold text-red-600 tracking-tight flex items-center gap-2"><AlertTriangle size={20}/> Report Delivery Issue</h3>
                   <p className="text-xs text-gray-500 mt-1 uppercase tracking-widest">{job.id}</p>
                </div>
                <button onClick={() => setActiveModal(null)} className="p-2 hover:bg-gray-100 rounded-full text-gray-400 transition-colors"><X size={20}/></button>

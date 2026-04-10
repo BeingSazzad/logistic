@@ -11,7 +11,7 @@ import { useAuth } from '../../context/AuthContext';
 const QUEUES = [
   { id: 'unassigned', label: 'Unassigned',     icon: Inbox,       color: 'text-amber-600',  bg: 'bg-amber-50',  border: 'border-amber-200', desc: 'Booked – awaiting driver assignment' },
   { id: 'assigned',   label: 'In Transit',     icon: Zap,          color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-200', desc: 'Assigned & physically moving' },
-  { id: 'exception',  label: 'Exceptions',     icon: AlertCircle,  color: 'text-red-600',    bg: 'bg-red-50',    border: 'border-red-200',    desc: 'Delayed or arrival issues' },
+  { id: 'exception',  label: 'Issues',     icon: AlertCircle,  color: 'text-red-600',    bg: 'bg-red-50',    border: 'border-red-200',    desc: 'Delayed or delivery problems' },
   { id: 'completed',  label: 'Received',       icon: CheckCircle2, color: 'text-gray-500',   bg: 'bg-gray-50',   border: 'border-gray-200',   desc: 'Handover complete / Delivered' },
 ];
 

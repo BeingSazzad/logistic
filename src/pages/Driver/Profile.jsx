@@ -178,7 +178,7 @@ export default function DriverProfile() {
                    <span className="font-bold text-gray-900">24,180 KM</span>
                 </div>
                 <div className="flex justify-between items-center border-b border-gray-50 pb-3">
-                   <span className="text-gray-500 text-xs font-semibold uppercase tracking-wider">Exception Reports</span>
+                   <span className="text-gray-500 text-xs font-semibold uppercase tracking-wider">Delivery Issues</span>
                    <span className="font-bold text-gray-900">3</span>
                 </div>
                 <div className="flex justify-between items-center pb-1">

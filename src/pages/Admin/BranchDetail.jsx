@@ -39,7 +39,7 @@ const BRANCH_DB = {
       { id: 'SHP-9042', customer: 'Acme Corp',     status: 'In Transit', driver: 'Jack Taylor',  eta: '14:30' },
       { id: 'SHP-9055', customer: 'Acme Freight',  status: 'Unassigned', driver: '—',            eta: '—' },
       { id: 'SHP-9039', customer: 'Global Traders',status: 'Received',   driver: 'Liam Smith',   eta: 'Done' },
-      { id: 'SHP-9041', customer: 'Tech Solutions', status: 'Exception', driver: 'Lucas Jones',  eta: 'Delayed' },
+      { id: 'SHP-9041', customer: 'Tech Solutions', status: 'Issue', driver: 'Lucas Jones',  eta: 'Delayed' },
     ],
   },
   'MEL-HUB': {
@@ -87,7 +87,7 @@ const roleColor = (r) => {
 const jobStatusStyle = (s) => {
   if (s === 'In Transit')  return 'bg-blue-50 text-blue-600 border-blue-100';
   if (s === 'Received')    return 'bg-emerald-50 text-emerald-600 border-emerald-100';
-  if (s === 'Exception')   return 'bg-red-50 text-red-600 border-red-100';
+  if (s === 'Issue')   return 'bg-red-50 text-red-600 border-red-100';
   if (s === 'Unassigned')  return 'bg-amber-50 text-amber-600 border-amber-100';
   return 'bg-gray-100 text-gray-500 border-gray-200';
 };
@@ -171,7 +171,7 @@ export default function AdminBranchDetail() {
           { label: 'Fleet Assets',   val: b.kpi.fleet,      icon: Truck,       color: 'text-violet-500',  bg: 'bg-violet-50',  border: 'border-violet-100' },
           { label: 'Active Jobs',    val: b.kpi.activeJobs, icon: Zap,         color: 'text-amber-500',   bg: 'bg-amber-50',   border: 'border-amber-100' },
           { label: 'Delivered Today',val: b.kpi.delivered,  icon: CheckCircle2,color: 'text-emerald-500', bg: 'bg-emerald-50', border: 'border-emerald-100' },
-          { label: 'Exceptions',     val: b.kpi.exceptions, icon: AlertCircle, color: 'text-red-500',     bg: 'bg-red-50',     border: 'border-red-100' },
+          { label: 'Issues',     val: b.kpi.exceptions, icon: AlertCircle, color: 'text-red-500',     bg: 'bg-red-50',     border: 'border-red-100' },
         ].map((s, i) => (
           <div key={i} className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm flex items-center justify-between">
             <div>

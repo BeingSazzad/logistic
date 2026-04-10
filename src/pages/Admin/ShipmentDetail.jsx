@@ -33,7 +33,7 @@ export default function AdminShipmentDetail() {
           <div className="flex items-center gap-3">
             <h1 className="text-3xl font-black text-gray-900 tracking-tight">{id || 'SHP-9000'}</h1>
             <span className={`badge font-bold uppercase tracking-widest text-[10px] ${exceptionActive ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`}>
-              ● {exceptionActive ? 'Exception Detected' : 'In Progress'}
+              ● {exceptionActive ? 'Delivery Issue Detected' : 'In Progress'}
             </span>
           </div>
           <p className="text-sm font-bold text-gray-500 mt-2 flex items-center gap-2">
