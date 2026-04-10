@@ -36,11 +36,7 @@ export default function AdminDashboard() {
             <p className="hero-body mt-1 flex items-center gap-2">Global network visibility and financial performance.</p>
           </div>
         </div>
-        <div className="flex gap-3">
-          <button onClick={() => navigate('/admin/shipments')} className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm">
-            <Plus size={16} strokeWidth={3} /> New Dispatch
-          </button>
-        </div>
+
       </div>
 
       <div className="w-full h-px bg-gray-100 mb-6 px-2"></div>
