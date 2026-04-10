@@ -82,21 +82,24 @@ export default function AdminCreateShipment() {
         </div>
       </div>
 
-      {/* Creator Accountability Banner */}
-      <div className="bg-[#111] border border-gray-800 rounded-lg p-3 flex justify-between items-center px-4 mb-2 shadow-sm text-white">
-         <div className="flex bg-white/5 p-1 rounded-lg border border-white/10 shrink-0">
-            {['Branch', 'Direct'].map(type => (
-              <button
-                key={type}
-                onClick={() => setTransferType(type)}
-                className={`px-6 py-1.5 text-[10px] font-black rounded uppercase tracking-[0.2em] transition-all ${transferType === type ? 'bg-[#FFCC00] text-black shadow-lg' : 'text-gray-500 hover:text-gray-300'}`}
-              >
-                {type === 'Branch' ? 'Branch to Branch' : 'Direct Delivery'}
-              </button>
-            ))}
+       <div className="bg-[#111] border border-gray-800 rounded-lg p-3 flex justify-between items-center px-4 mb-2 shadow-sm text-white">
+         <div className="flex bg-white/5 p-1 rounded-lg border border-white/10 shrink-0 gap-1">
+           {[
+             { type: 'Branch', label: 'Hub to Hub', desc: 'Branch → Sort → Branch' },
+             { type: 'Direct', label: 'Door to Door', desc: 'Pickup → Direct Delivery' },
+           ].map(({ type, label, desc }) => (
+             <button
+               key={type}
+               onClick={() => setTransferType(type)}
+               className={`px-5 py-2 text-[10px] font-black rounded-md flex flex-col items-center transition-all ${transferType === type ? 'bg-[#FFCC00] text-black shadow-lg' : 'text-gray-500 hover:text-gray-300'}`}
+             >
+               <span className="uppercase tracking-[0.15em]">{label}</span>
+               <span className={`text-[8px] font-bold mt-0.5 ${transferType === type ? 'text-black/60' : 'text-gray-600'}`}>{desc}</span>
+             </button>
+           ))}
          </div>
          <span className="text-xs font-bold text-gray-500">Creating as: <span className="text-[#FFCC00]">{user?.name || 'Admin'} ({user?.role || 'Admin'})</span></span>
-      </div>
+       </div>
 
       <div className="w-full h-px bg-gray-200/60 mb-2"></div>
 

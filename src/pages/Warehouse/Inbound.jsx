@@ -13,7 +13,7 @@ const statusCfg = {
   'In Transit':         { cls: 'bg-yellow-50 text-yellow-700 border-yellow-200',   icon: Clock },
   'Pending':            { cls: 'bg-gray-50 text-gray-500 border-gray-200',         icon: Clock },
   'Received at Branch': { cls: 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]',     icon: CheckCircle2 },
-  'Exception':          { cls: 'bg-[#FEF2F2] text-[#DC2626] border-[#FEE2E2]',     icon: AlertCircle },
+  'Delivery Issue':    { cls: 'bg-[#FEF2F2] text-[#DC2626] border-[#FEE2E2]',     icon: AlertCircle },
 };
 
 function HandoverModal({ handover, onClose, onConfirm }) {
@@ -172,6 +172,27 @@ export default function WarehouseInbound() {
           <h1 className="hero-h1">Inbound Sorting</h1>
           <p className="hero-body text-hero-neutral mt-1">Verify and formally receive inter-branch transfers into inventory.</p>
         </div>
+      </div>
+
+      {/* Lifecycle Banner */}
+      <div className="bg-[#111] border border-gray-800 rounded-xl p-4 flex items-center justify-between gap-4 px-6">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 text-[#FFCC00]">
+            <Package size={16}/>
+            <span className="text-xs font-black uppercase tracking-widest">Inbound</span>
+          </div>
+          <div className="w-8 h-0.5 bg-white/20"></div>
+          <div className="flex items-center gap-2 text-white/40">
+            <ArrowDownToLine size={16}/>
+            <span className="text-xs font-bold uppercase tracking-widest">Sort & Verify</span>
+          </div>
+          <div className="w-8 h-0.5 bg-white/20"></div>
+          <div className="flex items-center gap-2 text-white/40">
+            <CheckCircle2 size={16}/>
+            <span className="text-xs font-bold uppercase tracking-widest">Outbound</span>
+          </div>
+        </div>
+        <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Hub-to-Hub Lifecycle • SYD-CENTRAL → MEL-HUB</span>
       </div>
 
       <div className="w-full h-px bg-gray-200/60 mb-2"></div>

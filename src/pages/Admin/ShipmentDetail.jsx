@@ -14,11 +14,12 @@ const NETWORK_STAGES = [
 export default function AdminShipmentDetail() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [activeStage, setActiveStage] = useState(3); // Hub Transfer (Step 3)
+  const [activeStage, setActiveStage] = useState(3);
   const [exceptionActive, setExceptionActive] = useState(false);
   const [showPodModal, setShowPodModal] = useState(false);
   const [podStatus, setPodStatus] = useState('pending');
   const [overrideSuccess, setOverrideSuccess] = useState(false);
+  const [deliveryMode, setDeliveryMode] = useState('hub'); // 'hub' | 'door'
 
   return (
     <div className="w-full max-w-[1440px] mx-auto pb-16">
@@ -30,10 +31,13 @@ export default function AdminShipmentDetail() {
       {/* Header Context */}
       <div className="flex justify-between items-start mb-6">
         <div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap">
             <h1 className="text-3xl font-black text-gray-900 tracking-tight">{id || 'SHP-9000'}</h1>
             <span className={`badge font-bold uppercase tracking-widest text-[10px] ${exceptionActive ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`}>
               ● {exceptionActive ? 'Delivery Issue Detected' : 'In Progress'}
+            </span>
+            <span className={`badge font-bold uppercase tracking-widest text-[10px] ${deliveryMode === 'hub' ? 'bg-indigo-100 text-indigo-700' : 'bg-emerald-100 text-emerald-700'}`}>
+              {deliveryMode === 'hub' ? '🏢 Hub-to-Hub' : '🚪 Door-to-Door'}
             </span>
           </div>
           <p className="text-sm font-bold text-gray-500 mt-2 flex items-center gap-2">
@@ -144,6 +148,17 @@ export default function AdminShipmentDetail() {
                 </div>
 
                 <div className="flex flex-col gap-3">
+                   <div className="flex bg-white/5 p-1 rounded-xl border border-white/10 mb-1">
+                     {[{key:'hub', label:'Hub to Hub'},{key:'door', label:'Door to Door'}].map(m => (
+                       <button
+                         key={m.key}
+                         onClick={() => setDeliveryMode(m.key)}
+                         className={`flex-1 py-2 rounded-lg text-[9px] font-black uppercase tracking-[0.15em] transition-all ${
+                           deliveryMode === m.key ? 'bg-[#FFCC00] text-black shadow' : 'text-gray-500 hover:text-gray-300'
+                         }`}
+                       >{m.label}</button>
+                     ))}
+                   </div>
                    <button 
                      onClick={() => setActiveStage(prev => Math.min(5, prev + 1))}
                      className="w-full bg-[#FFCC00] hover:bg-yellow-400 text-black py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-lg shadow-yellow-400/10 transition-all flex items-center justify-center gap-2"
