@@ -66,6 +66,7 @@ import DriverPay         from './pages/Driver/Pay';
 import DriverExpenses    from './pages/Driver/Expenses';
 import DriverProfile     from './pages/Driver/Profile';
 import DriverMessages    from './pages/Driver/Messages';
+import DriverNotifications from './pages/Driver/Notifications';
 
 // ── Warehouse ────────────────────────────────────────────────────
 import WarehouseDashboard from './pages/Warehouse/Dashboard';
@@ -170,6 +171,7 @@ function App() {
           <Route path="expenses"     element={<DriverExpenses />} />
           <Route path="profile"      element={<DriverProfile />} />
           <Route path="messages"     element={<DriverMessages />} />
+          <Route path="notifications" element={<DriverNotifications />} />
         </Route>
 
         {/* ── WAREHOUSE ── */}

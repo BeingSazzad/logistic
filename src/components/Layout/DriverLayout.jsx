@@ -7,7 +7,7 @@ import { House, Map, FileText, User, Bell, Zap, Receipt } from 'lucide-react';
 const bottomNav = [
   { to: '/driver',          label: 'Home',     icon: House,    end: true },
   { to: '/driver/jobs',     label: 'Jobs',     icon: Map },
-  { to: '/driver/pay',      label: 'Pay',      icon: FileText },
+  // { to: '/driver/pay',      label: 'Pay',      icon: FileText }, // Hidden: Fixed salary based drivers
   { to: '/driver/expenses', label: 'Expenses', icon: Receipt },
   { to: '/driver/profile',  label: 'Profile',  icon: User },
 ];
@@ -43,7 +43,7 @@ export default function DriverLayout() {
               </p>
             </div>
           </div>
-          <NavLink to="/driver/messages" className={({ isActive }) =>
+          <NavLink to="/driver/notifications" className={({ isActive }) =>
             `relative p-2 rounded-xl transition-all ${isActive ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'}`
           }>
             <Bell size={20} />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Camera, Receipt, CheckCircle, Plus, Fuel } from 'lucide-react';
+import { Camera, Receipt, CheckCircle, Plus, Fuel, Wrench } from 'lucide-react';
 
 const submitted = [
   { id: 'TOL-881', type: 'Toll', desc: 'M1 Sydney–Melbourne', amount: 45.00, date: 'Today', status: 'pending' },
@@ -24,7 +24,7 @@ export default function DriverExpenses() {
             </div>
             <div>
               <label className="text-sm font-semibold text-gray-700 block mb-1.5">Description</label>
-              <input className="input" placeholder={form === 'Toll' ? 'e.g. M1 Motorway' : 'e.g. Goulburn BP'} />
+              <input className="input" placeholder={form === 'Toll' ? 'e.g. M1 Motorway' : form === 'Fuel' ? 'e.g. Goulburn BP' : 'e.g. Replaced flat tire'} />
             </div>
             <div>
               <label className="text-sm font-semibold text-gray-700 block mb-1.5">Link to Job</label>
@@ -73,13 +73,19 @@ export default function DriverExpenses() {
           className="bg-orange-50 border border-orange-200 rounded-2xl p-5 flex flex-col items-center gap-2 hover:bg-orange-100 transition-colors">
           <Receipt size={28} className="text-orange-600" />
           <p className="font-bold text-sm text-orange-800">Toll Receipt</p>
-          <p className="text-xs text-orange-600 text-center">Upload receipt + amount</p>
+          <p className="text-[10px] font-semibold text-orange-600 text-center uppercase tracking-widest mt-1">Upload + Amount</p>
         </button>
         <button onClick={() => { setForm('Fuel'); setDone(false); }}
           className="bg-blue-50 border border-blue-200 rounded-2xl p-5 flex flex-col items-center gap-2 hover:bg-blue-100 transition-colors">
           <Fuel size={28} className="text-blue-600" />
           <p className="font-bold text-sm text-blue-800">Fuel Expense</p>
-          <p className="text-xs text-blue-600 text-center">Upload receipt + litres</p>
+          <p className="text-[10px] font-semibold text-blue-600 text-center uppercase tracking-widest mt-1">Upload + Litres</p>
+        </button>
+        <button onClick={() => { setForm('Maintenance'); setDone(false); }}
+          className="bg-red-50 border border-red-200 rounded-2xl p-5 flex flex-col items-center gap-2 hover:bg-red-100 transition-colors col-span-2">
+          <Wrench size={24} className="text-red-600" />
+          <p className="font-bold text-sm text-red-800">Maintenance & Repairs</p>
+          <p className="text-xs text-red-600 text-center">Tire punctures, oil, repairs, workshop</p>
         </button>
       </div>
 
@@ -92,8 +98,11 @@ export default function DriverExpenses() {
           {submitted.map(c => (
             <div key={c.id} className="p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${c.type === 'Toll' ? 'bg-orange-100' : 'bg-blue-100'}`}>
-                  {c.type === 'Toll' ? <Receipt size={16} className="text-orange-600" /> : <Fuel size={16} className="text-blue-600" />}
+                <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${
+                  c.type === 'Toll' ? 'bg-orange-100 text-orange-600' : 
+                  c.type === 'Fuel' ? 'bg-blue-100 text-blue-600' : 'bg-red-100 text-red-600'
+                }`}>
+                  {c.type === 'Toll' ? <Receipt size={16} /> : c.type === 'Fuel' ? <Fuel size={16} /> : <Wrench size={16} />}
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-gray-900">{c.desc}</p>

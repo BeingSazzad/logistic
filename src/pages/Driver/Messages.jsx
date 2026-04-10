@@ -31,7 +31,7 @@ export default function DriverMessages() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-gray-50 min-h-screen">
+    <div className="flex flex-col h-full bg-gray-50">
       
       {/* Dynamic Header */}
       <div className="bg-black text-white px-4 py-4 flex items-center justify-between shadow-md shrink-0">
@@ -57,7 +57,7 @@ export default function DriverMessages() {
       </div>
 
       {/* Message List */}
-      <div className="flex-1 overflow-y-auto px-4 py-6 flex flex-col gap-4 pb-24 relative z-0">
+      <div className="flex-1 overflow-y-auto px-4 py-6 flex flex-col gap-4 pb-4">
          <div className="text-center sticky top-0 bg-gray-50 py-2">
             <span className="text-[9px] font-black text-gray-400 bg-gray-200 border border-gray-300 px-3 py-1 rounded-full uppercase tracking-widest">Today, 10:30 AM</span>
          </div>
@@ -75,9 +75,9 @@ export default function DriverMessages() {
          ))}
       </div>
 
-      {/* Input Box - Stick to bottom */}
-      <div className="fixed bottom-[68px] left-0 right-0 p-4 bg-white border-t border-gray-100 shadow-[0_-10px_20px_rgba(0,0,0,0.02)] z-10">
-         <div className="flex items-end gap-3 max-w-md mx-auto">
+      {/* Input Box - Flex Bottom */}
+      <div className="w-full shrink-0 p-4 bg-white border-t border-gray-100 shadow-[0_-10px_15px_rgba(0,0,0,0.02)] z-10">
+         <div className="flex items-end gap-3 w-full">
             <textarea 
                value={inputValue}
                onChange={(e) => setInputValue(e.target.value)}
