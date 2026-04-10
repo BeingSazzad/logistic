@@ -16,7 +16,7 @@ export default function AdminSettings() {
   const [activeTab, setActiveTab] = useState('profile');
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-2 px-2">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 tracking-tight">System Settings</h1>

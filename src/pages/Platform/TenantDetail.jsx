@@ -25,7 +25,7 @@ export default function TenantDetail() {
   };
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto">
       <div>
         <button onClick={() => navigate('/platform/tenants')} className="text-sm font-medium text-blue-600 hover:underline mb-4 flex items-center gap-1">← Back to Companies</button>
         <div className="flex items-center gap-4">

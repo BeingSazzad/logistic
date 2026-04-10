@@ -16,7 +16,7 @@ export default function CustomerDashboard() {
   ];
 
   return (
-    <div className="flex flex-col gap-8 w-full max-w-7xl mx-auto pb-12">
+    <div className="flex flex-col gap-8 w-full max-w-[1440px] mx-auto pb-12">
       
       {/* ── 1. Brand & Account Header ── */}
       <div className="bg-hero-dark rounded-hero-lg p-10 text-white relative overflow-hidden shadow-2xl">

@@ -26,7 +26,9 @@ export default function DispatchCreateJob() {
   const [directDropoff, setDirectDropoff] = useState(true);
 
   // Sender mode: 'guest' | 'registered'
-  const [senderMode, setSenderMode] = useState('guest');
+  const [senderMode, setSenderMode] = useState('registered');
+  const [transferType, setTransferType] = useState('Branch'); // 'Branch' or 'Direct'
+  const [targetBranch, setTargetBranch] = useState('');
   const [senderSearch, setSenderSearch] = useState('');
   const [selectedSender, setSelectedSender] = useState(null);
   const [showSenderDropdown, setShowSenderDropdown] = useState(false);
@@ -51,7 +53,7 @@ export default function DispatchCreateJob() {
   };
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12">
       
       {/* ── Header ── */}
       <div className="flex justify-between items-center mb-2 px-2">
@@ -81,12 +83,19 @@ export default function DispatchCreateJob() {
       </div>
 
       {/* Creator Accountability Banner */}
-      <div className="bg-blue-50 border border-blue-100 rounded-lg p-3 flex justify-between items-center px-4 mb-2">
-         <div className="flex items-center gap-2">
-            <Activity size={16} className="text-blue-500" />
-            <span className="text-xs font-bold text-blue-700 uppercase tracking-widest">Audit Trail: Data Entry Logging Active</span>
+      <div className="bg-[#111] border border-gray-800 rounded-lg p-3 flex justify-between items-center px-4 mb-2 shadow-sm text-white">
+         <div className="flex bg-white/5 p-1 rounded-lg border border-white/10 shrink-0">
+            {['Branch', 'Direct'].map(type => (
+              <button
+                key={type}
+                onClick={() => setTransferType(type)}
+                className={`px-6 py-1.5 text-[10px] font-black rounded uppercase tracking-[0.2em] transition-all ${transferType === type ? 'bg-[#FFCC00] text-black shadow-lg' : 'text-gray-500 hover:text-gray-300'}`}
+              >
+                {type === 'Branch' ? 'Branch to Branch' : 'Direct Delivery'}
+              </button>
+            ))}
          </div>
-         <span className="text-xs font-bold text-gray-500">Creating as: <span className="text-[#111]">{user?.name || 'Dispatcher'} ({user?.role || 'Dispatch'})</span></span>
+         <span className="text-xs font-bold text-gray-500">Creating as: <span className="text-[#FFCC00]">{user?.name || 'Dispatcher'} ({user?.role || 'Dispatch'})</span></span>
       </div>
 
       <div className="w-full h-px bg-gray-200/60 mb-2"></div>
@@ -254,25 +263,56 @@ export default function DispatchCreateJob() {
                 <p className="text-[10px] text-gray-400 font-medium uppercase mt-0.5">Where is this package going?</p>
               </div>
             </div>
-            <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="md:col-span-2">
-                <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Receiver Name *</label>
-                <div className="relative group">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors" size={16}/>
-                  <input type="text" placeholder="Full name or company name" className="w-full bg-white border border-gray-200 focus:border-blue-400 rounded-lg py-2.5 pl-11 pr-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
+            <div className="p-6">
+              {transferType === 'Branch' ? (
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Target Receiving Branch *</label>
+                    <div className="relative group">
+                       <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors" size={16}/>
+                       <select 
+                         value={targetBranch}
+                         onChange={(e) => setTargetBranch(e.target.value)}
+                         className="w-full bg-white border border-gray-200 focus:border-blue-400 rounded-lg py-2.5 pl-11 pr-4 text-sm font-black text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/20 appearance-none cursor-pointer"
+                       >
+                         <option value="">Select Destination Branch...</option>
+                         <option value="HUB-SYD">Sydney Central Hub (HUB-SYD)</option>
+                         <option value="STA-MEL">Melbourne North Station (STA-MEL)</option>
+                         <option value="STA-BRI">Brisbane Port Station (STA-BRI)</option>
+                       </select>
+                       <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={16} />
+                    </div>
+                  </div>
+                  <div className="p-4 bg-blue-50/50 border border-blue-100 rounded-xl flex items-start gap-3">
+                     <Shield className="text-blue-500 shrink-0 mt-0.5" size={16} />
+                     <div>
+                        <p className="text-[10px] font-black uppercase text-blue-700 tracking-widest">Internal Logistics Protocol</p>
+                        <p className="text-[10px] text-blue-600 mt-1 font-medium">Branch transfers are prioritized for internal fleet movements. Delivery details will be managed by the destination hub.</p>
+                     </div>
+                  </div>
                 </div>
-              </div>
-              <div>
-                <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Contact Email / Phone</label>
-                <input type="text" placeholder="Tracking alerts will be sent here" className="w-full bg-white border border-gray-200 focus:border-blue-400 rounded-lg py-2.5 px-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
-              </div>
-              <div>
-                <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widests mb-1.5 ml-1">Drop-off Address *</label>
-                <div className="relative group">
-                  <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors" size={16}/>
-                  <input type="text" placeholder="Full address" className="w-full bg-white border border-gray-200 focus:border-blue-400 rounded-lg py-2.5 pl-11 pr-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="md:col-span-2">
+                    <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Receiver Name *</label>
+                    <div className="relative group">
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors" size={16}/>
+                      <input type="text" placeholder="Full name or company name" className="w-full bg-white border border-gray-200 focus:border-blue-400 rounded-lg py-2.5 pl-11 pr-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Contact Email / Phone</label>
+                    <input type="text" placeholder="Tracking alerts will be sent here" className="w-full bg-white border border-gray-200 focus:border-blue-400 rounded-lg py-2.5 px-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widests mb-1.5 ml-1">Drop-off Address *</label>
+                    <div className="relative group">
+                      <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors" size={16}/>
+                      <input type="text" placeholder="Full address" className="w-full bg-white border border-gray-200 focus:border-blue-400 rounded-lg py-2.5 pl-11 pr-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
+                    </div>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
 
@@ -316,8 +356,8 @@ export default function DispatchCreateJob() {
           {/* Summary */}
           <div className="bg-[#111] rounded-xl p-6 text-white shadow-xl border border-gray-800 relative overflow-hidden group">
             <div className="absolute -right-6 -top-6 w-32 h-32 bg-[#FFCC00]/10 rounded-full blur-3xl group-hover:bg-[#FFCC00]/20 transition-all"></div>
-            <h3 className="text-xs font-black uppercase tracking-widest mb-6 text-[#FFCC00] flex items-center gap-2">
-               <Box size={16}/> Summary
+            <h3 className="text-xs font-black uppercase tracking-widest mb-6 text-[#FFCC00] flex items-center justify-center gap-2 border-b border-white/10 pb-4">
+               <Box size={16}/> Network Transit Order
             </h3>
             <div className="space-y-6">
               <div>

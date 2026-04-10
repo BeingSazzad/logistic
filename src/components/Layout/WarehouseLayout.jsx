@@ -6,10 +6,10 @@ import {
 import SidebarLayout from './SidebarLayout';
 
 const navConfig = [
-  { type: 'link', to: '/warehouse',           label: 'Dashboard',        icon: Building2,       end: true },
-  { type: 'link', to: '/warehouse/inbound',   label: 'Inbound Receipts', icon: ArrowDownToLine },
+  { type: 'link', to: '/warehouse',           label: 'Floor Command',        icon: Building2,       end: true },
+  { type: 'link', to: '/warehouse/inbound',   label: 'Incoming Handovers', icon: ArrowDownToLine },
   { type: 'link', to: '/warehouse/outbound',  label: 'Outbound Loading', icon: ArrowUpFromLine },
-  { type: 'link', to: '/warehouse/inventory', label: 'Inventory Search', icon: PackageSearch },
+  { type: 'link', to: '/warehouse/inventory', label: 'Inventory', icon: PackageSearch },
 ];
 
 const user = { name: 'Floor Manager', role: 'Warehouse Ops', initials: 'FM' };

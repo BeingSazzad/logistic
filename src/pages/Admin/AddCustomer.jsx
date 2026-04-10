@@ -6,7 +6,7 @@ export default function AdminAddCustomer() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12">
       
       {/* Standardized Header */}
       <div className="flex justify-between items-center mb-2 px-2">

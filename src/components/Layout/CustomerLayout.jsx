@@ -4,9 +4,9 @@ import { Package, MapPin, FileText, User, Zap, Bell, LogOut } from 'lucide-react
 
 // Customer layout uses a top-nav bar (not sidebar) as it's a public-facing portal.
 const navItems = [
-  { to: '/customer',          label: 'My Shipments',  icon: Package,  end: true },
+  { to: '/customer',          label: 'Acme Distribution',  icon: Package,  end: true },
   { to: '/customer/tracking', label: 'Live Tracking', icon: MapPin },
-  { to: '/customer/invoices', label: 'Invoices',      icon: FileText },
+  { to: '/customer/invoices', label: 'My Invoices',      icon: FileText },
   { to: '/customer/account',  label: 'My Account',    icon: User },
 ];
 

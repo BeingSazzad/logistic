@@ -33,7 +33,7 @@ export default function AdminFinance() {
   };
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12 relative">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12 relative">
       
       {/* Success Toast */}
       {showSuccess && (

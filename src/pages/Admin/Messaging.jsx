@@ -32,7 +32,7 @@ export default function AdminMessaging() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-8rem)] w-full max-w-7xl mx-auto space-y-4">
+    <div className="flex flex-col h-[calc(100vh-8rem)] w-full max-w-[1440px] mx-auto space-y-4">
       
       {/* ── Header ── */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0">

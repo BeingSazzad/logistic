@@ -32,7 +32,7 @@ export default function AdminFleetManagement() {
   });
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12">
       
       {/* Header */}
       <div className="flex justify-between items-center mb-2 px-2">
@@ -194,7 +194,10 @@ export default function AdminFleetManagement() {
                        </div>
                     </td>
                     <td className="px-6 py-4 text-right">
-                       <button className="text-[10px] font-black text-[#111] hover:text-white border border-gray-200 hover:bg-black px-4 py-2 rounded-xl transition-all uppercase tracking-widest shadow-sm">
+                       <button 
+                         onClick={(e) => { e.stopPropagation(); navigate(`/admin/fleet/${v.id}`); }}
+                         className="text-[10px] font-black text-[#111] hover:text-white border border-gray-200 hover:bg-black px-4 py-2 rounded-xl transition-all uppercase tracking-widest shadow-sm"
+                       >
                          Manage
                        </button>
                     </td>

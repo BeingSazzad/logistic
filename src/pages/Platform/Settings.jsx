@@ -17,7 +17,7 @@ export default function PlatformSettings() {
   const [inviteModal, setInviteModal] = useState(false);
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12 px-2">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12 px-2">
       
       {/* Page Header — matching Dashboard/Fleet standard */}
       <div className="flex justify-between items-center mb-2">

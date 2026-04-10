@@ -18,7 +18,7 @@ export default function AdminBranchDetail() {
   const [editing, setEditing] = useState(false);
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12">
       <div className="flex justify-between items-center mb-2 px-2">
         <div className="flex items-center gap-4">
           <button onClick={() => navigate('/admin/branches')} className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-gray-500 hover:text-gray-900 transition-all shadow-sm">

@@ -7,12 +7,12 @@ import {
 import SidebarLayout from './SidebarLayout';
 
 const navConfig = [
-  { type: 'link', to: '/platform',               label: 'Dashboard',     icon: LayoutDashboard, end: true },
-  { type: 'link', to: '/platform/tenants',       label: 'Companies',     icon: Building2 },
+  { type: 'link', to: '/platform',               label: 'Platform Overview',     icon: LayoutDashboard, end: true },
+  { type: 'link', to: '/platform/tenants',       label: 'Client Companies',     icon: Building2 },
   { type: 'link', to: '/platform/transactions',  label: 'Transactions',  icon: Receipt },
-  { type: 'link', to: '/platform/subscriptions', label: 'Subscriptions', icon: CreditCard },
-  { type: 'link', to: '/platform/support',       label: 'Support',       icon: Headphones },
-  { type: 'link', to: '/platform/settings',      label: 'Settings',      icon: Settings },
+  { type: 'link', to: '/platform/subscriptions', label: 'Subscriptions & Plans', icon: CreditCard },
+  { type: 'link', to: '/platform/support',       label: 'Support Tickets',       icon: Headphones },
+  { type: 'link', to: '/platform/settings',      label: 'Platform Settings',      icon: Settings },
 ];
 
 const user = { name: 'Platform Admin', role: 'SaaS Owner', initials: 'PO' };

@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
-  MapPin, Navigation, Phone, Clock, Package, 
+  MapPin, Navigation, Phone, Clock, Package, Search,
   CheckCircle2, Bell, User, Zap, AlertTriangle, ShieldCheck, ChevronRight
 } from 'lucide-react';
 
 export default function DriverHome() {
   const navigate = useNavigate();
   const [isOnline, setIsOnline] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      // Navigate to job detail if search matches pattern
+      navigate(`/driver/jobs/${searchQuery.trim()}`);
+    }
+  };
 
   const upcoming = [
     { id: 'SHP-20502', area: 'Parramatta, NSW', time: '11:45 AM', items: 3, priority: 'Normal' },
@@ -17,7 +26,21 @@ export default function DriverHome() {
   return (
     <div className="p-5 flex flex-col gap-6 max-w-md mx-auto min-h-screen bg-gray-50 pb-24">
 
-      {/* ── 1. Dynamic Status Bar ── */}
+      {/* ── 0. Global Standard Search ── */}
+      <form onSubmit={handleSearch} className="relative group">
+         <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+            <Search size={18} className="text-gray-400 group-focus-within:text-yellow-600 transition-colors" />
+         </div>
+         <input 
+           type="text" 
+           value={searchQuery}
+           onChange={(e) => setSearchQuery(e.target.value)}
+           placeholder="Check Job ID Globally..." 
+           className="w-full bg-white border border-gray-100 py-4 pl-12 pr-4 rounded-2xl text-sm font-bold shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400/20 focus:border-yellow-400 transition-all placeholder:text-gray-300"
+         />
+      </form>
+
+      {/* ── 动态状态栏 (Dynamic Status Bar) ── */}
       <div className="flex justify-between items-center bg-white p-3 rounded-2xl shadow-sm border border-gray-100">
          <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center overflow-hidden">

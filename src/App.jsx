@@ -56,6 +56,7 @@ import DispatchMessages  from './pages/Dispatch/Messages';
 import DispatchSettings  from './pages/Dispatch/Settings';
 import DispatchVehicleDetail from './pages/Dispatch/VehicleDetail';
 import DispatchFleet from './pages/Dispatch/Fleet';
+import DispatchTerminal from './pages/Dispatch/TerminalWorkspace';
 
 // ── Driver ───────────────────────────────────────────────────────
 import DriverHome        from './pages/Driver/Home';
@@ -67,6 +68,7 @@ import DriverExpenses    from './pages/Driver/Expenses';
 import DriverProfile     from './pages/Driver/Profile';
 import DriverMessages    from './pages/Driver/Messages';
 import DriverNotifications from './pages/Driver/Notifications';
+import DriverJobDetail   from './pages/Driver/JobDetail';
 
 // ── Warehouse ────────────────────────────────────────────────────
 import WarehouseDashboard from './pages/Warehouse/Dashboard';
@@ -159,6 +161,7 @@ function App() {
           <Route path="settings"     element={<DispatchSettings />} />
           <Route path="fleet"        element={<DispatchFleet />} />
           <Route path="vehicles/:vehicleId" element={<DispatchVehicleDetail />} />
+          <Route path="terminal" element={<DispatchTerminal />} />
         </Route>
 
         {/* ── DRIVER ── */}
@@ -167,6 +170,7 @@ function App() {
           <Route path="safety-check" element={<DriverSafetyCheck />} />
           <Route path="active"       element={<DriverActiveTrip />} />
           <Route path="jobs"         element={<DriverJobs />} />
+          <Route path="jobs/:id"     element={<DriverJobDetail />} />
           <Route path="pay"          element={<DriverPay />} />
           <Route path="expenses"     element={<DriverExpenses />} />
           <Route path="profile"      element={<DriverProfile />} />

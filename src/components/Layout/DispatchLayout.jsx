@@ -8,13 +8,14 @@ import SidebarLayout from './SidebarLayout';
 import { useAuth } from '../../context/AuthContext';
 
 const navConfig = [
-  { type: 'link', to: '/dispatch',          label: 'Dashboard', icon: LayoutDashboard, end: true },
-  { type: 'link', to: '/dispatch/jobs',     label: 'Jobs',      icon: Package },
+  { type: 'link', to: '/dispatch',          label: 'Fleet Operations', icon: LayoutDashboard, end: true },
+  { type: 'link', to: '/dispatch/jobs',     label: 'Shipment Queue', icon: Package },
+  { type: 'link', to: '/dispatch/terminal', label: 'Terminal Sortation', icon: Zap },
   { type: 'link', to: '/dispatch/tracking', label: 'Tracking',  icon: MapPin },
   { type: 'link', to: '/dispatch/fleet',    label: 'Fleet',     icon: Truck },
-  { type: 'link', to: '/dispatch/drivers',  label: 'Drivers',   icon: Users },
-  { type: 'link', to: '/dispatch/messages', label: 'Messages',  icon: MessageSquare },
-  { type: 'link', to: '/dispatch/settings', label: 'Settings',  icon: Settings },
+  { type: 'link', to: '/dispatch/drivers',  label: 'Driver Directory',   icon: Users },
+  { type: 'link', to: '/dispatch/messages', label: 'Comms Hub',  icon: MessageSquare },
+  { type: 'link', to: '/dispatch/settings', label: 'System Settings',  icon: Settings },
 ];
 
 export default function DispatchLayout() {

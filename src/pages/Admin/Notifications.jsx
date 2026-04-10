@@ -12,7 +12,7 @@ export default function AdminNotifications() {
   const resolve = (id) => setAlerts(prev => prev.map(a => a.id === id ? { ...a, resolved: true } : a));
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto">
       <div className="flex justify-between items-end mb-2">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Notification Center</h1>

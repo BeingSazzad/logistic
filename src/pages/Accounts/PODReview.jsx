@@ -17,7 +17,7 @@ export default function PODReview() {
   if (selected && pod) {
     const isApproved = approved.includes(pod.id);
     return (
-      <div className="w-full max-w-7xl mx-auto flex flex-col gap-6">
+      <div className="w-full max-w-[1440px] mx-auto flex flex-col gap-6">
         <div className="flex items-center gap-4">
           <button onClick={() => setSelected(null)} className="flex items-center gap-2 text-sm font-semibold text-hero-neutral hover:text-hero-dark transition-colors">
             ← Back to Queue
@@ -144,7 +144,7 @@ export default function PODReview() {
   }
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto">
       <div className="flex justify-between items-end px-2">
         <div>
           <h1 className="hero-h1">POD Review Queue</h1>

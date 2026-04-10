@@ -3,8 +3,42 @@ import { useSearchParams } from 'react-router-dom';
 import { Truck, MapPin, Clock, Navigation } from 'lucide-react';
 
 const trips = [
-  { id: 'J-2026-1260', driver: 'James Mitchell', vehicle: 'NSW-456-XY', lat: -37.4, status: 'In Transit', eta: '17:30', progress: 65, from: 'Sydney', to: 'Melbourne', phone: '0412 345 678' },
-  { id: 'J-2026-1268', driver: 'Sarah Chen',     vehicle: 'VIC-891-AB', lat: -37.8, status: 'At Pickup',  eta: 'Tomorrow', progress: 20, from: 'Melbourne', to: 'Adelaide', phone: '0423 567 890' },
+  { 
+    id: 'SHP-9042', 
+    driver: 'James Mitchell', 
+    vehicle: 'NSW-456-XY', 
+    status: 'On the way to Melbourne', 
+    currentCity: 'Albury (NSW/VIC Border)',
+    progress: 55, 
+    from: 'Sydney', 
+    to: 'Melbourne', 
+    phone: '0412 345 678',
+    steps: [
+      { city: 'Sydney CBD', label: 'Collected from Customer', done: true },
+      { city: 'Sydney Depot', label: 'Processing at Depot', done: true },
+      { city: 'Goulburn Hub', label: 'Departed Central Hub', done: true },
+      { city: 'Albury', label: 'Inter-city Transit', current: true },
+      { city: 'Melbourne Depot', label: 'Awaiting Arrival', done: false },
+      { city: 'Melbourne CBD', label: 'Out for Delivery', done: false }
+    ]
+  },
+  { 
+    id: 'SHP-9039', 
+    driver: 'Sarah Chen',     
+    vehicle: 'VIC-891-AB', 
+    status: 'Out for delivery', 
+    currentCity: 'Melbourne (St Kilda)',
+    progress: 92, 
+    from: 'Melbourne Hub', 
+    to: 'St Kilda', 
+    phone: '0423 567 890',
+    steps: [
+      { city: 'Brisbane Hub', label: 'Line-haul Departed', done: true },
+      { city: 'Melbourne Hub', label: 'Sorting at Hub', done: true },
+      { city: 'Melbourne Depot', label: 'Staged for Delivery', done: true },
+      { city: 'Melbourne CBD', label: 'With Courier', current: true }
+    ]
+  },
 ];
 
 export default function CustomerTracking() {
@@ -69,37 +103,86 @@ export default function CustomerTracking() {
             </div>
           </div>
 
-          {/* Trip Detail */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-            <div className="flex justify-between items-start mb-4">
-              <div>
-                <h3 className="font-bold text-gray-900">{selected.id}</h3>
-                <p className="text-sm text-gray-500">{selected.from} → {selected.to}</p>
-              </div>
-              <span className="text-yellow-700 bg-yellow-100 text-xs font-black uppercase px-3 py-1 rounded-full">{selected.status}</span>
-            </div>
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              {[
-                ['Driver',   selected.driver],
-                ['Vehicle',  selected.vehicle],
-                ['ETA',      selected.eta],
-                ['Contact',  selected.phone],
-              ].map(([k,v]) => (
-                <div key={k}>
-                  <p className="text-xs text-gray-400 font-semibold">{k}</p>
-                  <p className="font-semibold text-gray-900 mt-0.5">{v}</p>
+            {/* Trip Detail & Network Journey (Hub-to-Hub) */}
+            <div className="bg-white rounded-3xl border border-gray-100 shadow-xl overflow-hidden">
+              <div className="p-8 border-b border-gray-100 flex justify-between items-start bg-gradient-to-r from-gray-50 to-white">
+                <div>
+                  <h3 className="font-black text-gray-900 text-2xl uppercase tracking-tighter">{selected.id}</h3>
+                  <p className="text-xs font-bold text-gray-400 mt-2 uppercase tracking-widest flex items-center gap-2">
+                     <MapPin size={12} className="text-brand" /> {selected.from} <span className="text-gray-200">→</span> {selected.to}
+                  </p>
                 </div>
-              ))}
-            </div>
-            <div className="mt-4 pt-4 border-t border-gray-100">
-              <div className="flex justify-between text-xs text-gray-500 mb-1">
-                <span>Trip progress</span><span>{selected.progress}%</span>
+                <div className="text-right">
+                  <span className="text-black bg-yellow-400 text-[10px] font-black uppercase px-4 py-2 rounded-xl shadow-lg shadow-yellow-400/20">{selected.status}</span>
+                  <div className="mt-3 flex flex-col items-end">
+                     <p className="text-[10px] font-black text-brand uppercase tracking-widest">Active Node</p>
+                     <p className="text-xs font-bold text-gray-900 mt-1">{selected.currentCity}</p>
+                  </div>
+                </div>
               </div>
-              <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden">
-                <div className="h-full bg-yellow-400 rounded-full transition-all" style={{ width: `${selected.progress}%` }} />
+
+              {/* Dynamic Network Path (Hub to Hub) */}
+              <div className="p-10 bg-white">
+                 <div className="relative space-y-12">
+                    {/* The Progress Line */}
+                    <div className="absolute left-2 top-2 bottom-2 w-0.5 bg-gray-100"></div>
+                    
+                    {selected.steps.map((step, idx) => (
+                      <div key={idx} className="flex gap-8 relative group">
+                         {/* Icon/Dot */}
+                         <div className={`w-4 h-4 rounded-full border-2 z-10 shrink-0 mt-1.5 transition-all duration-500 ${
+                            step.done ? 'bg-emerald-500 border-emerald-100 scale-110 shadow-lg' : 
+                            step.current ? 'bg-yellow-400 border-yellow-200 animate-pulse scale-150 shadow-xl shadow-yellow-400/40' : 
+                            'bg-white border-gray-200 opacity-30 shadow-inner'
+                         }`}></div>
+
+                         {/* Content */}
+                         <div className={`flex-1 transition-all duration-500 ${step.done ? 'opacity-60' : step.current ? 'opacity-100' : 'opacity-20'}`}>
+                            <div className="flex justify-between items-center">
+                               <p className={`text-[10px] font-black uppercase tracking-[0.2em] ${step.current ? 'text-yellow-600' : 'text-gray-400'}`}>
+                                  {step.city}
+                               </p>
+                               {step.done && <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded tracking-widest uppercase">Scanned</span>}
+                            </div>
+                            
+                            <div className={`mt-2 p-4 rounded-2xl border transition-all ${step.current ? 'bg-gray-900 border-gray-800 shadow-2xl translate-x-1' : 'bg-gray-50/50 border-gray-100'}`}>
+                               <p className={`text-sm font-bold leading-tight ${step.current ? 'text-white' : 'text-gray-900'}`}>
+                                  {step.label}
+                               </p>
+                               {step.current && (
+                                  <p className="text-[10px] font-medium text-gray-400 mt-2 leading-relaxed">
+                                     Our automated sorting facility is preparing this parcel for the next inter-city line-haul truck.
+                                  </p>
+                               )}
+                            </div>
+                         </div>
+                      </div>
+                    ))}
+                 </div>
+              </div>
+
+              {/* Transit Context */}
+              <div className="px-8 py-6 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+                 <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-white border border-gray-200 flex items-center justify-center text-gray-400 shadow-sm">
+                       <Truck size={22} />
+                    </div>
+                    <div>
+                       <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">In Transit via Hub</p>
+                       <p className="text-xs font-bold text-gray-900">Consolidated Loading</p>
+                    </div>
+                 </div>
+                 <div className="text-right">
+                    <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Network Speed</p>
+                    <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest">Standard Express</p>
+                 </div>
+              </div>
+
+              <div className="p-5 bg-black text-[#FFCC00] text-[10px] font-black uppercase tracking-[0.3em] text-center flex items-center justify-center gap-4 group">
+                 <div className="w-2 h-2 rounded-full bg-[#FFCC00] animate-pulse"></div>
+                 AUSTRALIAN LOGISTICS NETWORK LIVE FEED
               </div>
             </div>
-          </div>
         </div>
       </div>
     </div>

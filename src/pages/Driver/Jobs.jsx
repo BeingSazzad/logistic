@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Package, MapPin, Clock, ChevronRight, CheckCircle, AlertCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const STATUS_STYLES = {
   'Completed': 'bg-green-100 text-green-700',
@@ -10,7 +11,7 @@ const STATUS_STYLES = {
 
 const jobs = [
   {
-    id: 'J-2026-1260',
+    id: 'SHP-9081',
     customer: 'Woolworths',
     from: 'Sydney NSW',
     to: 'Melbourne VIC',
@@ -20,7 +21,7 @@ const jobs = [
     earnings: '$796.30',
   },
   {
-    id: 'J-2026-1247',
+    id: 'SHP-9076',
     customer: 'Coles',
     from: 'Melbourne VIC',
     to: 'Adelaide SA',
@@ -30,7 +31,7 @@ const jobs = [
     earnings: '$620.50',
   },
   {
-    id: 'J-2026-1235',
+    id: 'SHP-9065',
     customer: 'Amazon AU',
     from: 'Brisbane QLD',
     to: 'Sydney NSW',
@@ -40,7 +41,7 @@ const jobs = [
     earnings: '$510.00',
   },
   {
-    id: 'J-2026-1222',
+    id: 'SHP-9052',
     customer: 'IGA',
     from: 'Sydney NSW',
     to: 'Newcastle NSW',
@@ -50,7 +51,7 @@ const jobs = [
     earnings: '$240.00',
   },
   {
-    id: 'J-2026-1298',
+    id: 'SHP-9099',
     customer: 'BigW',
     from: 'Sydney NSW',
     to: 'Canberra ACT',
@@ -62,6 +63,7 @@ const jobs = [
 ];
 
 export default function DriverJobs() {
+  const navigate = useNavigate();
   const [tab, setTab] = useState('all');
 
   const filtered = jobs.filter(j => {
@@ -73,7 +75,7 @@ export default function DriverJobs() {
   return (
     <div className="p-4 flex flex-col gap-4">
       <div className="flex justify-between items-center pt-1">
-        <h2 className="text-lg font-bold text-gray-900">My Jobs</h2>
+        <h2 className="text-lg font-bold text-gray-900">Active Shipments</h2>
         <span className="text-xs text-gray-500">{jobs.length} total</span>
       </div>
 
@@ -124,7 +126,10 @@ export default function DriverJobs() {
 
             <div className="mt-3 pt-3 border-t border-gray-50 flex justify-between items-center">
               <span className="text-sm font-black text-gray-900">{job.earnings}</span>
-              <button className="flex items-center gap-1 text-xs font-bold text-yellow-600">
+              <button 
+                onClick={() => navigate(`/driver/jobs/${job.id}`)}
+                className="flex items-center gap-1 text-xs font-bold text-yellow-600 hover:text-yellow-700 active:scale-95 transition-all"
+              >
                 View Details <ChevronRight size={14} />
               </button>
             </div>

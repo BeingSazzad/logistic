@@ -3,7 +3,7 @@ import { Building2, Phone, Mail, MapPin } from 'lucide-react';
 
 export default function CustomerAccount() {
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto">
       <div>
         <h1 className="text-2xl font-bold text-gray-900">My Account</h1>
         <p className="text-sm text-gray-500 mt-1">Woolworths Group Logistics</p>

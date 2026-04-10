@@ -4,7 +4,8 @@ import {
   ArrowLeft, MapPin, CheckCircle2, Circle, AlertTriangle, 
   Printer, Share2, ClipboardList, Truck, Box, 
   User, Clock, FileCheck, Route, FileText, UserCheck,
-  Star, ChevronRight, X, Send, PackageCheck
+  Star, ChevronRight, X, Send, PackageCheck,
+  UploadCloud, FileSignature, ArrowRight
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -38,13 +39,12 @@ const JOB_DB = {
     pickup: '09:00 AM', window: '10:00 – 11:30', load: '4.8t', notes: 'Perishables — strict delivery window'
   },
   'SHP-9042': {
-    id: 'SHP-9042', branchId: 'SYD-CENTRAL', status: 'Assigned', priority: 'High',
-    customer: 'Acme Corp Logistics',
-    consignor: { name: 'Sydney Hub Terminal', address: '1 O\'Riordan St, Alexandria NSW 2015', contact: 'Hub Ops (+61 2 9300 0055)', type: 'Pickup' },
-    consignee: { name: 'Melbourne Hub Terminal', address: '42 Freight Way, Laverton VIC 3028', contact: 'Ops Team (+61 3 9366 2000)', type: 'Delivery' },
-    cargo: { description: 'Mixed goods — automotive parts', packaging: '6 x Pallets', weight: '18,400 KG', value: '$52,000.00', fragile: false, hazardous: false },
-    fleet: { driver: 'Jack Taylor', driverInitials: 'JT', vehicle: 'TRK-102 (Freightliner Cascadia)', eta: 'April 09, 02:30 PM' },
-    pickup: '06:00 AM', window: 'Deliver by 16:00', load: '18.4t', notes: ''
+    pickup: '06:00 AM', window: 'Deliver by 16:00', load: '18.4t', notes: '',
+    legs: [
+      { id: 1, type: 'Pickup', from: 'Consignor', to: 'Sydney Hub', driver: 'Jack Taylor', status: 'Completed', icon: PackageCheck },
+      { id: 2, type: 'Line-haul', from: 'Sydney Hub', to: 'Melbourne Hub', driver: null, status: 'Unassigned', icon: Truck },
+      { id: 3, type: 'Last Mile', from: 'Melbourne Hub', to: 'Consignee', driver: null, status: 'Pending', icon: MapPin },
+    ]
   },
 };
 
@@ -86,7 +86,7 @@ export default function DispatchJobDetail() {
   const statusLabel = assigned ? 'Assigned' : (isUnassigned ? 'Unassigned' : job.status);
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12">
 
       {/* Success Toast */}
       {showSuccess && (
@@ -169,164 +169,68 @@ export default function DispatchJobDetail() {
         {/* ── LEFT: Route & Cargo ── */}
         <div className="lg:col-span-2 space-y-6">
 
-          {/* Route Card */}
-          <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
-            <div className="p-5 border-b border-gray-100 bg-[#FAFAFA] flex items-center gap-3">
-              <Route className="text-[#FFCC00]" size={18} />
-              <h2 className="text-sm font-bold text-[#111] uppercase tracking-wide">Transit Route</h2>
+          {/* ── NEW: NETWORK JOURNEY & LEG ASSIGNMENTS ── */}
+          <div className="card overflow-hidden">
+            <div className="p-4 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Route className="text-hero-primary" size={16} />
+                <h2 className="text-sm font-bold text-hero-dark uppercase tracking-wide">Network Journey & Assignments</h2>
+              </div>
+              <span className="badge bg-indigo-50 text-indigo-700 border-indigo-200">Multi-Leg Enabled</span>
             </div>
+            
             <div className="p-6">
-              <div className="flex gap-6">
-                <div className="relative">
-                  <div className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-400 shrink-0 z-10 relative">
-                    <Circle size={14} strokeWidth={3} />
-                  </div>
-                  <div className="absolute top-10 bottom-[-1.5rem] left-1/2 -translate-x-1/2 border-l-2 border-dashed border-gray-200 z-0"></div>
-                </div>
-                <div className="space-y-1.5 pb-8 pt-1">
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{job.consignor.type} Location</p>
-                  <h3 className="text-lg font-black text-gray-900 leading-tight">{job.consignor.name}</h3>
-                  <p className="text-sm font-medium text-gray-600">{job.consignor.address}</p>
-                  <div className="pt-1.5 flex items-center gap-1.5 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
-                    <User size={12}/> {job.consignor.contact}
-                  </div>
-                </div>
-              </div>
-              <div className="flex gap-6">
-                <div className="w-10 h-10 rounded-full bg-[#111] border border-gray-800 flex items-center justify-center text-white shrink-0">
-                  <MapPin size={16} />
-                </div>
-                <div className="space-y-1.5 pt-1">
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{job.consignee.type} Location</p>
-                  <h3 className="text-lg font-black text-gray-900 leading-tight">{job.consignee.name}</h3>
-                  <p className="text-sm font-medium text-gray-600">{job.consignee.address}</p>
-                  <div className="pt-1.5 flex items-center gap-1.5 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
-                    <User size={12}/> {job.consignee.contact}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+               <div className="space-y-6 relative">
+                  <div className="absolute left-[19px] top-6 bottom-6 w-0.5 bg-gray-100"></div>
+                  
+                  {job.legs?.map((leg, idx) => (
+                    <div key={leg.id} className="flex gap-4 relative group">
+                       <div className={`w-10 h-10 rounded-hero-sm flex items-center justify-center shrink-0 z-10 border-[3px] border-white shadow-sm transition-all ${
+                          leg.status === 'Completed' ? 'bg-hero-success text-white' : 
+                          leg.status === 'Unassigned' ? 'bg-hero-warning text-black animate-pulse' : 
+                          'bg-gray-100 text-gray-500'
+                       }`}>
+                          <leg.icon size={16} />
+                       </div>
+                       
+                       <div className="flex-1 pb-4">
+                          <div className="flex justify-between items-start">
+                             <div>
+                                <p className="hero-metadata">{leg.type} Leg</p>
+                                <h4 className="text-sm font-bold text-hero-dark mt-1">{leg.from} <ArrowRight size={12} className="inline mx-1 text-gray-400"/> {leg.to}</h4>
+                             </div>
+                             <div className="text-right">
+                                <span className={`badge ${
+                                   leg.status === 'Completed' ? 'bg-hero-success/10 text-hero-success border-hero-success/20' : 
+                                   leg.status === 'Unassigned' ? 'bg-hero-warning/10 text-hero-warning border-hero-warning/20' : 
+                                   'bg-gray-100 text-gray-500 border-gray-200'
+                                }`}>{leg.status}</span>
+                             </div>
+                          </div>
 
-          {/* Cargo Card */}
-          <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
-            <div className="p-5 border-b border-gray-100 bg-[#FAFAFA] flex items-center gap-3">
-              <Box className="text-gray-400" size={18} />
-              <h2 className="text-sm font-bold text-[#111] uppercase tracking-wide">Package Details</h2>
-            </div>
-            <div className="p-6">
-              <p className="text-base font-black text-gray-900 mb-6">{job.cargo.description}</p>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                {[
-                  { label: 'Packaging', val: job.cargo.packaging },
-                  { label: 'Total Weight', val: job.cargo.weight },
-                  { label: 'Est. Value', val: job.cargo.value, highlight: true },
-                  { label: 'Handling', val: job.cargo.fragile ? 'Fragile' : 'Standard', warn: job.cargo.fragile },
-                ].map((item, i) => (
-                  <div key={i} className="bg-gray-50 p-3 rounded-lg border border-gray-100">
-                    <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1">{item.label}</p>
-                    <p className={`text-sm font-black ${item.highlight ? 'text-emerald-600' : item.warn ? 'text-red-500' : 'text-gray-900'}`}>{item.val}</p>
-                  </div>
-                ))}
-              </div>
-              {job.notes && (
-                <div className="mt-4 flex items-center gap-2 p-3 bg-amber-50 border border-amber-100 rounded-lg">
-                  <AlertTriangle size={14} className="text-amber-500 shrink-0" />
-                  <p className="text-xs font-bold text-amber-700 uppercase tracking-widest">{job.notes}</p>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* ── ASSIGN DRIVER PANEL (only for unassigned) ── */}
-          {isUnassigned && !assigned && (
-            <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border-2 border-[#FFCC00] overflow-hidden">
-              <div className="p-5 border-b border-[#FFCC00]/30 bg-[#FFCC00]/5 flex items-center gap-3">
-                <UserCheck className="text-[#9A7B00]" size={18} />
-                <div>
-                  <h2 className="text-sm font-black text-[#111] uppercase tracking-wide">Assign Driver & Vehicle</h2>
-                  <p className="text-[10px] text-gray-500 font-medium mt-0.5">Select a branch driver — SMS will be sent automatically on confirmation</p>
-                </div>
-              </div>
-              <div className="p-6 space-y-4">
-
-                {/* Suggested Drivers */}
-                <div className="space-y-3">
-                  {AVAILABLE_DRIVERS.map(drv => (
-                    <button
-                      key={drv.id}
-                      onClick={() => setSelectedDriver(drv)}
-                      className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-all ${
-                        selectedDriver?.id === drv.id
-                          ? 'border-[#FFCC00] bg-[#FFFBEB] shadow-md'
-                          : 'border-gray-100 bg-gray-50 hover:border-gray-200 hover:bg-gray-100'
-                      }`}
-                    >
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-black text-sm shrink-0 shadow-sm ${selectedDriver?.id === drv.id ? 'bg-[#111] text-[#FFCC00]' : 'bg-white border border-gray-200 text-gray-600'}`}>
-                        {drv.initials}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <p className="font-black text-sm text-gray-900">{drv.name}</p>
-                          <span className="text-[9px] font-black text-gray-500 bg-white border border-gray-200 px-1.5 py-0.5 rounded uppercase tracking-widest">{drv.rank}</span>
-                        </div>
-                        <div className="flex items-center gap-3 mt-1">
-                          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{drv.vehicle}</span>
-                          <span className="text-[10px] text-emerald-600 font-black">{drv.availability}</span>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-1 text-xs font-black text-amber-500">
-                        <Star size={12} className="fill-amber-400" /> {drv.rating}
-                      </div>
-                      {selectedDriver?.id === drv.id && (
-                        <CheckCircle2 size={20} className="text-[#FFCC00] shrink-0" />
-                      )}
-                    </button>
+                          <div className="mt-3 p-3 rounded-hero-sm border bg-gray-50 border-gray-100 flex items-center justify-between">
+                             {leg.driver ? (
+                                <div className="flex items-center gap-3">
+                                   <div className="w-8 h-8 rounded-hero-sm bg-hero-dark text-hero-primary flex items-center justify-center font-bold text-xs">{leg.driver[0]}</div>
+                                   <p className="text-sm font-bold text-hero-dark">{leg.driver}</p>
+                                </div>
+                             ) : (
+                                <p className="text-sm font-medium text-gray-400 italic">No resource allocated</p>
+                             )}
+                             
+                             <button 
+                               onClick={() => setSelectedDriver({ legId: leg.id })}
+                               className="text-xs font-bold text-hero-primary hover:underline transition-colors"
+                             >
+                                {leg.driver ? 'Change Driver' : 'Assign Driver'}
+                             </button>
+                          </div>
+                       </div>
+                    </div>
                   ))}
-                </div>
-
-                {/* SMS Note */}
-                <div className="space-y-2 pt-2">
-                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block">Optional Dispatch Note (sent via SMS)</label>
-                  <textarea
-                    value={smsNote}
-                    onChange={e => setSmsNote(e.target.value)}
-                    placeholder="e.g. Temperature cargo — handle with care. Contact warehouse before arrival."
-                    className="w-full border border-gray-200 bg-gray-50 rounded-xl px-4 py-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 focus:border-[#FFCC00] transition-all h-[80px] font-medium"
-                  />
-                </div>
-
-                {/* Confirm Button */}
-                <button
-                  onClick={handleAssign}
-                  disabled={!selectedDriver}
-                  className={`w-full py-4 rounded-xl font-black uppercase text-sm tracking-widest flex items-center justify-center gap-3 transition-all ${
-                    selectedDriver
-                      ? 'bg-[#111] hover:bg-black text-[#FFCC00] shadow-xl active:scale-95'
-                      : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                  }`}
-                >
-                  <Send size={16} />
-                  {selectedDriver ? `Confirm Assignment → ${selectedDriver.name}` : 'Select a Driver Above'}
-                </button>
-              </div>
+               </div>
             </div>
-          )}
-
-          {/* Post-assignment confirmation */}
-          {isUnassigned && assigned && (
-            <div className="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-6 flex items-center gap-6">
-              <div className="w-14 h-14 bg-emerald-500 rounded-xl flex items-center justify-center text-white shadow-lg">
-                <CheckCircle2 size={28} />
-              </div>
-              <div>
-                <h3 className="font-black text-emerald-900 text-lg leading-none">Assignment Confirmed</h3>
-                <p className="text-emerald-700 text-sm font-medium mt-1">
-                  <strong>{selectedDriver?.name}</strong> ({selectedDriver?.vehicle}) has been assigned. SMS notifications sent.
-                </p>
-              </div>
-            </div>
-          )}
+          </div>
         </div>
 
         {/* ── RIGHT: Fleet Status / Document Controls ── */}
@@ -699,6 +603,58 @@ export default function DispatchJobDetail() {
         </div>
       )}
 
+      {/* Driver Assignment Panel */}
+      {selectedDriver?.legId && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200" onClick={() => setSelectedDriver(null)}>
+          <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl flex flex-col max-h-[85vh]" onClick={e => e.stopPropagation()}>
+            <div className="p-6 border-b border-gray-100 flex justify-between items-center shrink-0">
+               <div>
+                  <h3 className="text-xl font-bold text-gray-900 tracking-tight">Assign Fleet Resource</h3>
+                  <p className="text-xs text-gray-500 mt-1 uppercase tracking-widest">Select driver & vehicle for Leg {selectedDriver.legId}</p>
+               </div>
+               <button onClick={() => setSelectedDriver(null)} className="p-2 hover:bg-gray-100 rounded-full text-gray-400 transition-colors"><X size={20}/></button>
+            </div>
+            <div className="p-6 overflow-y-auto flex-1 space-y-4 bg-gray-50/50">
+               {AVAILABLE_DRIVERS.map(driver => (
+                 <div key={driver.id} className="bg-white border border-gray-200 p-4 rounded-xl flex items-center justify-between hover:border-[#FFCC00] hover:shadow-md transition-all cursor-pointer" onClick={() => {
+                     // Normally you would update the specific leg here
+                     setSelectedDriver(driver); // set the actual driver selected, not just legId
+                 }}>
+                   <div className="flex items-center gap-4">
+                     <div className="w-10 h-10 rounded-lg bg-[#111] text-[#FFCC00] flex items-center justify-center font-black">{driver.initials}</div>
+                     <div>
+                       <p className="text-sm font-bold text-gray-900">{driver.name} <span className="text-gray-400 font-medium ml-1">({driver.vehicle})</span></p>
+                       <p className={`text-[10px] font-black uppercase tracking-widest mt-1 ${driver.status === 'On Duty' ? 'text-emerald-500' : 'text-amber-500'}`}>{driver.availability}</p>
+                     </div>
+                   </div>
+                   <div className="text-right">
+                     <span className="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded font-bold uppercase">{driver.rank}</span>
+                   </div>
+                 </div>
+               ))}
+            </div>
+            <div className="p-6 border-t border-gray-100 shrink-0 flex justify-end gap-3 bg-white rounded-b-2xl">
+               <button onClick={() => setSelectedDriver(null)} className="px-5 py-2.5 text-sm font-bold text-gray-500 hover:text-gray-900">Cancel</button>
+               {/* Note: The button in the modal actually needs to confirm a selected driver.
+                   Since we click the driver row to select, if selectedDriver has .name, we show assign button */}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Driver Assignment Confirmation (If they selected a driver from the list) */}
+      {selectedDriver?.name && !showSuccess && !assigned && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] bg-[#111] text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-6 animate-in slide-in-from-bottom-6 border border-white/10">
+          <div>
+            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Confirm Assignment</p>
+            <p className="text-sm font-bold">{selectedDriver.name} <span className="text-[#FFCC00]">({selectedDriver.vehicle})</span></p>
+          </div>
+          <div className="flex items-center gap-3">
+             <button onClick={() => setSelectedDriver(null)} className="px-4 py-2 text-xs font-bold text-gray-400 hover:text-white transition-colors">Cancel</button>
+             <button onClick={handleAssign} className="px-6 py-2 bg-[#FFCC00] text-black font-black text-xs uppercase tracking-widest rounded-lg hover:bg-yellow-400 transition-colors shadow-lg">Confirm & Dispatch</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -22,7 +22,7 @@ export default function AccountsDashboard() {
   ];
 
   return (
-    <div className="flex flex-col gap-8 w-full max-w-7xl mx-auto">
+    <div className="flex flex-col gap-8 w-full max-w-[1440px] mx-auto">
       
       {/* Standardized Header */}
       <div className="flex justify-between items-center mb-6 px-2">

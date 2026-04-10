@@ -11,7 +11,7 @@ export default function AdminBranches() {
   ];
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12">
       
       {/* Pro Header */}
       <div className="flex justify-between items-center mb-2 px-2">
@@ -113,7 +113,12 @@ export default function AdminBranches() {
 
              <div className="border-t border-gray-50 p-5 bg-gray-50/50 flex justify-between items-center group-hover:bg-[#111] group-hover:text-white transition-all">
                <span className="text-[10px] font-black tracking-[0.2em] text-gray-400 group-hover:text-[#FFCC00] transition-colors uppercase">{branch.id}</span>
-               <button className="text-[11px] font-black uppercase tracking-widest flex items-center gap-2">Manage Branch <ArrowUpRight size={14}/></button>
+               <button 
+                 onClick={(e) => { e.stopPropagation(); navigate(`/admin/branches/${branch.id}`); }}
+                 className="text-[11px] font-black uppercase tracking-widest flex items-center gap-2"
+               >
+                 Manage Branch <ArrowUpRight size={14}/>
+               </button>
             </div>
           </div>
         ))}

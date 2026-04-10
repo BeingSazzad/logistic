@@ -8,7 +8,7 @@ const maxMrr = 1300;
 
 export default function PlatformAnalytics() {
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto">
       <div className="flex justify-between items-center mb-2 px-2">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Platform Analytics</h1>

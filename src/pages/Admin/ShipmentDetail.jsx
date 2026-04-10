@@ -2,35 +2,26 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, MapPin, CheckCircle2, Circle, AlertTriangle, ShieldAlert, FileText, UploadCloud, Truck, PackageCheck, FileSignature, X } from 'lucide-react';
 
-const LIFECYCLE_STATES = [
-  { step: 1,  label: 'Created Booking', reqs: ['Address Validated'], strict: true },
-  { step: 2,  label: 'Assigned to Branch', reqs: [], strict: false },
-  { step: 3,  label: 'Driver Assigned', reqs: ['Driver Active'], strict: true },
-  { step: 4,  label: 'Vehicle Allocated', reqs: ['Pre-Start Check'], strict: true },
-  { step: 5,  label: 'Dispatched to Pickup', reqs: [], strict: false },
-  { step: 6,  label: 'Arrived at Pickup', reqs: ['GPS Geofence (50m)'], strict: false },
-  { step: 7,  label: 'Loading Goods', reqs: [], strict: false },
-  { step: 8,  label: 'Pickup Complete', reqs: ['Pallet Count Verified'], strict: true },
-  { step: 9,  label: 'In Transit', reqs: [], strict: false },
-  { step: 10, label: 'Arrived at Hub / Consolidation', reqs: [], strict: false },
-  { step: 11, label: 'Out for Last Mile', reqs: [], strict: false },
-  { step: 12, label: 'Arrived at Drop-off', reqs: ['GPS Geofence (50m)'], strict: true },
-  { step: 13, label: 'Unloading Goods', reqs: [], strict: false },
-  { step: 14, label: 'Proof of Delivery (POD)', reqs: ['Receiver Signature', 'Photo Proof'], strict: true },
-  { step: 15, label: 'Completed', reqs: [], strict: true },
+// Dynamic Network Stages for sequential custody transfer
+const NETWORK_STAGES = [
+  { id: 1, type: 'Pickup', label: 'First Mile Pickup', location: 'Customer Site (Bondi)', actor: 'Local Courier', status: 'Completed', icon: PackageCheck },
+  { id: 2, type: 'Sorting', label: 'Inbound Sorting', location: 'Sydney Central Depot', actor: 'Depot Manager', status: 'Completed', icon: MapPin },
+  { id: 3, type: 'Inter-Hub', label: 'Hub Transfer (Trunk)', location: 'Sydney Hub → Melbourne Hub', actor: 'Line-haul Truck', status: 'Active', icon: Truck },
+  { id: 4, type: 'Sorting', label: 'Outbound Sorting', location: 'Melbourne Terminal', actor: 'Hub Supervisor', status: 'Pending', icon: Circle },
+  { id: 5, type: 'Delivery', label: 'Last Mile Delivery', location: 'Melbourne CBD', actor: 'Local Courier', status: 'Pending', icon: FileSignature },
 ];
 
 export default function AdminShipmentDetail() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [currentStep, setCurrentStep] = useState(9); // "In Transit"
-  const [exceptionActive, setExceptionActive] = useState(false); // Mock data
+  const [activeStage, setActiveStage] = useState(3); // Hub Transfer (Step 3)
+  const [exceptionActive, setExceptionActive] = useState(false);
   const [showPodModal, setShowPodModal] = useState(false);
-  const [podStatus, setPodStatus] = useState('pending'); // pending, submitting, done
+  const [podStatus, setPodStatus] = useState('pending');
   const [overrideSuccess, setOverrideSuccess] = useState(false);
 
   return (
-    <div className="w-full max-w-7xl mx-auto pb-16">
+    <div className="w-full max-w-[1440px] mx-auto pb-16">
       <button onClick={() => navigate('/admin/shipments')}
         className="flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-gray-900 mb-6 transition-colors">
         <ArrowLeft size={16} /> Back to Shipments
@@ -90,64 +81,80 @@ export default function AdminShipmentDetail() {
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
-        {/* LEFT COMPONENT: 15-State Lifecycle Architecture */}
-        <div className="lg:col-span-1 flex flex-col gap-5">
-          <div className="card bg-white shadow-sm p-6">
-            <h2 className="text-sm font-black text-gray-900 tracking-widest uppercase border-b border-gray-100 pb-4 mb-4">Shipment Lifecycle</h2>
+            {/* LEFT COMPONENT: Dynamic Network Journey */}
+        <div className="lg:col-span-1 flex flex-col gap-6">
+          <div className="card bg-white shadow-sm p-6 border border-gray-100">
+            <h2 className="text-sm font-black text-gray-900 tracking-widest uppercase border-b border-gray-100 pb-4 mb-6">Transport Network Flow</h2>
             
-            <div className="flex flex-col gap-0 relative">
-               <div className="absolute top-4 bottom-8 left-[11px] w-0.5 bg-gray-100 z-0"></div>
-               {LIFECYCLE_STATES.map((state, idx) => {
-                 const isCompleted = state.step < currentStep;
-                 const isCurrent = state.step === currentStep;
-                 const isPending = state.step > currentStep;
-
+            <div className="space-y-0 relative">
+               <div className="absolute top-4 bottom-8 left-[11px] w-0.5 bg-gray-50"></div>
+               {NETWORK_STAGES.map((stage, idx) => {
+                 const isCompleted = stage.id < activeStage;
+                 const isCurrent = stage.id === activeStage;
+                 
                  return (
-                   <div key={state.step} className="flex gap-4 relative z-10 hover:bg-gray-50/50 p-2 rounded-lg -ml-2 transition-colors group">
-                     {/* Node */}
-                     <div className="pt-0.5 shrink-0">
-                       {isCompleted ? (
-                         <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center border-4 border-white shadow-sm">
-                           <CheckCircle2 size={12} className="text-white" />
-                         </div>
-                       ) : isCurrent ? (
-                         <div className="w-6 h-6 rounded-full bg-yellow-400 flex items-center justify-center border-4 border-white shadow-md animate-pulse">
-                           <div className="w-2 h-2 rounded-full bg-black"></div>
-                         </div>
-                       ) : (
-                         <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center border-4 border-white">
-                           <Circle size={8} className="text-gray-300 fill-gray-300" />
-                         </div>
-                       )}
-                     </div>
-
-                     {/* Content */}
-                     <div className={`pb-6 w-full ${isPending ? 'opacity-50' : ''}`}>
-                       <div className="flex justify-between items-start">
-                         <p className={`text-xs font-bold uppercase tracking-widest ${isCurrent ? 'text-gray-900' : 'text-gray-600'}`}>{state.label}</p>
-                         {isCurrent && <span className="text-[9px] font-black uppercase text-yellow-600 bg-yellow-100 px-1.5 py-0.5 rounded">Active</span>}
-                       </div>
-                       
-                       {state.reqs.length > 0 && (
-                         <div className="mt-2 flex flex-wrap gap-1.5">
-                           {state.reqs.map((r, i) => (
-                             <span key={i} className={`text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider border ${isCompleted ? 'bg-green-50 text-green-700 border-green-200' : isCurrent ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-gray-50 text-gray-500 border-gray-200'}`}>
-                               {r}
-                             </span>
-                           ))}
-                         </div>
-                       )}
-                       
-                       {/* Admin Override Action Reveal */}
-                       <div className="hidden group-hover:flex mt-2 justify-end">
-                          <button className="text-[10px] font-black text-red-500 uppercase tracking-widest hover:underline">Force Bypass</button>
-                       </div>
-                     </div>
+                   <div key={stage.id} className={`flex gap-4 relative z-10 p-3 rounded-2xl transition-all ${isCurrent ? 'bg-yellow-50 border border-yellow-100 shadow-sm' : ''}`}>
+                      <div className="pt-0.5 shrink-0">
+                         {isCompleted ? (
+                           <div className="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center border-4 border-white shadow-sm">
+                             <CheckCircle2 size={12} className="text-white" />
+                           </div>
+                         ) : isCurrent ? (
+                           <div className="w-6 h-6 rounded-full bg-yellow-400 flex items-center justify-center border-4 border-white shadow-md animate-pulse">
+                             <div className="w-1.5 h-1.5 rounded-full bg-black"></div>
+                           </div>
+                         ) : (
+                           <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center border-4 border-white">
+                             <div className="w-1.5 h-1.5 rounded-full bg-gray-300"></div>
+                           </div>
+                         )}
+                      </div>
+                      <div className={`w-full ${!isCurrent && !isCompleted ? 'opacity-30' : ''}`}>
+                         <p className={`text-[10px] font-black uppercase tracking-widest ${isCurrent ? 'text-yellow-700' : 'text-gray-400'}`}>{stage.type}</p>
+                         <p className={`text-sm font-bold mt-0.5 ${isCurrent ? 'text-gray-900' : 'text-gray-600'}`}>{stage.label}</p>
+                         <p className="text-[10px] text-gray-500 font-medium mt-1 leading-relaxed">
+                            {stage.location} <span className="text-gray-300 mx-1">/</span> {stage.actor}
+                         </p>
+                      </div>
                    </div>
                  );
                })}
             </div>
+          </div>
+
+          {/* Terminal Handover Control Block (The SaaS Solution) */}
+          <div className="card bg-[#111] text-white p-6 shadow-xl border border-gray-800 relative overflow-hidden group">
+             <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <Truck size={60} />
+             </div>
+             <h2 className="text-[11px] font-black text-[#FFCC00] tracking-[0.2em] uppercase mb-6 flex items-center gap-2">
+                <ShieldAlert size={14}/> Terminal Management
+             </h2>
+             
+             <div className="space-y-6 relative z-10">
+                <div className="p-4 bg-white/5 rounded-2xl border border-white/10">
+                   <p className="text-[10px] font-black uppercase text-gray-500 tracking-widest mb-2">Current Custodian</p>
+                   <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-yellow-400 text-black flex items-center justify-center font-black">LH</div>
+                      <div>
+                         <p className="text-sm font-bold uppercase tracking-tight">Line-haul Fleet V-904</p>
+                         <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">In-Transit to MEL</p>
+                      </div>
+                   </div>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                   <button 
+                     onClick={() => setActiveStage(prev => Math.min(5, prev + 1))}
+                     className="w-full bg-[#FFCC00] hover:bg-yellow-400 text-black py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-lg shadow-yellow-400/10 transition-all flex items-center justify-center gap-2"
+                   >
+                     Authorize Handover <ArrowLeft size={16} className="rotate-180" />
+                   </button>
+                   <p className="text-[9px] text-center font-bold text-gray-500 uppercase tracking-widest px-4">
+                      Approving handover confirms the physical scan and receipt of cargo at the next node.
+                   </p>
+                </div>
+             </div>
           </div>
         </div>
 

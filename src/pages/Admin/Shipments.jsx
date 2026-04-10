@@ -1,258 +1,338 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Package, Search, Filter, Plus, Clock, CheckCircle2, AlertTriangle, Truck, ArrowDownUp, MapPin, ChevronDown, X } from 'lucide-react';
+import { 
+  Package, Search, Filter, Plus, Clock,
+  MapPin, ChevronDown, AlertTriangle,
+  CheckCircle2, UserCheck, Inbox, Zap,
+  ArrowRight, AlertCircle, Users, Lock, ShieldCheck, X
+} from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+
+const QUEUES = [
+  { id: 'unassigned', label: 'Unassigned',     icon: Inbox,       color: 'text-amber-600',  bg: 'bg-amber-50',  border: 'border-amber-200', desc: 'Booked – awaiting driver assignment' },
+  { id: 'assigned',   label: 'In Transit',     icon: Zap,          color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-200', desc: 'Assigned & physically moving' },
+  { id: 'exception',  label: 'Exceptions',     icon: AlertCircle,  color: 'text-red-600',    bg: 'bg-red-50',    border: 'border-red-200',    desc: 'Delayed or arrival issues' },
+  { id: 'completed',  label: 'Received',       icon: CheckCircle2, color: 'text-gray-500',   bg: 'bg-gray-50',   border: 'border-gray-200',   desc: 'Handover complete / Delivered' },
+];
 
 export default function AdminShipments() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [filter, setFilter] = useState('All');
+  const [queue, setQueue] = useState('unassigned');
   const [search, setSearch] = useState('');
-  const [sortKey, setSortKey] = useState('id');
-  const [sortOrder, setSortOrder] = useState('desc');
+  const [showFilter, setShowFilter] = useState(false);
+  const [showSort, setShowSort] = useState(false);
   const [selectedIds, setSelectedIds] = useState([]);
-  const [showCreateMock, setShowCreateMock] = useState(false);
-  
+  const [unassignedFilter, setUnassignedFilter] = useState('All');
+
   const toggleSelect = (id) => {
     setSelectedIds(prev => prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]);
   };
-  
-  const rawShipments = [
-    { id: 'SHP-9042', branchId: 'SYD-CENTRAL', origin: 'Sydney Depot', dest: 'Melbourne Branch', customer: 'Acme Corp Logistics', status: 'In Transit', progress: 45, type: 'Heavy Load', driver: 'Jack Taylor', est: 'Today 4:00 PM' },
-    { id: 'SHP-9041', branchId: 'SYD-CENTRAL', origin: 'Sydney Depot', dest: 'Penrith Branch', customer: 'Tech Solutions Ltd', status: 'Arrived at Branch', progress: 85, type: 'Parcel', driver: 'Sarah Mitchell', est: 'Awaiting Handover' },
-    { id: 'SHP-9039', branchId: 'MEL-HUB', origin: 'Brisbane Port', dest: 'Gold Coast Branch', customer: 'Global Traders Australia', status: 'Exception', progress: 60, type: 'Express', driver: 'Liam Smith', est: 'Delayed' },
-    { id: 'SHP-9035', branchId: 'SYD-CENTRAL', origin: 'Adelaide Depot', dest: 'Sydney Depot', customer: 'Acme Corp Logistics', status: 'Received at Branch', progress: 100, type: 'Heavy Load', driver: 'Noah Williams', est: 'Completed' }
+
+  const rawJobs = [
+    // Unassigned (confirmed, no driver yet)
+    { id: 'SHP-9055', branchId: 'SYD-CENTRAL', customer: 'Acme Freight Co', origin: 'Sydney Depot', dest: 'Canberra Branch', queue: 'unassigned', unassignedType: 'Local Pickups', driver: null, vehicle: null, priority: 'High', eta: '—', pickup: '11:00 AM', window: '12:00–14:00', load: '6.2t', notes: 'Temperature-controlled cargo' },
+    { id: 'SHP-9054', branchId: 'SYD-CENTRAL', customer: 'Tech Solutions Ltd', origin: 'Sydney Depot', dest: 'Penrith Branch', queue: 'unassigned', unassignedType: 'Local Pickups', driver: null, vehicle: null, priority: 'Medium', eta: '—', pickup: '12:30 PM', window: '13:00–15:00', load: '2.1t', notes: '' },
+    { id: 'SHP-9060', branchId: 'SYD-CENTRAL', customer: 'Velocity Logistics', origin: 'Melbourne Hub', dest: 'Brisbane Hub', queue: 'unassigned', unassignedType: 'Branch Transfers', driver: null, vehicle: null, priority: 'High', eta: '—', pickup: 'Awaiting Transit', window: '—', load: '14.5t', notes: 'Hub cross-dock completed' },
+    { id: 'SHP-9061', branchId: 'SYD-CENTRAL', customer: 'Local Retailer', origin: 'Perth Depot', dest: 'Sydney Local', queue: 'unassigned', unassignedType: 'Local Deliveries', driver: null, vehicle: null, priority: 'Medium', eta: '—', pickup: 'Arrived at Staging', window: 'Before 17:00', load: '2.4t', notes: 'Last mile priority' },
+
+    // Assigned (active trips)
+    { id: 'SHP-9042', branchId: 'SYD-CENTRAL', customer: 'Acme Corp Logistics', origin: 'Sydney Depot', dest: 'Melbourne Branch', queue: 'assigned', driver: 'Jack Taylor', vehicle: 'XQG-984', priority: 'High', eta: '14:30', pickup: '06:00 AM', window: 'Deliver by 16:00', load: '18.4t', notes: '' },
+    { id: 'SHP-9035', branchId: 'SYD-CENTRAL', customer: 'Southport Logistics', origin: 'Adelaide Depot', dest: 'Sydney Depot', queue: 'assigned', driver: 'Oliver Brown', vehicle: 'V-102', priority: 'High', eta: 'Arrived at Branch', pickup: '05:00 AM', window: 'Delivered by 11:00', load: '12.0t', notes: '' },
+
+    // Exception
+    { id: 'SHP-9041', branchId: 'SYD-CENTRAL', customer: 'Tech Solutions Ltd', origin: 'Sydney Depot', dest: 'Penrith Branch', queue: 'exception', driver: 'Liam Smith', vehicle: 'BGT-221', priority: 'Medium', eta: 'Delayed', pickup: '07:00 AM', window: 'Deliver by 14:00', load: '9.5t', notes: 'Driver reports heavy traffic — ETA +1h', exception: 'Delay' },
+    { id: 'SHP-9048', branchId: 'SYD-CENTRAL', customer: 'Blue River Exports', origin: 'Sydney Depot', dest: 'Sydney Depot', queue: 'exception', driver: 'Lucas Jones', vehicle: 'TRK-08', priority: 'High', eta: 'GPS Lost', pickup: '04:00 AM', window: 'Deliver by 09:00', load: '14.2t', notes: 'No GPS update for 18 minutes', exception: 'GPS Lost' },
+
+    // Completed
+    { id: 'SHP-9039', branchId: 'SYD-CENTRAL', customer: 'Global Traders AU', origin: 'Brisbane Depot', dest: 'Gold Coast Branch', queue: 'completed', driver: 'Liam Smith', vehicle: 'KLY-004', priority: 'Low', eta: 'Received at Branch', pickup: '03:00 AM', window: 'Deliver by 08:00', load: '5.5t', notes: '' },
   ];
 
-  const branchShipments = useMemo(() => {
-    if (user.role === 'Super Admin' || user.role === 'Platform Admin') return rawShipments;
-    return rawShipments.filter(shp => shp.branchId === user.branchId);
+  const branchJobs = useMemo(() => {
+    if (user.role === 'Super Admin' || user.role === 'Platform Admin') return rawJobs;
+    return rawJobs.filter(j => j.branchId === user.branchId);
   }, [user.role, user.branchId]);
 
-  const filteredShipments = useMemo(() => {
-    return branchShipments.filter(shp => {
-      const matchesFilter = filter === 'All' || shp.status === filter;
-      const searchStr = `${shp.id} ${shp.customer} ${shp.origin} ${shp.dest} ${shp.driver}`.toLowerCase();
-      const matchesSearch = searchStr.includes(search.toLowerCase());
-      return matchesFilter && matchesSearch;
-    }).sort((a, b) => {
-      const aVal = a[sortKey];
-      const bVal = b[sortKey];
-      if (sortOrder === 'asc') return aVal > bVal ? 1 : -1;
-      return aVal < bVal ? 1 : -1;
-    });
-  }, [branchShipments, filter, search, sortKey, sortOrder]);
+  const counts = useMemo(() => ({
+    unassigned: branchJobs.filter(j => j.queue === 'unassigned').length,
+    assigned:   branchJobs.filter(j => j.queue === 'assigned').length,
+    exception:  branchJobs.filter(j => j.queue === 'exception').length,
+    completed:  branchJobs.filter(j => j.queue === 'completed').length,
+  }), [branchJobs]);
 
-  const toggleSort = () => {
-    if (sortKey === 'id') {
-      setSortKey('customer');
-      setSortOrder('asc');
-    } else if (sortKey === 'customer') {
-      setSortKey('progress');
-      setSortOrder('desc');
-    } else {
-      setSortKey('id');
-      setSortOrder('desc');
-    }
+  const filtered = useMemo(() => {
+    return branchJobs.filter(j => {
+      const matchesQueue  = j.queue === queue;
+      const matchesSearch = !search || `${j.id} ${j.customer} ${j.driver || ''}`.toLowerCase().includes(search.toLowerCase());
+      
+      let matchesSub = true;
+      if (queue === 'unassigned' && unassignedFilter !== 'All') {
+        matchesSub = j.unassignedType === unassignedFilter;
+      }
+      return matchesQueue && matchesSearch && matchesSub;
+    });
+  }, [branchJobs, queue, search, unassignedFilter]);
+
+  const priorityStyle = (p) => {
+    if (p === 'High')   return 'bg-red-50 text-red-600 border-red-100';
+    if (p === 'Medium') return 'bg-amber-50 text-amber-600 border-amber-100';
+    return 'bg-gray-50 text-gray-500 border-gray-100';
   };
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
-      
-      {/* Standardized Header */}
-      <div className="flex justify-between items-center mb-6 px-2">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12">
+
+      {/* ── Header ── */}
+      <div className="flex justify-between items-center mb-2 px-2">
         <div className="flex items-center gap-4">
-          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-hero-sm text-hero-dark shadow-sm">
+          <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-100 rounded-hero-sm text-hero-dark shadow-sm">
             <Package size={20} />
           </div>
           <div>
-            <h1 className="hero-h1">Active Shipments</h1>
-            <p className="hero-body mt-1">Real-time status tracking and lifecycle management for all active freight.</p>
+            <h1 className="hero-h1">Shipment Queue</h1>
+            <p className="hero-body text-hero-neutral mt-1">{user.role === 'Super Admin' ? 'Global network' : user.branchName} · Live cargo operations and exception management</p>
           </div>
         </div>
-        <button 
-          onClick={() => {
-            setShowCreateMock(true);
-            setTimeout(() => setShowCreateMock(false), 3000);
-          }} 
+        <button
+          onClick={() => navigate('/admin/shipments/create')}
           className="btn btn-primary"
         >
-          <Plus size={16} strokeWidth={3} /> New Shipment
+          <Plus size={18} strokeWidth={3} /> Create Shipment
         </button>
       </div>
 
-      <div className="w-full h-px bg-gray-100 mb-6"></div>
+      <div className="w-full h-px bg-gray-200/60 mb-2"></div>
 
-      {showCreateMock && (
-        <div className="fixed top-24 right-8 bg-[#111] text-[#FFCC00] px-6 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-3 animate-in slide-in-from-right border border-white/10">
-           <Package size={20} className="animate-pulse" />
-           <div>
-              <p className="text-sm font-black uppercase tracking-widest">Restricted Action</p>
-              <p className="text-xs font-bold text-gray-400">Shipments must be created via the Booking API.</p>
-           </div>
-        </div>
-      )}
-
-      {/* KPI HUD */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 px-2 mb-6">
-        {[
-          { label: 'Total Volume', value: '1,204', icon: Package, color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-100' },
-          { label: 'On Road Now', value: '84', icon: Truck, color: 'text-indigo-600', bg: 'bg-indigo-50', border: 'border-indigo-100' },
-          { label: 'Exceptions', value: '3', icon: AlertTriangle, color: 'text-hero-danger', bg: 'bg-hero-danger/10', border: 'border-hero-danger/20' },
-          { label: 'Delivered Today', value: '412', icon: CheckCircle2, color: 'text-hero-success', bg: 'bg-hero-success/10', border: 'border-hero-success/20' },
-        ].map((kpi, i) => (
-          <div key={i} className="card p-5 flex items-center justify-between">
-            <div>
-              <p className="hero-metadata leading-tight text-hero-neutral">{kpi.label}</p>
-              <p className="text-2xl font-black text-hero-dark mt-1.5 leading-none">{kpi.value}</p>
-            </div>
-            <div className={`w-10 h-10 rounded-hero-sm border ${kpi.border} flex items-center justify-center ${kpi.bg} ${kpi.color}`}>
-              <kpi.icon size={20} />
-            </div>
-          </div>
-        ))}
+      {/* ── Queue Selector Cards ── */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {QUEUES.map(q => {
+          const isActive = queue === q.id;
+          const count = counts[q.id];
+          return (
+            <button
+              key={q.id}
+              onClick={() => setQueue(q.id)}
+              className={`card p-5 text-left flex flex-col gap-2 transition-all group overflow-hidden ${isActive ? 'ring-2 ring-brand border-brand shadow-lg ' + q.bg : 'hover:border-brand/40'}`}
+            >
+              <div className="flex justify-between items-center relative z-10">
+                <q.icon size={20} className={isActive ? q.color : 'text-hero-neutral'} />
+                <span className={`text-xl font-black ${isActive ? 'text-hero-dark' : 'text-hero-neutral'}`}>{counts[q.id]}</span>
+              </div>
+              <div className="relative z-10 mt-1">
+                <p className={`hero-card-title ${isActive ? 'text-hero-dark' : 'text-hero-neutral'}`}>{q.label}</p>
+                <p className="hero-metadata leading-tight text-hero-neutral group-hover:text-hero-dark transition-colors">{q.desc}</p>
+              </div>
+            </button>
+          );
+        })}
       </div>
 
-      {/* Modern High-Density Table Card */}
+      {/* ── Table Card ── */}
       <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
-        
-        {/* Filter Bar */}
-        <div className="p-5 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 bg-gray-50/30">
-           <div className="flex bg-gray-100/50 p-1 rounded-hero-sm border border-gray-200/60 w-full md:w-auto shadow-inner">
-             {['All', 'In Transit', 'Arrived', 'Exception', 'Delivered'].map((tab) => (
-               <button 
-                 key={tab}
-                 onClick={() => setFilter(tab)}
-                 className={`px-4 py-2 hero-metadata rounded-hero-sm transition-all whitespace-nowrap ${filter === tab ? 'bg-white text-hero-dark shadow-sm border border-gray-200/50' : 'text-hero-neutral hover:text-hero-dark border border-transparent'}`}
-               >
-                 {tab}
-               </button>
-             ))}
-           </div>
 
-           <div className="flex items-center gap-4 w-full md:w-auto">
-             <div className="relative flex-1 md:w-[320px] group">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-hero-neutral group-focus-within:text-brand transition-colors" size={14} />
-                <input 
-                  type="text" 
-                  value={search}
-                  onChange={e => setSearch(e.target.value)}
-                  placeholder="Find SHP- ID, origins or customers..." 
-                  className="input pl-10" 
-                />
-             </div>
-             
-             <div className="relative">
-                <select 
-                  value={sortKey} 
-                  onChange={(e) => setSortKey(e.target.value)}
-                  className="appearance-none bg-white border border-gray-200 text-gray-700 text-xs font-bold rounded-lg pl-9 pr-10 py-2.5 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 transition-all cursor-pointer shadow-sm uppercase tracking-widest"
-                >
-                  <option value="id">Sort: Handover ID</option>
-                  <option value="customer">Sort: Customer Info</option>
-                  <option value="progress">Sort: Delivery Progress</option>
-                  <option value="origin">Sort: Origin Location</option>
-                </select>
-                <ArrowDownUp size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
-                <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
-             </div>
-           </div>
+        {/* Filter Bar */}
+        <div className="p-5 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 bg-[#FAFAFA]">
+          <div className="flex-1">
+            <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest">{QUEUES.find(q=>q.id===queue)?.label}</h3>
+            <p className="text-[10px] font-medium text-gray-400 mt-0.5">{filtered.length} shipment{filtered.length !== 1 ? 's' : ''} found</p>
+          </div>
+          
+          <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+            <div className="relative flex-1 md:flex-initial">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={15} />
+              <input
+                type="text"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                placeholder="Search..."
+                className="w-full md:w-64 bg-white border border-gray-200 rounded-lg py-2.5 pl-10 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 focus:border-[#FFCC00] transition-all shadow-sm"
+              />
+            </div>
+
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <button 
+                onClick={() => setShowFilter(!showFilter)}
+                className="btn btn-outline py-2.5 px-4"
+              >
+                <Filter size={14} /> Filter <ChevronDown size={14} className={`transition-transform ${showFilter ? 'rotate-180' : ''}`} />
+              </button>
+              {showFilter && (
+                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-hero-md shadow-xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                  <div className="py-1">
+                    {['All Priorities', 'High Priority', 'Medium Priority', 'Critical Only'].map((opt) => (
+                      <button key={opt} onClick={() => setShowFilter(false)} className="w-full text-left px-4 py-2 text-sm text-hero-dark hover:bg-brand/5 hover:text-hero-dark transition-colors font-medium border-b border-gray-50 last:border-0">{opt}</button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="relative">
+              <button 
+                onClick={() => setShowSort(!showSort)}
+                className="btn btn-outline py-2.5 px-4"
+              >
+                <ChevronDown size={14} className={`mr-2 transition-transform ${showSort ? 'rotate-180' : ''}`} /> Sort
+              </button>
+              {showSort && (
+                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-hero-md shadow-xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                  <div className="py-1">
+                    {['ID (Asc)', 'ID (Desc)', 'Customer Name', 'Earliest Pickup'].map((opt) => (
+                      <button key={opt} onClick={() => setShowSort(false)} className="w-full text-left px-4 py-2 text-sm text-hero-dark hover:bg-brand/5 hover:text-hero-dark transition-colors font-medium border-b border-gray-50 last:border-0">{opt}</button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
         </div>
 
-        <div className="overflow-x-auto relative">
-           {/* Floating Batch Action Bar */}
-           {selectedIds.length > 0 && (
-              <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 bg-black text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-6 animate-in slide-in-from-top-4 duration-300 border border-white/10">
-                <div className="flex items-center gap-3 border-r border-white/20 pr-6">
-                   <div className="w-8 h-8 rounded-lg bg-[#FFCC00] text-black flex items-center justify-center font-black">{selectedIds.length}</div>
-                   <div>
-                     <span className="text-[10px] font-black uppercase tracking-widest text-[#FFCC00]">Shipments Selected</span>
-                     <p className="text-[9px] text-gray-500 font-bold uppercase">Ready for route assembly</p>
-                   </div>
-                </div>
-                <div className="flex gap-4">
-                   <button className="bg-[#FFCC00] hover:bg-yellow-400 text-black px-5 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all shadow-lg flex items-center gap-2">
-                      <Truck size={14} /> Create Dispatch List
-                   </button>
-                </div>
-                <button onClick={() => setSelectedIds([])} className="p-1 hover:bg-white/10 rounded-full transition-colors"><X size={16}/></button>
-              </div>
-           )}
+        {/* Dynamic Segmentation Panel for Unassigned Queue */}
+        {queue === 'unassigned' && (
+           <div className="flex bg-gray-50 flex-wrap items-center gap-2 px-5 py-3 border-b border-gray-100">
+             <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest mr-2 flex items-center gap-1.5"><MapPin size={12}/> Task Type</span>
+             {['All', 'Local Pickups', 'Branch Transfers', 'Local Deliveries'].map(type => (
+                <button 
+                  key={type}
+                  onClick={() => setUnassignedFilter(type)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 ${
+                     unassignedFilter === type ? 'bg-[#111] text-[#FFCC00] shadow-md' : 'bg-white border border-gray-200 text-gray-500 hover:bg-gray-100'
+                  }`}
+                >
+                  {type === 'Local Pickups' && <Package size={12}/>}
+                  {type === 'Branch Transfers' && <ArrowRight size={12}/>}
+                  {type === 'Local Deliveries' && <MapPin size={12} />}
+                  {type}
+                </button>
+             ))}
+           </div>
+        )}
 
-           <table className="w-full text-left">
-             <thead className="hero-table-header">
-               <tr>
-                 <th className="px-6 py-4 w-4">
+        <div className="overflow-x-auto relative">
+          {/* Floating Batch Action Bar */}
+          {selectedIds.length > 0 && (
+             <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 bg-hero-dark text-white px-6 py-4 rounded-hero-lg shadow-2xl flex items-center gap-6 animate-in slide-in-from-top-4 duration-300 border border-white/10">
+               <div className="flex items-center gap-3 border-r border-white/20 pr-6">
+                  <div className="w-8 h-8 rounded-hero-sm bg-brand text-hero-dark flex items-center justify-center font-black">{selectedIds.length}</div>
+                  <div>
+                    <span className="hero-metadata text-brand">Operations Ready</span>
+                    <p className="text-[9px] text-gray-400 font-bold uppercase">Ready for inter-branch transfer</p>
+                  </div>
+               </div>
+               <div className="flex gap-4">
+                  <button className="bg-white/10 hover:bg-brand hover:text-hero-dark text-white px-4 py-2 rounded-hero-sm text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2">
+                     <Lock size={12} className="inline"/> Dispatch &amp; Lock IDs
+                  </button>
+                  <button className="btn btn-primary py-2 px-4 !rounded-hero-sm text-[10px]">
+                     Generate Manifest
+                  </button>
+               </div>
+               <button onClick={() => setSelectedIds([])} className="p-1 hover:bg-white/10 rounded-full transition-colors"><X size={16}/></button>
+            </div>
+          )}
+
+          <table className="w-full text-left">
+            <thead className="hero-table-header">
+              <tr>
+                <th className="px-6 py-4 w-4">
+                   <input 
+                      type="checkbox" 
+                      onChange={(e) => setSelectedIds(e.target.checked ? filtered.map(j => j.id) : [])}
+                      checked={selectedIds.length === filtered.length && filtered.length > 0}
+                      className="w-4 h-4 rounded-hero-sm border-gray-300 accent-brand cursor-pointer"
+                   />
+                </th>
+                <th className="px-6 py-4">Shipment Reference</th>
+                <th className="px-6 py-4">Route Info</th>
+                <th className="px-6 py-4">Weight/Load</th>
+                <th className="px-6 py-4">Assigned Driver</th>
+                <th className="px-6 py-4 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-50">
+              {filtered.length === 0 ? (
+                <tr>
+                  <td colSpan="6" className="px-6 py-16 text-center">
+                    <div className="flex flex-col items-center gap-3 text-gray-400">
+                      <Package size={36} strokeWidth={1} />
+                      <p className="text-sm font-bold">No shipments in this queue</p>
+                      <p className="text-[11px] font-medium">All clear for this terminal</p>
+                    </div>
+                  </td>
+                </tr>
+              ) : filtered.map(job => (
+                <tr
+                  key={job.id}
+                  className={`hover:bg-gray-50/80 transition-all cursor-pointer group border-l-4 ${selectedIds.includes(job.id) ? 'border-l-[#FFCC00] bg-yellow-50/20' : 'border-l-transparent'}`}
+                  onClick={() => navigate(`/admin/shipments/${job.id}`)}
+                >
+                  <td className="px-6 py-4" onClick={e => e.stopPropagation()}>
                     <input 
-                       type="checkbox" 
-                       onChange={(e) => setSelectedIds(e.target.checked ? filteredShipments.map(j => j.id) : [])}
-                       checked={selectedIds.length === filteredShipments.length && filteredShipments.length > 0}
-                       className="w-4 h-4 rounded border-gray-300 accent-yellow-400"
+                      type="checkbox" 
+                      checked={selectedIds.includes(job.id)}
+                      onChange={() => toggleSelect(job.id)}
+                      className="w-4 h-4 rounded border-gray-300 accent-yellow-400 cursor-pointer"
                     />
-                 </th>
-                 <th className="px-6 py-4">Manifest Reference</th>
-                 <th className="px-6 py-4">Ownership</th>
-                 <th className="px-6 py-4">Route / Trajectory</th>
-                 <th className="px-6 py-4">Current State</th>
-                 <th className="px-6 py-4 text-right">Actions</th>
-               </tr>
-             </thead>
-             <tbody className="divide-y divide-gray-100">
-               {filteredShipments.map(shp => (
-                 <tr className={`hover:bg-gray-50/50 transition-all cursor-pointer group ${selectedIds.includes(shp.id) ? 'bg-yellow-50/30 border-l-4 border-l-[#FFCC00]' : 'border-l-4 border-l-transparent'}`} key={shp.id} onClick={() => toggleSelect(shp.id)}>
-                   <td className="px-6 py-5" onClick={e => e.stopPropagation()}>
-                     <input 
-                       type="checkbox" 
-                       checked={selectedIds.includes(shp.id)}
-                       onChange={() => toggleSelect(shp.id)}
-                       className="w-4 h-4 rounded border-gray-300 accent-yellow-400 cursor-pointer"
-                     />
-                   </td>
-                   <td className="px-6 py-5" onClick={() => navigate(`/admin/shipments/${shp.id}`)}>
-                      <div className="font-bold text-[#111] text-[15px]">{shp.id}</div>
-                      <div className="text-[11px] text-gray-400 font-medium tracking-tight mt-0.5 truncate max-w-[160px]">{shp.customer}</div>
-                   </td>
-                   <td className="px-6 py-5" onClick={() => navigate(`/admin/shipments/${shp.id}`)}>
-                      <div className="flex items-center gap-2">
-                         <div className="w-1.5 h-1.5 rounded-full bg-[#FFCC00]"></div>
-                         <span className="text-[10px] font-black uppercase tracking-widest text-[#111]">{shp.branchId}</span>
-                      </div>
-                   </td>
-                   <td className="px-6 py-5" onClick={() => navigate(`/admin/shipments/${shp.id}`)}>
-                      <div className="flex flex-col gap-1 relative pl-4">
-                         <div className="absolute left-0 top-1 bottom-1 w-px bg-gray-100"></div>
-                         <div className="flex items-center gap-2 text-[10px] font-medium text-gray-400 uppercase">
-                            <MapPin size={10}/> {shp.origin}
-                         </div>
-                         <div className="flex items-center gap-2 text-xs font-bold text-gray-900 mt-0.5">
-                            <div className="w-1 h-1 rounded-full bg-yellow-400"></div> {shp.dest}
-                         </div>
-                      </div>
-                   </td>
-                   <td className="px-6 py-5" onClick={() => navigate(`/admin/shipments/${shp.id}`)}>
-                      <div className="flex flex-col gap-1.5">
-                        <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md border w-fit uppercase tracking-widest ${
-                           shp.status === 'Delivered' || shp.status === 'Received at Branch' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 
-                           shp.status === 'Exception' ? 'bg-[#FEF2F2] text-[#DC2626] border-[#FEE2E2]' : 
-                           shp.status === 'Arrived at Branch' ? 'bg-blue-50 text-blue-700 border-blue-200' :
-                           'bg-[#EFF6FF] text-[#2563EB] border-[#DBEAFE]'
-                        }`}>
-                           {shp.status}
-                        </span>
-                        <div className="w-20 h-1 bg-gray-50 rounded-full overflow-hidden border border-gray-100">
-                           <div className={`h-full ${shp.status === 'Exception' ? 'bg-red-500' : 'bg-emerald-500'}`} style={{ width: `${shp.progress}%` }}></div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="font-black text-[#111] text-sm tracking-tight">{job.id}</div>
+                    <div className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-0.5 truncate max-w-[160px]">{job.customer}</div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="flex items-center gap-2 text-xs font-bold text-gray-700">
+                      <span>{job.origin}</span>
+                      <ArrowRight size={12} className="text-gray-300 shrink-0"/>
+                      <span>{job.dest}</span>
+                    </div>
+                    {job.queue === 'unassigned' && job.unassignedType && (
+                       <div className="mt-1">
+                          <span className={`text-[9px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded ${
+                             job.unassignedType === 'Local Pickups' ? 'bg-blue-50 text-blue-600' :
+                             job.unassignedType === 'Branch Transfers' ? 'bg-amber-50 text-amber-600' :
+                             'bg-emerald-50 text-emerald-600'
+                          }`}>{job.unassignedType}</span>
+                       </div>
+                    )}
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="text-xs font-bold text-gray-700">{job.load}</div>
+                  </td>
+                  <td className="px-6 py-4">
+                    {job.driver ? (
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded bg-[#111] flex items-center justify-center font-black text-[10px] text-[#FFCC00] shrink-0 group-hover:border-[#FFCC00] border-2 border-transparent transition-colors">
+                          {job.driver.split(' ').map(n=>n[0]).join('')}
+                        </div>
+                        <div>
+                          <div className="font-bold text-[#111] text-xs">{job.driver}</div>
+                          <div className="text-[9px] text-gray-400 uppercase font-bold tracking-widest">{job.vehicle}</div>
                         </div>
                       </div>
-                   </td>
-                   <td className="px-6 py-4 text-right">
-                      <button onClick={(e) => { e.stopPropagation(); navigate(`/admin/shipments/${shp.id}`); }} className="text-[10px] font-black text-[#111] hover:text-white border border-gray-200 hover:bg-black px-4 py-2 rounded-lg transition-all uppercase tracking-widest shadow-sm">
-                        View Audit
+                    ) : (
+                      <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Waiting Assignment</span>
+                    )}
+                  </td>
+                  <td className="px-6 py-4 text-right">
+                    <div className="flex items-center justify-end gap-3">
+                      {job.queue !== 'unassigned' && (
+                         <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 shadow-inner" title="Locked for Transit">
+                            <Lock size={14} />
+                         </div>
+                      )}
+                      <button
+                        onClick={e => { e.stopPropagation(); navigate(`/admin/shipments/${job.id}`); }}
+                        className="text-[10px] font-black border border-gray-200 px-4 py-1.5 rounded-lg transition-all uppercase tracking-widest hover:bg-gray-50 bg-white"
+                      >
+                        Details
                       </button>
-                   </td>
-                 </tr>
-               ))}
-             </tbody>
-           </table>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

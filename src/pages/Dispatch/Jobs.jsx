@@ -23,6 +23,7 @@ export default function DispatchJobs() {
   const [showFilter, setShowFilter] = useState(false);
   const [showSort, setShowSort] = useState(false);
   const [selectedIds, setSelectedIds] = useState([]);
+  const [unassignedFilter, setUnassignedFilter] = useState('All');
 
   const toggleSelect = (id) => {
     setSelectedIds(prev => prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]);
@@ -30,9 +31,10 @@ export default function DispatchJobs() {
 
   const rawJobs = [
     // Unassigned (confirmed, no driver yet)
-    { id: 'SHP-9055', branchId: 'SYD-CENTRAL', customer: 'Acme Freight Co', origin: 'Sydney Depot', dest: 'Canberra Branch', queue: 'unassigned', driver: null, vehicle: null, priority: 'High', eta: '—', pickup: '11:00 AM', window: '12:00–14:00', load: '6.2t', notes: 'Temperature-controlled cargo' },
-    { id: 'SHP-9054', branchId: 'SYD-CENTRAL', customer: 'Tech Solutions Ltd', origin: 'Sydney Depot', dest: 'Penrith Branch', queue: 'unassigned', driver: null, vehicle: null, priority: 'Medium', eta: '—', pickup: '12:30 PM', window: '13:00–15:00', load: '2.1t', notes: '' },
-    { id: 'SHP-9053', branchId: 'SYD-CENTRAL', customer: 'Fresh Markets AU', origin: 'Sydney Depot', dest: 'Randwick Branch', queue: 'unassigned', driver: null, vehicle: null, priority: 'High', eta: '—', pickup: '09:00 AM', window: '10:00–11:30', load: '4.8t', notes: 'Perishables — strict window' },
+    { id: 'SHP-9055', branchId: 'SYD-CENTRAL', customer: 'Acme Freight Co', origin: 'Sydney Depot', dest: 'Canberra Branch', queue: 'unassigned', unassignedType: 'Local Pickups', driver: null, vehicle: null, priority: 'High', eta: '—', pickup: '11:00 AM', window: '12:00–14:00', load: '6.2t', notes: 'Temperature-controlled cargo' },
+    { id: 'SHP-9054', branchId: 'SYD-CENTRAL', customer: 'Tech Solutions Ltd', origin: 'Sydney Depot', dest: 'Penrith Branch', queue: 'unassigned', unassignedType: 'Local Pickups', driver: null, vehicle: null, priority: 'Medium', eta: '—', pickup: '12:30 PM', window: '13:00–15:00', load: '2.1t', notes: '' },
+    { id: 'SHP-9060', branchId: 'SYD-CENTRAL', customer: 'Velocity Logistics', origin: 'Melbourne Hub', dest: 'Brisbane Hub', queue: 'unassigned', unassignedType: 'Branch Transfers', driver: null, vehicle: null, priority: 'High', eta: '—', pickup: 'Awaiting Transit', window: '—', load: '14.5t', notes: 'Hub cross-dock completed' },
+    { id: 'SHP-9061', branchId: 'SYD-CENTRAL', customer: 'Local Retailer', origin: 'Perth Depot', dest: 'Sydney Local', queue: 'unassigned', unassignedType: 'Local Deliveries', driver: null, vehicle: null, priority: 'Medium', eta: '—', pickup: 'Arrived at Staging', window: 'Before 17:00', load: '2.4t', notes: 'Last mile priority' },
 
     // Assigned (active trips)
     { id: 'SHP-9042', branchId: 'SYD-CENTRAL', customer: 'Acme Corp Logistics', origin: 'Sydney Depot', dest: 'Melbourne Branch', queue: 'assigned', driver: 'Jack Taylor', vehicle: 'XQG-984', priority: 'High', eta: '14:30', pickup: '06:00 AM', window: 'Deliver by 16:00', load: '18.4t', notes: '' },
@@ -61,9 +63,14 @@ export default function DispatchJobs() {
     return branchJobs.filter(j => {
       const matchesQueue  = j.queue === queue;
       const matchesSearch = !search || `${j.id} ${j.customer} ${j.driver || ''}`.toLowerCase().includes(search.toLowerCase());
-      return matchesQueue && matchesSearch;
+      
+      let matchesSub = true;
+      if (queue === 'unassigned' && unassignedFilter !== 'All') {
+        matchesSub = j.unassignedType === unassignedFilter;
+      }
+      return matchesQueue && matchesSearch && matchesSub;
     });
-  }, [branchJobs, queue, search]);
+  }, [branchJobs, queue, search, unassignedFilter]);
 
   const priorityStyle = (p) => {
     if (p === 'High')   return 'bg-red-50 text-red-600 border-red-100';
@@ -72,7 +79,7 @@ export default function DispatchJobs() {
   };
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12">
 
       {/* ── Header ── */}
       <div className="flex justify-between items-center mb-2 px-2">
@@ -181,6 +188,27 @@ export default function DispatchJobs() {
         </div>
         </div>
 
+        {/* Dynamic Segmentation Panel for Unassigned Queue */}
+        {queue === 'unassigned' && (
+           <div className="flex bg-gray-50 flex-wrap items-center gap-2 px-5 py-3 border-b border-gray-100">
+             <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest mr-2 flex items-center gap-1.5"><MapPin size={12}/> Task Type</span>
+             {['All', 'Local Pickups', 'Branch Transfers', 'Local Deliveries'].map(type => (
+                <button 
+                  key={type}
+                  onClick={() => setUnassignedFilter(type)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 ${
+                     unassignedFilter === type ? 'bg-[#111] text-[#FFCC00] shadow-md' : 'bg-white border border-gray-200 text-gray-500 hover:bg-gray-100'
+                  }`}
+                >
+                  {type === 'Local Pickups' && <Package size={12}/>}
+                  {type === 'Branch Transfers' && <ArrowRight size={12}/>}
+                  {type === 'Local Deliveries' && <MapPin size={12} />}
+                  {type}
+                </button>
+             ))}
+           </div>
+        )}
+
         <div className="overflow-x-auto relative">
           {/* Floating Batch Action Bar */}
           {selectedIds.length > 0 && (
@@ -197,7 +225,7 @@ export default function DispatchJobs() {
                      <Lock size={12} className="inline"/> Dispatch &amp; Lock IDs
                   </button>
                   <button className="btn btn-primary py-2 px-4 !rounded-hero-sm text-[10px]">
-                     Create Dispatch List
+                     Generate Manifest
                   </button>
                </div>
                <button onClick={() => setSelectedIds([])} className="p-1 hover:bg-white/10 rounded-full transition-colors"><X size={16}/></button>
@@ -237,7 +265,7 @@ export default function DispatchJobs() {
                 <tr
                   key={job.id}
                   className={`hover:bg-gray-50/80 transition-all cursor-pointer group border-l-4 ${selectedIds.includes(job.id) ? 'border-l-[#FFCC00] bg-yellow-50/20' : 'border-l-transparent'}`}
-                  onClick={() => toggleSelect(job.id)}
+                  onClick={() => navigate(`/dispatch/jobs/${job.id}`)}
                 >
                   <td className="px-6 py-4" onClick={e => e.stopPropagation()}>
                     <input 
@@ -257,6 +285,15 @@ export default function DispatchJobs() {
                       <ArrowRight size={12} className="text-gray-300 shrink-0"/>
                       <span>{job.dest}</span>
                     </div>
+                    {job.queue === 'unassigned' && job.unassignedType && (
+                       <div className="mt-1">
+                          <span className={`text-[9px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded ${
+                             job.unassignedType === 'Local Pickups' ? 'bg-blue-50 text-blue-600' :
+                             job.unassignedType === 'Branch Transfers' ? 'bg-amber-50 text-amber-600' :
+                             'bg-emerald-50 text-emerald-600'
+                          }`}>{job.unassignedType}</span>
+                       </div>
+                    )}
                   </td>
                   <td className="px-6 py-4">
                     <div className="text-xs font-bold text-gray-700">{job.load}</div>

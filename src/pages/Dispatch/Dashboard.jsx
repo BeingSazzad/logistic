@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Filter, Plus, Package, Truck, DollarSign, AlertCircle,
@@ -7,30 +7,52 @@ import {
 } from 'lucide-react';
 
 const jobs = [
-  { id: 'SHP-20481', customer: 'Acme Corp',          route: 'Sydney Branch → Melbourne Branch',  driver: 'Jack Taylor',  vehicle: 'TRK-102', status: 'In Transit', progress: 65, eta: '2:45 PM' },
-  { id: 'SHP-20482', customer: 'Tech Solutions Ltd',  route: 'Brisbane Branch → Sydney Branch',      driver: 'Liam Smith',  vehicle: 'VAN-08',   status: 'Arrived at Branch',  progress: 85, eta: '4:30 PM' },
-  { id: 'SHP-20483', customer: 'Global Traders',      route: 'Perth Branch → Adelaide Branch',   driver: 'Noah Williams',   vehicle: 'TRK-05',   status: 'Received at Branch',   progress: 100, eta: 'Done' },
-  { id: 'SHP-20484', customer: 'Express Goods',       route: 'Sydney Branch → Newcastle Branch',  driver: 'Unassigned',   vehicle: '-',        status: 'Unassigned',   progress: 0, eta: '-' },
+  { id: 'SHP-20481', customer: 'Acme Corp',          route: 'Sydney Hub → Melbourne Hub',  driver: 'Jack Taylor',  vehicle: 'TRK-102', status: 'In Transit', progress: 65, eta: '2:45 PM', nextStop: 'Melbourne Terminal' },
+  { id: 'SHP-20482', customer: 'Tech Solutions Ltd',  route: 'Brisbane Depot → Sydney Hub',      driver: 'Liam Smith',  vehicle: 'VAN-08',   status: 'Arriving Soon',  progress: 85, eta: '4:30 PM', nextStop: 'Sydney Central Hub' },
+  { id: 'SHP-20483', customer: 'Global Traders',      route: 'Perth Hub → Adelaide Hub',   driver: 'Noah Williams',   vehicle: 'TRK-05',   status: 'In Sorting',   progress: 100, eta: 'Done', nextStop: 'Adelaide Terminal' },
+  { id: 'SHP-20484', customer: 'Express Goods',       route: 'Sydney Hub → Newcastle Depot',  driver: 'Unassigned',   vehicle: '-',        status: 'Unassigned',   progress: 0, eta: '-', nextStop: 'Newcastle Depot' },
 ];
 
 function StatusBadge({ status }) {
   const map = {
     'In Transit': 'badge-blue',
-    'Arrived at Branch': 'badge-blue',
-    'Received at Branch': 'badge-green',
-    'Delayed':    'badge-red',
+    'Arriving Soon': 'bg-amber-100 text-amber-700 border-amber-200',
+    'In Sorting': 'bg-violet-100 text-violet-700 border-violet-200',
     'Unassigned': 'badge-gray',
   };
-  return <span className={`badge ${map[status] ?? 'badge-gray'}`}>{status}</span>;
+  return <span className={`badge ${map[status] ?? 'badge-gray'} text-[10px] font-black uppercase tracking-widest`}>{status}</span>;
 }
 
 export default function DispatchDashboard() {
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
+  const [sortKey, setSortKey] = useState('id');
+  const [sortOrder, setSortOrder] = useState('desc');
   const [autoAssigning, setAutoAssigning] = useState(false);
 
+  // Advanced Filtering & Sorting Logic
+  const filteredAndSortedJobs = useMemo(() => {
+    return jobs
+      .filter(job => {
+        const searchStr = `${job.id} ${job.customer} ${job.route} ${job.driver} ${job.nextStop}`.toLowerCase();
+        return searchStr.includes(search.toLowerCase());
+      })
+      .sort((a, b) => {
+        const aVal = a[sortKey];
+        const bVal = b[sortKey];
+        if (sortOrder === 'asc') return aVal > bVal ? 1 : -1;
+        return aVal < bVal ? 1 : -1;
+      });
+  }, [search, sortKey, sortOrder]);
+
+  const toggleSort = () => {
+    if (sortKey === 'id') setSortKey('customer');
+    else if (sortKey === 'customer') setSortKey('status');
+    else setSortKey('id');
+  };
+
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12">
       
       {/* ── Standardized Header ── */}
       <div className="flex justify-between items-center mb-6 px-2">
@@ -113,9 +135,12 @@ export default function DispatchDashboard() {
                     />
                  </div>
                  
-                 <button className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 shadow-sm rounded-lg text-xs font-bold uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-colors">
-                    Sort By <ChevronDown size={14} className="text-gray-400" />
-                 </button>
+                  <button 
+                    onClick={toggleSort}
+                    className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 shadow-sm rounded-lg text-xs font-bold uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-colors"
+                  >
+                    Sort: {sortKey.charAt(0).toUpperCase() + sortKey.slice(1)} <ChevronDown size={14} className="text-gray-400" />
+                  </button>
               </div>
 
               <div className="overflow-x-auto flex-1">
@@ -129,37 +154,52 @@ export default function DispatchDashboard() {
                        </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
-                       {jobs.map(job => (
-                          <tr key={job.id} className="hover:bg-gray-50 transition-colors group cursor-pointer" onClick={() => navigate(`/dispatch/jobs/${job.id}`)}>
-                             <td className="px-6 py-4">
-                                <div className="font-bold text-[#111] text-sm">{job.id}</div>
-                                <div className="text-[10px] text-gray-400 uppercase font-bold tracking-widest mt-0.5 truncate max-w-[150px]">{job.customer}</div>
-                             </td>
-                             <td className="px-6 py-4">
-                                <p className="text-xs font-bold text-gray-700 mb-1.5">{job.route}</p>
-                                <div className="flex items-center gap-3">
-                                   <StatusBadge status={job.status} />
-                                   <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1.5"><Clock size={12}/> {job.eta}</span>
-                                </div>
-                             </td>
-                             <td className="px-6 py-4">
-                                <div className="flex items-center gap-3">
-                                   <div className={`w-9 h-9 rounded border-2 border-transparent flex items-center justify-center font-black text-[10px] shrink-0 transition-colors ${job.driver === 'Unassigned' ? 'bg-red-50 text-red-500 border border-red-100' : 'bg-[#111] text-[#FFCC00] group-hover:border-[#FFCC00]'}`}>
-                                      {job.driver === 'Unassigned' ? '?' : job.driver[0]}
-                                   </div>
-                                   <div>
-                                      <div className={`text-xs font-bold leading-tight ${job.driver === 'Unassigned' ? 'text-red-500' : 'text-[#111]'}`}>{job.driver}</div>
-                                      <div className={`text-[9px] uppercase font-bold tracking-widest mt-0.5 ${job.vehicle === '-' ? 'text-gray-300' : 'text-gray-400'}`}>{job.vehicle}</div>
-                                   </div>
-                                </div>
-                             </td>
-                             <td className="px-6 py-4 text-right">
-                                <button className="text-[10px] font-bold text-blue-600 hover:text-white border border-blue-200 hover:bg-blue-600 hover:border-blue-600 px-3 py-1.5 rounded-lg transition-colors uppercase tracking-widest" onClick={(e)=>{e.stopPropagation(); navigate(`/dispatch/jobs/${job.id}`);}}>
-                                   Manage Details
-                                </button>
-                             </td>
-                          </tr>
-                       ))}
+                       {filteredAndSortedJobs.length > 0 ? (
+                         filteredAndSortedJobs.map(job => (
+                           <tr key={job.id} className="hover:bg-gray-50 transition-colors group cursor-pointer" onClick={() => navigate(`/dispatch/jobs/${job.id}`)}>
+                              <td className="px-6 py-4">
+                                 <div className="font-bold text-[#111] text-sm">{job.id}</div>
+                                 <div className="text-[10px] text-gray-400 uppercase font-bold tracking-widest mt-0.5 truncate max-w-[150px]">{job.customer}</div>
+                              </td>
+                              <td className="px-6 py-4">
+                                 <p className="text-xs font-bold text-gray-700 mb-1.5">{job.route}</p>
+                                 <div className="flex items-center gap-3">
+                                    <StatusBadge status={job.status} />
+                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1.5"><MapPin size={12}/> {job.nextStop}</span>
+                                 </div>
+                              </td>
+                              <td className="px-6 py-4">
+                                 <div className="flex items-center gap-3">
+                                    <div className={`w-9 h-9 rounded border-2 border-transparent flex items-center justify-center font-black text-[10px] shrink-0 transition-colors ${job.driver === 'Unassigned' ? 'bg-red-50 text-red-500 border border-red-100' : 'bg-[#111] text-[#FFCC00] group-hover:border-[#FFCC00]'}`}>
+                                       {job.driver === 'Unassigned' ? '?' : job.driver[0]}
+                                    </div>
+                                    <div>
+                                       <div className={`text-xs font-bold leading-tight ${job.driver === 'Unassigned' ? 'text-red-500' : 'text-[#111]'}`}>{job.driver}</div>
+                                       <div className={`text-[9px] uppercase font-bold tracking-widest mt-0.5 ${job.vehicle === '-' ? 'text-gray-300' : 'text-gray-400'}`}>{job.vehicle}</div>
+                                    </div>
+                                 </div>
+                              </td>
+                              <td className="px-6 py-4 text-right">
+                                 {job.status === 'Arriving Soon' ? (
+                                    <button 
+                                      onClick={(e) => { e.stopPropagation(); alert(`Received ${job.id} into SYDNEY HUB`); }}
+                                      className="bg-[#111] text-[#FFCC00] text-[9px] font-black uppercase px-4 py-2 rounded-lg shadow-lg hover:bg-black transition-all tracking-[0.1em] whitespace-nowrap"
+                                    >
+                                       Check-in Hub
+                                    </button>
+                                 ) : (
+                                    <button className="text-[10px] font-black text-blue-600 hover:text-white border border-blue-200 hover:bg-blue-600 px-4 py-2 rounded-lg transition-all shadow-sm uppercase tracking-widest whitespace-nowrap" onClick={(e)=>{e.stopPropagation(); navigate(`/dispatch/jobs/${job.id}`);}}>
+                                       Manage Next Leg
+                                    </button>
+                                 )}
+                              </td>
+                           </tr>
+                         ))
+                       ) : (
+                         <tr>
+                            <td colSpan="4" className="px-6 py-12 text-center text-gray-400 font-bold uppercase tracking-widest text-xs">No matching shipments found</td>
+                         </tr>
+                       )}
                     </tbody>
                  </table>
               </div>

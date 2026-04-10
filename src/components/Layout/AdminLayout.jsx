@@ -14,7 +14,7 @@ const navConfig = [
       { to: '/admin/shipments',   label: 'Shipments' },
       { to: '/admin/exceptions',  label: 'Delivery Issues' },
       { to: '/admin/customers',   label: 'Customers' },
-      { to: '/admin/jobs-config', label: 'Jobs Config' },
+      { to: '/admin/jobs-config', label: 'Global Jobs Monitor' },
     ]
   },
   { type: 'link', label: 'Financial Control', icon: DollarSign, to: '/admin/finance' },
@@ -22,21 +22,21 @@ const navConfig = [
     type: 'group', label: 'Network Control', icon: Network,
     items: [
       { to: '/admin/branches', label: 'Branches' },
-      { to: '/admin/fleet',    label: 'Fleet' },
+      { to: '/admin/fleet',    label: 'Vehicles & Fleet' },
       { to: '/admin/drivers',  label: 'Drivers' },
     ]
   },
   {
     type: 'group', label: 'Insights', icon: BarChart2,
     items: [
-      { to: '/admin/reports', label: 'Operational Analytics' },
+      { to: '/admin/reports', label: 'Revenue Insights' },
       { to: '/admin/audit',   label: 'System Audit Logs' },
     ]
   },
   {
     type: 'group', label: 'Help & Support', icon: MessageSquare,
     items: [
-      { to: '/admin/messaging', label: 'Messages' },
+      { to: '/admin/messaging', label: 'Company Help Desk' },
       { to: '/admin/helpline',  label: 'Support' },
     ]
   },
@@ -44,10 +44,10 @@ const navConfig = [
     type: 'group', label: 'General Settings', icon: Settings,
     items: [
       { to: '/admin/company',       label: 'Company Profile' },
-      { to: '/admin/users',         label: 'Users & Permissions' },
-      { to: '/admin/notifications', label: 'Alert Notifications' },
-      { to: '/admin/integrations',  label: 'API & Connections' },
-      { to: '/admin/settings',      label: 'System Config' },
+      { to: '/admin/users',         label: 'Identity & Access' },
+      { to: '/admin/notifications', label: 'Notification Center' },
+      { to: '/admin/integrations',  label: 'Hub Integrations' },
+      { to: '/admin/settings',      label: 'System Settings' },
     ]
   }
 ];

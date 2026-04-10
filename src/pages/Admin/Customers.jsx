@@ -41,7 +41,7 @@ export default function AdminCustomers() {
   };
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto pb-12">
+    <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12">
       <div className="flex justify-between items-center mb-2 px-2">
         <div className="flex items-center gap-4">
           <div className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-[#111] shadow-sm">

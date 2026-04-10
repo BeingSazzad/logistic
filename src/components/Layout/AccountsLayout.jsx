@@ -7,12 +7,12 @@ import {
 import SidebarLayout from './SidebarLayout';
 
 const navConfig = [
-  { type: 'link', to: '/accounts',                label: 'Dashboard',      icon: LayoutDashboard, end: true },
-  { type: 'link', to: '/accounts/pod-review',     label: 'POD Review',     icon: FileCheck, badge: 12 },
-  { type: 'link', to: '/accounts/invoices',       label: 'Invoices',       icon: FileText },
+  { type: 'link', to: '/accounts',                label: 'Accounts Intelligence',      icon: LayoutDashboard, end: true },
+  { type: 'link', to: '/accounts/pod-review',     label: 'POD Review Queue',     icon: FileCheck, badge: 12 },
+  { type: 'link', to: '/accounts/invoices',       label: 'My Invoices',       icon: FileText },
   { type: 'link', to: '/accounts/payments',       label: 'Payments',       icon: CreditCard },
   { type: 'link', to: '/accounts/reimbursements', label: 'Reimbursements', icon: Receipt },
-  { type: 'link', to: '/accounts/settlements',    label: 'Settlements',    icon: Users },
+  { type: 'link', to: '/accounts/settlements',    label: 'Driver Settlements',    icon: Users },
   { type: 'link', to: '/accounts/reports',        label: 'Reports',        icon: BarChart2 },
 ];
 
