@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { User, Phone, Mail, Shield, CheckCircle2, AlertCircle, LogOut, ChevronRight, Lock, Bell, FileText, Activity, Info, Link as LinkIcon, Smartphone, Mailbox, Camera, LifeBuoy, Send } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useAuthStore } from '../../store/authStore';
 
 export default function DriverProfile() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function DriverProfile() {
     { name: 'Forklift License',           expiry: '30 Sep 2026', ok: true,  type: 'License' },
   ];
 
-  const { user } = useAuth();
+  const user = useAuthStore(state => state.user);
   const [activeView, setActiveView] = useState('main'); // 'main', 'edit', 'password'
   const [profilePhoto, setProfilePhoto] = useState(null);
 

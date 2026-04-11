@@ -5,10 +5,10 @@ import {
   UserCog, Plus, Users, ChevronDown, X
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useAuthStore } from '../../store/authStore';
 
 export default function DispatchDrivers() {
-  const { user } = useAuth();
+  const user = useAuthStore(state => state.user);
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('All');

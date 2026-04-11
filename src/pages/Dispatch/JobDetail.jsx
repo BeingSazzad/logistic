@@ -7,7 +7,7 @@ import {
   Star, ChevronRight, X, Send, PackageCheck,
   UploadCloud, FileSignature, ArrowRight
 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuthStore } from '../../store/authStore';
 
 // Mock job database — keyed by ID
 const JOB_DB = {
@@ -59,7 +59,7 @@ export default function DispatchJobDetail() {
   const navigate = useNavigate();
   const { useAuth: _useAuth, ...rest } = {};
   const { id } = useParams();
-  const { user } = useAuth();
+  const user = useAuthStore(state => state.user);
 
   const job = JOB_DB[id] || JOB_DB['SHP-9042'];
   const isUnassigned = !job.fleet;

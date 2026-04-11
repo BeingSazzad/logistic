@@ -6,7 +6,7 @@ import {
   CheckCircle2, UserCheck, Inbox, Zap,
   ArrowRight, AlertCircle, Users, Lock, ShieldCheck, X
 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuthStore } from '../../store/authStore';
 
 const QUEUES = [
   { id: 'unassigned', label: 'Unassigned',     icon: Inbox,       color: 'text-amber-600',  bg: 'bg-amber-50',  border: 'border-amber-200', desc: 'Booked – awaiting driver assignment' },
@@ -16,7 +16,7 @@ const QUEUES = [
 ];
 
 export default function DispatchJobs() {
-  const { user } = useAuth();
+  const user = useAuthStore(state => state.user);
   const navigate = useNavigate();
   const [queue, setQueue] = useState('unassigned');
   const [search, setSearch] = useState('');

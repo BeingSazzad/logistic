@@ -4,7 +4,7 @@ import {
   Bell, Globe, Shield, LogOut, ChevronRight,
   Settings, UserCircle, Key, AlertTriangle, LifeBuoy, Send
 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuthStore } from '../../store/authStore';
 
 const tabs = [
   { id: 'profile', label: 'My Account', icon: UserCircle, desc: 'Personal details and hub info' },
@@ -14,7 +14,7 @@ const tabs = [
 ];
 
 export default function DispatchSettings() {
-  const { user } = useAuth();
+  const user = useAuthStore(state => state.user);
   const [activeTab, setActiveTab] = useState('profile');
 
   return (

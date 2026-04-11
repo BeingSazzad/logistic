@@ -12,11 +12,18 @@ const inventory = [
 
 export default function WarehouseInventory() {
   const [search, setSearch] = useState('');
+  const [sortKey, setSortKey] = useState('sku');
+
   const filtered = inventory.filter(i =>
     i.name.toLowerCase().includes(search.toLowerCase()) ||
     i.sku.toLowerCase().includes(search.toLowerCase()) ||
     i.location.toLowerCase().includes(search.toLowerCase())
-  );
+  ).sort((a, b) => {
+    if (sortKey === 'qty') return b.qty - a.qty;
+    if (sortKey === 'name') return a.name.localeCompare(b.name);
+    if (sortKey === 'location') return a.location.localeCompare(b.location);
+    return a.sku.localeCompare(b.sku);
+  });
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12">
@@ -61,9 +68,19 @@ export default function WarehouseInventory() {
               value={search} onChange={e => setSearch(e.target.value)}
             />
           </div>
-          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50">
-            Sort By <ChevronDown size={16} className="text-gray-400" />
-          </button>
+          <div className="relative">
+            <select
+              value={sortKey}
+              onChange={(e) => setSortKey(e.target.value)}
+              className="appearance-none flex items-center gap-2 pl-4 pr-10 py-2 bg-white border border-gray-200 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 focus:outline-none cursor-pointer"
+            >
+              <option value="sku">Sort By SKU</option>
+              <option value="name">Sort By Name</option>
+              <option value="qty">Sort By Qty (High-Low)</option>
+              <option value="location">Sort By Location</option>
+            </select>
+            <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+          </div>
         </div>
 
         <div className="overflow-x-auto">

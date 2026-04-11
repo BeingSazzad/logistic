@@ -8,7 +8,7 @@ import {
   CheckCircle2, X, ChevronDown, Mail, CreditCard, Building2,
   Plus, Trash2, Copy, ChevronUp, Car, Boxes, AlertCircle
 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuthStore } from '../../store/authStore';
 
 const REGISTERED_USERS = [
   { id: 'CUS-001', name: 'Acme Corp Logistics', contact: 'James Hargrove', email: 'james@acme.com.au', phone: '+61 2 9283 1122', address: 'Warehouse 4, 12 Botany Rd, Alexandria NSW 2015', type: 'Business' },
@@ -33,7 +33,7 @@ const createItem = (id) => ({
 });
 
 export default function AdminCreateShipment() {
-  const { user } = useAuth();
+  const user = useAuthStore(state => state.user);
   const navigate = useNavigate();
   const [priority, setPriority] = useState('Normal');
   const [paymentBy, setPaymentBy] = useState('Sender');

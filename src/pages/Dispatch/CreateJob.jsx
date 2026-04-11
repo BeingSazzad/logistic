@@ -7,7 +7,7 @@ import {
   Layers, Fingerprint, Shield, Search,
   CheckCircle2, X, ChevronDown, Mail, CreditCard, Activity, Building2
 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuthStore } from '../../store/authStore';
 
 // Mock registered user/customer DB
 const REGISTERED_USERS = [
@@ -19,7 +19,7 @@ const REGISTERED_USERS = [
 ];
 
 export default function DispatchCreateJob() {
-  const { user } = useAuth();
+  const user = useAuthStore(state => state.user);
   const navigate = useNavigate();
   const [priority, setPriority] = useState('Normal');
   const [paymentBy, setPaymentBy] = useState('Sender');

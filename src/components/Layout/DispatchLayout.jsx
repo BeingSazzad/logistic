@@ -5,7 +5,7 @@ import {
   MessageSquare, Settings, Truck, Zap
 } from 'lucide-react';
 import SidebarLayout from './SidebarLayout';
-import { useAuth } from '../../context/AuthContext';
+import { useAuthStore } from '../../store/authStore';
 
 const navConfig = [
   { type: 'link', to: '/dispatch',          label: 'Overview', icon: LayoutDashboard, end: true },
@@ -19,7 +19,7 @@ const navConfig = [
 ];
 
 export default function DispatchLayout() {
-  const { user: authUser } = useAuth();
+  const authUser = useAuthStore(state => state.user);
   const user = {
     name: authUser?.name || 'Dispatcher',
     role: authUser?.role || 'Dispatcher',

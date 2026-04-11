@@ -5,7 +5,7 @@ import {
   Satellite, Layers, Maximize2, Crosshair, Bell, Info,
   ChevronRight, Phone, MessageCircle, AlertTriangle, Package
 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuthStore } from '../../store/authStore';
 
 const activeVehicles = [
   { id: 'TRK-102', branchId: 'SYD-CENTRAL', driver: 'Jack Taylor', status: 'Moving', speed: '45 km/h', loc: 'Hume Highway, Goulburn', eta: '45 mins', carga: 'Perishables', temp: '-2°C' },
@@ -16,7 +16,7 @@ const activeVehicles = [
 ];
 
 export default function DispatchTracking() {
-  const { user } = useAuth();
+  const user = useAuthStore(state => state.user);
   const [searchParams] = useSearchParams();
   const vid = searchParams.get('id');
   const [selectedVehicle, setSelectedVehicle] = useState(null);
