@@ -164,15 +164,28 @@ export default function SidebarLayout({
 
         {/* Brand */}
         <div className="px-5 pt-6 pb-5 border-b border-white/5 shrink-0">
-          <div className="flex items-center gap-2.5 mb-2">
-            <div className="w-8 h-8 bg-[#FFCC00] rounded-lg flex items-center justify-center shrink-0 shadow-[0_0_12px_rgba(255,204,0,0.25)]">
-              <Zap size={16} className="text-[#111]" strokeWidth={3} />
+          <div className="flex items-center mb-2">
+            <img 
+              src="/logo.png" 
+              alt="HERO Logistics" 
+              className="h-10 object-contain cursor-pointer"
+              onClick={() => navigate('/')}
+              onError={(e) => {
+                e.target.style.display = 'none';
+                if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex';
+              }} 
+            />
+            {/* Fallback Text Logo (hidden if image loads successfully) */}
+            <div className="hidden items-center gap-2.5 cursor-pointer" onClick={() => navigate('/')}>
+              <div className="w-8 h-8 bg-[#FFCC00] rounded-lg flex items-center justify-center shrink-0 shadow-[0_0_12px_rgba(255,204,0,0.25)]">
+                <Zap size={16} className="text-[#111]" strokeWidth={3} />
+              </div>
+              <span className="text-white font-black text-xl tracking-tighter uppercase">HERO</span>
             </div>
-            <span className="text-white font-black text-xl tracking-tighter uppercase">HERO</span>
           </div>
-          <div className="flex items-center gap-1.5 ml-[40px]">
-            {roleIcon && <span className="text-[#FFCC00]">{roleIcon}</span>}
-            <p className="text-[#FFCC00] text-[9px] font-black tracking-[0.2em] uppercase">{roleName}</p>
+          <div className="flex items-center gap-1.5 ml-1">
+            {roleIcon && <span className="text-[#FFCC00] shrink-0">{roleIcon}</span>}
+            <p className="text-[#FFCC00] text-[9px] font-black tracking-[0.2em] uppercase whitespace-nowrap truncate">{roleName}</p>
           </div>
 
           {/* Branch badge */}

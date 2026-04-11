@@ -378,7 +378,6 @@ export default function AdminShipmentDetail() {
                           setPodStatus('submitting');
                           setTimeout(() => {
                              setPodStatus('done');
-                             if(typeof setCurrentStep === 'function') setCurrentStep(15);
                           }, 1000);
                        }}
                        disabled={podStatus === 'submitting'}

@@ -29,11 +29,23 @@ export default function Login() {
         <div className="absolute inset-0 opacity-5"
           style={{ backgroundImage: 'radial-gradient(#FACC15 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
 
-        <div className="relative z-10 flex items-center gap-3">
-          <div className="w-9 h-9 bg-yellow-400 rounded-lg flex items-center justify-center">
-            <Zap size={20} className="text-black" strokeWidth={3} />
+        <div className="relative z-10 flex items-center mb-8">
+          <img 
+            src="/logo.png" 
+            alt="HERO Logistics" 
+            className="h-10 object-contain cursor-pointer"
+            onClick={() => navigate('/')}
+            onError={(e) => {
+              e.target.style.display = 'none';
+              if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex';
+            }} 
+          />
+          <div className="hidden items-center gap-3">
+            <div className="w-9 h-9 bg-yellow-400 rounded-lg flex items-center justify-center">
+              <Zap size={20} className="text-black" strokeWidth={3} />
+            </div>
+            <span className="text-white text-2xl font-bold tracking-tight">HERO</span>
           </div>
-          <span className="text-white text-2xl font-bold tracking-tight">HERO</span>
         </div>
 
         <div className="relative z-10">
@@ -64,11 +76,23 @@ export default function Login() {
       {/* Right Login Panel */}
       <div className="w-full lg:w-1/2 flex items-center justify-center bg-gray-50 p-8">
         <div className="w-full max-w-md">
-          <div className="flex lg:hidden items-center gap-3 mb-10 justify-center">
-            <div className="w-9 h-9 bg-yellow-400 rounded-lg flex items-center justify-center">
-              <Zap size={20} className="text-black" strokeWidth={3} />
+          <div className="flex lg:hidden items-center justify-center mb-10">
+            <img 
+              src="/logo.png" 
+              alt="HERO Logistics" 
+              className="h-10 object-contain cursor-pointer"
+              onClick={() => navigate('/')}
+              onError={(e) => {
+                e.target.style.display = 'none';
+                if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex';
+              }} 
+            />
+            <div className="hidden items-center gap-3">
+              <div className="w-9 h-9 bg-yellow-400 rounded-lg flex items-center justify-center">
+                <Zap size={20} className="text-black" strokeWidth={3} />
+              </div>
+              <span className="text-gray-900 text-2xl font-bold">HERO</span>
             </div>
-            <span className="text-gray-900 text-2xl font-bold">HERO</span>
           </div>
 
           <div className="mb-8">

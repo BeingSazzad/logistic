@@ -21,10 +21,22 @@ export default function CustomerLayout() {
 
           {/* Brand */}
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 bg-[#FFCC00] rounded-lg flex items-center justify-center shadow-[0_0_10px_rgba(255,204,0,0.2)]">
-              <Zap size={14} color="#111" strokeWidth={3} />
+            <img 
+              src="/logo.png" 
+              alt="HERO Logistics" 
+              className="h-8 object-contain cursor-pointer"
+              onClick={() => navigate('/')}
+              onError={(e) => {
+                e.target.style.display = 'none';
+                if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex';
+              }} 
+            />
+            <div className="hidden items-center gap-2.5 cursor-pointer" onClick={() => navigate('/')}>
+              <div className="w-7 h-7 bg-[#FFCC00] rounded-lg flex items-center justify-center shadow-[0_0_10px_rgba(255,204,0,0.2)]">
+                <Zap size={14} color="#111" strokeWidth={3} />
+              </div>
+              <span className="font-black text-[#111] text-lg tracking-tighter uppercase">HERO</span>
             </div>
-            <span className="font-black text-[#111] text-lg tracking-tighter uppercase">HERO</span>
             <span className="w-px h-4 bg-gray-200 mx-1" />
             <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest">Customer Portal</span>
           </div>

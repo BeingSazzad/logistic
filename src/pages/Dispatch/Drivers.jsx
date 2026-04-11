@@ -39,7 +39,8 @@ export default function DispatchDrivers() {
       if (sortOrder === 'asc') return aVal > bVal ? 1 : -1;
       return aVal < bVal ? 1 : -1;
     });
-  }, [filter, search, sortKey, sortOrder, user.branchId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter, search, sortKey, sortOrder, user]);
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12">
