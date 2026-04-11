@@ -19,8 +19,8 @@ export default function DriverHome() {
    };
 
    const upcoming = [
-      { id: 'SHP-20502', area: 'Parramatta, NSW', time: '11:45 AM', items: 3, priority: 'Normal' },
-      { id: 'SHP-20503', area: 'Chatswood, NSW', time: '1:15 PM', items: 7, priority: 'High' },
+      { id: 'SHP-20502', area: 'Parramatta, NSW', time: '11:45 AM', items: 3, priority: 'Express' },
+      { id: 'SHP-20503', area: 'Chatswood, NSW', time: '1:15 PM', items: 7, priority: 'Direct' },
    ];
 
    return (

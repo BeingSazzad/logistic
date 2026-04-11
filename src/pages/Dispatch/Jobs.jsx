@@ -31,21 +31,21 @@ export default function DispatchJobs() {
 
   const rawJobs = [
     // Unassigned (confirmed, no driver yet)
-    { id: 'SHP-9055', branchId: 'SYD-CENTRAL', customer: 'Acme Freight Co', origin: 'Sydney Depot', dest: 'Canberra Branch', queue: 'unassigned', unassignedType: 'Local Pickups', driver: null, vehicle: null, priority: 'High', eta: '—', pickup: '11:00 AM', window: '12:00–14:00', load: '6.2t', notes: 'Temperature-controlled cargo' },
-    { id: 'SHP-9054', branchId: 'SYD-CENTRAL', customer: 'Tech Solutions Ltd', origin: 'Sydney Depot', dest: 'Penrith Branch', queue: 'unassigned', unassignedType: 'Local Pickups', driver: null, vehicle: null, priority: 'Medium', eta: '—', pickup: '12:30 PM', window: '13:00–15:00', load: '2.1t', notes: '' },
-    { id: 'SHP-9060', branchId: 'SYD-CENTRAL', customer: 'Velocity Logistics', origin: 'Melbourne Hub', dest: 'Brisbane Hub', queue: 'unassigned', unassignedType: 'Branch Transfers', driver: null, vehicle: null, priority: 'High', eta: '—', pickup: 'Awaiting Transit', window: '—', load: '14.5t', notes: 'Hub cross-dock completed' },
-    { id: 'SHP-9061', branchId: 'SYD-CENTRAL', customer: 'Local Retailer', origin: 'Perth Depot', dest: 'Sydney Local', queue: 'unassigned', unassignedType: 'Local Deliveries', driver: null, vehicle: null, priority: 'Medium', eta: '—', pickup: 'Arrived at Staging', window: 'Before 17:00', load: '2.4t', notes: 'Last mile priority' },
+    { id: 'SHP-9055', branchId: 'SYD-CENTRAL', customer: 'Acme Freight Co', origin: 'Sydney Depot', dest: 'Canberra Branch', queue: 'unassigned', unassignedType: 'Local Pickups', driver: null, vehicle: null, priority: 'Direct', eta: '—', pickup: '11:00 AM', window: '12:00–14:00', load: '6.2t', notes: 'Temperature-controlled cargo' },
+    { id: 'SHP-9054', branchId: 'SYD-CENTRAL', customer: 'Tech Solutions Ltd', origin: 'Sydney Depot', dest: 'Penrith Branch', queue: 'unassigned', unassignedType: 'Local Pickups', driver: null, vehicle: null, priority: 'Express', eta: '—', pickup: '12:30 PM', window: '13:00–15:00', load: '2.1t', notes: '' },
+    { id: 'SHP-9060', branchId: 'SYD-CENTRAL', customer: 'Velocity Logistics', origin: 'Melbourne Hub', dest: 'Brisbane Hub', queue: 'unassigned', unassignedType: 'Branch Transfers', driver: null, vehicle: null, priority: 'Direct', eta: '—', pickup: 'Awaiting Transit', window: '—', load: '14.5t', notes: 'Hub cross-dock completed' },
+    { id: 'SHP-9061', branchId: 'SYD-CENTRAL', customer: 'Local Retailer', origin: 'Perth Depot', dest: 'Sydney Local', queue: 'unassigned', unassignedType: 'Local Deliveries', driver: null, vehicle: null, priority: 'Express', eta: '—', pickup: 'Arrived at Staging', window: 'Before 17:00', load: '2.4t', notes: 'Last mile priority' },
 
     // Assigned (active trips)
-    { id: 'SHP-9042', branchId: 'SYD-CENTRAL', customer: 'Acme Corp Logistics', origin: 'Sydney Depot', dest: 'Melbourne Branch', queue: 'assigned', driver: 'Jack Taylor', vehicle: 'XQG-984', priority: 'High', eta: '14:30', pickup: '06:00 AM', window: 'Deliver by 16:00', load: '18.4t', notes: '' },
-    { id: 'SHP-9035', branchId: 'SYD-CENTRAL', customer: 'Southport Logistics', origin: 'Adelaide Depot', dest: 'Sydney Depot', queue: 'assigned', driver: 'Oliver Brown', vehicle: 'V-102', priority: 'High', eta: 'Arrived at Branch', pickup: '05:00 AM', window: 'Delivered by 11:00', load: '12.0t', notes: '' },
+    { id: 'SHP-9042', branchId: 'SYD-CENTRAL', customer: 'Acme Corp Logistics', origin: 'Sydney Depot', dest: 'Melbourne Branch', queue: 'assigned', driver: 'Jack Taylor', vehicle: 'XQG-984', priority: 'Direct', eta: '14:30', pickup: '06:00 AM', window: 'Deliver by 16:00', load: '18.4t', notes: '' },
+    { id: 'SHP-9035', branchId: 'SYD-CENTRAL', customer: 'Southport Logistics', origin: 'Adelaide Depot', dest: 'Sydney Depot', queue: 'assigned', driver: 'Oliver Brown', vehicle: 'V-102', priority: 'Direct', eta: 'Arrived at Branch', pickup: '05:00 AM', window: 'Delivered by 11:00', load: '12.0t', notes: '' },
 
     // Exception
-    { id: 'SHP-9041', branchId: 'SYD-CENTRAL', customer: 'Tech Solutions Ltd', origin: 'Sydney Depot', dest: 'Penrith Branch', queue: 'exception', driver: 'Liam Smith', vehicle: 'BGT-221', priority: 'Medium', eta: 'Delayed', pickup: '07:00 AM', window: 'Deliver by 14:00', load: '9.5t', notes: 'Driver reports heavy traffic — ETA +1h', exception: 'Delay' },
-    { id: 'SHP-9048', branchId: 'SYD-CENTRAL', customer: 'Blue River Exports', origin: 'Sydney Depot', dest: 'Sydney Depot', queue: 'exception', driver: 'Lucas Jones', vehicle: 'TRK-08', priority: 'High', eta: 'GPS Lost', pickup: '04:00 AM', window: 'Deliver by 09:00', load: '14.2t', notes: 'No GPS update for 18 minutes', exception: 'GPS Lost' },
+    { id: 'SHP-9041', branchId: 'SYD-CENTRAL', customer: 'Tech Solutions Ltd', origin: 'Sydney Depot', dest: 'Penrith Branch', queue: 'exception', driver: 'Liam Smith', vehicle: 'BGT-221', priority: 'Express', eta: 'Delayed', pickup: '07:00 AM', window: 'Deliver by 14:00', load: '9.5t', notes: 'Driver reports heavy traffic — ETA +1h', exception: 'Delay' },
+    { id: 'SHP-9048', branchId: 'SYD-CENTRAL', customer: 'Blue River Exports', origin: 'Sydney Depot', dest: 'Sydney Depot', queue: 'exception', driver: 'Lucas Jones', vehicle: 'TRK-08', priority: 'Direct', eta: 'GPS Lost', pickup: '04:00 AM', window: 'Deliver by 09:00', load: '14.2t', notes: 'No GPS update for 18 minutes', exception: 'GPS Lost' },
 
     // Completed
-    { id: 'SHP-9039', branchId: 'SYD-CENTRAL', customer: 'Global Traders AU', origin: 'Brisbane Depot', dest: 'Gold Coast Branch', queue: 'completed', driver: 'Liam Smith', vehicle: 'KLY-004', priority: 'Low', eta: 'Received at Branch', pickup: '03:00 AM', window: 'Deliver by 08:00', load: '5.5t', notes: '' },
+    { id: 'SHP-9039', branchId: 'SYD-CENTRAL', customer: 'Global Traders AU', origin: 'Brisbane Depot', dest: 'Gold Coast Branch', queue: 'completed', driver: 'Liam Smith', vehicle: 'KLY-004', priority: 'Normal', eta: 'Received at Branch', pickup: '03:00 AM', window: 'Deliver by 08:00', load: '5.5t', notes: '' },
   ];
 
   const branchJobs = useMemo(() =>
@@ -73,8 +73,8 @@ export default function DispatchJobs() {
   }, [branchJobs, queue, search, unassignedFilter]);
 
   const priorityStyle = (p) => {
-    if (p === 'High')   return 'bg-red-50 text-red-600 border-red-100';
-    if (p === 'Medium') return 'bg-amber-50 text-amber-600 border-amber-100';
+    if (p === 'Direct')  return 'bg-red-50 text-red-600 border-red-100';
+    if (p === 'Express') return 'bg-amber-50 text-amber-600 border-amber-100';
     return 'bg-gray-50 text-gray-500 border-gray-100';
   };
 

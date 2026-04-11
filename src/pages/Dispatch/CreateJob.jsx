@@ -361,13 +361,13 @@ export default function DispatchCreateJob() {
             </h3>
             <div className="space-y-6">
               <div>
-                <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widests mb-2">Delivery Priority</label>
-                <div className="grid grid-cols-2 gap-2">
-                  {['Low', 'Normal', 'High', 'Urgent'].map(l => (
+                <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widests mb-2">Service Level</label>
+                <div className="flex bg-white/5 p-1 rounded-xl border border-white/5 gap-1.5">
+                  {['Normal', 'Express', 'Direct'].map(l => (
                     <button 
                       key={l}
                       onClick={() => setPriority(l)}
-                      className={`py-2 rounded-lg text-[10px] font-black uppercase tracking-widest border transition-all ${priority === l ? 'bg-[#FFCC00] text-black border-transparent shadow-sm' : 'bg-white/5 text-gray-300 border-white/10 hover:bg-white/10'}`}
+                      className={`flex-1 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest border transition-all ${priority === l ? 'bg-[#FFCC00] text-black border-transparent shadow-sm' : 'bg-white/5 text-gray-300 border-white/10 hover:bg-white/10'}`}
                     >
                       {l}
                     </button>
@@ -397,7 +397,7 @@ export default function DispatchCreateJob() {
                 </div>
                 <div className="flex justify-between items-end border-b border-white/10 pb-3">
                   <span className="text-[10px] font-black uppercase text-gray-400 tracking-widests">Extra Fees</span>
-                  <span className={`text-sm font-black transition-all ${['High','Urgent'].includes(priority) ? 'text-[#FFCC00]' : 'text-gray-500'}`}>+$250.00</span>
+                  <span className={`text-sm font-black transition-all ${['Express','Direct'].includes(priority) ? 'text-[#FFCC00]' : 'text-gray-500'}`}>+$250.00</span>
                 </div>
                 <div className="flex justify-between items-end pt-2">
                   <span className="text-xs font-black uppercase text-[#FFCC00] tracking-widests">Total Price</span>

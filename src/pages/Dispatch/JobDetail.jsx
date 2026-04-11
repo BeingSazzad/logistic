@@ -12,7 +12,7 @@ import { useAuthStore } from '../../store/authStore';
 // Mock job database — keyed by ID
 const JOB_DB = {
   'SHP-9055': {
-    id: 'SHP-9055', branchId: 'SYD-CENTRAL', status: 'Unassigned', priority: 'High',
+    id: 'SHP-9055', branchId: 'SYD-CENTRAL', status: 'Unassigned', priority: 'Direct',
     customer: 'Acme Freight Co',
     consignor: { name: 'Acme Freight Co', address: 'Warehouse 4, 12 Botany Rd, Alexandria NSW 2015', contact: "Liam O'Neil (+61 2 9283 1122)", type: 'Pickup' },
     consignee: { name: 'Canberra Distribution Centre', address: 'Bay 5, 22 Industrial Ave, Fyshwick ACT 2609', contact: 'Sarah Miller (+61 2 6123 4567)', type: 'Delivery' },
@@ -21,7 +21,7 @@ const JOB_DB = {
     pickup: '11:00 AM', window: '12:00 – 14:00', load: '6.2t', notes: 'Temperature-controlled cargo'
   },
   'SHP-9054': {
-    id: 'SHP-9054', branchId: 'SYD-CENTRAL', status: 'Unassigned', priority: 'Medium',
+    id: 'SHP-9054', branchId: 'SYD-CENTRAL', status: 'Unassigned', priority: 'Express',
     customer: 'Tech Solutions Ltd',
     consignor: { name: 'Tech Solutions Warehouse', address: '1 Innovation Dr, Port Botany NSW 2036', contact: 'Tom Carey (+61 2 9666 0011)', type: 'Pickup' },
     consignee: { name: 'Penrith Hub Depot', address: 'Lot 4, 88 Mulgoa Rd, Penrith NSW 2750', contact: 'Jay Park (+61 2 4700 3344)', type: 'Delivery' },
@@ -30,7 +30,7 @@ const JOB_DB = {
     pickup: '12:30 PM', window: '13:00 – 15:00', load: '2.1t', notes: ''
   },
   'SHP-9053': {
-    id: 'SHP-9053', branchId: 'SYD-CENTRAL', status: 'Unassigned', priority: 'High',
+    id: 'SHP-9053', branchId: 'SYD-CENTRAL', status: 'Unassigned', priority: 'Direct',
     customer: 'Fresh Markets AU',
     consignor: { name: 'Flemington Wholesale Market', address: '250 Parramatta Rd, Flemington NSW 2140', contact: 'Ben Chu (+61 2 9764 1230)', type: 'Pickup' },
     consignee: { name: 'Randwick Distribution Centre', address: '88 Wentworth Ave, Randwick NSW 2031', contact: 'Mia Davis (+61 2 9399 4422)', type: 'Delivery' },
@@ -119,7 +119,7 @@ export default function DispatchJobDetail() {
               <span className={`text-[10px] font-bold px-2.5 py-1 rounded border uppercase tracking-widest`} style={{ background: assigned || !isUnassigned ? '#F0FDF4' : '#FFFBEB', color: assigned || !isUnassigned ? '#16A34A' : '#D97706', borderColor: assigned || !isUnassigned ? '#DCFCE7' : '#FDE68A' }}>
                 {statusLabel}
               </span>
-              {job.priority === 'High' && (
+              {job.priority === 'Direct' && (
                 <span className="text-[10px] font-bold px-2 py-1 rounded bg-red-50 text-red-600 border border-red-100 uppercase tracking-widest animate-pulse">
                   Priority
                 </span>
