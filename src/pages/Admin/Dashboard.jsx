@@ -19,7 +19,12 @@ export default function AdminDashboard() {
   ];
 
   const shipmentData = [32, 45, 38, 52, 65, 58, 72, 85, 92, 88, 105, 120];
-  const revenueData  = [140, 165, 155, 180, 210, 195, 230, 250, 280, 265, 305, 342];
+  const distData = [
+    { label: 'Standard', val: 56, color: 'bg-emerald-500' },
+    { label: 'Express',  val: 28, color: 'bg-[#FACC15]' },
+    { label: 'Priority', val: 12, color: 'bg-orange-500' },
+    { label: 'DG / Freight', val: 4, color: 'bg-red-500' }
+  ];
   const months = ['J','F','M','A','M','J','J','A','S','O','N','D'];
 
   return (
@@ -43,43 +48,43 @@ export default function AdminDashboard() {
 
       {/* ── KPI Cards ── */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 px-2 mb-6">
-        <div className="card p-5 flex items-center justify-between">
+        <div className="card p-5 flex items-center justify-between border-transparent hover:border-gray-200 transition-colors">
           <div>
-            <p className="hero-metadata leading-tight text-hero-neutral">Total Order <span className="text-emerald-500 font-bold ml-1">+1.29%</span></p>
-            <p className="text-2xl font-black text-hero-dark mt-1.5 leading-none">$238.00</p>
+            <p className="hero-metadata leading-tight text-hero-neutral">Total Shipments <span className="text-emerald-500 font-bold ml-1">+14%</span></p>
+            <p className="text-2xl font-black text-hero-dark mt-1.5 leading-none">12,482</p>
           </div>
           <div className="w-10 h-10 rounded-hero-sm border border-blue-100 flex items-center justify-center bg-blue-50 text-blue-500">
             <Package size={20}/>
           </div>
         </div>
         
-        <div className="card p-5 flex items-center justify-between">
+        <div className="card p-5 flex items-center justify-between border-transparent hover:border-gray-200 transition-colors">
           <div>
-            <p className="hero-metadata leading-tight text-hero-neutral">Total Delivered <span className="text-emerald-500 font-bold ml-1">+1.29%</span></p>
-            <p className="text-2xl font-black text-hero-dark mt-1.5 leading-none">35,874</p>
+            <p className="hero-metadata leading-tight text-hero-neutral">Active Vehicles <span className="text-emerald-500 font-bold ml-1">+2%</span></p>
+            <p className="text-2xl font-black text-hero-dark mt-1.5 leading-none">415</p>
           </div>
           <div className="w-10 h-10 rounded-hero-sm border border-emerald-100 flex items-center justify-center bg-emerald-50 text-emerald-500">
             <Truck size={20}/>
           </div>
         </div>
         
-        <div className="card p-5 flex items-center justify-between">
-          <div>
-            <p className="hero-metadata leading-tight text-hero-neutral">Return Pending <span className="text-emerald-500 font-bold ml-1">+1.29%</span></p>
-            <p className="text-2xl font-black text-hero-dark mt-1.5 leading-none">64%</p>
-          </div>
-          <div className="w-10 h-10 rounded-hero-sm border border-amber-200 flex items-center justify-center bg-amber-50 text-amber-500">
-            <AlertTriangle size={20}/>
-          </div>
-        </div>
-        
-        <div className="card p-5 flex items-center justify-between">
+        <div className="card p-5 flex items-center justify-between border-transparent hover:border-gray-200 transition-colors">
           <div>
             <p className="hero-metadata leading-tight text-hero-neutral">Total Revenue <span className="text-emerald-500 font-bold ml-1">+4.5%</span></p>
             <p className="text-2xl font-black text-hero-dark mt-1.5 leading-none">$1.2M</p>
           </div>
           <div className="w-10 h-10 rounded-hero-sm border border-indigo-100 flex items-center justify-center bg-indigo-50 text-indigo-500">
             <DollarSign size={20}/>
+          </div>
+        </div>
+        
+        <div className="card p-5 flex items-center justify-between border border-red-100 bg-red-50/10">
+          <div>
+            <p className="hero-metadata leading-tight text-red-400">Pending Issues <span className="text-red-500 font-bold ml-1">+12</span></p>
+            <p className="text-2xl font-black text-red-600 mt-1.5 leading-none">84</p>
+          </div>
+          <div className="w-10 h-10 rounded-hero-sm border border-red-200 flex items-center justify-center bg-red-50 text-red-500">
+            <AlertTriangle size={20}/>
           </div>
         </div>
       </div>
@@ -133,71 +138,40 @@ export default function AdminDashboard() {
               </div>
             </div>
 
-            {/* Financial Yield */}
+            {/* Shipment Distribution */}
             <div className="card overflow-hidden flex flex-col min-h-[340px]">
               <div className="p-5 border-b border-gray-100 flex justify-between items-center bg-[#FAFAFA]">
                 <div>
-                  <h3 className="text-sm font-bold text-[#111] uppercase tracking-wide">Market Yield</h3>
-                  <p className="text-[10px] text-gray-400 font-medium uppercase mt-0.5">FY {revenueYear} Revenue</p>
+                  <h3 className="text-sm font-bold text-[#111] uppercase tracking-wide">Shipment Distribution</h3>
+                  <p className="text-[10px] text-gray-400 font-medium uppercase mt-0.5">By Volume</p>
                 </div>
-                <select 
-                  value={revenueYear} 
-                  onChange={e => setRevenueYear(e.target.value)}
-                  className="bg-white border border-gray-200 rounded-md px-3 py-1.5 text-xs font-bold outline-none cursor-pointer focus:ring-2 focus:ring-brand/20 focus:border-brand"
-                >
-                  <option value="2026">2026</option>
-                  <option value="2025">2025</option>
-                </select>
               </div>
-              <div className="flex-1 flex items-end gap-1.5 px-5 pt-8 pb-4">
-                {revenueData.map((v, i) => (
-                  <div key={i} className="flex-1 flex flex-col justify-end gap-2 group/bar">
-                    <div 
-                      className="w-full bg-emerald-50 hover:bg-emerald-500 transition-all relative cursor-pointer rounded-t-sm" 
-                      style={{ height: `${(v/380)*100}%` }}
-                    >
-                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#111] text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover/bar:opacity-100 shadow-lg z-20 whitespace-nowrap transition-opacity">
-                        ${v}k
+              <div className="flex-1 flex flex-col justify-center px-8 py-5">
+                <div className="h-4 w-full flex rounded-full overflow-hidden mb-6 shadow-sm">
+                  {distData.map((d, i) => (
+                    <div key={i} style={{ width: `${d.val}%` }} className={`h-full ${d.color} hover:brightness-110 transition-all`} title={`${d.label} (${d.val}%)`}></div>
+                  ))}
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  {distData.map((d, i) => (
+                    <div key={i} className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className={`w-2.5 h-2.5 rounded-full ${d.color}`}></div>
+                        <span className="text-xs font-bold text-gray-700">{d.label}</span>
                       </div>
+                      <span className="text-xs font-black text-gray-900">{d.val}%</span>
                     </div>
-                    <span className="text-[9px] font-bold text-gray-400 text-center uppercase tracking-widest">{months[i]}</span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
               <div className="p-5 border-t border-gray-100 flex justify-between items-center bg-[#FAFAFA]">
                 <div>
-                  <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Total Yield</p>
-                  <p className="text-lg font-black text-emerald-600 tracking-tight mt-0.5">$2.84M USD</p>
+                  <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Largest Segment</p>
+                  <p className="text-lg font-black text-hero-dark tracking-tight mt-0.5">Standard</p>
                 </div>
-                <ArrowUpRight size={20} className="text-emerald-400" />
               </div>
             </div>
 
-          </div>
-
-          {/* Bottom mini-metrics */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="card p-5 flex items-center gap-4">
-              <div className="w-10 h-10 rounded-hero-sm bg-blue-50 flex items-center justify-center text-blue-500 shrink-0"><Navigation size={18}/></div>
-              <div>
-                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Transit Time</p>
-                <p className="text-lg font-black text-hero-dark leading-none mt-1">1.4 Days</p>
-              </div>
-            </div>
-            <div className="card p-5 flex items-center gap-4">
-              <div className="w-10 h-10 rounded-hero-sm bg-emerald-50 flex items-center justify-center text-emerald-500 shrink-0"><CheckCircle size={18}/></div>
-              <div>
-                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Resolution</p>
-                <p className="text-lg font-black text-hero-dark leading-none mt-1">94.2%</p>
-              </div>
-            </div>
-            <div className="card p-5 flex items-center gap-4">
-              <div className="w-10 h-10 rounded-hero-sm bg-brand/10 flex items-center justify-center text-brand-hover shrink-0"><ShieldCheck size={18}/></div>
-              <div>
-                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Fleet Status</p>
-                <p className="text-lg font-black text-hero-dark leading-none mt-1">Optimal</p>
-              </div>
-            </div>
           </div>
 
         </div>

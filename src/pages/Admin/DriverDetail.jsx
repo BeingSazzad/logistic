@@ -229,6 +229,25 @@ export default function AdminDriverDetail() {
                   <span className="text-[10px] font-black text-gray-800">{driver.medical.expiry}</span>
                 </div>
               </div>
+
+              {/* Special Certifications */}
+              <div className="pt-2 border-t border-gray-100 mt-2">
+                 <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3">Special Certifications</h4>
+                 <div className="flex flex-col gap-2">
+                    <div className="flex items-center justify-between p-3 rounded-lg border border-gray-200 bg-gray-50">
+                       <span className="text-xs font-bold text-gray-900">MSIC Access</span>
+                       <span className="text-[10px] font-black text-emerald-700 bg-emerald-100 uppercase tracking-widest px-2 py-0.5 rounded">Active</span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 rounded-lg border border-gray-200 bg-gray-50">
+                       <span className="text-xs font-bold text-gray-900">Dangerous Goods (DG)</span>
+                       <span className="text-[10px] font-black text-emerald-700 bg-emerald-100 uppercase tracking-widest px-2 py-0.5 rounded">Active</span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 rounded-lg border border-gray-200 bg-gray-50">
+                       <span className="text-xs font-bold text-gray-900">Construction White Card</span>
+                       <span className="text-[10px] font-black text-emerald-700 bg-emerald-100 uppercase tracking-widest px-2 py-0.5 rounded">Active</span>
+                    </div>
+                 </div>
+              </div>
             </div>
           </div>
         </div>

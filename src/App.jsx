@@ -46,6 +46,8 @@ import AdminBranchDetail    from './pages/Admin/BranchDetail';
 import AdminCustomerDetail  from './pages/Admin/CustomerDetail';
 import AdminUserDetail      from './pages/Admin/UserDetail';
 import AdminSafetyChecklists from './pages/Admin/SafetyChecklists';
+import AdminBilling         from './pages/Admin/Billing';
+import AdminSubscriptionPlans from './pages/Admin/SubscriptionPlans';
 
 // ── Dispatch ─────────────────────────────────────────────────────
 import DispatchDashboard from './pages/Dispatch/Dashboard';
@@ -149,6 +151,8 @@ function App() {
           <Route path="audit"           element={<AdminAuditLogs />} />
           <Route path="safety-checklists" element={<AdminSafetyChecklists />} />
           <Route path="settings"        element={<AdminSettings />} />
+          <Route path="billing"         element={<AdminBilling />} />
+          <Route path="billing/plans"   element={<AdminSubscriptionPlans />} />
         </Route>
 
         {/* ── DISPATCH ── */}

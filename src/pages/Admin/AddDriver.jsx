@@ -161,6 +161,25 @@ export default function AdminAddDriver() {
                     <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Years of Experience</label>
                     <input type="number" placeholder="e.g. 5" className="w-full bg-white border border-gray-200 focus:border-blue-400 rounded-lg py-2.5 px-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
                  </div>
+                 
+                 {/* Special Certifications */}
+                 <div className="md:col-span-2 pt-4 border-t border-gray-100 mt-2">
+                    <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-4 ml-1">Special Certifications & Access</label>
+                    <div className="flex flex-col gap-3">
+                       <label className="flex items-center gap-3 cursor-pointer group">
+                          <input type="checkbox" className="w-4 h-4 rounded border-gray-300 accent-blue-500" />
+                          <span className="text-sm font-bold text-gray-700">MSIC Access (Maritime Security Identification Card)</span>
+                       </label>
+                       <label className="flex items-center gap-3 cursor-pointer group">
+                          <input type="checkbox" className="w-4 h-4 rounded border-gray-300 accent-blue-500" />
+                          <span className="text-sm font-bold text-gray-700">Dangerous Goods (DG) Certificate</span>
+                       </label>
+                       <label className="flex items-center gap-3 cursor-pointer group">
+                          <input type="checkbox" className="w-4 h-4 rounded border-gray-300 accent-blue-500" />
+                          <span className="text-sm font-bold text-gray-700">Construction White Card (General Construction Induction)</span>
+                       </label>
+                    </div>
+                 </div>
 
                  {/* ID Document Upload Area */}
                  <div className="md:col-span-2 grid grid-cols-2 gap-4 pt-2">

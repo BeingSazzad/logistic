@@ -33,6 +33,15 @@
     font-weight: 400;
     color: #9CA3AF;  /* gray-400 — subtle, not distracting */
   }
+
+  /* ── Global UI Weight Reset ── */
+  button, .btn {
+    font-weight: 600 !important; /* Buttons -> Semibold */
+  }
+
+  label {
+    font-weight: 500 !important; /* Labels -> Medium weight */
+  }
 }
 
 @layer utilities {

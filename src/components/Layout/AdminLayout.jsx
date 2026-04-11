@@ -2,59 +2,33 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, Package, DollarSign, Network,
-  BarChart2, MessageSquare, Settings, Shield, ShieldCheck
+  BarChart2, MessageSquare, Settings, Shield, ShieldCheck, Briefcase
 } from 'lucide-react';
 import SidebarLayout from './SidebarLayout';
 
 const navConfig = [
   { type: 'link', label: 'Dashboard', icon: LayoutDashboard, to: '/admin', end: true },
+  { type: 'link', label: 'Shipments', icon: Package, to: '/admin/shipments' },
+  { type: 'link', label: 'Vehicles', icon: Network, to: '/admin/fleet' },
   {
-    type: 'group', label: 'Operations', icon: Package,
-    items: [
-      { to: '/admin/shipments',   label: 'Shipments' },
-      { to: '/admin/exceptions',  label: 'Delivery Issues' },
-      { to: '/admin/customers',   label: 'Customers' },
-      { to: '/admin/jobs-config', label: 'Global Shipment Monitor' },
-    ]
-  },
-  { type: 'link', label: 'Financial Control', icon: DollarSign, to: '/admin/finance' },
-  {
-    type: 'group', label: 'Network Control', icon: Network,
+    type: 'group', label: 'Operations', icon: Briefcase,
     items: [
       { to: '/admin/branches', label: 'Branches' },
-      { to: '/admin/fleet',    label: 'Vehicles & Fleet' },
-      { to: '/admin/drivers',  label: 'Drivers' },
-    ]
-  },
-  {
-    type: 'group', label: 'Insights', icon: BarChart2,
-    items: [
-      { to: '/admin/reports', label: 'Revenue Insights' },
-      { to: '/admin/audit',   label: 'System Audit Logs' },
-    ]
-  },
-  {
-    type: 'group', label: 'Help & Support', icon: MessageSquare,
-    items: [
-      { to: '/admin/messaging', label: 'Company Help Desk' },
-      { to: '/admin/helpline',  label: 'Support' },
-    ]
-  },
-  {
-    type: 'group', label: 'Compliance', icon: ShieldCheck,
-    items: [
+      { to: '/admin/drivers', label: 'Drivers' },
+      { to: '/admin/customers', label: 'Customers' },
       { to: '/admin/safety-checklists', label: 'Safety Checklists' },
-      { to: '/admin/jobs-config',       label: 'Global Shipment Monitor' },
+      { to: '/admin/exceptions', label: 'Delivery Issues' },
     ]
   },
+  { type: 'link', label: 'Finance', icon: DollarSign, to: '/admin/finance' },
+  { type: 'link', label: 'User Roles', icon: Shield, to: '/admin/users' },
+  { type: 'link', label: 'Support', icon: MessageSquare, to: '/admin/helpline' },
   {
-    type: 'group', label: 'General Settings', icon: Settings,
+    type: 'group', label: 'Settings', icon: Settings,
     items: [
-      { to: '/admin/company',       label: 'Company Profile' },
-      { to: '/admin/users',         label: 'Identity & Access' },
-      { to: '/admin/notifications', label: 'Notification Center' },
-      { to: '/admin/integrations',  label: 'Hub Integrations' },
-      { to: '/admin/settings',      label: 'System Settings' },
+      { to: '/admin/company', label: 'Company Settings' },
+      { to: '/admin/billing', label: 'Subscription & Billing' },
+      { to: '/admin/settings', label: 'My Profile' }
     ]
   }
 ];

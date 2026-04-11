@@ -22,6 +22,9 @@ export default function AdminShipments() {
   const [search, setSearch] = useState('');
   const [showFilter, setShowFilter] = useState(false);
   const [showSort, setShowSort] = useState(false);
+  const [sortOption, setSortOption] = useState('Latest'); // Latest, Oldest, Priority
+  const [filterDate, setFilterDate] = useState('');
+  const [filterBranch, setFilterBranch] = useState('All');
   const [selectedIds, setSelectedIds] = useState([]);
   const [unassignedFilter, setUnassignedFilter] = useState('All');
 
@@ -53,16 +56,29 @@ export default function AdminShipments() {
   }), [branchJobs]);
 
   const filtered = useMemo(() => {
-    return branchJobs.filter(j => {
+    let result = branchJobs.filter(j => {
       const matchesQueue  = j.queue === queue;
       const matchesSearch = !search || `${j.id} ${j.customer} ${j.driver || ''}`.toLowerCase().includes(search.toLowerCase());
       let matchesSub = true;
       if (queue === 'unassigned' && unassignedFilter !== 'All') {
         matchesSub = j.unassignedType === unassignedFilter;
       }
-      return matchesQueue && matchesSearch && matchesSub;
+      const matchesBranch = filterBranch === 'All' || j.branchId === filterBranch;
+      return matchesQueue && matchesSearch && matchesSub && matchesBranch;
     });
-  }, [branchJobs, queue, search, unassignedFilter]);
+
+    if (sortOption === 'Priority') {
+      const pLevel = { 'High': 3, 'Medium': 2, 'Low': 1 };
+      result.sort((a, b) => (pLevel[b.priority] || 0) - (pLevel[a.priority] || 0));
+    } else if (sortOption === 'Latest') {
+      // Mock Latest
+      result.sort((a, b) => b.id.localeCompare(a.id));
+    } else if (sortOption === 'Oldest') {
+      result.sort((a, b) => a.id.localeCompare(b.id));
+    }
+
+    return result;
+  }, [branchJobs, queue, search, unassignedFilter, sortOption, filterBranch]);
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12">
@@ -123,9 +139,40 @@ export default function AdminShipments() {
                 className="w-full md:w-64 bg-white border border-gray-200 rounded-xl py-2 pl-10 pr-4 text-[11px] font-black uppercase tracking-widest focus:outline-none focus:ring-2 focus:ring-brand/20 shadow-sm transition-all"
               />
             </div>
-            <button onClick={() => setShowFilter(!showFilter)} className="bg-white border border-gray-200 px-4 py-2 rounded-xl text-[10px] font-black uppercase flex items-center gap-2 hover:bg-gray-50 shadow-sm transition-all">
-              <Filter size={14} /> Filter
-            </button>
+            <div className="relative">
+              <button onClick={() => { setShowFilter(!showFilter); setShowSort(false); }} className="bg-white border border-gray-200 px-4 py-2 rounded-xl text-[10px] font-black uppercase flex items-center gap-2 hover:bg-gray-50 shadow-sm transition-all">
+                <Filter size={14} /> Filter
+              </button>
+              {showFilter && (
+                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 shadow-xl rounded-xl p-3 z-20 animate-in fade-in slide-in-from-top-2">
+                  <div className="mb-3">
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest block mb-1">Branch</label>
+                    <select value={filterBranch} onChange={e => setFilterBranch(e.target.value)} className="w-full text-xs font-bold bg-gray-50 border border-gray-200 rounded p-1.5 focus:outline-none">
+                      <option value="All">All Branches</option>
+                      <option value="SYD-CENTRAL">Sydney Central</option>
+                      <option value="MEL-HUB">Melbourne Hub</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest block mb-1">Date</label>
+                    <input type="date" value={filterDate} onChange={e => setFilterDate(e.target.value)} className="w-full text-xs font-bold bg-gray-50 border border-gray-200 rounded p-1.5 focus:outline-none" />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="relative">
+              <button onClick={() => { setShowSort(!showSort); setShowFilter(false); }} className="bg-white border border-gray-200 px-4 py-2 rounded-xl text-[10px] font-black uppercase flex items-center gap-2 hover:bg-gray-50 shadow-sm transition-all">
+                Sort: {sortOption} <ChevronDown size={12}/>
+              </button>
+              {showSort && (
+                <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-100 shadow-xl rounded-xl py-1 z-20 animate-in fade-in slide-in-from-top-2">
+                  {['Latest', 'Oldest', 'Priority'].map(opt => (
+                    <button key={opt} onClick={() => { setSortOption(opt); setShowSort(false); }} className={`w-full text-left px-4 py-2 text-xs font-bold hover:bg-gray-50 ${sortOption === opt ? 'text-brand' : 'text-gray-700'}`}>{opt}</button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 

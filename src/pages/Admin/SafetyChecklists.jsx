@@ -16,7 +16,7 @@ const FIELD_TYPES = [
 const DEFAULT_CHECKLISTS = [
   {
     id: 'CL-001', name: 'Standard Pre-Trip', active: true, category: 'Safety',
-    appliesTo: 'All Drivers', triggerOn: 'Every Trip',
+    appliesTo: 'All Drivers', triggerOn: 'Every Trip', allowFlexible: false,
     items: [
       { id: 1, label: 'Tyres inspected — pressure and tread OK', type: 'checkbox', required: true },
       { id: 2, label: 'Headlights, indicators and brake lights functional', type: 'checkbox', required: true },
@@ -28,7 +28,7 @@ const DEFAULT_CHECKLISTS = [
   },
   {
     id: 'CL-002', name: 'Dangerous Goods Check', active: true, category: 'Cargo',
-    appliesTo: 'DG Certified Drivers', triggerOn: 'DG Shipments Only',
+    appliesTo: 'DG Certified Drivers', triggerOn: 'DG Shipments Only', allowFlexible: false,
     items: [
       { id: 1, label: 'DG manifest verified and onboard', type: 'checkbox', required: true },
       { id: 2, label: 'Hazmat placards correctly displayed', type: 'checkbox', required: true },
@@ -144,6 +144,9 @@ export default function AdminSafetyChecklists() {
                     <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded ${cl.active ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'}`}>
                       {cl.active ? '● Active' : '○ Inactive'}
                     </span>
+                    <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded ${cl.allowFlexible ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700'}`}>
+                      {cl.allowFlexible ? 'Flexible' : 'Strict Execution'}
+                    </span>
                   </div>
                   <div className="flex items-center gap-3 mt-1.5 flex-wrap">
                     <span className="text-[10px] font-bold text-gray-500 flex items-center gap-1"><ShieldCheck size={10} /> {cl.appliesTo}</span>
@@ -230,6 +233,7 @@ function NewChecklistModal({ onClose, onCreate }) {
   const [category, setCategory] = useState('Safety');
   const [appliesTo, setAppliesTo] = useState('All Drivers');
   const [triggerOn, setTriggerOn] = useState('Every Trip');
+  const [allowFlexible, setAllowFlexible] = useState(false);
   const [items, setItems] = useState([
     { id: 1, label: '', type: 'checkbox', required: true }
   ]);
@@ -242,7 +246,7 @@ function NewChecklistModal({ onClose, onCreate }) {
     if (!name.trim()) return;
     onCreate({
       id: `CL-${String(Date.now()).slice(-3)}`,
-      name, category, appliesTo, triggerOn, active: true,
+      name, category, appliesTo, triggerOn, active: true, allowFlexible,
       items: items.filter(i => i.label.trim())
     });
   };
@@ -289,6 +293,18 @@ function NewChecklistModal({ onClose, onCreate }) {
                 <option>Cold Chain Shipments</option>
                 <option>Interstate Trips</option>
               </select>
+            </div>
+            <div className="md:col-span-2 pt-2 border-t border-gray-100 mt-2">
+              <label className="flex items-center gap-3 cursor-pointer group w-max">
+                <div className={`relative w-10 h-5 rounded-full transition-colors ${allowFlexible ? 'bg-amber-400' : 'bg-gray-300'}`}>
+                  <div className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-transform ${allowFlexible ? 'translate-x-5' : ''}`}></div>
+                </div>
+                <div>
+                  <span className="text-sm font-bold text-gray-900 block leading-none">Allow trip without full checklist</span>
+                  <span className="text-[10px] text-gray-500 font-medium">Makes this checklist flexible (driver can skip and proceed)</span>
+                </div>
+                <input type="checkbox" className="hidden" checked={allowFlexible} onChange={e => setAllowFlexible(e.target.checked)} />
+              </label>
             </div>
           </div>
 
@@ -366,6 +382,18 @@ function EditChecklistModal({ checklist, onClose, onSave }) {
           <div>
             <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1.5">Checklist Name</label>
             <input value={data.name} onChange={e => setData(d => ({ ...d, name: e.target.value }))} className="input w-full" />
+          </div>
+          <div className="pt-2 border-t border-gray-100">
+            <label className="flex items-center gap-3 cursor-pointer group w-max">
+              <div className={`relative w-10 h-5 rounded-full transition-colors ${data.allowFlexible ? 'bg-amber-400' : 'bg-gray-300'}`}>
+                <div className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-transform ${data.allowFlexible ? 'translate-x-5' : ''}`}></div>
+              </div>
+              <div>
+                <span className="text-sm font-bold text-gray-900 block leading-none">Allow trip without full checklist</span>
+                <span className="text-[10px] text-gray-500 font-medium">Makes this checklist flexible (driver can skip and proceed)</span>
+              </div>
+              <input type="checkbox" className="hidden" checked={data.allowFlexible} onChange={e => setData(d => ({ ...d, allowFlexible: e.target.checked }))} />
+            </label>
           </div>
           <div>
             <div className="flex justify-between items-center mb-3">

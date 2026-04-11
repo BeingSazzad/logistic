@@ -34,22 +34,27 @@ export default function AdminUserDetail() {
   const [role, setRole] = useState(u.role);
   const [branch, setBranch] = useState(u.branch);
   const [access, setAccess] = useState(u.access);
-  const [saved, setSaved] = useState(false);
+  const [toastMsg, setToastMsg] = useState('');
+  const [accountStatus, setAccountStatus] = useState(u.status);
+
+  const showToast = (msg) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(''), 3000);
+  };
 
   const handleSave = () => {
     setEditing(false);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+    showToast('User access updated successfully');
   };
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12">
       
       {/* Success Toast */}
-      {saved && (
+      {toastMsg && (
         <div className="fixed top-6 right-6 z-50 bg-[#111] text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-4 border border-white/10 animate-in slide-in-from-right">
           <CheckCircle2 size={20} className="text-emerald-400" />
-          <p className="font-black text-sm">User access updated successfully</p>
+          <p className="font-black text-sm">{toastMsg}</p>
         </div>
       )}
 
@@ -63,7 +68,7 @@ export default function AdminUserDetail() {
             <div className="flex items-center gap-3">
               <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{u.name}</h1>
               <span className={`text-[10px] font-black px-2.5 py-1 rounded border uppercase tracking-widest ${roleColor(u.role)}`}>{u.role}</span>
-              <span className={`text-[10px] font-black px-2.5 py-1 rounded border uppercase tracking-widest ${u.status === 'Active' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 'bg-gray-100 text-gray-500 border-gray-200'}`}>{u.status}</span>
+              <span className={`text-[10px] font-black px-2.5 py-1 rounded border uppercase tracking-widest ${accountStatus === 'Active' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 'bg-red-50 text-red-600 border-red-200'}`}>{accountStatus}</span>
             </div>
             <p className="text-[11px] text-gray-500 mt-1 uppercase tracking-widest font-medium">{u.id} · {u.email} · Joined {u.joined}</p>
           </div>
@@ -184,18 +189,18 @@ export default function AdminUserDetail() {
               <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Security Actions</h3>
             </div>
             <div className="p-4 flex flex-col gap-2">
-              <button className="w-full py-3 bg-white border border-gray-200 rounded-xl text-[10px] font-black uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
+              <button onClick={() => showToast('Password reset link sent to user email')} className="w-full py-3 bg-white border border-gray-200 rounded-xl text-[10px] font-black uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
                 <Key size={14}/> Reset Password
               </button>
-              <button className="w-full py-3 bg-white border border-gray-200 rounded-xl text-[10px] font-black uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
+              <button onClick={() => showToast('User session explicitly terminated (Forced Logout)')} className="w-full py-3 bg-white border border-gray-200 rounded-xl text-[10px] font-black uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
                 <Lock size={14}/> Force Logout
               </button>
-              {u.status === 'Active' ? (
-                <button className="w-full py-3 bg-red-50 border border-red-100 rounded-xl text-[10px] font-black uppercase tracking-widest text-red-600 hover:bg-red-100 transition-all flex items-center justify-center gap-2 mt-1">
+              {accountStatus === 'Active' ? (
+                <button onClick={() => { setAccountStatus('Suspended'); showToast('Account suspended'); }} className="w-full py-3 bg-red-50 border border-red-100 rounded-xl text-[10px] font-black uppercase tracking-widest text-red-600 hover:bg-red-100 transition-all flex items-center justify-center gap-2 mt-1">
                   <AlertTriangle size={14}/> Suspend Account
                 </button>
               ) : (
-                <button className="w-full py-3 bg-emerald-50 border border-emerald-100 rounded-xl text-[10px] font-black uppercase tracking-widests text-emerald-600 hover:bg-emerald-100 transition-all flex items-center justify-center gap-2 mt-1">
+                <button onClick={() => { setAccountStatus('Active'); showToast('Account reactivated'); }} className="w-full py-3 bg-emerald-50 border border-emerald-100 rounded-xl text-[10px] font-black uppercase tracking-widest text-emerald-600 hover:bg-emerald-100 transition-all flex items-center justify-center gap-2 mt-1">
                   <Unlock size={14}/> Reactivate Account
                 </button>
               )}
