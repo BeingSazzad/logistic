@@ -123,10 +123,4 @@ export default function DriverHome() {
 
       </div>
    );
-}</p>
-            </div>
-         </div>
-
-      </div>
-  );
 }
