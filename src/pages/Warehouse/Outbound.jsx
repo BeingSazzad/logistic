@@ -96,7 +96,7 @@ export default function WarehouseOutbound() {
                     <div>
                       <div className="flex items-center gap-3 mb-1">
                         <span className="font-mono font-semibold text-gray-900 text-sm leading-none">{load.id}</span>
-                        <span className={`text-xs font-black uppercase tracking-[0.15em] px-2.5 py-1 rounded-xl border ${cfg.bg} ${cfg.text} ${cfg.border}`}>
+                        <span className={`text-xs font-semibold uppercase tracking-[0.15em] px-2.5 py-1 rounded-xl border ${cfg.bg} ${cfg.text} ${cfg.border}`}>
                           {status}
                         </span>
                       </div>
@@ -142,7 +142,7 @@ export default function WarehouseOutbound() {
                     <button
                       onClick={() => handleRelease(load.id)}
                       disabled={isReleasing}
-                      className={`flex items-center gap-2 px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-[0.1em] transition-all shadow-lg active:scale-[0.97] ${
+                      className={`flex items-center gap-2 px-8 py-4 rounded-2xl text-xs font-semibold uppercase tracking-[0.1em] transition-all shadow-lg active:scale-[0.97] ${
                         isReleasing
                           ? 'bg-gray-100 text-gray-300 cursor-wait'
                           : 'bg-[#111] text-[#FFCC00] hover:bg-black hover:shadow-xl'
@@ -172,4 +172,5 @@ export default function WarehouseOutbound() {
     </div>
   );
 }
+
 

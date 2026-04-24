@@ -112,7 +112,7 @@ export default function DriverJobDetail() {
       <div className="p-4 space-y-4">
         {/* Status Chip */}
         <div className="flex">
-          <span className={`text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-full border ${STATUS_VARIANTS[job.status]}`}>
+          <span className={`text-xs font-semibold uppercase tracking-widest px-3 py-1.5 rounded-full border ${STATUS_VARIANTS[job.status]}`}>
             {job.status}
           </span>
         </div>
@@ -126,7 +126,7 @@ export default function DriverJobDetail() {
             <div className="flex gap-6 relative">
               <div className="w-4 h-4 rounded-full bg-white border-2 border-yellow-400 z-10 shrink-0 mt-1"></div>
               <div className="flex-1">
-                <p className="text-xs font-black text-gray-400 uppercase tracking-widest leading-none mb-1.5">Pickup Point</p>
+                <p className="hero-metadata leading-none mb-1.5">Pickup Point</p>
                 <h3 className="font-bold text-gray-900 text-sm">{job.consignor.name}</h3>
                 <p className="text-xs text-gray-500 mt-0.5">{job.consignor.address}</p>
                 <div className="flex items-center gap-4 mt-3 pt-3 border-t border-gray-50">
@@ -144,7 +144,7 @@ export default function DriverJobDetail() {
             <div className="flex gap-6 relative">
               <div className="w-4 h-4 rounded-full bg-yellow-400 border-2 border-white shadow-sm z-10 shrink-0 mt-1"></div>
               <div className="flex-1">
-                <p className="text-xs font-black text-gray-400 uppercase tracking-widest leading-none mb-1.5">Delivery Point</p>
+                <p className="hero-metadata leading-none mb-1.5">Delivery Point</p>
                 <h3 className="font-bold text-gray-900 text-sm">{job.consignee.name}</h3>
                 <p className="text-xs text-gray-500 mt-0.5">{job.consignee.address}</p>
                 <div className="flex items-center gap-4 mt-3 pt-3 border-t border-gray-50">
@@ -164,17 +164,17 @@ export default function DriverJobDetail() {
         <div className="bg-gray-900 rounded-3xl p-6 text-white shadow-xl shadow-gray-200">
            <div className="flex items-center gap-2 mb-4">
               <Box size={16} className="text-yellow-400" />
-              <h3 className="text-xs font-black uppercase tracking-widest">Cargo Specification</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-widest">Cargo Specification</h3>
            </div>
            <p className="text-sm font-bold text-gray-100 leading-relaxed mb-6">{job.cargo.description}</p>
            
            <div className="grid grid-cols-2 gap-4">
               <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
-                 <p className="text-xs font-black text-gray-500 uppercase tracking-widest mb-1">Total Weight</p>
+                 <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1">Total Weight</p>
                  <p className="text-lg font-bold">{job.cargo.weight}</p>
               </div>
               <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
-                 <p className="text-xs font-black text-gray-500 uppercase tracking-widest mb-1">Quantity</p>
+                 <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1">Quantity</p>
                  <p className="text-lg font-bold">{job.cargo.items}</p>
               </div>
            </div>
@@ -189,7 +189,7 @@ export default function DriverJobDetail() {
         <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
            <div className="flex items-center gap-2 mb-6">
               <ShieldCheck size={16} className="text-emerald-500" />
-              <h3 className="text-xs font-black uppercase tracking-widest text-gray-400">Parcel Network Progression</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400">Parcel Network Progression</h3>
            </div>
            <div className="space-y-4">
               {job.stages.map((stage, i) => (
@@ -199,7 +199,7 @@ export default function DriverJobDetail() {
                    'bg-gray-50 border-gray-100 opacity-40'
                 }`}>
                    <div className="flex items-center gap-4">
-                      <div className={`w-8 h-8 rounded-xl flex items-center justify-center font-black text-xs ${
+                      <div className={`w-8 h-8 rounded-xl flex items-center justify-center font-semibold text-xs ${
                          stage.status === 'Active' ? 'bg-yellow-400 text-black shadow-lg animate-pulse' :
                          stage.status === 'Completed' ? 'bg-emerald-500 text-white' :
                          'bg-gray-200 text-gray-400'
@@ -207,12 +207,12 @@ export default function DriverJobDetail() {
                          {i + 1}
                       </div>
                       <div>
-                         <p className="text-xs font-black text-gray-900 leading-none">{stage.name}</p>
+                         <p className="text-xs font-semibold text-gray-900 leading-none">{stage.name}</p>
                          <p className="text-xs font-bold text-gray-500 mt-1 uppercase tracking-tight">{stage.from} → {stage.to}</p>
                       </div>
                    </div>
                    <div className="text-right">
-                      <p className={`text-xs font-black uppercase tracking-widest ${stage.status === 'Active' ? 'text-yellow-700' : 'text-gray-400'}`}>
+                      <p className={`text-xs font-semibold uppercase tracking-widest ${stage.status === 'Active' ? 'text-yellow-700' : 'text-gray-400'}`}>
                          {stage.status}
                       </p>
                       {stage.time !== '-' && <p className="text-xs font-bold text-gray-400 mt-0.5">{stage.time}</p>}
@@ -250,4 +250,5 @@ export default function DriverJobDetail() {
     </div>
   );
 }
+
 

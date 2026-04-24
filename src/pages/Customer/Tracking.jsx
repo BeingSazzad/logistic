@@ -71,7 +71,7 @@ export default function CustomerTracking() {
               <p className="font-bold text-gray-900 text-sm">{t.id}</p>
               <div className="flex items-center gap-1 text-xs text-gray-500 mt-1"><MapPin size={10} />{t.from} → {t.to}</div>
               <div className="flex justify-between items-center mt-2">
-                <span className="text-xs font-black uppercase text-yellow-700 bg-yellow-100 px-2 py-0.5 rounded-full">{t.status}</span>
+                <span className="text-xs font-semibold uppercase text-yellow-700 bg-yellow-100 px-2 py-0.5 rounded-full">{t.status}</span>
                 <span className="text-xs text-gray-500 flex items-center gap-1"><Clock size={10} /> ETA {t.eta}</span>
               </div>
               <div className="w-full h-1.5 bg-gray-100 rounded-full mt-2 overflow-hidden">
@@ -109,15 +109,15 @@ export default function CustomerTracking() {
             <div className="bg-white rounded-3xl border border-gray-100 shadow-xl overflow-hidden">
               <div className="p-8 border-b border-gray-100 flex justify-between items-start bg-gradient-to-r from-gray-50 to-white">
                 <div>
-                  <h3 className="font-black text-gray-900 text-2xl uppercase tracking-tighter">{selected.id}</h3>
+                  <h3 className="font-semibold text-gray-900 text-2xl uppercase tracking-tighter">{selected.id}</h3>
                   <p className="text-xs font-bold text-gray-400 mt-2 uppercase tracking-widest flex items-center gap-2">
                      <MapPin size={12} className="text-brand" /> {selected.from} <span className="text-gray-200">→</span> {selected.to}
                   </p>
                 </div>
                 <div className="text-right">
-                  <span className="text-black bg-yellow-400 text-xs font-black uppercase px-4 py-2 rounded-xl shadow-lg shadow-yellow-400/20">{selected.status}</span>
+                  <span className="text-black bg-yellow-400 text-xs font-semibold uppercase px-4 py-2 rounded-xl shadow-lg shadow-yellow-400/20">{selected.status}</span>
                   <div className="mt-3 flex flex-col items-end">
-                     <p className="text-xs font-black text-brand uppercase tracking-widest">Active Node</p>
+                     <p className="text-xs font-semibold text-brand uppercase tracking-widest">Active Node</p>
                      <p className="text-xs font-bold text-gray-900 mt-1">{selected.currentCity}</p>
                   </div>
                 </div>
@@ -141,7 +141,7 @@ export default function CustomerTracking() {
                          {/* Content */}
                          <div className={`flex-1 transition-all duration-500 ${step.done ? 'opacity-60' : step.current ? 'opacity-100' : 'opacity-20'}`}>
                             <div className="flex justify-between items-center">
-                               <p className={`text-xs font-black uppercase tracking-[0.2em] ${step.current ? 'text-yellow-600' : 'text-gray-400'}`}>
+                               <p className={`text-xs font-semibold uppercase tracking-[0.2em] ${step.current ? 'text-yellow-600' : 'text-gray-400'}`}>
                                   {step.city}
                                </p>
                                {step.done && <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded tracking-widest uppercase">Scanned</span>}
@@ -170,17 +170,17 @@ export default function CustomerTracking() {
                        <Truck size={22} />
                     </div>
                     <div>
-                       <p className="text-xs font-black text-gray-400 uppercase tracking-widest">In Transit via Depot</p>
+                       <p className="hero-metadata">In Transit via Depot</p>
                        <p className="text-xs font-bold text-gray-900">Consolidated Loading</p>
                     </div>
                  </div>
                  <div className="text-right">
-                    <p className="text-xs font-black text-gray-400 uppercase tracking-widest">Network Speed</p>
+                    <p className="hero-metadata">Network Speed</p>
                     <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest">Standard Express</p>
                  </div>
               </div>
 
-              <div className="p-5 bg-black text-[#FFCC00] text-xs font-black uppercase tracking-[0.3em] text-center flex items-center justify-center gap-4 group">
+              <div className="p-5 bg-black text-[#FFCC00] text-xs font-semibold uppercase tracking-[0.3em] text-center flex items-center justify-center gap-4 group">
                  <div className="w-2 h-2 rounded-full bg-[#FFCC00] animate-pulse"></div>
                  AUSTRALIAN LOGISTICS NETWORK LIVE FEED
               </div>
@@ -190,5 +190,6 @@ export default function CustomerTracking() {
     </div>
   );
 }
+
 
 

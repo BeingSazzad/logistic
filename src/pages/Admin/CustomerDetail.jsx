@@ -48,7 +48,7 @@ export default function AdminCustomerDetail() {
           <div>
             <div className="flex items-center gap-3">
               <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{c.name}</h1>
-              <span className={`text-xs font-black px-2.5 py-1 rounded border uppercase tracking-widest ${statusStyle(c.status)}`}>{c.status}</span>
+              <span className={`text-xs font-semibold px-2.5 py-1 rounded border uppercase tracking-widest ${statusStyle(c.status)}`}>{c.status}</span>
             </div>
             <p className="text-xs text-gray-500 mt-1 uppercase tracking-widest font-medium">{c.id} · {c.industry} · Customer since {c.joined}</p>
           </div>
@@ -80,8 +80,8 @@ export default function AdminCustomerDetail() {
               { label: 'Avg Rating', val: `★ ${c.rating}`, color: 'text-amber-500' },
             ].map((s, i) => (
               <div key={i} className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm">
-                <p className="text-xs font-black text-gray-400 uppercase tracking-widest">{s.label}</p>
-                <p className={`text-xl font-black mt-1 ${s.color}`}>{s.val}</p>
+                <p className="hero-metadata">{s.label}</p>
+                <p className={`text-xl font-semibold mt-1 ${s.color}`}>{s.val}</p>
               </div>
             ))}
           </div>
@@ -89,7 +89,7 @@ export default function AdminCustomerDetail() {
           {/* Company Details */}
           <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
             <div className="p-5 border-b border-gray-100 bg-[#FAFAFA]">
-              <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest flex items-center gap-2"><Building size={12}/> Account Details</h3>
+              <h3 className="hero-metadata flex items-center gap-2"><Building size={12}/> Account Details</h3>
             </div>
             <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
@@ -99,7 +99,7 @@ export default function AdminCustomerDetail() {
                 { label: 'Payment Terms', val: c.terms, icon: CreditCard },
               ].map((f, i) => (
                 <div key={i} className="space-y-1">
-                  <p className="text-xs font-black text-gray-400 uppercase tracking-widest">{f.label}</p>
+                  <p className="hero-metadata">{f.label}</p>
                   {editing ? (
                     <input defaultValue={f.val} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 focus:border-[#FFCC00] transition-all" />
                   ) : (
@@ -108,7 +108,7 @@ export default function AdminCustomerDetail() {
                 </div>
               ))}
               <div className="md:col-span-2 space-y-1">
-                <p className="text-xs font-black text-gray-400 uppercase tracking-widest flex items-center gap-1"><MapPin size={11}/> Business Address</p>
+                <p className="hero-metadata flex items-center gap-1"><MapPin size={11}/> Business Address</p>
                 {editing ? (
                   <input defaultValue={c.address} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 focus:border-[#FFCC00] transition-all" />
                 ) : (
@@ -127,17 +127,17 @@ export default function AdminCustomerDetail() {
           {/* Credit Facility */}
           <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
             <div className="p-5 border-b border-gray-100 bg-[#FAFAFA]">
-              <h3 className="text-xs font-black text-gray-400 uppercase tracking-widests flex items-center gap-2"><CreditCard size={12}/> Credit Facility</h3>
+              <h3 className="hero-metadatas flex items-center gap-2"><CreditCard size={12}/> Credit Facility</h3>
             </div>
             <div className="p-6">
               <div className="flex justify-between items-end mb-3">
                 <div>
-                  <p className="text-xs font-black text-gray-400 uppercase tracking-widests">Used Credit</p>
-                  <p className="text-2xl font-black text-gray-900">${c.usedCredit.toLocaleString()}</p>
+                  <p className="hero-metadatas">Used Credit</p>
+                  <p className="text-2xl font-semibold text-gray-900">${c.usedCredit.toLocaleString()}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-black text-gray-400 uppercase tracking-widests">Credit Limit</p>
-                  <p className="text-2xl font-black text-gray-500">${c.creditLimit.toLocaleString()}</p>
+                  <p className="hero-metadatas">Credit Limit</p>
+                  <p className="text-2xl font-semibold text-gray-500">${c.creditLimit.toLocaleString()}</p>
                 </div>
               </div>
               <div className="w-full h-4 bg-gray-100 rounded-full overflow-hidden">
@@ -150,20 +150,20 @@ export default function AdminCustomerDetail() {
           {/* Recent Loads */}
           <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
             <div className="p-5 border-b border-gray-100 bg-[#FAFAFA] flex items-center justify-between">
-              <h3 className="text-xs font-black text-gray-400 uppercase tracking-widests flex items-center gap-2"><Package size={12}/> Recent Loads</h3>
-              <button onClick={() => navigate('/admin/loads')} className="text-xs font-black text-[#FFCC00] uppercase tracking-widests hover:underline">View All →</button>
+              <h3 className="hero-metadatas flex items-center gap-2"><Package size={12}/> Recent Loads</h3>
+              <button onClick={() => navigate('/admin/loads')} className="text-xs font-semibold text-[#FFCC00] uppercase tracking-widests hover:underline">View All →</button>
             </div>
             <div className="divide-y divide-gray-50">
               {RECENT_LoadS.map(s => (
                 <div key={s.id} onClick={() => navigate(`/admin/loads/${s.id}`)} className="flex items-center justify-between px-6 py-4 hover:bg-gray-50 cursor-pointer transition-all">
                   <div>
-                    <p className="text-sm font-black text-gray-900">{s.id}</p>
+                    <p className="text-sm font-semibold text-gray-900">{s.id}</p>
                     <p className="text-xs text-gray-400 font-bold uppercase tracking-widests">{s.origin} → {s.dest}</p>
                   </div>
                   <div className="flex items-center gap-4">
                     <span className="text-xs font-bold text-gray-400 flex items-center gap-1"><Clock size={10}/>{s.date}</span>
-                    <span className="text-xs font-black text-emerald-600">{s.value}</span>
-                    <span className={`text-xs font-black px-2.5 py-1 rounded-md border uppercase tracking-widests ${statusStyle(s.status)}`}>{s.status}</span>
+                    <span className="text-xs font-semibold text-emerald-600">{s.value}</span>
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-md border uppercase tracking-widests ${statusStyle(s.status)}`}>{s.status}</span>
                     <ChevronRight size={14} className="text-gray-300" />
                   </div>
                 </div>
@@ -176,14 +176,14 @@ export default function AdminCustomerDetail() {
         <div className="lg:col-span-1 space-y-6">
           {/* Contact Card */}
           <div className="bg-[#111] rounded-xl p-6 text-white shadow-xl border border-gray-800">
-            <h3 className="text-xs font-black uppercase tracking-widests mb-5 text-gray-300">Primary Contact</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-widests mb-5 text-gray-300">Primary Contact</h3>
             <div className="space-y-4">
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-[#FFCC00] flex items-center justify-center text-black font-black text-xl shadow-lg shrink-0">
+                <div className="w-14 h-14 rounded-2xl bg-[#FFCC00] flex items-center justify-center text-black font-semibold text-xl shadow-lg shrink-0">
                   {c.contact.split(' ').map(n=>n[0]).join('')}
                 </div>
                 <div>
-                  <p className="font-black text-white">{c.contact}</p>
+                  <p className="font-semibold text-white">{c.contact}</p>
                   <p className="text-xs text-gray-400 font-bold uppercase tracking-widests">Account Owner</p>
                 </div>
               </div>
@@ -197,7 +197,7 @@ export default function AdminCustomerDetail() {
                   <span className="text-gray-300 font-bold text-xs">{c.email}</span>
                 </div>
               </div>
-              <button className="w-full bg-[#FFCC00] hover:bg-yellow-400 text-black py-2.5 rounded-xl font-black text-xs uppercase tracking-widests transition-all flex items-center justify-center gap-2 mt-4">
+              <button className="w-full bg-[#FFCC00] hover:bg-yellow-400 text-black py-2.5 rounded-xl font-semibold text-xs uppercase tracking-widests transition-all flex items-center justify-center gap-2 mt-4">
                 <MessageSquare size={14}/> Send Message
               </button>
             </div>
@@ -206,21 +206,21 @@ export default function AdminCustomerDetail() {
           {/* Quick Actions */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
             <div className="p-4 border-b border-gray-100 bg-[#FAFAFA]">
-              <h3 className="text-xs font-black text-gray-400 uppercase tracking-widests">Account Actions</h3>
+              <h3 className="hero-metadatas">Account Actions</h3>
             </div>
             <div className="p-4 flex flex-col gap-2">
-              <button className="w-full py-3 bg-white border border-gray-200 rounded-xl text-xs font-black uppercase tracking-widests text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
+              <button className="w-full py-3 bg-white border border-gray-200 rounded-xl text-xs font-semibold uppercase tracking-widests text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
                 <FileText size={14}/> View Invoices
               </button>
-              <button className="w-full py-3 bg-white border border-gray-200 rounded-xl text-xs font-black uppercase tracking-widests text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
+              <button className="w-full py-3 bg-white border border-gray-200 rounded-xl text-xs font-semibold uppercase tracking-widests text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
                 <TrendingUp size={14}/> Load History
               </button>
               {c.status === 'Active' ? (
-                <button className="w-full py-3 bg-amber-50 border border-amber-100 rounded-xl text-xs font-black uppercase tracking-widests text-amber-600 hover:bg-amber-100 transition-all flex items-center justify-center gap-2 mt-1">
+                <button className="w-full py-3 bg-amber-50 border border-amber-100 rounded-xl text-xs font-semibold uppercase tracking-widests text-amber-600 hover:bg-amber-100 transition-all flex items-center justify-center gap-2 mt-1">
                   <AlertTriangle size={14}/> Place On Hold
                 </button>
               ) : (
-                <button className="w-full py-3 bg-emerald-50 border border-emerald-100 rounded-xl text-xs font-black uppercase tracking-widests text-emerald-600 hover:bg-emerald-100 transition-all flex items-center justify-center gap-2 mt-1">
+                <button className="w-full py-3 bg-emerald-50 border border-emerald-100 rounded-xl text-xs font-semibold uppercase tracking-widests text-emerald-600 hover:bg-emerald-100 transition-all flex items-center justify-center gap-2 mt-1">
                   <CheckCircle2 size={14}/> Reactivate Account
                 </button>
               )}
@@ -231,4 +231,5 @@ export default function AdminCustomerDetail() {
     </div>
   );
 }
+
 

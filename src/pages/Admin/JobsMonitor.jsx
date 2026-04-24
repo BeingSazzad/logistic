@@ -58,15 +58,15 @@ export default function AdminJobsMonitor() {
       {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 px-2 mb-2">
         <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between">
-          <div><p className="text-xs text-gray-400 uppercase font-bold tracking-widest leading-tight">Global Active Jobs</p><p className="text-2xl font-black text-gray-900 mt-1.5 leading-none">482</p></div>
+          <div><p className="text-xs text-gray-400 uppercase font-bold tracking-widest leading-tight">Global Active Jobs</p><p className="text-2xl font-semibold text-gray-900 mt-1.5 leading-none">482</p></div>
           <div className="w-10 h-10 rounded border border-gray-100 flex items-center justify-center bg-gray-50 text-gray-400"><BarChart size={20}/></div>
         </div>
         <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between">
-          <div><p className="text-xs text-gray-400 uppercase font-bold tracking-widest leading-tight">SLA Breaches</p><p className="text-2xl font-black text-red-600 mt-1.5 leading-none">14</p></div>
+          <div><p className="text-xs text-gray-400 uppercase font-bold tracking-widest leading-tight">SLA Breaches</p><p className="text-2xl font-semibold text-red-600 mt-1.5 leading-none">14</p></div>
           <div className="w-10 h-10 rounded border border-red-100 flex items-center justify-center bg-red-50 text-red-500"><ShieldAlert size={20}/></div>
         </div>
         <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex items-center justify-between">
-          <div><p className="text-xs text-gray-400 uppercase font-bold tracking-widest leading-tight">Critical Flags</p><p className="text-2xl font-black text-amber-600 mt-1.5 leading-none">3</p></div>
+          <div><p className="text-xs text-gray-400 uppercase font-bold tracking-widest leading-tight">Critical Flags</p><p className="text-2xl font-semibold text-amber-600 mt-1.5 leading-none">3</p></div>
           <div className="w-10 h-10 rounded border border-amber-100 flex items-center justify-center bg-amber-50 text-amber-500"><AlertTriangle size={20}/></div>
         </div>
       </div>
@@ -153,4 +153,5 @@ export default function AdminJobsMonitor() {
     </div>
   );
 }
+
 

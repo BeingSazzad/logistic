@@ -40,9 +40,9 @@ export default function DispatchVehicleDetail() {
                <div>
                   <div className="flex items-center gap-3">
                      <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{v.id}</h1>
-                     <span className={`text-xs font-black px-2.5 py-1 rounded border uppercase tracking-widest ${statusStyle(v.status)}`}>{v.status}</span>
+                     <span className={`text-xs font-semibold px-2.5 py-1 rounded border uppercase tracking-widest ${statusStyle(v.status)}`}>{v.status}</span>
                      {v.compliance === 'Warning' && (
-                        <span className="text-xs font-black px-2 py-1 rounded bg-red-50 text-red-600 border border-red-100 uppercase tracking-widest flex items-center gap-1">
+                        <span className="text-xs font-semibold px-2 py-1 rounded bg-red-50 text-red-600 border border-red-100 uppercase tracking-widest flex items-center gap-1">
                            <AlertTriangle size={10} /> Compliance Warning
                         </span>
                      )}
@@ -76,7 +76,7 @@ export default function DispatchVehicleDetail() {
                   />
                   <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
                      <div className="bg-black/50 backdrop-blur-md px-4 py-2 rounded-lg border border-white/20">
-                        <p className="text-xs font-black text-[#FFCC00] uppercase tracking-widest">VIN / Chassis</p>
+                        <p className="text-xs font-semibold text-[#FFCC00] uppercase tracking-widest">VIN / Chassis</p>
                         <p className="text-sm font-bold text-white uppercase font-mono">{v.id}-2026-XQG</p>
                      </div>
                   </div>
@@ -100,22 +100,22 @@ export default function DispatchVehicleDetail() {
 
             <div className="lg:w-1/3 flex flex-col justify-center">
                <div className="flex items-center gap-3 mb-2">
-                  <span className={`text-xs font-black px-2.5 py-1 rounded border uppercase tracking-widest ${statusStyle(v.status)}`}>
+                  <span className={`text-xs font-semibold px-2.5 py-1 rounded border uppercase tracking-widest ${statusStyle(v.status)}`}>
                      <div className={`w-1.5 h-1.5 rounded-full bg-current ${v.status === 'Active' ? 'animate-pulse' : ''}`}></div> {v.status}
                   </span>
                   <span className="text-xs font-bold px-2.5 py-1 rounded-md border border-gray-200 text-gray-500 uppercase tracking-widest">{v.type}</span>
                </div>
-               <h2 className="text-4xl font-black text-gray-900 tracking-tighter leading-none mb-2">{v.id}</h2>
+               <h2 className="text-4xl font-semibold text-gray-900 tracking-tighter leading-none mb-2">{v.id}</h2>
                <h3 className="text-xl font-bold text-gray-500 tracking-tight mb-4">{v.make}</h3>
 
                <div className="grid grid-cols-2 gap-4 mt-2">
                   <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
                      <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1 flex items-center gap-1.5"><Activity size={12} /> Odometer</p>
-                     <p className="text-lg font-black text-gray-900 leading-none">{v.mileage}</p>
+                     <p className="text-lg font-semibold text-gray-900 leading-none">{v.mileage}</p>
                   </div>
                   <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
                      <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1 flex items-center gap-1.5"><Fuel size={12} className="text-blue-500" /> Fuel</p>
-                     <p className="text-lg font-black text-gray-900 leading-none">{v.fuel}</p>
+                     <p className="text-lg font-semibold text-gray-900 leading-none">{v.fuel}</p>
                   </div>
                </div>
             </div>
@@ -132,10 +132,10 @@ export default function DispatchVehicleDetail() {
                   ].map((s, i) => (
                      <div key={i} className="bg-white rounded-xl border border-gray-100 p-5 shadow-sm flex flex-col gap-2">
                         <div className="flex items-center justify-between">
-                           <p className="text-xs font-black text-gray-400 uppercase tracking-widest">{s.label}</p>
+                           <p className="hero-metadata">{s.label}</p>
                            <s.icon size={16} className={s.color} />
                         </div>
-                        <p className="text-xl font-black text-gray-900 tracking-tight">{s.val}</p>
+                        <p className="text-xl font-semibold text-gray-900 tracking-tight">{s.val}</p>
                      </div>
                   ))}
                </div>
@@ -148,8 +148,8 @@ export default function DispatchVehicleDetail() {
                   <div className="p-6 space-y-6">
                      <div>
                         <div className="flex justify-between items-center mb-2">
-                           <p className="text-xs font-black text-gray-400 uppercase tracking-widest">Fuel Level</p>
-                           <p className="text-sm font-black text-gray-900">{v.fuel}</p>
+                           <p className="hero-metadata">Fuel Level</p>
+                           <p className="text-sm font-semibold text-gray-900">{v.fuel}</p>
                         </div>
                         <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
                            <div className={`h-full ${fuelColor} rounded-full transition-all`} style={{ width: v.fuel }}></div>
@@ -165,8 +165,8 @@ export default function DispatchVehicleDetail() {
                            <div key={i} className={`flex items-center gap-3 p-4 rounded-xl border ${s.label === 'Compliance' && v.compliance === 'Warning' ? 'bg-red-50 border-red-100' : 'bg-gray-50 border-gray-100'}`}>
                               <s.icon size={18} className={s.color} />
                               <div>
-                                 <p className="text-xs font-black text-gray-400 uppercase tracking-widest">{s.label}</p>
-                                 <p className={`text-xs font-black mt-0.5 ${s.label === 'Compliance' && v.compliance === 'Warning' ? 'text-red-600' : 'text-gray-900'}`}>{s.val}</p>
+                                 <p className="hero-metadata">{s.label}</p>
+                                 <p className={`text-xs font-semibold mt-0.5 ${s.label === 'Compliance' && v.compliance === 'Warning' ? 'text-red-600' : 'text-gray-900'}`}>{s.val}</p>
                               </div>
                            </div>
                         ))}
@@ -184,10 +184,10 @@ export default function DispatchVehicleDetail() {
                         <MapPin size={28} className="text-emerald-500" />
                      </div>
                      <div>
-                        <p className="text-lg font-black text-gray-900 leading-tight">{v.location}</p>
+                        <p className="text-lg font-semibold text-gray-900 leading-tight">{v.location}</p>
                         <div className="flex items-center gap-2 mt-2">
                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                           <p className="text-xs font-black text-gray-400 uppercase tracking-widest">GPS Signal Active · Updated 32 seconds ago</p>
+                           <p className="hero-metadata">GPS Signal Active · Updated 32 seconds ago</p>
                         </div>
                      </div>
                   </div>
@@ -197,7 +197,7 @@ export default function DispatchVehicleDetail() {
             <div className="lg:col-span-1 space-y-6">
                <div className="bg-[#111] rounded-xl p-6 text-white shadow-xl border border-gray-800 relative overflow-hidden group">
                   <div className="absolute -right-6 -top-6 w-32 h-32 bg-gray-800/50 rounded-full blur-3xl"></div>
-                  <h3 className="text-xs font-black uppercase tracking-widest mb-6 text-gray-300 flex items-center gap-2 relative z-10">
+                  <h3 className="text-xs font-semibold uppercase tracking-widest mb-6 text-gray-300 flex items-center gap-2 relative z-10">
                      <Truck size={16} /> Asset Record
                   </h3>
                   <div className="space-y-4 relative z-10">
@@ -209,8 +209,8 @@ export default function DispatchVehicleDetail() {
                         { label: 'GVM Capacity', val: v.capacity },
                      ].map((r, i) => (
                         <div key={i} className="flex justify-between items-center border-b border-white/5 pb-3 last:border-0 last:pb-0">
-                           <span className="text-xs font-black text-gray-400 uppercase tracking-widest">{r.label}</span>
-                           <span className="text-xs font-black text-white">{r.val}</span>
+                           <span className="hero-metadata">{r.label}</span>
+                           <span className="text-xs font-semibold text-white">{r.val}</span>
                         </div>
                      ))}
                   </div>
@@ -218,8 +218,8 @@ export default function DispatchVehicleDetail() {
 
                <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
                   <div className="p-5 border-b border-gray-100 bg-[#FAFAFA] flex items-center justify-between">
-                     <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest flex items-center gap-2"><User size={12} /> Shift Roster</h3>
-                     <span className="bg-gray-100 text-gray-500 px-2 py-0.5 rounded text-xs font-black">{v.shifts?.length || 0} Drivers</span>
+                     <h3 className="hero-metadata flex items-center gap-2"><User size={12} /> Shift Roster</h3>
+                     <span className="bg-gray-100 text-gray-500 px-2 py-0.5 rounded text-xs font-semibold">{v.shifts?.length || 0} Drivers</span>
                   </div>
                   <div className="p-5 flex flex-col gap-4 max-h-[300px] overflow-y-auto">
                      {!v.shifts || v.shifts.length === 0 ? (
@@ -228,24 +228,24 @@ export default function DispatchVehicleDetail() {
                         </div>
                      ) : v.shifts.map((shift, idx) => (
                         <div key={idx} className="flex items-center gap-4 bg-gray-50/50 p-3 rounded-xl border border-gray-100">
-                           <div className="w-10 h-10 rounded-xl bg-[#111] flex items-center justify-center text-[#FFCC00] font-black text-xs shadow-lg shrink-0">
+                           <div className="w-10 h-10 rounded-xl bg-[#111] flex items-center justify-center text-[#FFCC00] font-semibold text-xs shadow-lg shrink-0">
                               {shift.initials}
                            </div>
                            <div className="flex-1 min-w-0">
-                              <p className="font-black text-gray-900 truncate">{shift.name}</p>
+                              <p className="font-semibold text-gray-900 truncate">{shift.name}</p>
                               <p className="text-xs text-gray-400 uppercase tracking-widest font-bold mt-0.5">{shift.id}</p>
                            </div>
                            <div className="text-right shrink-0">
-                              <p className="text-xs font-black text-blue-600 bg-blue-50 border border-blue-100 px-2 py-1 rounded truncate max-w-[120px]">{shift.shift}</p>
+                              <p className="text-xs font-semibold text-blue-600 bg-blue-50 border border-blue-100 px-2 py-1 rounded truncate max-w-[120px]">{shift.shift}</p>
                            </div>
                         </div>
                      ))}
                      <div className="flex gap-2 mt-2">
-                        <button className="flex-1 py-3 bg-white hover:bg-gray-50 border border-dashed border-gray-300 rounded-xl text-xs font-black uppercase tracking-widest text-[#111] transition-all flex items-center justify-center gap-2">
+                        <button className="flex-1 py-3 bg-white hover:bg-gray-50 border border-dashed border-gray-300 rounded-xl text-xs font-semibold uppercase tracking-widest text-[#111] transition-all flex items-center justify-center gap-2">
                            <Plus size={13} /> Assign Driver
                         </button>
                         {v.shifts?.length > 0 && (
-                           <button onClick={() => navigate('/dispatch/drivers')} className="flex-1 py-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-xs font-black uppercase tracking-widest text-gray-600 transition-all flex items-center justify-center gap-2">
+                           <button onClick={() => navigate('/dispatch/drivers')} className="flex-1 py-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl text-xs font-semibold uppercase tracking-widest text-gray-600 transition-all flex items-center justify-center gap-2">
                               Manage List
                            </button>
                         )}
@@ -255,16 +255,16 @@ export default function DispatchVehicleDetail() {
 
                <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
                   <div className="p-4 border-b border-gray-100 bg-[#FAFAFA]">
-                     <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest">Asset Actions</h3>
+                     <h3 className="hero-metadata">Asset Actions</h3>
                   </div>
                   <div className="p-4 flex flex-col gap-2">
-                     <button className="w-full py-3 bg-white border border-gray-200 rounded-xl text-xs font-black uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
+                     <button className="w-full py-3 bg-white border border-gray-200 rounded-xl text-xs font-semibold uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
                         <Wrench size={14} /> Schedule Service
                      </button>
-                     <button className="w-full py-3 bg-white border border-gray-200 rounded-xl text-xs font-black uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
+                     <button className="w-full py-3 bg-white border border-gray-200 rounded-xl text-xs font-semibold uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
                         <FileText size={14} /> View Service Log
                      </button>
-                     <button className="w-full py-3 bg-red-50 border border-red-100 rounded-xl text-xs font-black uppercase tracking-widest text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center gap-2 mt-1">
+                     <button className="w-full py-3 bg-red-50 border border-red-100 rounded-xl text-xs font-semibold uppercase tracking-widest text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center gap-2 mt-1">
                         <AlertTriangle size={14} /> Report Fault
                      </button>
                   </div>
@@ -274,4 +274,5 @@ export default function DispatchVehicleDetail() {
       </div>
    );
 }
+
 

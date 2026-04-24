@@ -35,10 +35,10 @@ export default function CustomerLayout() {
               <div className="w-7 h-7 bg-[#FFCC00] rounded-lg flex items-center justify-center shadow-[0_0_10px_rgba(255,204,0,0.2)]">
                 <Zap size={14} color="#111" strokeWidth={3} />
               </div>
-              <span className="font-black text-[#111] text-lg tracking-tighter uppercase">HERO</span>
+              <span className="font-semibold text-[#111] text-lg tracking-tighter uppercase">HERO</span>
             </div>
             <span className="w-px h-4 bg-gray-200 mx-1" />
-            <span className="text-xs text-gray-400 font-black uppercase tracking-widest">Customer Portal</span>
+            <span className="text-xs text-gray-400 font-semibold uppercase tracking-widest">Customer Portal</span>
           </div>
 
           {/* Nav Links */}
@@ -46,7 +46,7 @@ export default function CustomerLayout() {
             {navItems.map(({ to, label, icon: Icon, end }) => (
               <NavLink key={to} to={to} end={end}>
                 {({ isActive }) => (
-                  <div className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${
+                  <div className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-widest transition-all ${
                     isActive
                       ? 'bg-[#FFCC00] text-[#111]'
                       : 'text-gray-500 hover:text-[#111] hover:bg-gray-100'
@@ -65,12 +65,12 @@ export default function CustomerLayout() {
               <Bell size={18} />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white" />
             </button>
-            <div className="w-8 h-8 rounded-full bg-[#FFCC00] flex items-center justify-center font-black text-[#111] text-xs shadow-md">
+            <div className="w-8 h-8 rounded-full bg-[#FFCC00] flex items-center justify-center font-semibold text-[#111] text-xs shadow-md">
               WL
             </div>
             <button
               onClick={() => navigate('/login')}
-              className="flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-gray-400 hover:text-red-500 transition-colors ml-1"
+              className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-gray-400 hover:text-red-500 transition-colors ml-1"
             >
               <LogOut size={13} />
               Sign Out
@@ -85,4 +85,5 @@ export default function CustomerLayout() {
     </div>
   );
 }
+
 

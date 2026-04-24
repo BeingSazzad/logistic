@@ -62,7 +62,7 @@ export default function Invoices() {
         ].map(s => (
           <div key={s.label} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
             <p className="text-xs text-gray-400 uppercase font-bold tracking-widest">{s.label}</p>
-            <p className={`text-2xl font-black mt-1 ${s.color}`}>{s.value}</p>
+            <p className={`text-2xl font-semibold mt-1 ${s.color}`}>{s.value}</p>
           </div>
         ))}
       </div>
@@ -111,7 +111,7 @@ export default function Invoices() {
                       <div className="font-bold text-[#111] text-sm">{inv.customer}</div>
                     </td>
                     <td className="px-6 py-5">
-                      <div className="font-black text-[#111]">{inv.amount}</div>
+                      <div className="font-semibold text-[#111]">{inv.amount}</div>
                     </td>
                     <td className="px-6 py-5">
                       <div className={`text-sm font-bold ${inv.status === 'overdue' ? 'text-red-500' : 'text-gray-700'}`}>
@@ -153,4 +153,5 @@ export default function Invoices() {
     </div>
   );
 }
+
 

@@ -99,7 +99,7 @@ export default function AdminSafetyChecklists() {
           <div key={i} className={`card p-5 flex items-center justify-between border ${s.border}`}>
             <div>
               <p className="hero-metadata">{s.label}</p>
-              <p className={`text-3xl font-black mt-1 ${s.color}`}>{s.val}</p>
+              <p className={`text-3xl font-semibold mt-1 ${s.color}`}>{s.val}</p>
             </div>
             <div className={`w-12 h-12 rounded-xl ${s.bg} flex items-center justify-center border ${s.border}`}>
               <s.icon size={22} className={s.color} />
@@ -114,13 +114,13 @@ export default function AdminSafetyChecklists() {
           <ShieldCheck size={18} />
         </div>
         <div>
-          <p className="text-xs font-black text-[#FFCC00] uppercase tracking-widest">Trip Block Enforcement Active</p>
+          <p className="text-xs font-semibold text-[#FFCC00] uppercase tracking-widest">Trip Block Enforcement Active</p>
           <p className="text-xs font-medium text-gray-500 mt-0.5">
             Drivers cannot start a trip until all required checklist items are completed. {activeCount} checklist{activeCount !== 1 ? 's' : ''} currently enforced.
           </p>
         </div>
         <div className="ml-auto shrink-0">
-          <span className="flex items-center gap-2 text-emerald-400 text-xs font-black uppercase tracking-widest">
+          <span className="flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase tracking-widest">
             <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span> Live
           </span>
         </div>
@@ -139,12 +139,12 @@ export default function AdminSafetyChecklists() {
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <h3 className="text-sm font-black text-gray-900">{cl.name}</h3>
-                    <span className="text-xs font-black text-gray-400 uppercase tracking-widest border border-gray-200 bg-gray-50 px-2 py-0.5 rounded">{cl.id}</span>
-                    <span className={`text-xs font-black uppercase tracking-widest px-2 py-0.5 rounded ${cl.active ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'}`}>
+                    <h3 className="text-sm font-semibold text-gray-900">{cl.name}</h3>
+                    <span className="hero-metadata border border-gray-200 bg-gray-50 px-2 py-0.5 rounded">{cl.id}</span>
+                    <span className={`text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded ${cl.active ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'}`}>
                       {cl.active ? '● Active' : '○ Inactive'}
                     </span>
-                    <span className={`text-xs font-black uppercase tracking-widest px-2 py-0.5 rounded ${cl.allowFlexible ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700'}`}>
+                    <span className={`text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded ${cl.allowFlexible ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700'}`}>
                       {cl.allowFlexible ? 'Flexible' : 'Strict Execution'}
                     </span>
                   </div>
@@ -174,7 +174,7 @@ export default function AdminSafetyChecklists() {
                 </button>
                 <button
                   onClick={() => toggleActive(cl.id)}
-                  className={`px-3 py-2 text-xs font-black rounded-lg flex items-center gap-1.5 transition-all ${cl.active ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200' : 'bg-gray-50 text-gray-500 hover:bg-gray-100 border border-gray-200'}`}
+                  className={`px-3 py-2 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-all ${cl.active ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200' : 'bg-gray-50 text-gray-500 hover:bg-gray-100 border border-gray-200'}`}
                 >
                   {cl.active ? <ToggleRight size={16} /> : <ToggleLeft size={16} />}
                   {cl.active ? 'Disable' : 'Enable'}
@@ -191,14 +191,14 @@ export default function AdminSafetyChecklists() {
             {/* Preview Panel */}
             {previewId === cl.id && (
               <div className="border-t border-gray-50 p-5 bg-gray-50/50 animate-in slide-in-from-top-2 duration-200">
-                <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-3">Driver View Preview</p>
+                <p className="hero-metadata mb-3">Driver View Preview</p>
                 <div className="bg-[#111] rounded-2xl p-5 max-w-sm mx-auto">
                   <div className="flex items-center gap-3 mb-5 pb-4 border-b border-white/10">
                     <div className="w-8 h-8 bg-[#FFCC00] rounded-lg flex items-center justify-center text-black">
                       <ShieldCheck size={16} />
                     </div>
                     <div>
-                      <p className="text-white font-black text-sm">{cl.name}</p>
+                      <p className="text-white font-semibold text-sm">{cl.name}</p>
                       <p className="text-gray-500 text-xs font-bold uppercase tracking-widest">Pre-trip safety gate</p>
                     </div>
                   </div>
@@ -207,11 +207,11 @@ export default function AdminSafetyChecklists() {
                       <div key={i} className="flex items-center gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
                         <div className="w-5 h-5 rounded border-2 border-gray-600 shrink-0"></div>
                         <p className="text-xs font-medium text-gray-300 leading-tight flex-1">{item.label}</p>
-                        {item.required && <span className="text-xs font-black text-red-400 uppercase tracking-widest shrink-0">Req</span>}
+                        {item.required && <span className="text-xs font-semibold text-red-400 uppercase tracking-widest shrink-0">Req</span>}
                       </div>
                     ))}
                   </div>
-                  <div className="mt-4 w-full py-3 bg-gray-700 text-gray-500 text-xs font-black uppercase tracking-widest rounded-xl text-center cursor-not-allowed">
+                  <div className="mt-4 w-full py-3 bg-gray-700 text-gray-500 text-xs font-semibold uppercase tracking-widest rounded-xl text-center cursor-not-allowed">
                     Start Trip (Locked)
                   </div>
                 </div>
@@ -256,7 +256,7 @@ function NewChecklistModal({ onClose, onCreate }) {
       <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col max-h-[90vh]">
         <div className="px-6 py-5 border-b border-gray-100 bg-[#FAFAFA] flex justify-between items-center rounded-t-2xl">
           <div>
-            <h3 className="text-lg font-black text-gray-900">New Safety Checklist</h3>
+            <h3 className="text-lg font-semibold text-gray-900">New Safety Checklist</h3>
             <p className="text-xs text-gray-500 mt-0.5">All active checklists are enforced as a trip gate for drivers.</p>
           </div>
           <button onClick={onClose} className="w-8 h-8 flex items-center justify-center hover:bg-gray-200 rounded-lg text-gray-500"><X size={18} /></button>
@@ -266,17 +266,17 @@ function NewChecklistModal({ onClose, onCreate }) {
           {/* Basic Info */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="md:col-span-2">
-              <label className="block text-xs font-black text-gray-500 uppercase tracking-widest mb-1.5">Checklist Name *</label>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5">Checklist Name *</label>
               <input value={name} onChange={e => setName(e.target.value)} placeholder="e.g. Night Shift Pre-Check" className="input w-full" />
             </div>
             <div>
-              <label className="block text-xs font-black text-gray-500 uppercase tracking-widest mb-1.5">Category</label>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5">Category</label>
               <select value={category} onChange={e => setCategory(e.target.value)} className="input w-full">
                 {CATEGORY_OPTIONS.map(c => <option key={c}>{c}</option>)}
               </select>
             </div>
             <div>
-              <label className="block text-xs font-black text-gray-500 uppercase tracking-widest mb-1.5">Applies To</label>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5">Applies To</label>
               <select value={appliesTo} onChange={e => setAppliesTo(e.target.value)} className="input w-full">
                 <option>All Drivers</option>
                 <option>DG Certified Drivers</option>
@@ -285,7 +285,7 @@ function NewChecklistModal({ onClose, onCreate }) {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-black text-gray-500 uppercase tracking-widest mb-1.5">Trigger On</label>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5">Trigger On</label>
               <select value={triggerOn} onChange={e => setTriggerOn(e.target.value)} className="input w-full">
                 <option>Every Trip</option>
                 <option>First Trip of Day</option>
@@ -311,8 +311,8 @@ function NewChecklistModal({ onClose, onCreate }) {
           {/* Items Builder */}
           <div>
             <div className="flex justify-between items-center mb-3">
-              <label className="text-xs font-black text-gray-500 uppercase tracking-widest flex items-center gap-2"><ClipboardList size={12} /> Checklist Items</label>
-              <button onClick={addItem} className="text-xs font-black uppercase tracking-widest px-3 py-1.5 bg-gray-900 text-[#FFCC00] rounded-lg flex items-center gap-1.5 hover:bg-black transition-colors">
+              <label className="text-xs font-semibold text-gray-500 uppercase tracking-widest flex items-center gap-2"><ClipboardList size={12} /> Checklist Items</label>
+              <button onClick={addItem} className="text-xs font-semibold uppercase tracking-widest px-3 py-1.5 bg-gray-900 text-[#FFCC00] rounded-lg flex items-center gap-1.5 hover:bg-black transition-colors">
                 <Plus size={11} strokeWidth={3} /> Add Item
               </button>
             </div>
@@ -320,7 +320,7 @@ function NewChecklistModal({ onClose, onCreate }) {
               {items.map((item, idx) => (
                 <div key={item.id} className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100">
                   <GripVertical size={16} className="text-gray-300 shrink-0 cursor-grab" />
-                  <span className="w-5 h-5 rounded bg-gray-200 text-gray-500 flex items-center justify-center text-xs font-black shrink-0">{idx + 1}</span>
+                  <span className="w-5 h-5 rounded bg-gray-200 text-gray-500 flex items-center justify-center text-xs font-semibold shrink-0">{idx + 1}</span>
                   <input
                     type="text"
                     value={item.label}
@@ -335,7 +335,7 @@ function NewChecklistModal({ onClose, onCreate }) {
                   >
                     {FIELD_TYPES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
                   </select>
-                  <label className="flex items-center gap-1.5 text-xs font-black text-gray-500 uppercase tracking-widest shrink-0 cursor-pointer">
+                  <label className="flex items-center gap-1.5 text-xs font-semibold text-gray-500 uppercase tracking-widest shrink-0 cursor-pointer">
                     <input type="checkbox" checked={item.required} onChange={e => updateItem(item.id, 'required', e.target.checked)} className="w-3.5 h-3.5 accent-red-500" />
                     Req.
                   </label>
@@ -373,14 +373,14 @@ function EditChecklistModal({ checklist, onClose, onSave }) {
       <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col max-h-[90vh]">
         <div className="px-6 py-5 border-b border-gray-100 bg-[#FAFAFA] flex justify-between items-center rounded-t-2xl">
           <div>
-            <h3 className="text-lg font-black text-gray-900">Edit: {data.name}</h3>
+            <h3 className="text-lg font-semibold text-gray-900">Edit: {data.name}</h3>
             <p className="text-xs text-gray-500 mt-0.5">{data.id} · Changes apply immediately to all active trips.</p>
           </div>
           <button onClick={onClose} className="w-8 h-8 flex items-center justify-center hover:bg-gray-200 rounded-lg text-gray-500"><X size={18} /></button>
         </div>
         <div className="p-6 overflow-y-auto flex-1 space-y-5">
           <div>
-            <label className="block text-xs font-black text-gray-500 uppercase tracking-widest mb-1.5">Checklist Name</label>
+            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1.5">Checklist Name</label>
             <input value={data.name} onChange={e => setData(d => ({ ...d, name: e.target.value }))} className="input w-full" />
           </div>
           <div className="pt-2 border-t border-gray-100">
@@ -397,15 +397,15 @@ function EditChecklistModal({ checklist, onClose, onSave }) {
           </div>
           <div>
             <div className="flex justify-between items-center mb-3">
-              <label className="text-xs font-black text-gray-500 uppercase tracking-widest flex items-center gap-2"><ClipboardList size={12} /> Items</label>
-              <button onClick={addItem} className="text-xs font-black uppercase tracking-widest px-3 py-1.5 bg-gray-900 text-[#FFCC00] rounded-lg flex items-center gap-1.5">
+              <label className="text-xs font-semibold text-gray-500 uppercase tracking-widest flex items-center gap-2"><ClipboardList size={12} /> Items</label>
+              <button onClick={addItem} className="text-xs font-semibold uppercase tracking-widest px-3 py-1.5 bg-gray-900 text-[#FFCC00] rounded-lg flex items-center gap-1.5">
                 <Plus size={11} strokeWidth={3} /> Add
               </button>
             </div>
             <div className="space-y-2">
               {data.items.map((item, idx) => (
                 <div key={item.id} className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100">
-                  <span className="w-5 h-5 rounded bg-gray-200 text-gray-500 flex items-center justify-center text-xs font-black shrink-0">{idx + 1}</span>
+                  <span className="w-5 h-5 rounded bg-gray-200 text-gray-500 flex items-center justify-center text-xs font-semibold shrink-0">{idx + 1}</span>
                   <input
                     type="text" value={item.label}
                     onChange={e => updateItem(item.id, 'label', e.target.value)}
@@ -414,7 +414,7 @@ function EditChecklistModal({ checklist, onClose, onSave }) {
                   <select value={item.type} onChange={e => updateItem(item.id, 'type', e.target.value)} className="bg-white border border-gray-200 rounded-lg py-2 px-2 text-xs font-bold text-gray-700 focus:outline-none w-32 shrink-0">
                     {FIELD_TYPES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
                   </select>
-                  <label className="flex items-center gap-1 text-xs font-black text-gray-500 uppercase tracking-widest shrink-0 cursor-pointer">
+                  <label className="flex items-center gap-1 text-xs font-semibold text-gray-500 uppercase tracking-widest shrink-0 cursor-pointer">
                     <input type="checkbox" checked={item.required} onChange={e => updateItem(item.id, 'required', e.target.checked)} className="w-3.5 h-3.5 accent-red-500" />
                     Req.
                   </label>
@@ -434,5 +434,6 @@ function EditChecklistModal({ checklist, onClose, onSave }) {
     </div>
   );
 }
+
 
 

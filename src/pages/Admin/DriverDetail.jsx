@@ -203,7 +203,7 @@ export default function AdminDriverDetail() {
               <div className="p-4 rounded-xl border border-emerald-100 bg-emerald-50/50">
                 <div className="flex justify-between items-start">
                   <div>
-                    <p className="text-xs font-black text-emerald-600 uppercase tracking-widest mb-1.5">Driver's License</p>
+                    <p className="text-xs font-semibold text-emerald-600 uppercase tracking-widest mb-1.5">Driver's License</p>
                     <p className="text-sm font-bold text-gray-900">{driver.license.type}</p>
                     <p className="text-xs font-medium text-gray-500 mt-0.5">{driver.license.number}</p>
                   </div>
@@ -211,14 +211,14 @@ export default function AdminDriverDetail() {
                 </div>
                 <div className="mt-4 pt-3 border-t border-emerald-100/50 flex justify-between items-center">
                   <span className="text-xs text-emerald-600/80 font-bold uppercase tracking-widest">Expiration</span>
-                  <span className="text-xs font-black text-gray-800">{driver.license.expiry}</span>
+                  <span className="text-xs font-semibold text-gray-800">{driver.license.expiry}</span>
                 </div>
               </div>
 
               <div className="p-4 rounded-xl border border-emerald-100 bg-emerald-50/50">
                 <div className="flex justify-between items-start">
                   <div>
-                    <p className="text-xs font-black text-emerald-600 uppercase tracking-widest mb-1.5">Medical Certificate</p>
+                    <p className="text-xs font-semibold text-emerald-600 uppercase tracking-widest mb-1.5">Medical Certificate</p>
                     <p className="text-sm font-bold text-gray-900">Fitness for Duty</p>
                     <p className="text-xs font-medium text-gray-500 mt-0.5">Dept. Transport</p>
                   </div>
@@ -226,25 +226,25 @@ export default function AdminDriverDetail() {
                 </div>
                 <div className="mt-4 pt-3 border-t border-emerald-100/50 flex justify-between items-center">
                   <span className="text-xs text-emerald-600/80 font-bold uppercase tracking-widest">Expiration</span>
-                  <span className="text-xs font-black text-gray-800">{driver.medical.expiry}</span>
+                  <span className="text-xs font-semibold text-gray-800">{driver.medical.expiry}</span>
                 </div>
               </div>
 
               {/* Special Certifications */}
               <div className="pt-2 border-t border-gray-100 mt-2">
-                 <h4 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-3">Special Certifications</h4>
+                 <h4 className="hero-metadata mb-3">Special Certifications</h4>
                  <div className="flex flex-col gap-2">
                     <div className="flex items-center justify-between p-3 rounded-lg border border-gray-200 bg-gray-50">
                        <span className="text-xs font-bold text-gray-900">MSIC Access</span>
-                       <span className="text-xs font-black text-emerald-700 bg-emerald-100 uppercase tracking-widest px-2 py-0.5 rounded">Active</span>
+                       <span className="text-xs font-semibold text-emerald-700 bg-emerald-100 uppercase tracking-widest px-2 py-0.5 rounded">Active</span>
                     </div>
                     <div className="flex items-center justify-between p-3 rounded-lg border border-gray-200 bg-gray-50">
                        <span className="text-xs font-bold text-gray-900">Dangerous Goods (DG)</span>
-                       <span className="text-xs font-black text-emerald-700 bg-emerald-100 uppercase tracking-widest px-2 py-0.5 rounded">Active</span>
+                       <span className="text-xs font-semibold text-emerald-700 bg-emerald-100 uppercase tracking-widest px-2 py-0.5 rounded">Active</span>
                     </div>
                     <div className="flex items-center justify-between p-3 rounded-lg border border-gray-200 bg-gray-50">
                        <span className="text-xs font-bold text-gray-900">Construction White Card</span>
-                       <span className="text-xs font-black text-emerald-700 bg-emerald-100 uppercase tracking-widest px-2 py-0.5 rounded">Active</span>
+                       <span className="text-xs font-semibold text-emerald-700 bg-emerald-100 uppercase tracking-widest px-2 py-0.5 rounded">Active</span>
                     </div>
                  </div>
               </div>
@@ -259,19 +259,19 @@ export default function AdminDriverDetail() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] text-center flex flex-col justify-center">
               <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1.5">Delivered</p>
-              <p className="text-3xl font-black text-gray-900">{driver.stats.completedLoads}</p>
+              <p className="text-3xl font-semibold text-gray-900">{driver.stats.completedLoads}</p>
             </div>
             <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] text-center flex flex-col justify-center">
               <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1.5">On-Time</p>
-              <p className="text-3xl font-black text-emerald-500">{driver.stats.onTimeRate}</p>
+              <p className="text-3xl font-semibold text-emerald-500">{driver.stats.onTimeRate}</p>
             </div>
             <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] text-center flex flex-col justify-center">
               <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1.5">Rating</p>
-              <p className="text-3xl font-black text-[#FFCC00] flex items-center justify-center gap-1">{driver.stats.avgRating} <Star size={18} className="fill-[#FFCC00]"/></p>
+              <p className="text-3xl font-semibold text-[#FFCC00] flex items-center justify-center gap-1">{driver.stats.avgRating} <Star size={18} className="fill-[#FFCC00]"/></p>
             </div>
             <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] text-center flex flex-col justify-center">
               <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1.5">Delays</p>
-              <p className="text-3xl font-black text-red-500">{driver.stats.delayedLoads}</p>
+              <p className="text-3xl font-semibold text-red-500">{driver.stats.delayedLoads}</p>
             </div>
           </div>
 
@@ -290,11 +290,11 @@ export default function AdminDriverDetail() {
               <div className="flex justify-between items-start">
                 <div>
                   <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1">Load Reference</p>
-                  <p className="text-xl font-black text-gray-900">{driver.currentLoad.id}</p>
+                  <p className="text-xl font-semibold text-gray-900">{driver.currentLoad.id}</p>
                 </div>
                 <div className="text-right">
                   <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1">Current ETA</p>
-                  <p className="text-xl font-black text-gray-900 flex items-center gap-1.5"><Clock size={16} className="text-[#FFCC00]"/> {driver.currentLoad.eta}</p>
+                  <p className="text-xl font-semibold text-gray-900 flex items-center gap-1.5"><Clock size={16} className="text-[#FFCC00]"/> {driver.currentLoad.eta}</p>
                 </div>
               </div>
 
@@ -318,7 +318,7 @@ export default function AdminDriverDetail() {
               <div className="pt-2">
                 <div className="flex justify-between mb-2.5">
                   <span className="text-xs font-bold uppercase tracking-widest text-gray-500">Route Progress</span>
-                  <span className="text-xs font-black uppercase tracking-widest text-emerald-600">{driver.currentLoad.progress}% Complete</span>
+                  <span className="text-xs font-semibold uppercase tracking-widest text-emerald-600">{driver.currentLoad.progress}% Complete</span>
                 </div>
                 <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden shadow-inner">
                   <div className="h-full bg-emerald-500 rounded-full transition-all" style={{ width: `${driver.currentLoad.progress}%` }}></div>
@@ -366,4 +366,5 @@ export default function AdminDriverDetail() {
     </div>
   );
 }
+
 

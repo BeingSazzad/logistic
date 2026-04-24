@@ -110,7 +110,7 @@ export default function DispatchMessages() {
                 <div className="flex justify-between items-center">
                   <p className={`text-xs truncate pr-4 ${t.unread ? 'text-gray-800 font-bold' : 'text-gray-500 font-medium'}`}>{t.msg}</p>
                   {t.unread > 0 && (
-                    <span className="w-5 h-5 rounded-md bg-[#111] text-[#FFCC00] flex items-center justify-center text-xs font-black shrink-0 shadow-sm">{t.unread}</span>
+                    <span className="w-5 h-5 rounded-md bg-[#111] text-[#FFCC00] flex items-center justify-center text-xs font-semibold shrink-0 shadow-sm">{t.unread}</span>
                   )}
                 </div>
               </div>
@@ -125,7 +125,7 @@ export default function DispatchMessages() {
               onClick={() => navigate('/dispatch/drivers/DRV-102')}
               className="flex items-center gap-3 cursor-pointer group hover:bg-gray-50 p-2 -ml-2 rounded-xl transition-all"
             >
-               <div className="w-11 h-11 rounded border-2 border-transparent bg-[#111] flex items-center justify-center font-black text-[#FFCC00] text-sm group-hover:scale-105 transition-transform">
+               <div className="w-11 h-11 rounded border-2 border-transparent bg-[#111] flex items-center justify-center font-semibold text-[#FFCC00] text-sm group-hover:scale-105 transition-transform">
                  {activeThread.name.split(' ').map(n=>n[0]).join('')}
                </div>
                <div>
@@ -175,5 +175,6 @@ export default function DispatchMessages() {
     </div>
   );
 }
+
 
 

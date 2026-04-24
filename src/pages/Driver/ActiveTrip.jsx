@@ -99,14 +99,14 @@ export default function ActiveTrip() {
               {/* Header Section */}
               <div className="flex flex-col items-center">
                  <div className="flex flex-col items-center leading-none">
-                    <p className="text-xs font-black text-gray-400 uppercase tracking-widest">Next Milestone</p>
+                    <p className="hero-metadata">Next Milestone</p>
                     <div className="flex items-center gap-1 mt-1">
                        <div className="w-1.5 h-1.5 bg-orange-600 rounded-full animate-pulse"></div>
-                       <span className="text-xs font-black text-orange-600 uppercase tracking-widest">Priority Asset</span>
+                       <span className="text-xs font-semibold text-orange-600 uppercase tracking-widest">Priority Asset</span>
                     </div>
                  </div>
-                 <h2 className="text-xl font-black text-gray-900 leading-tight mt-2 uppercase tracking-tight">SYD CBD Terminal</h2>
-                 <p className="text-xs font-black text-gray-400 mt-1.5 flex items-center justify-center gap-1.5 uppercase tracking-widest">
+                 <h2 className="text-xl font-semibold text-gray-900 leading-tight mt-2 uppercase tracking-tight">SYD CBD Terminal</h2>
+                 <p className="text-xs font-semibold text-gray-400 mt-1.5 flex items-center justify-center gap-1.5 uppercase tracking-widest">
                     <MapPin size={12} className="text-red-500" /> 127 York St, Sydney NSW 2000
                  </p>
               </div>
@@ -114,30 +114,30 @@ export default function ActiveTrip() {
               {/* Telemetry Strip - Centered and Fixed Layout */}
               <div className="bg-[#111] rounded-2xl p-4 flex items-center justify-between shadow-xl border border-white/5">
                  <div className="flex flex-col items-center flex-1">
-                    <p className="text-xs font-black text-gray-400 uppercase mb-1">Distance</p>
+                    <p className="text-xs font-semibold text-gray-400 uppercase mb-1">Distance</p>
                     <div className="flex items-baseline gap-0.5">
-                       <span className="text-lg font-black text-white">1.2</span>
-                       <span className="text-xs font-black text-gray-500 uppercase">km</span>
+                       <span className="text-lg font-semibold text-white">1.2</span>
+                       <span className="text-xs font-semibold text-gray-500 uppercase">km</span>
                     </div>
                  </div>
                  
                  <div className="w-px h-6 bg-white/5 mx-1"></div>
                  
                  <div className="flex flex-col items-center flex-1">
-                    <p className="text-xs font-black text-gray-400 uppercase mb-1">EST. Time</p>
+                    <p className="text-xs font-semibold text-gray-400 uppercase mb-1">EST. Time</p>
                     <div className="flex items-baseline gap-0.5">
-                       <span className="text-lg font-black text-white">08</span>
-                       <span className="text-xs font-black text-gray-500 uppercase">min</span>
+                       <span className="text-lg font-semibold text-white">08</span>
+                       <span className="text-xs font-semibold text-gray-500 uppercase">min</span>
                     </div>
                  </div>
                  
                  <div className="w-px h-6 bg-white/5 mx-1"></div>
                  
                  <div className="flex flex-col items-center flex-1">
-                    <p className="text-xs font-black text-gray-400 uppercase mb-1">Schedule</p>
+                    <p className="text-xs font-semibold text-gray-400 uppercase mb-1">Schedule</p>
                     <div className="flex items-baseline gap-0.5">
-                       <span className="text-lg font-black text-white">08:00</span>
-                       <span className="text-xs font-black text-gray-500 uppercase">am</span>
+                       <span className="text-lg font-semibold text-white">08:00</span>
+                       <span className="text-xs font-semibold text-gray-500 uppercase">am</span>
                     </div>
                  </div>
               </div>
@@ -148,7 +148,7 @@ export default function ActiveTrip() {
               <div className="flex flex-col gap-4">
                 <button
                   onClick={() => setStep('Arrived')}
-                  className="w-full bg-[#161B22] hover:bg-black text-[#FFCC00] font-black uppercase text-sm py-5 rounded-2xl flex items-center justify-center gap-3 active:scale-[0.98] transition-all shadow-xl"
+                  className="w-full bg-[#161B22] hover:bg-black text-[#FFCC00] font-semibold uppercase text-sm py-5 rounded-2xl flex items-center justify-center gap-3 active:scale-[0.98] transition-all shadow-xl"
                 >
                   <CheckCircle2 size={20} /> Confirm Arrival
                 </button>
@@ -166,12 +166,12 @@ export default function ActiveTrip() {
             {step === 'Arrived' && (
               <div className="space-y-4">
                 <div className="bg-emerald-50 text-emerald-900 p-8 rounded-3xl border border-emerald-100 flex flex-col items-center">
-                   <p className="text-xs font-black text-emerald-600 uppercase mb-2 font-mono">Gate Wait Timer</p>
-                   <p className="text-5xl font-black tracking-tighter tabular-nums">{formatTime(waitTime)}</p>
+                   <p className="text-xs font-semibold text-emerald-600 uppercase mb-2 font-mono">Gate Wait Timer</p>
+                   <p className="text-5xl font-semibold tracking-tighter tabular-nums">{formatTime(waitTime)}</p>
                 </div>
                 <button
                   onClick={() => setStep('Unloading')}
-                  className="w-full bg-[#111] hover:bg-black text-[#FFCC00] font-black uppercase text-sm py-6 rounded-2xl flex items-center justify-center gap-3 active:scale-[0.98] transition-all shadow-xl"
+                  className="w-full bg-[#111] hover:bg-black text-[#FFCC00] font-semibold uppercase text-sm py-6 rounded-2xl flex items-center justify-center gap-3 active:scale-[0.98] transition-all shadow-xl"
                 >
                   <Navigation size={18} /> Start Unloading
                 </button>
@@ -282,5 +282,6 @@ export default function ActiveTrip() {
     </div>
   );
 }
+
 
 

@@ -51,7 +51,7 @@ export default function TerminalWorkspace() {
            <div className="card p-3 flex items-center gap-4 border border-hero-success/20 bg-hero-success/10">
               <div className="text-right">
                  <p className="hero-metadata !text-hero-success">Efficiency</p>
-                 <p className="text-lg font-black tracking-tight text-hero-success">98.4%</p>
+                 <p className="text-lg font-semibold tracking-tight text-hero-success">98.4%</p>
               </div>
               <TrendingUp className="text-hero-success" />
            </div>
@@ -67,7 +67,7 @@ export default function TerminalWorkspace() {
             This module is used by Warehouse Staff when large line-haul trucks arrive at a Terminal. Workers scan every incoming box. The "Smart Sorter" instantly checks the <strong>Full Network Manifest</strong> (the master list of all cross-country jobs) to decide if the box should go out on a <strong>Local Delivery Van</strong> or be loaded onto another <strong>Line-haul Truck</strong> for the next Depot.
           </p>
           <p className="text-xs font-bold mt-2 text-blue-700 bg-blue-100/50 inline-block px-2 py-1 rounded">
-            💡 Try scanning: <span className="font-black">SHP-9041</span> or <span className="font-black">SHP-9042</span>
+            💡 Try scanning: <span className="font-semibold">SHP-9041</span> or <span className="font-semibold">SHP-9042</span>
           </p>
         </div>
       </div>
@@ -206,3 +206,4 @@ export default function TerminalWorkspace() {
     </div>
   );
 }
+

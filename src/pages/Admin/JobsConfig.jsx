@@ -16,7 +16,7 @@ export default function AdminJobsConfig() {
             <p className="hero-body text-gray-600 mt-1">Configure systemic status flows, automation triggers, and POD compliance requirements</p>
           </div>
         </div>
-        <button className="bg-hero-dark hover:bg-black text-brand px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-sm">
+        <button className="bg-hero-dark hover:bg-black text-brand px-6 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-widest transition-all shadow-sm">
           Save System Global Config
         </button>
       </div>
@@ -32,10 +32,10 @@ export default function AdminJobsConfig() {
           <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden flex flex-col group hover:border-brand/40 transition-all">
              <div className="p-6 border-b border-gray-50 flex justify-between items-center bg-gray-50/30">
                 <div>
-                  <h3 className="text-xs font-black text-hero-dark uppercase tracking-widest">Load Status Pipelines</h3>
+                  <h3 className="text-xs font-semibold text-hero-dark uppercase tracking-widest">Load Status Pipelines</h3>
                   <p className="text-xs text-gray-400 font-bold uppercase mt-1">Core logistics lifecycle control</p>
                 </div>
-                <button className="text-blue-600 hover:text-blue-700 text-xs font-black uppercase tracking-widest flex items-center gap-2"><Plus size={14}/> Define New Status</button>
+                <button className="text-blue-600 hover:text-blue-700 text-xs font-semibold uppercase tracking-widest flex items-center gap-2"><Plus size={14}/> Define New Status</button>
              </div>
              
              <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -51,7 +51,7 @@ export default function AdminJobsConfig() {
                            <type.icon size={18}/>
                         </div>
                         <div>
-                           <p className="text-xs font-black text-hero-dark uppercase tracking-tight">{type.name}</p>
+                           <p className="text-xs font-semibold text-hero-dark uppercase tracking-tight">{type.name}</p>
                            <p className="text-xs font-bold text-gray-400 uppercase mt-0.5">{type.desc}</p>
                         </div>
                      </div>
@@ -67,7 +67,7 @@ export default function AdminJobsConfig() {
           {/* Compliance Matrix */}
           <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden flex flex-col group hover:border-hero-success/40 transition-all">
              <div className="p-6 border-b border-gray-50 bg-gray-50/30">
-                <h3 className="text-xs font-black text-hero-dark uppercase tracking-widest">Compliance & POD Requirements</h3>
+                <h3 className="text-xs font-semibold text-hero-dark uppercase tracking-widest">Compliance & POD Requirements</h3>
                 <p className="text-xs text-gray-400 font-bold uppercase mt-1">Proof of Delivery (POD) Validation Rules</p>
              </div>
              <div className="p-8 space-y-6">
@@ -82,7 +82,7 @@ export default function AdminJobsConfig() {
                            <pod.icon size={18} className="text-hero-dark"/>
                            <input type="checkbox" defaultChecked className="w-4 h-4 rounded border-gray-300 accent-hero-success cursor-pointer" />
                         </div>
-                        <p className="text-xs font-black text-hero-dark uppercase tracking-widest">{pod.label}</p>
+                        <p className="text-xs font-semibold text-hero-dark uppercase tracking-widest">{pod.label}</p>
                         <p className="text-xs font-bold text-gray-400 uppercase leading-relaxed">{pod.desc}</p>
                      </div>
                    ))}
@@ -100,34 +100,34 @@ export default function AdminJobsConfig() {
            
            <div className="bg-hero-dark rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-brand/10 rounded-full blur-[60px] -mr-16 -mt-16"></div>
-              <h3 className="text-xs font-black uppercase tracking-[0.2em] mb-8 text-brand flex items-center gap-3">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.2em] mb-8 text-brand flex items-center gap-3">
                  Billings Logic
               </h3>
               
               <div className="space-y-6 relative z-10">
                  <div>
-                    <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2">Default Calculation Model</label>
-                    <select className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs font-black uppercase tracking-widest focus:border-brand focus:outline-none transition-all">
+                    <label className="hero-metadata block mb-2">Default Calculation Model</label>
+                    <select className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs font-semibold uppercase tracking-widest focus:border-brand focus:outline-none transition-all">
                        <option>Flat Fee + Distance</option>
                        <option>Strict Distance Matrix</option>
                        <option>Volumetric Weight Base</option>
                     </select>
                  </div>
                  <div>
-                    <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2">Base Minimum (AUD)</label>
+                    <label className="hero-metadata block mb-2">Base Minimum (AUD)</label>
                     <div className="relative">
-                       <span className="absolute left-4 top-1/2 -translate-y-1/2 text-brand font-black text-xs">$</span>
-                       <input type="number" defaultValue="250.00" className="w-full bg-white/5 border border-white/10 rounded-xl pl-8 pr-4 py-3 text-xs font-black uppercase tracking-widest focus:border-brand focus:outline-none transition-all" />
+                       <span className="absolute left-4 top-1/2 -translate-y-1/2 text-brand font-semibold text-xs">$</span>
+                       <input type="number" defaultValue="250.00" className="w-full bg-white/5 border border-white/10 rounded-xl pl-8 pr-4 py-3 text-xs font-semibold uppercase tracking-widest focus:border-brand focus:outline-none transition-all" />
                     </div>
                  </div>
                  <div className="pt-4">
-                    <button className="w-full bg-brand text-hero-dark py-4 rounded-xl text-xs font-black uppercase tracking-widest hover:scale-[1.02] transition-all active:scale-95 shadow-xl">Update Logic Matrix</button>
+                    <button className="w-full bg-brand text-hero-dark py-4 rounded-xl text-xs font-semibold uppercase tracking-widest hover:scale-[1.02] transition-all active:scale-95 shadow-xl">Update Logic Matrix</button>
                  </div>
               </div>
            </div>
 
            <div className="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm">
-              <h3 className="text-xs font-black text-hero-dark uppercase tracking-widest mb-6">Automation Triggers</h3>
+              <h3 className="text-xs font-semibold text-hero-dark uppercase tracking-widest mb-6">Automation Triggers</h3>
               <div className="space-y-4">
                  {[
                    { label: 'Auto-Assign Near Drivers', enabled: true },
@@ -136,7 +136,7 @@ export default function AdminJobsConfig() {
                    { label: 'E-Manifest Generation', enabled: true },
                  ].map((t, i) => (
                     <div key={i} className="flex justify-between items-center py-2">
-                       <span className="text-xs font-black text-gray-500 uppercase tracking-widest">{t.label}</span>
+                       <span className="text-xs font-semibold text-gray-500 uppercase tracking-widest">{t.label}</span>
                        <div className="relative inline-flex items-center cursor-pointer">
                           <input type="checkbox" defaultChecked={t.enabled} className="sr-only peer" />
                           <div className="w-8 h-4 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-blue-600"></div>
@@ -152,6 +152,7 @@ export default function AdminJobsConfig() {
     </div>
   );
 }
+
 
 
 

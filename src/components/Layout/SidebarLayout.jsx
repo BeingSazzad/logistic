@@ -57,7 +57,7 @@ function GlobalSearch() {
         <span className="text-xs font-bold flex-1 select-none">Quick Search...</span>
         <div className="flex items-center gap-1 opacity-40">
            <Command size={10} />
-           <span className="text-xs font-black uppercase">K</span>
+           <span className="text-xs font-semibold uppercase">K</span>
         </div>
       </div>
 
@@ -82,7 +82,7 @@ function GlobalSearch() {
             {query.length <= 2 ? (
               <div className="p-12 text-center">
                 <Search size={32} className="mx-auto text-gray-100 mb-3" />
-                <p className="text-xs font-black text-gray-400 uppercase tracking-widest">Type to search the registry</p>
+                <p className="hero-metadata">Type to search the registry</p>
               </div>
             ) : results.length > 0 ? (
               <div className="space-y-1">
@@ -93,18 +93,18 @@ function GlobalSearch() {
                         {r.type === 'Vehicle' ? <Car size={18} /> : r.type === 'Load' ? <Shield size={18} /> : <Zap size={18} />}
                       </div>
                       <div>
-                        <p className="text-sm font-black text-gray-900 leading-none mb-1">{r.title}</p>
+                        <p className="text-sm font-semibold text-gray-900 leading-none mb-1">{r.title}</p>
                         <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">{r.desc}</p>
                       </div>
                     </div>
-                    <span className="text-xs font-black uppercase tracking-widest text-gray-400 border border-gray-100 px-2 py-1 rounded-lg group-hover:border-gray-200">{r.status}</span>
+                    <span className="text-xs font-semibold uppercase tracking-widest text-gray-400 border border-gray-100 px-2 py-1 rounded-lg group-hover:border-gray-200">{r.status}</span>
                   </div>
                 ))}
               </div>
             ) : (
               <div className="p-12 text-center">
                 <AlertCircle size={32} className="mx-auto text-red-50 mb-3" />
-                <p className="text-xs font-black text-gray-400 uppercase tracking-widest">No matching records found</p>
+                <p className="hero-metadata">No matching records found</p>
               </div>
             )}
           </div>
@@ -112,15 +112,15 @@ function GlobalSearch() {
           <div className="p-3 border-t border-gray-100 bg-gray-50/50 flex items-center justify-between">
             <div className="flex items-center gap-4">
                <div className="flex items-center gap-1">
-                 <span className="text-[8px] font-black bg-white border border-gray-200 rounded px-1 text-gray-400 shadow-sm">ESC</span>
-                 <span className="text-[8px] font-black uppercase text-gray-400">Close</span>
+                 <span className="text-[8px] font-semibold bg-white border border-gray-200 rounded px-1 text-gray-400 shadow-sm">ESC</span>
+                 <span className="text-[8px] font-semibold uppercase text-gray-400">Close</span>
                </div>
                <div className="flex items-center gap-1">
-                 <span className="text-[8px] font-black bg-white border border-gray-200 rounded px-1 text-gray-400 shadow-sm">ENTER</span>
-                 <span className="text-[8px] font-black uppercase text-gray-400">Select</span>
+                 <span className="text-[8px] font-semibold bg-white border border-gray-200 rounded px-1 text-gray-400 shadow-sm">ENTER</span>
+                 <span className="text-[8px] font-semibold uppercase text-gray-400">Select</span>
                </div>
             </div>
-            <p className="text-xs font-black text-gray-400 uppercase tracking-widest">Global Asset Search</p>
+            <p className="hero-metadata">Global Asset Search</p>
           </div>
         </div>
       )}
@@ -140,7 +140,7 @@ export function SideNavItem({ to, label, Icon, end, badge }) {
           {Icon && <Icon size={15} className={isActive ? 'text-[#111]' : 'text-gray-500 group-hover:text-white transition-colors'} />}
           <span className="flex-1 leading-none">{label}</span>
           {badge != null && (
-            <span className={`text-xs font-black rounded-full px-1.5 py-0.5 min-w-[18px] text-center ${isActive ? 'bg-[#111] text-[#FFCC00]' : 'bg-red-500 text-white'}`}>
+            <span className={`text-xs font-semibold rounded-full px-1.5 py-0.5 min-w-[18px] text-center ${isActive ? 'bg-[#111] text-[#FFCC00]' : 'bg-red-500 text-white'}`}>
               {badge}
             </span>
           )}
@@ -231,7 +231,7 @@ function NotificationBell({ notifications = [] }) {
         <div className="absolute top-full right-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 z-50 animate-in fade-in slide-in-from-top-2">
           <div className="px-4 py-3 border-b border-gray-50 flex justify-between items-center">
             <h3 className="font-bold text-gray-900 text-sm">Notifications</h3>
-            <span className="text-xs text-[#FFCC00] font-black uppercase tracking-widest cursor-pointer hover:opacity-70">Clear all</span>
+            <span className="text-xs text-[#FFCC00] font-semibold uppercase tracking-widest cursor-pointer hover:opacity-70">Clear all</span>
           </div>
           <div className="divide-y divide-gray-50 max-h-80 overflow-auto">
             {items.map((n, i) => (
@@ -246,7 +246,7 @@ function NotificationBell({ notifications = [] }) {
             ))}
           </div>
           <div className="p-3 border-t border-gray-50 text-center bg-gray-50/50 rounded-b-2xl">
-            <button className="text-xs font-black uppercase tracking-widest text-gray-500 hover:text-gray-900">View All Activity</button>
+            <button className="hero-metadata hover:text-gray-900">View All Activity</button>
           </div>
         </div>
       )}
@@ -293,20 +293,20 @@ export default function SidebarLayout({
               <div className="w-8 h-8 bg-[#FFCC00] rounded-hero-sm flex items-center justify-center shrink-0 shadow-[0_0_12px_rgba(255,204,0,0.25)]">
                 <Zap size={16} className="text-[#111]" strokeWidth={3} />
               </div>
-              <span className="text-white font-black text-xl tracking-tighter uppercase">HERO</span>
+              <span className="text-white font-semibold text-xl tracking-tighter uppercase">HERO</span>
             </div>
           </div>
           <div className="flex items-center gap-1.5 ml-0.5">
             {roleIcon && <span className="text-[#FFCC00] shrink-0">{roleIcon}</span>}
-            <p className="text-[#FFCC00] text-xs font-black tracking-[0.2em] uppercase whitespace-nowrap truncate">{roleName}</p>
+            <p className="text-[#FFCC00] text-xs font-semibold tracking-[0.2em] uppercase whitespace-nowrap truncate">{roleName}</p>
           </div>
 
           {/* Branch badge */}
           {branchBadge && user.branchName && (
             <div className="flex items-center gap-2 mt-5 bg-white/5 px-3 py-2 rounded-hero-sm border border-white/5">
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-black text-gray-500 uppercase tracking-widest mb-0.5">Terminal</p>
-                <p className="text-white text-xs font-black truncate">{user.branchName}</p>
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-0.5">Terminal</p>
+                <p className="text-white text-xs font-semibold truncate">{user.branchName}</p>
               </div>
             </div>
           )}
@@ -328,7 +328,7 @@ export default function SidebarLayout({
               useAuthStore.getState().logout();
               navigate('/login');
             }}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-hero-sm text-xs font-black text-red-500 hover:text-white hover:bg-red-500/10 transition-all uppercase tracking-widest"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-hero-sm text-xs font-semibold text-red-500 hover:text-white hover:bg-red-500/10 transition-all uppercase tracking-widest"
           >
             <LogOut size={14} />
             <span>Sign Out</span>
@@ -342,8 +342,8 @@ export default function SidebarLayout({
         <header className="h-14 bg-white border-b border-gray-100 flex items-center justify-between px-8 shrink-0 z-40">
           <div className="flex items-center gap-8">
             <div className="flex flex-col">
-              <p className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] leading-none mb-1">{roleName}</p>
-              <p className="text-xs font-black text-gray-900 uppercase tracking-tight">{topbarTitle}</p>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-[0.2em] leading-none mb-1">{roleName}</p>
+              <p className="text-xs font-semibold text-gray-900 uppercase tracking-tight">{topbarTitle}</p>
             </div>
             {showSearch && <GlobalSearch />}
           </div>
@@ -354,10 +354,10 @@ export default function SidebarLayout({
             <div className="h-6 w-px bg-gray-100 mx-1"></div>
             <div className="flex items-center gap-3">
               <div className="text-right hidden sm:block">
-                <p className="text-xs font-black text-[#111] leading-none mb-1 uppercase tracking-tight">{user.name || 'Operator'}</p>
-                <p className="text-xs font-black text-gray-400 uppercase tracking-[0.15em]">{user.role || 'Admin'}</p>
+                <p className="text-xs font-semibold text-[#111] leading-none mb-1 uppercase tracking-tight">{user.name || 'Operator'}</p>
+                <p className="text-xs font-semibold text-gray-400 uppercase tracking-[0.15em]">{user.role || 'Admin'}</p>
               </div>
-              <div className="w-9 h-9 rounded-hero-sm bg-[#FFCC00] border border-black/5 flex items-center justify-center font-black text-[#111] text-xs shadow-sm">
+              <div className="w-9 h-9 rounded-hero-sm bg-[#FFCC00] border border-black/5 flex items-center justify-center font-semibold text-[#111] text-xs shadow-sm">
                 {initials}
               </div>
             </div>
@@ -371,4 +371,5 @@ export default function SidebarLayout({
     </div>
   );
 }
+
 

@@ -100,7 +100,7 @@ export default function PlatformTransactions() {
                     <div className="text-xs font-bold text-gray-600 bg-gray-100 w-max px-2.5 py-1 rounded-md border border-gray-200 uppercase">{txn.plan}</div>
                   </td>
                   <td className="px-6 py-5">
-                    <div className="font-black text-[#111]">{txn.amount}</div>
+                    <div className="font-semibold text-[#111]">{txn.amount}</div>
                   </td>
                   <td className="px-6 py-5">
                     <span className={`text-xs font-bold px-3 py-1 rounded-md border inline-flex items-center gap-1.5 ${
@@ -124,4 +124,5 @@ export default function PlatformTransactions() {
     </div>
   );
 }
+
 

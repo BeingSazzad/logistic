@@ -34,7 +34,7 @@ export default function WarehouseInventory() {
           <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Inventory</h1>
           <p className="text-sm text-gray-500 mt-1">{inventory.length} SKUs tracked &nbsp;·&nbsp; Zone A-14 &nbsp;·&nbsp; 78% capacity used</p>
         </div>
-        <button className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm">
+        <button className="btn btn-primary px-8">
           <Plus size={18} strokeWidth={3} /> Add SKU
         </button>
       </div>
@@ -44,15 +44,15 @@ export default function WarehouseInventory() {
       {/* KPI Cards */}
       <div className="grid grid-cols-3 gap-4 px-2 mb-2">
         <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
-          <div><p className="text-xs text-gray-400 uppercase font-bold tracking-widest">Total SKUs</p><p className="text-2xl font-black text-gray-900 mt-0.5">{inventory.length}</p></div>
+          <div><p className="text-xs text-gray-400 uppercase font-bold tracking-widest">Total SKUs</p><p className="text-2xl font-semibold text-gray-900 mt-0.5">{inventory.length}</p></div>
           <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-gray-50 text-gray-400"><Package size={20}/></div>
         </div>
         <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
-          <div><p className="text-xs text-gray-400 uppercase font-bold tracking-widest">Low Stock</p><p className="text-2xl font-black text-yellow-600 mt-0.5">{inventory.filter(i => i.status === 'Low Stock').length}</p></div>
+          <div><p className="text-xs text-gray-400 uppercase font-bold tracking-widest">Low Stock</p><p className="text-2xl font-semibold text-yellow-600 mt-0.5">{inventory.filter(i => i.status === 'Low Stock').length}</p></div>
           <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-yellow-50 text-yellow-500"><AlertTriangle size={20}/></div>
         </div>
         <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
-          <div><p className="text-xs text-gray-400 uppercase font-bold tracking-widest">Empty Bays</p><p className="text-2xl font-black text-red-600 mt-0.5">{inventory.filter(i => i.status === 'Empty').length}</p></div>
+          <div><p className="text-xs text-gray-400 uppercase font-bold tracking-widest">Empty Bays</p><p className="text-2xl font-semibold text-red-600 mt-0.5">{inventory.filter(i => i.status === 'Empty').length}</p></div>
           <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-red-50 text-red-500"><AlertTriangle size={20}/></div>
         </div>
       </div>
@@ -85,7 +85,7 @@ export default function WarehouseInventory() {
 
         <div className="overflow-x-auto">
           <table className="w-full text-left">
-            <thead className="bg-[#FAFAFA] text-xs font-bold text-gray-400 uppercase tracking-wider">
+            <thead className="bg-[#FAFAFA] hero-metadata">
               <tr>
                 <th className="px-6 py-4">SKU</th>
                 <th className="px-6 py-4">Description</th>
@@ -108,7 +108,7 @@ export default function WarehouseInventory() {
                     </div>
                   </td>
                   <td className="px-6 py-5 text-center">
-                    <span className={`font-black text-lg ${item.qty === 0 ? 'text-red-500' : item.qty < 5 ? 'text-yellow-600' : 'text-[#111]'}`}>{item.qty}</span>
+                    <span className={`font-semibold text-lg ${item.qty === 0 ? 'text-red-500' : item.qty < 5 ? 'text-yellow-600' : 'text-[#111]'}`}>{item.qty}</span>
                   </td>
                   <td className="px-6 py-5">
                     <div className="font-bold text-gray-700 text-sm">{item.weight}</div>
@@ -137,4 +137,5 @@ export default function WarehouseInventory() {
     </div>
   );
 }
+
 

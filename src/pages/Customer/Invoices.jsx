@@ -27,7 +27,7 @@ export default function CustomerInvoices() {
           <p className="text-sm text-gray-500 mb-6">{paying}</p>
           <div className="bg-gray-50 rounded-xl p-4 mb-6 flex justify-between items-center">
             <span className="text-gray-600 font-medium">Amount due</span>
-            <span className="text-2xl font-black text-gray-900">{inv?.amount}</span>
+            <span className="text-2xl font-semibold text-gray-900">{inv?.amount}</span>
           </div>
           <div className="space-y-4">
             <div>
@@ -93,7 +93,7 @@ export default function CustomerInvoices() {
                 <div>
                   <div className="flex items-center gap-2">
                     <p className="font-bold text-gray-900 text-sm">{inv.id}</p>
-                    <span className={`text-xs font-black uppercase px-2 py-0.5 rounded-full ${cfg.bg} ${cfg.text} flex items-center gap-1`}>
+                    <span className={`text-xs font-semibold uppercase px-2 py-0.5 rounded-full ${cfg.bg} ${cfg.text} flex items-center gap-1`}>
                       <cfg.icon size={10} /> {cfg.label}
                     </span>
                   </div>
@@ -116,4 +116,5 @@ export default function CustomerInvoices() {
     </div>
   );
 }
+
 

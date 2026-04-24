@@ -224,7 +224,7 @@ export default function DispatchSettings() {
                     <LifeBuoy size={32} />
                   </div>
                   <div>
-                    <h3 className="font-black text-white text-2xl tracking-tight leading-none">Contact Super Admin</h3>
+                    <h3 className="font-semibold text-white text-2xl tracking-tight leading-none">Contact Super Admin</h3>
                     <p className="text-xs font-medium text-gray-500 uppercase tracking-widest mt-2">Internal Team Support Ticket</p>
                   </div>
                 </div>
@@ -232,15 +232,15 @@ export default function DispatchSettings() {
 
               <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] space-y-6">
                 <div>
-                  <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Subject</label>
+                  <label className="hero-metadata block mb-2 px-1">Subject</label>
                   <input type="text" placeholder="e.g. Rate Config Error, New Branch Req..." className="w-full bg-gray-50 border border-gray-100 focus:border-[#FFCC00] focus:bg-white rounded-xl py-4 px-5 text-sm font-bold text-gray-900 shadow-sm transition-all outline-none" />
                 </div>
                 <div>
-                  <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Describe Issue</label>
+                  <label className="hero-metadata block mb-2 px-1">Describe Issue</label>
                   <textarea placeholder="Provide detailed operational issue..." className="w-full min-h-[160px] resize-none bg-gray-50 border border-gray-100 focus:border-[#FFCC00] focus:bg-white rounded-xl py-4 px-5 text-sm font-bold text-gray-900 shadow-sm transition-all outline-none" />
                 </div>
                 <div className="pt-2">
-                  <button onClick={() => { alert('Ticket sent to Admin Command Center.'); setActiveTab('profile'); }} className="bg-[#FFCC00] hover:bg-[#E6B800] text-black font-black uppercase tracking-widest px-8 py-4 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 w-fit active:scale-95">
+                  <button onClick={() => { alert('Ticket sent to Admin Command Center.'); setActiveTab('profile'); }} className="bg-[#FFCC00] hover:bg-[#E6B800] text-black font-semibold uppercase tracking-widest px-8 py-4 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 w-fit active:scale-95">
                     <Send size={18} /> Submit Ticket
                   </button>
                 </div>
@@ -253,5 +253,6 @@ export default function DispatchSettings() {
     </div>
   );
 }
+
 
 

@@ -28,7 +28,7 @@ export default function WarehouseDashboard() {
         <div className="flex items-center gap-4 bg-white px-5 py-2.5 rounded-lg border border-gray-200 shadow-sm">
           <div className="flex flex-col items-end">
             <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Active Shift</span>
-            <span className="text-sm font-black text-gray-900">06:00 → 15:00</span>
+            <span className="text-sm font-semibold text-gray-900">06:00 → 15:00</span>
           </div>
           <div className="w-px h-6 bg-gray-200"></div>
           <div className="flex flex-col">
@@ -51,7 +51,7 @@ export default function WarehouseDashboard() {
             <ArrowDownToLine size={26} strokeWidth={2.5} className="text-black" />
           </div>
           <div>
-            <h3 className="font-black text-black uppercase text-sm tracking-widest">Receive Load</h3>
+            <h3 className="font-semibold text-black uppercase text-sm tracking-widest">Receive Load</h3>
             <p className="text-xs font-bold text-black/60 uppercase mt-0.5">Incoming Handover Scan</p>
           </div>
         </button>
@@ -73,7 +73,7 @@ export default function WarehouseDashboard() {
             <ArrowUpFromLine size={26} strokeWidth={2.5} />
           </div>
           <div>
-            <h3 className="font-black text-white uppercase text-sm tracking-widest">Dispatch Load</h3>
+            <h3 className="font-semibold text-white uppercase text-sm tracking-widest">Dispatch Load</h3>
             <p className="text-xs font-bold text-gray-500 uppercase mt-0.5">Outbound Verification</p>
           </div>
         </button>
@@ -88,7 +88,7 @@ export default function WarehouseDashboard() {
           ].map((a, i) => (
             <button key={i} className={`p-4 rounded-xl border shadow-sm flex flex-col items-center justify-center gap-2 transition-colors group ${a.bg || 'bg-white border-gray-100 hover:bg-gray-50'}`}>
               <a.icon size={20} className={`text-gray-400 ${a.hoverColor}`} />
-              <span className="text-xs font-black text-gray-400 uppercase tracking-widest">{a.label}</span>
+              <span className="hero-metadata">{a.label}</span>
             </button>
           ))}
         </div>
@@ -139,7 +139,7 @@ export default function WarehouseDashboard() {
                       </td>
                       <td className="px-6 py-5">
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded bg-gray-50 border border-gray-200 flex items-center justify-center text-xs font-black text-gray-500">
+                          <div className="w-9 h-9 rounded bg-gray-50 border border-gray-200 flex items-center justify-center text-xs font-semibold text-gray-500">
                             {task.vehicle.split('-')[0]}
                           </div>
                           <div>
@@ -168,10 +168,10 @@ export default function WarehouseDashboard() {
             <h4 className="text-xs font-bold uppercase text-gray-500 tracking-widest mb-6">Zone Storage Capacity</h4>
             <div className="flex items-end justify-between gap-4 mb-3">
               <div>
-                <span className="text-4xl font-black text-white">78%</span>
+                <span className="text-4xl font-semibold text-white">78%</span>
                 <span className="text-xs font-bold text-gray-400 uppercase mt-1 tracking-widest block">Utilized Area</span>
               </div>
-              <span className="text-xs font-black text-[#FFCC00]">22% FREE</span>
+              <span className="text-xs font-semibold text-[#FFCC00]">22% FREE</span>
             </div>
             <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
               <div className="h-full bg-[#FFCC00] transition-all duration-1000" style={{ width: '78%' }}></div>
@@ -179,11 +179,11 @@ export default function WarehouseDashboard() {
             <div className="mt-6 pt-6 border-t border-white/10 grid grid-cols-2 gap-4">
               <div>
                 <span className="text-xs font-bold text-gray-500 uppercase tracking-widest block mb-1">Pallet Slots</span>
-                <span className="text-sm font-black text-white">412 / 600</span>
+                <span className="text-sm font-semibold text-white">412 / 600</span>
               </div>
               <div>
                 <span className="text-xs font-bold text-gray-500 uppercase tracking-widest block mb-1">Cold Chain</span>
-                <span className="text-sm font-black text-white">84 / 100</span>
+                <span className="text-sm font-semibold text-white">84 / 100</span>
               </div>
             </div>
           </div>
@@ -199,7 +199,7 @@ export default function WarehouseDashboard() {
             ].map((g, i) => (
               <div key={i} className="flex justify-between items-center bg-gray-50/50 p-3 rounded-lg border border-gray-100">
                 <div>
-                  <span className="text-xs font-black text-[#111] uppercase">{g.gate}</span>
+                  <span className="text-xs font-semibold text-[#111] uppercase">{g.gate}</span>
                   <p className="text-xs text-gray-400 font-medium mt-0.5">{g.vehicle}</p>
                 </div>
                 <span className={`text-xs font-bold uppercase tracking-widest px-2.5 py-1 rounded-md border ${g.cls}`}>{g.status}</span>
@@ -212,5 +212,6 @@ export default function WarehouseDashboard() {
     </div>
   );
 }
+
 
 

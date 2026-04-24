@@ -175,7 +175,7 @@ export default function AdminCreateLoad() {
               <button
                 key={type}
                 onClick={() => setTransferType(type)}
-                className={`flex-1 py-1.5 text-xs font-black rounded-md flex flex-col items-center transition-all ${transferType === type ? 'bg-[#FFCC00] text-black shadow-lg' : 'text-gray-400 hover:text-white'}`}
+                className={`flex-1 py-1.5 text-xs font-semibold rounded-md flex flex-col items-center transition-all ${transferType === type ? 'bg-[#FFCC00] text-black shadow-lg' : 'text-gray-400 hover:text-white'}`}
               >
                 <span className="uppercase tracking-widest">{label}</span>
                 <span className="text-xs font-bold opacity-70 leading-none mt-0.5">{desc}</span>
@@ -198,7 +198,7 @@ export default function AdminCreateLoad() {
                   <Fingerprint size={20} />
                 </div>
                 <div>
-                  <h2 className="text-sm font-black text-gray-900 uppercase tracking-wide">Sender Identity</h2>
+                  <h2 className="text-sm font-semibold text-gray-900 uppercase tracking-wide">Sender Identity</h2>
                   <p className="text-xs text-gray-400 font-bold uppercase mt-0.5 tracking-widest">Originating Party</p>
                 </div>
               </div>
@@ -207,7 +207,7 @@ export default function AdminCreateLoad() {
                   <button
                     key={mode}
                     onClick={() => { setSenderMode(mode); clearSender(); }}
-                    className={`px-5 py-2 text-xs font-black rounded-lg transition-all uppercase tracking-widest ${senderMode === mode ? 'bg-white text-gray-900 shadow-sm border border-gray-200/50' : 'text-gray-500 hover:text-gray-700'}`}
+                    className={`px-5 py-2 text-xs font-semibold rounded-lg transition-all uppercase tracking-widest ${senderMode === mode ? 'bg-white text-gray-900 shadow-sm border border-gray-200/50' : 'text-gray-500 hover:text-gray-700'}`}
                   >
                     {mode === 'guest' ? 'Quick Guest' : 'Existing Client'}
                   </button>
@@ -264,14 +264,14 @@ export default function AdminCreateLoad() {
                       <div className="mt-2 bg-white border border-gray-200 rounded-2xl shadow-2xl overflow-hidden z-20 relative animate-in slide-in-from-top-2">
                         {senderResults.map(u => (
                           <button key={u.id} onClick={() => selectSender(u)} className="w-full flex items-center gap-4 p-4 hover:bg-blue-50 text-left border-b border-gray-50 last:border-0 transition-all">
-                            <div className="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center text-[#FFCC00] font-black text-xs shrink-0 shadow-lg">
+                            <div className="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center text-[#FFCC00] font-semibold text-xs shrink-0 shadow-lg">
                               {u.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                             </div>
                             <div className="min-w-0">
-                              <p className="font-black text-sm text-gray-900 truncate">{u.name}</p>
-                              <p className="text-xs text-gray-400 uppercase tracking-widest font-black">{u.phone} · {u.type}</p>
+                              <p className="font-semibold text-sm text-gray-900 truncate">{u.name}</p>
+                              <p className="hero-metadata">{u.phone} · {u.type}</p>
                             </div>
-                            <span className="text-xs text-gray-400 font-black uppercase tracking-widest shrink-0 border border-gray-100 px-2 py-0.5 rounded-md ml-auto">{u.id}</span>
+                            <span className="text-xs text-gray-400 font-semibold uppercase tracking-widest shrink-0 border border-gray-100 px-2 py-0.5 rounded-md ml-auto">{u.id}</span>
                           </button>
                         ))}
                       </div>
@@ -282,13 +282,13 @@ export default function AdminCreateLoad() {
                     <div className="bg-blue-600 rounded-2xl p-6 relative overflow-hidden shadow-xl shadow-blue-200 animate-in zoom-in-95">
                       <div className="absolute top-0 right-0 p-12 -mr-6 -mt-6 bg-white/10 rounded-full blur-3xl"></div>
                       <div className="flex items-center gap-6 relative z-10">
-                        <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white font-black text-xl border border-white/30 shadow-lg shrink-0">
+                        <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white font-semibold text-xl border border-white/30 shadow-lg shrink-0">
                           {selectedSender.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-3 mb-1.5">
-                            <h4 className="font-black text-white text-lg tracking-tight">{selectedSender.name}</h4>
-                            <span className="text-xs font-black text-white bg-white/20 border border-white/30 px-2.5 py-0.5 rounded uppercase tracking-widest">ID: {selectedSender.id}</span>
+                            <h4 className="font-semibold text-white text-lg tracking-tight">{selectedSender.name}</h4>
+                            <span className="text-xs font-semibold text-white bg-white/20 border border-white/30 px-2.5 py-0.5 rounded uppercase tracking-widest">ID: {selectedSender.id}</span>
                           </div>
                           <div className="grid grid-cols-2 gap-y-1.5 gap-x-6">
                             <p className="text-xs font-bold text-blue-100 flex items-center gap-2"><Phone size={12} className="opacity-70" />{selectedSender.phone}</p>
@@ -300,7 +300,7 @@ export default function AdminCreateLoad() {
                           <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-blue-600 shadow-lg">
                             <CheckCircle2 size={18} strokeWidth={3} />
                           </div>
-                          <button onClick={clearSender} className="text-xs text-white/70 hover:text-white font-black uppercase tracking-widest transition-colors border-b border-white/30 pb-0.5">Switch Client</button>
+                          <button onClick={clearSender} className="text-xs text-white/70 hover:text-white font-semibold uppercase tracking-widest transition-colors border-b border-white/30 pb-0.5">Switch Client</button>
                         </div>
                       </div>
                     </div>
@@ -314,14 +314,14 @@ export default function AdminCreateLoad() {
           <div className="flex flex-col gap-4">
             <div className="flex justify-between items-center px-1">
               <div>
-                <h2 className="text-sm font-black text-gray-900 uppercase tracking-wide flex items-center gap-2">
+                <h2 className="text-sm font-semibold text-gray-900 uppercase tracking-wide flex items-center gap-2">
                   <Boxes size={18} className="text-blue-600" /> Manifest Items
                 </h2>
                 <p className="text-xs text-gray-400 mt-0.5 font-bold uppercase tracking-widest">Detailed Content Declaration</p>
               </div>
               <button
                 onClick={addItem}
-                className="flex items-center gap-2 bg-gray-900 hover:bg-black text-[#FFCC00] px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-lg active:scale-95"
+                className="flex items-center gap-2 bg-gray-900 hover:bg-black text-[#FFCC00] px-5 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-widest transition-all shadow-lg active:scale-95"
               >
                 <Plus size={14} strokeWidth={4} /> Add Item
               </button>
@@ -334,15 +334,15 @@ export default function AdminCreateLoad() {
                   onClick={() => toggleCollapse(item.id)}
                 >
                   <div className="flex items-center gap-4">
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-black text-xs shrink-0 shadow-sm ${selectedNiche === 'car' ? 'bg-blue-100 text-blue-700' : selectedNiche === 'dangerous' ? 'bg-orange-100 text-orange-700' : 'bg-violet-100 text-violet-700'}`}>
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-semibold text-xs shrink-0 shadow-sm ${selectedNiche === 'car' ? 'bg-blue-100 text-blue-700' : selectedNiche === 'dangerous' ? 'bg-orange-100 text-orange-700' : 'bg-violet-100 text-violet-700'}`}>
                       {idx + 1}
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <p className="text-sm font-black text-gray-900">
+                        <p className="text-sm font-semibold text-gray-900">
                           {item.description || (item.niche === 'car' ? 'Vehicle Entry' : item.niche === 'dangerous' ? 'Hazardous Material' : 'Freight Item')}
                         </p>
-                        {item.vin && <span className="text-xs font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-100 uppercase tracking-widest">VIN: {item.vin}</span>}
+                        {item.vin && <span className="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-100 uppercase tracking-widest">VIN: {item.vin}</span>}
                       </div>
                       <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mt-1">
                         {item.pickupAddress ? `📍 ${item.pickupAddress}` : 'Location data pending'}
@@ -513,18 +513,18 @@ export default function AdminCreateLoad() {
         {/* ── Sidebar ── */}
         <div className="lg:col-span-4 flex flex-col gap-6">
           <div className="bg-[#111] rounded-xl p-6 text-white shadow-xl border border-gray-800">
-            <h3 className="text-sm font-black uppercase tracking-widest mb-4 text-[#FFCC00] flex items-center gap-2 border-b border-white/10 pb-4">
+            <h3 className="text-sm font-semibold uppercase tracking-widest mb-4 text-[#FFCC00] flex items-center gap-2 border-b border-white/10 pb-4">
               <Box size={16} /> Load Summary
             </h3>
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-white/5 rounded-xl p-4 text-center border border-white/5">
                   <p className="text-xs text-gray-400 font-semibold mb-1">Total Items</p>
-                  <p className="text-2xl font-black">{totalQty}</p>
+                  <p className="text-2xl font-semibold">{totalQty}</p>
                 </div>
                 <div className="bg-white/5 rounded-xl p-4 text-center border border-white/5">
                   <p className="text-xs text-gray-400 font-semibold mb-1">Total Weight</p>
-                  <p className="text-2xl font-black">{totalWeight}<span className="text-sm font-medium ml-1">KG</span></p>
+                  <p className="text-2xl font-semibold">{totalWeight}<span className="text-sm font-medium ml-1">KG</span></p>
                 </div>
               </div>
 
@@ -575,7 +575,7 @@ export default function AdminCreateLoad() {
                   <span className="text-sm font-bold text-[#FFCC00]">
                     {paymentBy === 'Sender' ? 'Total Charged' : 'Total Due'}
                   </span>
-                  <span className="text-2xl font-black">
+                  <span className="text-2xl font-semibold">
                     ${((items.length * 420 + totalWeight * 2.5 + 45 + (priority === 'Direct' ? 450 : (priority === 'Express' ? 120 : 0))) * 1.1).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                   </span>
                 </div>
@@ -596,6 +596,7 @@ export default function AdminCreateLoad() {
     </div>
   );
 }
+
 
 
 

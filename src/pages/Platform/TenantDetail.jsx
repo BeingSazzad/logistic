@@ -35,7 +35,7 @@ export default function TenantDetail() {
           <div>
             <div className="flex items-center gap-3">
               <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{company.name}</h1>
-              <span className={`px-3 py-1 text-xs font-black uppercase tracking-wider rounded-full ${status === 'Active' ? 'bg-green-100 text-green-800 border border-green-300' : 'bg-yellow-100 text-yellow-800 border border-yellow-300'}`}>{status}</span>
+              <span className={`px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full ${status === 'Active' ? 'bg-green-100 text-green-800 border border-green-300' : 'bg-yellow-100 text-yellow-800 border border-yellow-300'}`}>{status}</span>
             </div>
             <p className="text-sm text-gray-500 mt-1">Account ID: {id || 'T-001'} · Joined {company.joined}</p>
           </div>
@@ -136,7 +136,7 @@ export default function TenantDetail() {
           <div className="bg-white rounded-2xl border border-blue-100 shadow-sm p-5 bg-gradient-to-b from-white to-blue-50/30">
             <div className="flex items-center gap-2 mb-4">
                <Shield size={16} className="text-blue-600" />
-               <p className="text-xs text-blue-900 font-black uppercase tracking-wider">Service Niches Configuration</p>
+               <p className="text-xs text-blue-900 font-semibold uppercase tracking-wider">Service Niches Configuration</p>
             </div>
             
             <p className="text-xs text-blue-700/70 font-medium mb-4 leading-relaxed italic">
@@ -286,4 +286,5 @@ export default function TenantDetail() {
     </div>
   );
 }
+
 

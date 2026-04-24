@@ -66,7 +66,7 @@ export default function AdminFleetManagement() {
            <div key={i} className="card p-5 flex items-center justify-between group hover:border-brand transition-colors">
               <div>
                  <p className="hero-metadata text-gray-600 mb-2">{stat.label}</p>
-                 <p className="text-2xl font-black text-hero-dark leading-none">{stat.value}</p>
+                 <p className="text-2xl font-semibold text-hero-dark leading-none">{stat.value}</p>
               </div>
               <div className={`w-11 h-11 rounded-hero-sm flex items-center justify-center ${stat.bg} ${stat.color} border border-gray-50`}>
                  <stat.icon size={20}/>
@@ -102,7 +102,7 @@ export default function AdminFleetManagement() {
                 {showFilterDropdown && (
                   <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-xl z-50 overflow-hidden animate-in fade-in zoom-in-95">
                     <div className="p-2 border-b border-gray-100 bg-gray-50 flex justify-between items-center px-4">
-                       <span className="text-xs font-black uppercase tracking-widest">Select Status</span>
+                       <span className="text-xs font-semibold uppercase tracking-widest">Select Status</span>
                        <X size={12} className="cursor-pointer" onClick={() => setShowFilterDropdown(false)}/>
                     </div>
                     <div className="py-1">
@@ -124,7 +124,7 @@ export default function AdminFleetManagement() {
               <div className="relative">
                 <button 
                   onClick={() => setShowSort(!showSort)}
-                  className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 shadow-sm rounded-lg text-xs font-black uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-colors"
+                  className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 shadow-sm rounded-lg text-xs font-semibold uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-colors"
                 >
                    Sort By <ChevronDown size={14} className={`text-gray-400 transition-transform ${showSort ? 'rotate-180' : ''}`} />
                 </button>
@@ -143,7 +143,7 @@ export default function AdminFleetManagement() {
 
         <div className="overflow-x-auto min-h-[300px]">
            <table className="w-full text-left">
-             <thead className="bg-[#FAFAFA] text-xs font-black text-gray-400 uppercase tracking-widest border-b border-gray-100">
+             <thead className="bg-[#FAFAFA] hero-metadata border-b border-gray-100">
                <tr>
                  <th className="px-6 py-4">Vehicle Details</th>
                  <th className="px-6 py-4">Branch</th>
@@ -162,7 +162,7 @@ export default function AdminFleetManagement() {
                            <Truck size={18} />
                         </div>
                         <div>
-                          <div className="font-black text-[#111] text-[15px] tracking-tight">{v.id}</div>
+                          <div className="font-semibold text-[#111] text-[15px] tracking-tight">{v.id}</div>
                           <div className="text-xs text-gray-400 font-bold uppercase tracking-[0.1em] mt-0.5">{v.reg}</div>
                         </div>
                       </div>
@@ -170,17 +170,17 @@ export default function AdminFleetManagement() {
                     <td className="px-6 py-5">
                        <div className="flex items-center gap-2">
                           <span className="w-2 h-2 rounded-full bg-[#FFCC00]"></span>
-                          <span className="text-xs font-black uppercase tracking-widest text-[#111]">{v.branch}</span>
+                          <span className="text-xs font-semibold uppercase tracking-widest text-[#111]">{v.branch}</span>
                        </div>
                     </td>
                     <td className="px-6 py-5">
                        <div className="flex flex-col">
-                          <span className="text-xs font-black text-[#111] uppercase tracking-wide">{v.type}</span>
+                          <span className="text-xs font-semibold text-[#111] uppercase tracking-wide">{v.type}</span>
                           <span className="text-xs text-gray-400 font-bold uppercase mt-1">Payload: {v.cap}</span>
                        </div>
                     </td>
                     <td className="px-6 py-5">
-                      <span className={`text-xs font-black px-2.5 py-1 rounded-lg border uppercase tracking-widest ${
+                      <span className={`text-xs font-semibold px-2.5 py-1 rounded-lg border uppercase tracking-widest ${
                          v.status === 'Active' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 
                          v.status === 'Maintenance' ? 'bg-[#FEF2F2] text-[#DC2626] border-[#FEE2E2]' :
                          'bg-blue-50 text-blue-600 border-blue-100'
@@ -190,13 +190,13 @@ export default function AdminFleetManagement() {
                     </td>
                     <td className="px-6 py-5">
                        <div className="flex flex-col">
-                          <div className={`text-xs font-black ${v.service === 'Overdue' ? 'text-red-500' : 'text-[#111]'}`}>{v.service}</div>
+                          <div className={`text-xs font-semibold ${v.service === 'Overdue' ? 'text-red-500' : 'text-[#111]'}`}>{v.service}</div>
                        </div>
                     </td>
                     <td className="px-6 py-4 text-right">
                        <button 
                          onClick={(e) => { e.stopPropagation(); navigate(`/admin/fleet/${v.id}`); }}
-                         className="text-xs font-black text-[#111] hover:text-white border border-gray-200 hover:bg-black px-4 py-2 rounded-xl transition-all uppercase tracking-widest shadow-sm"
+                         className="text-xs font-semibold text-[#111] hover:text-white border border-gray-200 hover:bg-black px-4 py-2 rounded-xl transition-all uppercase tracking-widest shadow-sm"
                        >
                          Manage
                        </button>
@@ -208,7 +208,7 @@ export default function AdminFleetManagement() {
                        <div className="flex flex-col items-center gap-3">
                           <Search size={40} className="text-gray-100" />
                           <p className="text-sm font-bold text-gray-400">No vehicles found matching your criteria.</p>
-                          <button onClick={() => { setSearch(''); setStatusFilter('All'); }} className="text-xs font-black uppercase text-blue-600 hover:underline">Clear all filters</button>
+                          <button onClick={() => { setSearch(''); setStatusFilter('All'); }} className="text-xs font-semibold uppercase text-blue-600 hover:underline">Clear all filters</button>
                        </div>
                     </td>
                   </tr>
@@ -220,5 +220,6 @@ export default function AdminFleetManagement() {
     </div>
   );
 }
+
 
 

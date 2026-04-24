@@ -40,8 +40,8 @@ export default function SafetyCheck() {
            <ArrowLeft size={24} />
         </button>
         <div>
-           <h1 className="text-white font-black text-lg tracking-tight uppercase leading-none">Vehicle Compliance</h1>
-           <p className="text-xs font-black text-gray-500 uppercase tracking-widest mt-1">Pre-Trip Safety Checklist</p>
+           <h1 className="text-white font-semibold text-lg tracking-tight uppercase leading-none">Vehicle Compliance</h1>
+           <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mt-1">Pre-Trip Safety Checklist</p>
         </div>
       </div>
 
@@ -110,5 +110,6 @@ export default function SafetyCheck() {
     </div>
   );
 }
+
 
 

@@ -66,10 +66,10 @@ export default function AdminAddVehicle() {
                <ShieldAlert size={20} className="text-red-600" />
              </div>
              <div className="flex-1">
-               <h3 className="text-sm font-black text-red-900 tracking-tight">Plan Limit Reached ({CURRENT_VEHICLE_COUNT}/{PLAN_LIMIT})</h3>
+               <h3 className="text-sm font-semibold text-red-900 tracking-tight">Plan Limit Reached ({CURRENT_VEHICLE_COUNT}/{PLAN_LIMIT})</h3>
                <p className="text-xs font-bold text-red-700 mt-0.5">Your '{PLAN_NAME}' plan does not allow more vehicles. Additional assets will not be saved.</p>
              </div>
-             <button onClick={() => navigate('/admin/billing/plans')} className="shrink-0 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all">
+             <button onClick={() => navigate('/admin/billing/plans')} className="shrink-0 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-widest transition-all">
                Upgrade Plan
              </button>
           </div>
@@ -225,4 +225,5 @@ export default function AdminAddVehicle() {
     </div>
   );
 }
+
 

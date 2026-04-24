@@ -79,7 +79,7 @@ export default function DriverLayout() {
                       color={isActive ? '#111' : '#9CA3AF'}
                       strokeWidth={isActive ? 2.5 : 1.5}
                     />
-                    <span className={`text-xs leading-none uppercase ${isActive ? 'font-black text-[#111]' : 'font-normal text-gray-400'}`}>
+                    <span className={`text-xs leading-none uppercase ${isActive ? 'font-semibold text-[#111]' : 'font-normal text-gray-400'}`}>
                       {label}
                     </span>
                   </div>
@@ -92,4 +92,5 @@ export default function DriverLayout() {
     </div>
   );
 }
+
 

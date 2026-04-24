@@ -50,8 +50,8 @@ export default function DispatchFleet() {
         ].map((k, i) => (
           <div key={i} className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
             <div>
-              <p className="text-xs text-gray-400 uppercase font-black tracking-widest leading-tight">{k.label}</p>
-              <p className="text-2xl font-black text-gray-900 mt-1.5 leading-none">{k.val}</p>
+              <p className="text-xs text-gray-400 uppercase font-semibold tracking-widest leading-tight">{k.label}</p>
+              <p className="text-2xl font-semibold text-gray-900 mt-1.5 leading-none">{k.val}</p>
             </div>
             <div className={`w-10 h-10 rounded border border-gray-100 flex items-center justify-center ${k.bg} ${k.color}`}>
               <k.icon size={20} />
@@ -111,8 +111,8 @@ export default function DispatchFleet() {
                         <Truck size={18} className="text-gray-400 group-hover:text-[#111]" />
                       </div>
                       <div>
-                        <div className="font-black text-[#111] text-sm">{v.id}</div>
-                        <div className="text-xs text-gray-400 font-black tracking-widest uppercase mt-0.5">{v.reg}</div>
+                        <div className="font-semibold text-[#111] text-sm">{v.id}</div>
+                        <div className="text-xs text-gray-400 font-semibold tracking-widest uppercase mt-0.5">{v.reg}</div>
                       </div>
                     </div>
                   </td>
@@ -122,7 +122,7 @@ export default function DispatchFleet() {
                   </td>
                   <td className="px-6 py-5">
                     <div className="flex items-center gap-3">
-                      <span className={`text-xs font-black px-2 py-1 rounded shadow-sm border uppercase tracking-widest ${v.status === 'Active' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
+                      <span className={`text-xs font-semibold px-2 py-1 rounded shadow-sm border uppercase tracking-widest ${v.status === 'Active' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
                           v.status === 'Maintenance' ? 'bg-red-50 text-red-600 border-red-100 animate-pulse' :
                             'bg-amber-50 text-amber-600 border-amber-100'
                         }`}>
@@ -134,13 +134,13 @@ export default function DispatchFleet() {
                     </div>
                   </td>
                   <td className="px-6 py-5 text-right">
-                    <div className="text-sm font-black text-gray-900">{v.fuel}</div>
+                    <div className="text-sm font-semibold text-gray-900">{v.fuel}</div>
                     <div className="w-16 h-1.5 bg-gray-100 rounded-full overflow-hidden mt-1 ml-auto">
                       <div className={`h-full ${parseInt(v.fuel) > 50 ? 'bg-emerald-500' : 'bg-red-500'} rounded-full`} style={{ width: v.fuel || '0%' }}></div>
                     </div>
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <button className="text-xs font-black text-blue-600 hover:text-white border border-blue-200 hover:bg-blue-600 hover:border-blue-600 px-4 py-2 rounded-lg transition-all uppercase tracking-widest shadow-sm">
+                    <button className="text-xs font-semibold text-blue-600 hover:text-white border border-blue-200 hover:bg-blue-600 hover:border-blue-600 px-4 py-2 rounded-lg transition-all uppercase tracking-widest shadow-sm">
                       View Details
                     </button>
                   </td>
@@ -153,4 +153,5 @@ export default function DispatchFleet() {
     </div>
   );
 }
+
 

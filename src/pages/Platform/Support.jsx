@@ -105,7 +105,7 @@ export default function PlatformSupport() {
                       <div className="flex items-center gap-2 mb-0.5">
                         <span className="font-mono text-xs text-gray-400">{t.id}</span>
                         <span className="font-bold text-sm text-gray-900">{t.tenant}</span>
-                        <span className={`text-xs font-black uppercase px-2 py-0.5 rounded ${pCfg.bg} ${pCfg.text}`}>{t.priority}</span>
+                        <span className={`text-xs font-semibold uppercase px-2 py-0.5 rounded ${pCfg.bg} ${pCfg.text}`}>{t.priority}</span>
                       </div>
                       <p className="text-sm font-medium text-gray-700">{t.issue}</p>
                       <p className="text-xs text-gray-400 mt-0.5">{t.user} · {t.created}</p>
@@ -149,4 +149,5 @@ export default function PlatformSupport() {
     </div>
   );
 }
+
 

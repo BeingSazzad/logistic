@@ -58,7 +58,7 @@ export default function DriverMessages() {
             </button>
             <div className="flex items-center gap-3">
                <div className="relative">
-                  <div className="w-10 h-10 rounded-full border-2 border-white/10 bg-[#FFCC00] flex items-center justify-center font-black text-[#111] text-sm shadow-inner">
+                  <div className="w-10 h-10 rounded-full border-2 border-white/10 bg-[#FFCC00] flex items-center justify-center font-semibold text-[#111] text-sm shadow-inner">
                      OP
                   </div>
                   <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-[#111] rounded-full"></span>
@@ -72,7 +72,7 @@ export default function DriverMessages() {
          <div className="flex items-center gap-2">
             <button className="p-2.5 bg-red-600/10 hover:bg-red-600 text-red-500 hover:text-white rounded-xl transition-all border border-red-500/20 active:scale-95 flex items-center gap-1.5 px-3">
                <AlertTriangle size={16} />
-               <span className="text-xs font-black uppercase tracking-tighter">Emergency</span>
+               <span className="text-xs font-semibold uppercase tracking-tighter">Emergency</span>
             </button>
          </div>
       </div>
@@ -83,7 +83,7 @@ export default function DriverMessages() {
         className="flex-1 overflow-y-auto px-4 py-6 flex flex-col gap-6 scroll-smooth pb-10"
       >
          <div className="text-center">
-            <span className="text-xs font-black text-gray-400 bg-gray-100 border border-gray-200 px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">Shift Started: 08:00 AM</span>
+            <span className="text-xs font-semibold text-gray-400 bg-gray-100 border border-gray-200 px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">Shift Started: 08:00 AM</span>
          </div>
          
          {messages.map((m) => (
@@ -110,9 +110,9 @@ export default function DriverMessages() {
                <button 
                   key={reply}
                   onClick={() => handleSendMessage(reply)}
-                  className={`whitespace-nowrap px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest border transition-all active:scale-95 ${
+                  className={`whitespace-nowrap px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-widest border transition-all active:scale-95 ${
                      reply === 'SOS' 
-                     ? 'bg-red-50 text-red-600 border-red-100 font-black' 
+                     ? 'bg-red-50 text-red-600 border-red-100 font-semibold' 
                      : 'bg-gray-50 text-gray-500 border-gray-100 hover:bg-gray-100 text-gray-700'
                   }`}
                >
@@ -146,4 +146,5 @@ export default function DriverMessages() {
     </div>
   );
 }
+
 

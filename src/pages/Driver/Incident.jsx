@@ -19,8 +19,8 @@ export default function DriverIncident() {
            <ArrowLeft size={24} />
         </button>
         <div>
-           <h1 className="text-white font-black text-lg tracking-tight uppercase leading-none">Emergency Protocol</h1>
-           <p className="text-xs font-black text-red-100 uppercase tracking-widest mt-1">Incident & Breakdown Response</p>
+           <h1 className="text-white font-semibold text-lg tracking-tight uppercase leading-none">Emergency Protocol</h1>
+           <p className="text-xs font-semibold text-red-100 uppercase tracking-widest mt-1">Incident & Breakdown Response</p>
         </div>
       </div>
 
@@ -32,7 +32,7 @@ export default function DriverIncident() {
                  <Info size={20} className="text-red-600" />
               </div>
               <div>
-                 <p className="text-xs font-black text-red-900 uppercase tracking-widest leading-tight">Critical Protocol</p>
+                 <p className="text-xs font-semibold text-red-900 uppercase tracking-widest leading-tight">Critical Protocol</p>
                  <p className="text-xs text-red-700 mt-1 font-bold leading-relaxed">If there are injuries, call 000 immediately before completing this form.</p>
               </div>
            </div>
@@ -40,7 +40,7 @@ export default function DriverIncident() {
            <div className="space-y-6">
               
               <div>
-                 <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Incident Type</label>
+                 <label className="hero-metadata block mb-2 px-1">Incident Type</label>
                  <select className="w-full bg-white border border-gray-100 py-4 px-5 rounded-2xl text-sm font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-400/20 focus:border-red-400 transition-all shadow-sm appearance-none">
                     <option>Vehicle Collision (Major)</option>
                     <option>Minor Scratch / Dent</option>
@@ -52,7 +52,7 @@ export default function DriverIncident() {
               </div>
 
               <div>
-                 <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Location Details</label>
+                 <label className="hero-metadata block mb-2 px-1">Location Details</label>
                  <div className="relative">
                     <input type="text" placeholder="Fetching current GPS..." className="w-full bg-white border border-gray-100 py-4 pl-12 pr-4 rounded-2xl text-sm font-bold focus:outline-none shadow-sm" />
                     <MapPin size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-red-500" />
@@ -60,7 +60,7 @@ export default function DriverIncident() {
               </div>
 
               <div>
-                 <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Description of Events</label>
+                 <label className="hero-metadata block mb-2 px-1">Description of Events</label>
                  <textarea 
                     placeholder="Describe exactly what happened..." 
                     className="w-full min-h-[120px] bg-white border border-gray-100 py-4 px-5 rounded-2xl text-sm font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-400/20 focus:border-red-400 transition-all shadow-sm resize-none"
@@ -70,17 +70,17 @@ export default function DriverIncident() {
               <div className="grid grid-cols-2 gap-3">
                  <button className="flex flex-col items-center justify-center p-6 bg-white border border-gray-100 rounded-3xl gap-2 shadow-sm hover:bg-gray-50 active:scale-95 transition-all">
                     <Camera size={24} className="text-gray-400" />
-                    <span className="text-xs font-black uppercase text-gray-400 tracking-widest">Add Photos</span>
+                    <span className="text-xs font-semibold uppercase text-gray-400 tracking-widest">Add Photos</span>
                  </button>
                  <button className="flex flex-col items-center justify-center p-6 bg-white border border-gray-100 rounded-3xl gap-2 shadow-sm hover:bg-gray-50 active:scale-95 transition-all">
                     <Phone size={24} className="text-gray-400" />
-                    <span className="text-xs font-black uppercase text-gray-400 tracking-widest">Call Dispatch</span>
+                    <span className="text-xs font-semibold uppercase text-gray-400 tracking-widest">Call Dispatch</span>
                  </button>
               </div>
 
               <button 
                  onClick={() => setStep('success')}
-                 className="w-full py-5 bg-red-600 hover:bg-red-700 text-white font-black uppercase text-xs tracking-[0.2em] rounded-2xl shadow-xl shadow-red-500/20 transition-all active:scale-[0.98] mt-4 flex items-center justify-center gap-2"
+                 className="w-full py-5 bg-red-600 hover:bg-red-700 text-white font-semibold uppercase text-xs tracking-[0.2em] rounded-2xl shadow-xl shadow-red-500/20 transition-all active:scale-[0.98] mt-4 flex items-center justify-center gap-2"
               >
                  <Send size={16}/> Submit Incident Report
               </button>
@@ -91,7 +91,7 @@ export default function DriverIncident() {
            <div className="w-24 h-24 bg-emerald-500 rounded-full flex items-center justify-center text-white mb-8 shadow-xl shadow-emerald-500/20">
               <CheckCircle2 size={48} strokeWidth={2.5}/>
            </div>
-           <h2 className="text-2xl font-black text-gray-900 uppercase tracking-tight">Report Received</h2>
+           <h2 className="text-2xl font-semibold text-gray-900 uppercase tracking-tight">Report Received</h2>
            <p className="text-sm font-bold text-gray-500 mt-3 leading-relaxed">Dispatch has been alerted. An emergency safety coordinator will contact you shortly.</p>
            
            <div className="mt-10 p-5 bg-white border border-gray-100 rounded-3xl w-full flex items-center gap-4 text-left">
@@ -103,7 +103,7 @@ export default function DriverIncident() {
 
            <button 
              onClick={() => navigate('/driver')}
-             className="mt-10 px-10 py-4 bg-[#111] text-white rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-black transition-all shadow-lg active:scale-95"
+             className="mt-10 px-10 py-4 bg-[#111] text-white rounded-2xl font-semibold uppercase text-xs tracking-widest hover:bg-black transition-all shadow-lg active:scale-95"
            >
              Return to Home
            </button>
@@ -113,4 +113,5 @@ export default function DriverIncident() {
     </div>
   );
 }
+
 

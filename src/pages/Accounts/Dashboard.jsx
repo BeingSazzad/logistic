@@ -54,7 +54,7 @@ export default function AccountsDashboard() {
                 <p className="hero-metadata leading-tight text-gray-600">{k.label}</p>
               </div>
               <div className="flex items-end gap-2">
-                 <p className="text-2xl font-black text-hero-dark leading-none">{k.val}</p>
+                 <p className="text-2xl font-semibold text-hero-dark leading-none">{k.val}</p>
                  <span className={`text-xs font-bold pb-0.5 ${k.up ? 'text-hero-success' : 'text-hero-danger'}`}>{k.diff}</span>
               </div>
             </div>
@@ -85,14 +85,14 @@ export default function AccountsDashboard() {
                          #LOG
                        </div>
                        <div>
-                          <p className="text-sm font-black text-gray-900 uppercase">{inv.customer}</p>
+                          <p className="text-sm font-semibold text-gray-900 uppercase">{inv.customer}</p>
                           <p className="text-xs font-bold text-gray-400">{inv.id} • {inv.date}</p>
                        </div>
                     </div>
                     <div className="flex items-center gap-8">
                        <div className="text-right">
-                          <p className="text-sm font-black text-gray-900">{inv.amount}</p>
-                          <p className={`text-xs font-black uppercase tracking-widest ${inv.status === 'Approved' ? 'text-emerald-500' : 'text-amber-500'}`}>{inv.status}</p>
+                          <p className="text-sm font-semibold text-gray-900">{inv.amount}</p>
+                          <p className={`text-xs font-semibold uppercase tracking-widest ${inv.status === 'Approved' ? 'text-emerald-500' : 'text-amber-500'}`}>{inv.status}</p>
                        </div>
                        <ChevronRight size={16} className="text-gray-300 group-hover:text-black"/>
                     </div>
@@ -105,24 +105,24 @@ export default function AccountsDashboard() {
          <div className="flex flex-col gap-6">
             <div className="bg-gray-900 rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] p-6 text-white relative overflow-hidden group">
                <div className="absolute top-0 right-0 w-32 h-32 bg-[#FFCC00]/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
-               <h3 className="text-xs font-black uppercase tracking-wider text-[#FFCC00] mb-8 flex items-center gap-2 leading-none">
+               <h3 className="text-xs font-semibold uppercase tracking-wider text-[#FFCC00] mb-8 flex items-center gap-2 leading-none">
                   <TrendingDown size={14} className="animate-bounce" /> Settlement Pulse
                </h3>
                
                <div className="space-y-6 relative z-10">
                   <div className="flex justify-between items-end border-b border-white/10 pb-4">
                      <div>
-                        <p className="text-xs font-black text-gray-500 uppercase mb-1">Total Payouts Due</p>
-                        <p className="text-2xl font-black">$18,400</p>
+                        <p className="text-xs font-semibold text-gray-500 uppercase mb-1">Total Payouts Due</p>
+                        <p className="text-2xl font-semibold">$18,400</p>
                      </div>
-                     <span onClick={() => navigate('/accounts/settlements')} className="text-xs font-black text-[#FFCC00] uppercase underline cursor-pointer hover:text-yellow-300 transition-colors">Reconcile</span>
+                     <span onClick={() => navigate('/accounts/settlements')} className="text-xs font-semibold text-[#FFCC00] uppercase underline cursor-pointer hover:text-yellow-300 transition-colors">Reconcile</span>
                   </div>
                   <div className="flex justify-between items-end border-b border-white/10 pb-4">
                      <div>
-                        <p className="text-xs font-black text-gray-500 uppercase mb-1">Unverified PODs</p>
-                        <p className="text-2xl font-black">12 Items</p>
+                        <p className="text-xs font-semibold text-gray-500 uppercase mb-1">Unverified PODs</p>
+                        <p className="text-2xl font-semibold">12 Items</p>
                      </div>
-                     <span onClick={() => navigate('/accounts/pod-review')} className="text-xs font-black text-[#FFCC00] uppercase underline cursor-pointer hover:text-yellow-300 transition-colors">Verify Now</span>
+                     <span onClick={() => navigate('/accounts/pod-review')} className="text-xs font-semibold text-[#FFCC00] uppercase underline cursor-pointer hover:text-yellow-300 transition-colors">Verify Now</span>
                   </div>
                </div>
 
@@ -137,7 +137,7 @@ export default function AccountsDashboard() {
                      <TrendingUp size={20}/>
                   </div>
                   <div>
-                     <h4 className="text-sm font-black text-gray-900 uppercase tracking-tight">Tax Projection</h4>
+                     <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-tight">Tax Projection</h4>
                      <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Quarterly Forecast</p>
                   </div>
                </div>
@@ -158,5 +158,6 @@ export default function AccountsDashboard() {
     </div>
   );
 }
+
 
 

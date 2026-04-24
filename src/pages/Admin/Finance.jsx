@@ -118,7 +118,7 @@ export default function AdminFinance() {
               <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${k.bg} ${k.color} group-hover:scale-110 transition-transform`}>
                 <k.icon size={22} />
               </div>
-              <span className={`text-xs font-black px-3 py-1.5 rounded-xl uppercase tracking-widest ${k.up ? 'text-emerald-600 bg-emerald-50' : 'text-red-500 bg-red-50'}`}>
+              <span className={`text-xs font-semibold px-3 py-1.5 rounded-xl uppercase tracking-widest ${k.up ? 'text-emerald-600 bg-emerald-50' : 'text-red-500 bg-red-50'}`}>
                 {k.trend}
               </span>
             </div>
@@ -194,7 +194,7 @@ export default function AdminFinance() {
                         <span className="text-xs font-semibold text-gray-900">{e.category}</span>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className={`text-xs font-black uppercase ${e.trend > 0 ? 'text-red-500' : 'text-emerald-500'}`}>
+                        <span className={`text-xs font-semibold uppercase ${e.trend > 0 ? 'text-red-500' : 'text-emerald-500'}`}>
                           {e.trend > 0 ? '+' : ''}{e.trend}%
                         </span>
                         <span className="text-xs font-semibold text-gray-900">{fmt(e.amount)}</span>
@@ -276,13 +276,13 @@ export default function AdminFinance() {
                     <td className="px-6 py-5 font-semibold text-gray-900 text-sm">{acc.customer}</td>
                     <td className="px-6 py-5 font-semibold text-gray-900 text-sm">{fmt(acc.amount)}</td>
                     <td className="px-6 py-5">
-                      <span className="text-xs font-black text-blue-600 bg-blue-50 border border-blue-100 px-2.5 py-1 rounded-lg">{acc.loads} loads</span>
+                      <span className="text-xs font-semibold text-blue-600 bg-blue-50 border border-blue-100 px-2.5 py-1 rounded-lg">{acc.loads} loads</span>
                     </td>
                     <td className="px-6 py-5">
                       <span className={`text-sm font-semibold ${acc.status === 'Overdue' ? 'text-red-500' : 'text-gray-700'}`}>{acc.dueDate}</span>
                     </td>
                     <td className="px-6 py-5">
-                      <span className={`text-xs font-black px-3 py-1.5 rounded-xl border uppercase tracking-widest ${STATUS_STYLE[acc.status]}`}>
+                      <span className={`text-xs font-semibold px-3 py-1.5 rounded-xl border uppercase tracking-widest ${STATUS_STYLE[acc.status]}`}>
                         {acc.status}
                       </span>
                     </td>
@@ -290,7 +290,7 @@ export default function AdminFinance() {
                       <button
                         onClick={e => { e.stopPropagation(); handleDownload(acc.id); }}
                         disabled={!!loadingInvoice}
-                        className="flex items-center gap-2 text-xs font-black text-gray-500 border border-gray-200 hover:bg-gray-900 hover:text-[#FFCC00] hover:border-gray-900 px-4 py-2 rounded-xl transition-all uppercase tracking-widest ml-auto shadow-sm disabled:opacity-40"
+                        className="flex items-center gap-2 text-xs font-semibold text-gray-500 border border-gray-200 hover:bg-gray-900 hover:text-[#FFCC00] hover:border-gray-900 px-4 py-2 rounded-xl transition-all uppercase tracking-widest ml-auto shadow-sm disabled:opacity-40"
                       >
                         {loadingInvoice === acc.id ? <Loader2 size={12} className="animate-spin" /> : <Download size={12} />}
                         PDF
@@ -325,7 +325,7 @@ export default function AdminFinance() {
                     <td className="px-6 py-5 font-bold text-gray-900 text-sm">{log.action}</td>
                     <td className="px-6 py-5">
                       <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-xl bg-gray-100 flex items-center justify-center text-xs font-black text-gray-500">
+                        <div className="w-7 h-7 rounded-xl bg-gray-100 flex items-center justify-center text-xs font-semibold text-gray-500">
                           {log.user.split(' ').map(n => n[0]).join('')}
                         </div>
                         <span className="text-xs font-semibold text-gray-900">{log.user}</span>
@@ -333,7 +333,7 @@ export default function AdminFinance() {
                     </td>
                     <td className="px-6 py-5 text-xs font-bold text-gray-500">{log.time}</td>
                     <td className="px-6 py-5">
-                      <span className={`text-xs font-black px-3 py-1.5 rounded-xl border uppercase tracking-widest ${
+                      <span className={`text-xs font-semibold px-3 py-1.5 rounded-xl border uppercase tracking-widest ${
                         log.status === 'Success' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
                         log.status === 'Warning' ? 'bg-amber-50 text-amber-600 border-amber-100' :
                                                    'bg-red-50 text-red-600 border-red-100'
@@ -352,4 +352,5 @@ export default function AdminFinance() {
     </div>
   );
 }
+
 

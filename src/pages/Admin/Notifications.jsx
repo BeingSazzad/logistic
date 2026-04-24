@@ -44,7 +44,7 @@ export default function AdminNotifications() {
                <div className="flex-1 min-w-0 pr-4">
                  <div className="flex items-center gap-3 mb-1">
                    <h3 className="font-bold text-gray-900 text-sm">{alt.type}</h3>
-                   <span className={`text-xs font-black uppercase tracking-widest px-2 py-0.5 rounded ${
+                   <span className={`text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded ${
                      alt.priority === 'Critical' ? 'bg-red-100 text-red-600' : 
                      alt.priority === 'High' ? 'bg-orange-100 text-orange-600' : 'bg-blue-100 text-blue-600'
                    }`}>
@@ -56,7 +56,7 @@ export default function AdminNotifications() {
                </div>
                <div className="absolute top-1/2 -translate-y-1/2 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
                  {alt.resolved 
-                   ? <span className="text-xs font-black text-emerald-600 uppercase tracking-widest flex items-center gap-1"><CheckCircle2 size={12}/> Resolved</span>
+                   ? <span className="text-xs font-semibold text-emerald-600 uppercase tracking-widest flex items-center gap-1"><CheckCircle2 size={12}/> Resolved</span>
                    : <button onClick={() => resolve(alt.id)} className="btn btn-dark text-xs py-1.5 px-4 font-bold rounded-full">Resolve</button>
                  }
                </div>
@@ -67,4 +67,5 @@ export default function AdminNotifications() {
     </div>
   );
 }
+
 

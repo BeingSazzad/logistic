@@ -73,7 +73,7 @@ export default function AdminReports() {
             <div>
               <p className="text-xs text-gray-400 uppercase font-bold tracking-widest leading-tight">{k.label}</p>
               <div className="flex items-end gap-2 mt-1.5">
-                <p className="text-2xl font-black text-gray-900 leading-none">{k.val}</p>
+                <p className="text-2xl font-semibold text-gray-900 leading-none">{k.val}</p>
                 <span className={`text-xs font-bold pb-0.5 flex items-center gap-0.5 ${k.up ? 'text-emerald-500' : 'text-red-500'}`}>
                   {k.up ? <ArrowUpRight size={10} strokeWidth={3}/> : <ArrowDownRight size={10} strokeWidth={3}/>}{k.diff}
                 </span>
@@ -149,16 +149,16 @@ export default function AdminReports() {
             <div className="flex gap-8">
               <div>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">YTD Growth</p>
-                <p className="text-base font-black text-emerald-600 mt-0.5">+14.2%</p>
+                <p className="text-base font-semibold text-emerald-600 mt-0.5">+14.2%</p>
               </div>
               <div>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Peak Month</p>
-                <p className="text-base font-black text-gray-900 mt-0.5">November</p>
+                <p className="text-base font-semibold text-gray-900 mt-0.5">November</p>
               </div>
             </div>
             <div className="text-right">
               <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Top Revenue</p>
-              <p className="text-base font-black text-gray-900 mt-0.5">$3.2M</p>
+              <p className="text-base font-semibold text-gray-900 mt-0.5">$3.2M</p>
             </div>
           </div>
         </div>
@@ -180,7 +180,7 @@ export default function AdminReports() {
               <div key={i} className="p-5 group hover:bg-gray-50/50 transition-colors cursor-pointer">
                 <div className="flex justify-between items-center mb-2">
                   <p className="text-sm font-bold text-gray-900">{Depot.name}</p>
-                  <p className="text-sm font-black text-gray-900">{Depot.revenue}</p>
+                  <p className="text-sm font-semibold text-gray-900">{Depot.revenue}</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
@@ -206,4 +206,5 @@ export default function AdminReports() {
     </div>
   );
 }
+
 

@@ -99,7 +99,7 @@ export default function PODReview() {
           </div>
           <div className="flex justify-between items-center py-3 border-t border-b border-gray-100 mb-4">
             <span className="font-semibold text-gray-700">Total Invoice (inc. GST)</span>
-            <span className="font-black text-lg text-gray-900">{pod.value}</span>
+            <span className="font-semibold text-lg text-gray-900">{pod.value}</span>
           </div>
 
           {pod.toll > 0 && (
@@ -179,7 +179,7 @@ export default function PODReview() {
                   </div>
                 </div>
                 <div className="flex items-center gap-6">
-                  <span className="text-sm font-black text-hero-dark">{pod.value}</span>
+                  <span className="text-sm font-semibold text-hero-dark">{pod.value}</span>
                   {!isDone ? (
                     <button onClick={() => setSelected(pod.id)} className="btn btn-outline py-2 border-hero-neutral/20 text-xs">
                       Review <ChevronRight size={14} />
@@ -196,4 +196,5 @@ export default function PODReview() {
     </div>
   );
 }
+
 

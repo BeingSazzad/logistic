@@ -54,8 +54,8 @@ export default function PlatformSupportDetail() {
           <div>
             <div className="flex items-center gap-3">
               <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{id}</h1>
-              <span className={`text-xs font-black uppercase px-2 py-1 rounded ${pCfg.bg} ${pCfg.text}`}>{ticket.priority} Priority</span>
-              {isResolved && <span className="text-xs font-black uppercase px-2 py-1 rounded bg-gray-200 text-gray-600">Resolved</span>}
+              <span className={`text-xs font-semibold uppercase px-2 py-1 rounded ${pCfg.bg} ${pCfg.text}`}>{ticket.priority} Priority</span>
+              {isResolved && <span className="text-xs font-semibold uppercase px-2 py-1 rounded bg-gray-200 text-gray-600">Resolved</span>}
             </div>
             <p className="text-sm text-gray-500 mt-1">{ticket.tenant} · {ticket.user} · Opened {ticket.created}</p>
           </div>
@@ -133,5 +133,6 @@ export default function PlatformSupportDetail() {
     </div>
   );
 }
+
 
 

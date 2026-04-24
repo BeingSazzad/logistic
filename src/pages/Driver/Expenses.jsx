@@ -80,7 +80,7 @@ export default function DriverExpenses() {
                   }`}
                 >
                   <cat.icon size={22} className={category?.id === cat.id ? 'text-[#FFCC00]' : ''} />
-                  <span className="text-xs font-black uppercase tracking-widest leading-tight">{cat.label}</span>
+                  <span className="text-xs font-semibold uppercase tracking-widest leading-tight">{cat.label}</span>
                 </button>
               ))}
             </div>
@@ -90,13 +90,13 @@ export default function DriverExpenses() {
           <div>
             <label className="text-xs font-semibold text-gray-500 block mb-2 px-1">Amount ($)</label>
             <div className="relative">
-              <span className="absolute left-5 top-1/2 -translate-y-1/2 text-2xl font-black text-gray-200">$</span>
+              <span className="absolute left-5 top-1/2 -translate-y-1/2 text-2xl font-semibold text-gray-200">$</span>
               <input
                 type="number"
                 value={amount}
                 onChange={e => setAmount(e.target.value)}
                 placeholder="0.00"
-                className="w-full bg-white border-2 border-gray-100 py-4 pl-10 pr-5 rounded-2xl text-2xl font-black focus:outline-none focus:ring-4 focus:ring-[#FFCC00]/10 focus:border-[#FFCC00] transition-all shadow-sm"
+                className="w-full bg-white border-2 border-gray-100 py-4 pl-10 pr-5 rounded-2xl text-2xl font-semibold focus:outline-none focus:ring-4 focus:ring-[#FFCC00]/10 focus:border-[#FFCC00] transition-all shadow-sm"
               />
             </div>
           </div>
@@ -109,7 +109,7 @@ export default function DriverExpenses() {
               value={vendor}
               onChange={e => setVendor(e.target.value)}
               placeholder="e.g. Shell Melbourne, City Parking..."
-              className="w-full bg-white border-2 border-gray-100 py-4 px-5 rounded-2xl text-sm font-black focus:outline-none focus:ring-4 focus:ring-[#FFCC00]/10 focus:border-[#FFCC00] transition-all shadow-sm"
+              className="w-full bg-white border-2 border-gray-100 py-4 px-5 rounded-2xl text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-[#FFCC00]/10 focus:border-[#FFCC00] transition-all shadow-sm"
             />
           </div>
 
@@ -125,13 +125,13 @@ export default function DriverExpenses() {
             {receiptCaptured ? (
               <>
                 <CheckCircle2 size={30} className="text-emerald-500" />
-                <span className="text-xs font-black uppercase tracking-widest">Receipt Photo Added ✓</span>
+                <span className="text-xs font-semibold uppercase tracking-widest">Receipt Photo Added ✓</span>
               </>
             ) : (
               <>
                 <Camera size={30} />
                 <div className="text-center">
-                  <span className="text-xs font-black uppercase tracking-widest block">Capture Receipt</span>
+                  <span className="text-xs font-semibold uppercase tracking-widest block">Capture Receipt</span>
                   <span className="text-xs font-bold text-gray-300 uppercase tracking-widest mt-0.5 block">Take a photo for verification</span>
                 </div>
               </>
@@ -161,7 +161,7 @@ export default function DriverExpenses() {
         <div className="w-28 h-28 bg-[#FFCC00] rounded-full flex items-center justify-center text-black mb-8 shadow-2xl shadow-yellow-400/30 animate-bounce">
           <CheckCircle2 size={56} strokeWidth={2.5} />
         </div>
-        <h2 className="text-3xl font-black text-gray-900 uppercase tracking-tight">Submitted!</h2>
+        <h2 className="text-3xl font-semibold text-gray-900 uppercase tracking-tight">Submitted!</h2>
         <p className="text-sm font-bold text-gray-400 mt-3 max-w-[240px] leading-snug">
           Expense queued for Accounts review. You'll be notified when approved.
         </p>
@@ -193,11 +193,11 @@ export default function DriverExpenses() {
           <p className="text-xs font-medium text-gray-500 mb-2">Pending Reimbursement</p>
           <div className="flex items-end justify-between">
             <div>
-              <h2 className="text-4xl font-black text-white leading-none">$145.20</h2>
+              <h2 className="text-4xl font-semibold text-white leading-none">$145.20</h2>
               <p className="text-xs font-medium text-[#FFCC00] mt-2">Awaiting Approval</p>
             </div>
             <div className="text-right">
-              <h2 className="text-xl font-black text-gray-400">$1,240.00</h2>
+              <h2 className="text-xl font-semibold text-gray-400">$1,240.00</h2>
               <p className="text-xs font-medium text-gray-600 mt-1">Paid This Month</p>
             </div>
           </div>
@@ -212,13 +212,13 @@ export default function DriverExpenses() {
           className="btn-cta bg-[#FFCC00] hover:bg-yellow-400 text-black shadow-lg border border-yellow-300"
         >
           <Plus size={22} strokeWidth={3} />
-          <span className="text-xs font-black uppercase tracking-widest">Log New Expense</span>
+          <span className="text-xs font-semibold uppercase tracking-widest">Log New Expense</span>
         </button>
 
         {/* Feed Header */}
         <div className="flex items-center justify-between px-1 pt-2">
           <h3 className="text-xs font-semibold text-gray-800">Recent Submissions</h3>
-          <button className="text-xs font-black text-gray-400 flex items-center gap-1.5 uppercase hover:text-gray-700 transition-colors">
+          <button className="text-xs font-semibold text-gray-400 flex items-center gap-1.5 uppercase hover:text-gray-700 transition-colors">
             <History size={12} /> Full History
           </button>
         </div>
@@ -238,12 +238,12 @@ export default function DriverExpenses() {
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-medium text-gray-400">{log.date}</span>
                     <span className="w-1 h-1 bg-gray-200 rounded-full" />
-                    <span className={`text-xs font-black uppercase tracking-widest ${STATUS_STYLE[log.status]}`}>
+                    <span className={`text-xs font-semibold uppercase tracking-widest ${STATUS_STYLE[log.status]}`}>
                       {log.status}
                     </span>
                   </div>
                   {log.reason && (
-                    <p className="text-xs font-black text-red-400 uppercase tracking-widest mt-0.5">↳ {log.reason}</p>
+                    <p className="text-xs font-semibold text-red-400 uppercase tracking-widest mt-0.5">↳ {log.reason}</p>
                   )}
                 </div>
               </div>
@@ -259,4 +259,5 @@ export default function DriverExpenses() {
     </div>
   );
 }
+
 

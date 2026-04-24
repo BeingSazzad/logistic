@@ -104,7 +104,7 @@ export default function AdminLoads() {
             >
               <div className="flex justify-between items-center relative z-10">
                 <q.icon size={20} className={isActive ? q.color : 'text-gray-600'} />
-                <span className={`text-xl font-black ${isActive ? 'text-hero-dark' : 'text-gray-600'}`}>{counts[q.id]}</span>
+                <span className={`text-xl font-semibold ${isActive ? 'text-hero-dark' : 'text-gray-600'}`}>{counts[q.id]}</span>
               </div>
               <div className="relative z-10 mt-1">
                 <p className={`hero-card-title ${isActive ? 'text-hero-dark' : 'text-gray-600'}`}>{q.label}</p>
@@ -121,7 +121,7 @@ export default function AdminLoads() {
         {/* Filter Bar */}
         <div className="p-5 border-b border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 bg-[#FAFAFA]">
           <div className="flex-1">
-            <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest">{QUEUES.find(q => q.id === queue)?.label} Queue</h3>
+            <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-widest">{QUEUES.find(q => q.id === queue)?.label} Queue</h3>
             <p className="text-xs font-medium text-gray-500 mt-0.5">{filtered.length} Load{filtered.length !== 1 ? 's' : ''} identified</p>
           </div>
 
@@ -148,7 +148,7 @@ export default function AdminLoads() {
         {/* Dynamic Segmentation Panel for Unassigned Queue */}
         {queue === 'unassigned' && (
           <div className="flex bg-gray-50 flex-wrap items-center gap-2 px-5 py-3 border-b border-gray-100">
-            <span className="text-xs font-black text-gray-400 uppercase tracking-widest mr-2 flex items-center gap-1.5"><MapPin size={12} /> Global Task Segments</span>
+            <span className="hero-metadata mr-2 flex items-center gap-1.5"><MapPin size={12} /> Global Task Segments</span>
             {['All', 'Local Pickups', 'Branch Transfers', 'Local Deliveries'].map(type => (
               <button
                 key={type}
@@ -167,14 +167,14 @@ export default function AdminLoads() {
           {selectedIds.length > 0 && (
             <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 bg-hero-dark text-white px-6 py-4 rounded-hero-lg shadow-2xl flex items-center gap-6 animate-in slide-in-from-top-4 duration-300 border border-white/10">
               <div className="flex items-center gap-3 border-r border-white/20 pr-6">
-                <div className="w-8 h-8 rounded-hero-sm bg-brand text-hero-dark flex items-center justify-center font-black">{selectedIds.length}</div>
+                <div className="w-8 h-8 rounded-hero-sm bg-brand text-hero-dark flex items-center justify-center font-semibold">{selectedIds.length}</div>
                 <div>
                   <span className="hero-metadata text-brand uppercase text-xs">Admin Batch Mode</span>
                   <p className="text-xs text-gray-400 font-bold uppercase">Multi-unit synchronization</p>
                 </div>
               </div>
               <div className="flex gap-4">
-                <button className="bg-brand text-hero-dark px-4 py-2 rounded-hero-sm text-xs font-black uppercase tracking-widest transition-all">
+                <button className="bg-brand text-hero-dark px-4 py-2 rounded-hero-sm text-xs font-semibold uppercase tracking-widest transition-all">
                   Update Multi-Route
                 </button>
               </div>
@@ -222,7 +222,7 @@ export default function AdminLoads() {
                       className="w-4 h-4 rounded border-gray-300 accent-yellow-400 cursor-pointer"
                     />
                   </td>
-                  <td className="px-6 py-4 font-black text-[#111] text-sm tracking-tight">{job.id}</td>
+                  <td className="px-6 py-4 font-semibold text-[#111] text-sm tracking-tight">{job.id}</td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2 text-xs font-bold text-gray-700">
                       <span>{job.origin}</span>
@@ -231,7 +231,7 @@ export default function AdminLoads() {
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`text-xs font-black uppercase tracking-widest px-3 py-1 rounded-md border shadow-sm transition-all ${
+                    <span className={`text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-md border shadow-sm transition-all ${
                       job.priority === 'High'  ? 'bg-[#111] text-[#FFCC00] border-[#FFCC00]/30 shadow-[#FFCC00]/10 shadow-lg' :
                       job.priority === 'Medium' ? 'bg-[#FFCC00] text-black border-transparent shadow-sm' :
                       'bg-gray-100 text-gray-500 border-gray-200'
@@ -243,7 +243,7 @@ export default function AdminLoads() {
                   <td className="px-6 py-4">
                     {job.driver ? (
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded bg-[#111] flex items-center justify-center font-black text-xs text-[#FFCC00] shrink-0">
+                        <div className="w-8 h-8 rounded bg-[#111] flex items-center justify-center font-semibold text-xs text-[#FFCC00] shrink-0">
                           {job.driver.split(' ').map(n => n[0]).join('')}
                         </div>
                         <div>
@@ -252,13 +252,13 @@ export default function AdminLoads() {
                         </div>
                       </div>
                     ) : (
-                      <span className="text-xs font-black text-gray-400 uppercase tracking-widest">Awaiting Assignment</span>
+                      <span className="hero-metadata">Awaiting Assignment</span>
                     )}
                   </td>
                   <td className="px-6 py-4 text-right">
                     <button
                       onClick={e => { e.stopPropagation(); navigate(`/admin/loads/${job.id}`); }}
-                      className="text-xs font-black border border-gray-200 px-4 py-1.5 rounded-lg transition-all uppercase tracking-widest hover:bg-gray-50 bg-white"
+                      className="text-xs font-semibold border border-gray-200 px-4 py-1.5 rounded-lg transition-all uppercase tracking-widest hover:bg-gray-50 bg-white"
                     >
                       Details
                     </button>
@@ -272,5 +272,6 @@ export default function AdminLoads() {
     </div>
   );
 }
+
 
 

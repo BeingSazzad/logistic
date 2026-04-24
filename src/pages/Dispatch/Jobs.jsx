@@ -153,7 +153,7 @@ export default function DispatchJobs() {
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`text-xs font-black uppercase tracking-widest px-2.5 py-1 rounded-hero-sm border shadow-sm ${
+                    <span className={`text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-hero-sm border shadow-sm ${
                       job.priority === 'High' ? 'bg-red-50 text-red-600 border-red-100' :
                       job.priority === 'Medium' ? 'bg-brand/10 text-gray-900 border-brand/20' :
                       'bg-gray-50 text-gray-400 border-gray-200'
@@ -165,7 +165,7 @@ export default function DispatchJobs() {
                   <td className="px-6 py-4">
                     {job.driver ? (
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-hero-sm bg-gray-900 text-brand flex items-center justify-center font-black text-xs shadow-sm">
+                        <div className="w-8 h-8 rounded-hero-sm bg-gray-900 text-brand flex items-center justify-center font-semibold text-xs shadow-sm">
                           {job.driver.split(' ').map(n => n[0]).join('')}
                         </div>
                         <div>
@@ -194,4 +194,5 @@ export default function DispatchJobs() {
     </div>
   );
 }
+
 

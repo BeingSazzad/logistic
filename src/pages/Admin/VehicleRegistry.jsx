@@ -157,7 +157,7 @@ export default function VehicleRegistry() {
             <button
               key={s}
               onClick={() => setStatusFilter(s)}
-              className={`px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
+              className={`px-4 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-widest transition-all ${
                 statusFilter === s
                   ? 'bg-white text-gray-900 shadow-md border border-gray-200'
                   : 'text-gray-500 hover:text-gray-900'
@@ -207,13 +207,13 @@ export default function VehicleRegistry() {
                       </div>
                     </td>
                     <td className="py-5 px-6">
-                      <div className="inline-block px-2 py-1 bg-gray-50 border border-gray-200 rounded font-mono text-xs font-black text-gray-700 uppercase tracking-wider mb-1">
+                      <div className="inline-block px-2 py-1 bg-gray-50 border border-gray-200 rounded font-mono text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1">
                         {v.vin}
                       </div>
                       <p className="text-xs font-medium text-gray-500 ml-1">{v.plate}</p>
                     </td>
                     <td className="py-5 px-6">
-                      <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest border ${sm.bg} ${sm.text} border-transparent shadow-sm`}>
+                      <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold uppercase tracking-widest border ${sm.bg} ${sm.text} border-transparent shadow-sm`}>
                         <span className={`w-1.5 h-1.5 rounded-full ${sm.dot}`} />
                         {v.status}
                       </span>
@@ -247,7 +247,7 @@ export default function VehicleRegistry() {
                           className="p-2.5 rounded-xl bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition-all border border-blue-100 shadow-sm active:scale-95 flex items-center gap-2"
                           title="Assign Load"
                         >
-                          <Truck size={16} /> <span className="text-xs font-black uppercase tracking-widest hidden xl:inline">Assign</span>
+                          <Truck size={16} /> <span className="text-xs font-semibold uppercase tracking-widest hidden xl:inline">Assign</span>
                         </button>
                         <button
                           onClick={() => setLabelVehicle(v)}
@@ -293,7 +293,7 @@ export default function VehicleRegistry() {
                     placeholder="Enter VIN..."
                     value={form.vin}
                     onChange={e => handleVinChange(e.target.value)}
-                    className={`w-full bg-gray-50 border-2 rounded-2xl py-4 pl-12 pr-12 text-sm font-mono font-black uppercase tracking-widest focus:outline-none focus:bg-white transition-all ${errors.vin ? 'border-red-400' : 'border-gray-100 focus:border-[#FFCC00]'}`}
+                    className={`w-full bg-gray-50 border-2 rounded-2xl py-4 pl-12 pr-12 text-sm font-mono font-semibold uppercase tracking-widest focus:outline-none focus:bg-white transition-all ${errors.vin ? 'border-red-400' : 'border-gray-100 focus:border-[#FFCC00]'}`}
                   />
                   <div className="absolute right-4 top-1/2 -translate-y-1/2">
                     {vinChecking && <Loader2 size={20} className="text-[#FFCC00] animate-spin" />}
@@ -301,8 +301,8 @@ export default function VehicleRegistry() {
                     {!vinChecking && vinOk === 'duplicate' && <AlertCircle  size={20} className="text-red-500" />}
                   </div>
                 </div>
-                {errors.vin && <p className="text-xs font-black text-red-500 mt-2 ml-1 uppercase">{errors.vin}</p>}
-                {!errors.vin && vinOk === 'ok' && <p className="text-xs font-black text-emerald-600 mt-2 ml-1 uppercase tracking-widest">VIN Verified ✓</p>}
+                {errors.vin && <p className="text-xs font-semibold text-red-500 mt-2 ml-1 uppercase">{errors.vin}</p>}
+                {!errors.vin && vinOk === 'ok' && <p className="text-xs font-semibold text-emerald-600 mt-2 ml-1 uppercase tracking-widest">VIN Verified ✓</p>}
               </section>
 
               <div className="grid grid-cols-2 gap-6">
@@ -316,7 +316,7 @@ export default function VehicleRegistry() {
                       placeholder="ABC-123"
                       value={form.plate}
                       onChange={e => setForm(f => ({ ...f, plate: e.target.value }))}
-                      className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 pl-12 pr-4 text-sm font-black uppercase tracking-widest focus:outline-none focus:bg-white focus:border-blue-400 transition-all"
+                      className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 pl-12 pr-4 text-sm font-semibold uppercase tracking-widest focus:outline-none focus:bg-white focus:border-blue-400 transition-all"
                     />
                   </div>
                 </div>
@@ -324,7 +324,7 @@ export default function VehicleRegistry() {
                 {/* Type */}
                 <div>
                   <label className="block text-xs font-semibold text-gray-500 mb-3 ml-1">Body Type</label>
-                  <select value={form.type} onChange={e => setForm(f => ({ ...f, type: e.target.value }))} className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 px-4 text-sm font-black uppercase tracking-widest appearance-none focus:outline-none focus:bg-white focus:border-violet-400 transition-all">
+                  <select value={form.type} onChange={e => setForm(f => ({ ...f, type: e.target.value }))} className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 px-4 text-sm font-semibold uppercase tracking-widest appearance-none focus:outline-none focus:bg-white focus:border-violet-400 transition-all">
                     {['Sedan', 'SUV', 'Ute', 'Van', 'Truck', 'Motorcycle', 'Other'].map(t => <option key={t}>{t}</option>)}
                   </select>
                 </div>
@@ -334,7 +334,7 @@ export default function VehicleRegistry() {
                   <label className="block text-xs font-semibold text-gray-500 mb-3 ml-1">Manufacturer</label>
                   <input type="text" placeholder="e.g. Toyota" value={form.make}
                     onChange={e => setForm(f => ({ ...f, make: e.target.value }))}
-                    className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 px-4 text-sm font-black uppercase tracking-widest focus:outline-none focus:bg-white focus:border-[#111] transition-all" />
+                    className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 px-4 text-sm font-semibold uppercase tracking-widest focus:outline-none focus:bg-white focus:border-[#111] transition-all" />
                 </div>
 
                 {/* Model */}
@@ -342,7 +342,7 @@ export default function VehicleRegistry() {
                   <label className="block text-xs font-semibold text-gray-500 mb-3 ml-1">Model Name</label>
                   <input type="text" placeholder="e.g. Camry" value={form.model}
                     onChange={e => setForm(f => ({ ...f, model: e.target.value }))}
-                    className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 px-4 text-sm font-black uppercase tracking-widest focus:outline-none focus:bg-white focus:border-[#111] transition-all" />
+                    className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 px-4 text-sm font-semibold uppercase tracking-widest focus:outline-none focus:bg-white focus:border-[#111] transition-all" />
                 </div>
               </div>
 
@@ -350,17 +350,17 @@ export default function VehicleRegistry() {
                  <div>
                    <label className="block text-xs font-semibold text-gray-500 mb-3 ml-1">Year</label>
                    <input type="text" placeholder="2024" value={form.year}
-                     onChange={e => setForm(f => ({ ...f, year: e.target.value }))} className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 px-4 text-sm font-black focus:outline-none focus:bg-white transition-all" />
+                     onChange={e => setForm(f => ({ ...f, year: e.target.value }))} className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 px-4 text-sm font-semibold focus:outline-none focus:bg-white transition-all" />
                  </div>
                  <div>
                    <label className="block text-xs font-semibold text-gray-500 mb-3 ml-1">Color</label>
                    <input type="text" placeholder="White" value={form.color}
-                     onChange={e => setForm(f => ({ ...f, color: e.target.value }))} className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 px-4 text-sm font-black focus:outline-none focus:bg-white transition-all" />
+                     onChange={e => setForm(f => ({ ...f, color: e.target.value }))} className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 px-4 text-sm font-semibold focus:outline-none focus:bg-white transition-all" />
                  </div>
                  <div>
                    <label className="block text-xs font-semibold text-gray-500 mb-3 ml-1">Weight</label>
                    <input type="text" placeholder="1500kg" value={form.weight}
-                     onChange={e => setForm(f => ({ ...f, weight: e.target.value }))} className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 px-4 text-sm font-black focus:outline-none focus:bg-white transition-all" />
+                     onChange={e => setForm(f => ({ ...f, weight: e.target.value }))} className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 px-4 text-sm font-semibold focus:outline-none focus:bg-white transition-all" />
                  </div>
               </div>
 
@@ -371,20 +371,20 @@ export default function VehicleRegistry() {
                 <div>
                   <label className="block text-xs font-semibold text-gray-500 mb-3 ml-1">Customer / Owner</label>
                   <input type="text" placeholder="Client name or ID" value={form.customer}
-                    onChange={e => setForm(f => ({ ...f, customer: e.target.value }))} className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 px-4 text-sm font-black focus:outline-none focus:bg-white transition-all" />
+                    onChange={e => setForm(f => ({ ...f, customer: e.target.value }))} className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 px-4 text-sm font-semibold focus:outline-none focus:bg-white transition-all" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-gray-500 mb-3 ml-1">Final Destination</label>
                   <input type="text" placeholder="e.g. Brisbane QLD" value={form.destination}
-                    onChange={e => setForm(f => ({ ...f, destination: e.target.value }))} className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 px-4 text-sm font-black focus:outline-none focus:bg-white transition-all" />
+                    onChange={e => setForm(f => ({ ...f, destination: e.target.value }))} className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 px-4 text-sm font-semibold focus:outline-none focus:bg-white transition-all" />
                 </div>
               </div>
 
               <div className="flex items-center justify-end gap-4 mt-4">
-                <button onClick={() => setShowModal(false)} className="px-8 py-4 rounded-2xl text-xs font-black text-gray-400 uppercase tracking-widest hover:text-gray-900 transition-colors">
+                <button onClick={() => setShowModal(false)} className="px-8 py-4 rounded-2xl hero-metadata hover:text-gray-900 transition-colors">
                   Cancel
                 </button>
-                <button onClick={handleSubmit} className="px-10 py-5 rounded-[1.5rem] bg-[#FFCC00] text-black text-sm font-black uppercase tracking-[0.1em] shadow-xl hover:shadow-yellow-200 active:scale-[0.98] transition-all">
+                <button onClick={handleSubmit} className="px-10 py-5 rounded-[1.5rem] bg-[#FFCC00] text-black text-sm font-semibold uppercase tracking-[0.1em] shadow-xl hover:shadow-yellow-200 active:scale-[0.98] transition-all">
                   Confirm Registration
                 </button>
               </div>
@@ -423,7 +423,7 @@ export default function VehicleRegistry() {
               <button 
                 onClick={handleAssignLoad} 
                 disabled={!loadInput.trim()}
-                className="w-full py-4 rounded-2xl bg-[#FFCC00] text-black text-sm font-black uppercase tracking-[0.1em] shadow-xl hover:shadow-yellow-200 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-4 rounded-2xl bg-[#FFCC00] text-black text-sm font-semibold uppercase tracking-[0.1em] shadow-xl hover:shadow-yellow-200 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Confirm Assignment
               </button>
@@ -449,12 +449,12 @@ export default function VehicleRegistry() {
               {/* Sticker Preview */}
               <div className="border-[3px] border-black rounded-[2rem] p-8 flex flex-col items-center gap-6 bg-white shadow-2xl scale-105 my-4">
                 <div className="flex flex-col gap-1 items-center text-center">
-                  <p className="text-[12px] font-black text-black uppercase tracking-[0.3em] mb-2 border-b-2 border-black pb-1">HERO LOGISTICS</p>
-                  <p className="text-xl font-black text-black leading-none">{labelVehicle.year} {labelVehicle.make}</p>
-                  <p className="text-lg font-black text-black/60 uppercase tracking-tight">{labelVehicle.model}</p>
+                  <p className="text-[12px] font-semibold text-black uppercase tracking-[0.3em] mb-2 border-b-2 border-black pb-1">HERO LOGISTICS</p>
+                  <p className="text-xl font-semibold text-black leading-none">{labelVehicle.year} {labelVehicle.make}</p>
+                  <p className="text-lg font-semibold text-black/60 uppercase tracking-tight">{labelVehicle.model}</p>
                 </div>
                 
-                <div className="bg-black text-white px-6 py-2 rounded-lg text-lg font-black tracking-widest">
+                <div className="bg-black text-white px-6 py-2 rounded-lg text-lg font-semibold tracking-widest">
                   {labelVehicle.plate}
                 </div>
 
@@ -468,10 +468,10 @@ export default function VehicleRegistry() {
                 </div>
 
                 <div className="flex flex-col items-center">
-                   <p className="font-mono text-sm font-black text-black tracking-[0.2em]">{labelVehicle.vin}</p>
+                   <p className="font-mono text-sm font-semibold text-black tracking-[0.2em]">{labelVehicle.vin}</p>
                    <div className="mt-6 flex items-center gap-2 bg-emerald-50 border border-emerald-100 px-4 py-2 rounded-xl">
                       <MapPin size={16} className="text-emerald-600" />
-                      <span className="text-xs font-black text-emerald-900 uppercase tracking-tight">{labelVehicle.destination}</span>
+                      <span className="text-xs font-semibold text-emerald-900 uppercase tracking-tight">{labelVehicle.destination}</span>
                    </div>
                 </div>
               </div>
@@ -479,11 +479,11 @@ export default function VehicleRegistry() {
               <div className="flex flex-col gap-3">
                 <button
                   onClick={() => { window.print(); }}
-                  className="w-full flex items-center justify-center gap-3 py-5 rounded-2xl bg-black text-[#FFCC00] text-sm font-black uppercase tracking-widest shadow-xl active:scale-95 transition-all"
+                  className="w-full flex items-center justify-center gap-3 py-5 rounded-2xl bg-black text-[#FFCC00] text-sm font-semibold uppercase tracking-widest shadow-xl active:scale-95 transition-all"
                 >
                   <Printer size={18} strokeWidth={3} /> Execute Print Job
                 </button>
-                <p className="text-xs font-black text-gray-400 text-center uppercase tracking-widest">System Hash: HL-{labelVehicle.id.toString().padStart(6, '0')}</p>
+                <p className="text-xs font-semibold text-gray-400 text-center uppercase tracking-widest">System Hash: HL-{labelVehicle.id.toString().padStart(6, '0')}</p>
               </div>
             </div>
           </div>
@@ -492,4 +492,5 @@ export default function VehicleRegistry() {
     </div>
   );
 }
+
 

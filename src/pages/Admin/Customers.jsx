@@ -96,7 +96,7 @@ export default function AdminCustomers() {
 
         <div className="overflow-x-auto">
           <table className="w-full text-left">
-            <thead className="bg-[#FAFAFA] text-xs font-black text-gray-400 uppercase tracking-widest border-b border-gray-100">
+            <thead className="bg-[#FAFAFA] hero-metadata border-b border-gray-100">
               <tr>
                 <th className="px-6 py-4">Company</th>
                 <th className="px-6 py-4">Primary Contact</th>
@@ -114,7 +114,7 @@ export default function AdminCustomers() {
                   className="hover:bg-gray-50/80 transition-all cursor-pointer group border-l-4 border-l-transparent hover:border-l-[#FFCC00]">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-lg bg-[#111] flex items-center justify-center text-[#FFCC00] font-black text-xs shrink-0 group-hover:border-[#FFCC00] border-2 border-transparent transition-colors">
+                      <div className="w-9 h-9 rounded-lg bg-[#111] flex items-center justify-center text-[#FFCC00] font-semibold text-xs shrink-0 group-hover:border-[#FFCC00] border-2 border-transparent transition-colors">
                         {c.name.split(' ').map(n=>n[0]).join('').slice(0,2)}
                       </div>
                       <div>
@@ -128,30 +128,30 @@ export default function AdminCustomers() {
                     <div className="text-xs text-gray-400 font-bold mt-0.5 flex items-center gap-1"><Mail size={10}/> {c.email}</div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="text-sm font-black text-gray-900">${c.creditLimit.toLocaleString()}</span>
+                    <span className="text-sm font-semibold text-gray-900">${c.creditLimit.toLocaleString()}</span>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="flex items-center gap-1.5 text-xs font-black text-gray-600 bg-gray-100 w-max px-3 py-1.5 rounded-md border border-gray-200">
+                    <div className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 bg-gray-100 w-max px-3 py-1.5 rounded-md border border-gray-200">
                       <CreditCard size={11}/> {c.terms}
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-sm font-black text-gray-900">{c.Loads}</div>
+                    <div className="text-sm font-semibold text-gray-900">{c.Loads}</div>
                     <div className="text-xs text-emerald-600 font-bold">{c.revenue}</div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="flex items-center gap-1 text-xs font-black text-amber-500">
+                    <div className="flex items-center gap-1 text-xs font-semibold text-amber-500">
                       <Star size={12} className="fill-amber-400"/> {c.rating}
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`text-xs font-black px-2.5 py-1 rounded-md border uppercase tracking-widest ${statusStyle(c.status)}`}>
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-md border uppercase tracking-widest ${statusStyle(c.status)}`}>
                       {c.status}
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right">
                     <button onClick={e => { e.stopPropagation(); navigate(`/admin/customers/${c.id}`); }}
-                      className="text-xs font-black border border-gray-200 text-gray-600 hover:bg-gray-50 px-3 py-1.5 rounded-lg transition-all uppercase tracking-widest">
+                      className="text-xs font-semibold border border-gray-200 text-gray-600 hover:bg-gray-50 px-3 py-1.5 rounded-lg transition-all uppercase tracking-widest">
                       View →
                     </button>
                   </td>
@@ -164,4 +164,5 @@ export default function AdminCustomers() {
     </div>
   );
 }
+
 

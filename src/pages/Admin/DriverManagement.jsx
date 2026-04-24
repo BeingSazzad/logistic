@@ -67,7 +67,7 @@ export default function AdminDriverManagement() {
            <div key={i} className="card p-5 flex items-center justify-between group hover:border-brand transition-colors">
               <div>
                  <p className="hero-metadata text-gray-600 mb-2">{stat.label}</p>
-                 <p className="text-2xl font-black text-hero-dark leading-none">{stat.value}</p>
+                 <p className="text-2xl font-semibold text-hero-dark leading-none">{stat.value}</p>
               </div>
               <div className={`w-11 h-11 rounded-hero-sm flex items-center justify-center ${stat.bg} ${stat.color} border border-gray-50`}>
                  <stat.icon size={20}/>
@@ -124,7 +124,7 @@ export default function AdminDriverManagement() {
                  <tr className="hover:bg-gray-50 transition-all cursor-pointer group" key={d.id} onClick={() => navigate(`/admin/drivers/${d.id}`)}>
                    <td className="px-6 py-4">
                      <div className="flex items-center gap-3">
-                       <div className="w-10 h-10 rounded border-2 border-transparent bg-[#111] flex items-center justify-center text-[#FFCC00] font-black text-xs shrink-0 group-hover:border-[#FFCC00] transition-colors">
+                       <div className="w-10 h-10 rounded border-2 border-transparent bg-[#111] flex items-center justify-center text-[#FFCC00] font-semibold text-xs shrink-0 group-hover:border-[#FFCC00] transition-colors">
                           {d.name.split(' ').map(n=>n[0]).join('')}
                        </div>
                        <div>
@@ -167,5 +167,6 @@ export default function AdminDriverManagement() {
     </div>
   );
 }
+
 
 

@@ -21,7 +21,7 @@ export default function DriverHome() {
          {/* ── 1. Operator Status HUD ── */}
          <div className="flex justify-between items-center bg-[#111] p-4 rounded-3xl shadow-xl border border-white/5">
             <div className="flex items-center gap-4">
-               <div className="w-12 h-12 rounded-2xl bg-[#FFCC00] border-2 border-white/10 flex items-center justify-center font-black text-black text-xl shadow-inner">
+               <div className="w-12 h-12 rounded-2xl bg-[#FFCC00] border-2 border-white/10 flex items-center justify-center font-semibold text-black text-xl shadow-inner">
                   JT
                </div>
                <div>
@@ -49,7 +49,7 @@ export default function DriverHome() {
                <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center shrink-0 text-emerald-600">
                   <ShieldCheck size={28} />
                </div>
-               <span className="text-xs font-black uppercase tracking-tight text-center">Compliance</span>
+               <span className="text-xs font-semibold uppercase tracking-tight text-center">Compliance</span>
             </button>
             <button 
                onClick={() => navigate('/driver/active')} 
@@ -58,7 +58,7 @@ export default function DriverHome() {
                <div className="w-12 h-12 bg-black/10 rounded-2xl flex items-center justify-center shrink-0">
                   <Navigation size={28} className="text-black" />
                </div>
-               <span className="text-xs font-black uppercase tracking-tight text-center">Route</span>
+               <span className="text-xs font-semibold uppercase tracking-tight text-center">Route</span>
             </button>
             <button 
                onClick={() => navigate('/driver/draft')} 
@@ -68,8 +68,8 @@ export default function DriverHome() {
                   <Package size={24} className="text-blue-600" />
                </div>
                <div className="text-left flex-1">
-                  <span className="block text-xs font-black uppercase tracking-widest text-blue-500 mb-0.5">Quick Action</span>
-                  <span className="block text-sm font-black uppercase tracking-tight text-blue-900">Create Draft Load</span>
+                  <span className="block text-xs font-semibold uppercase tracking-widest text-blue-500 mb-0.5">Quick Action</span>
+                  <span className="block text-sm font-semibold uppercase tracking-tight text-blue-900">Create Draft Load</span>
                </div>
                <ChevronRight size={20} className="text-blue-300" />
             </button>
@@ -83,8 +83,8 @@ export default function DriverHome() {
                   <ShieldAlert size={20} className="absolute" />
                </div>
                <div className="text-left">
-                  <p className="text-xs font-black text-red-600 uppercase tracking-widest leading-none">Emergency Protocol</p>
-                  <p className="text-xs font-black text-red-900 uppercase mt-1">Report Incident / Breakdown</p>
+                  <p className="text-xs font-semibold text-red-600 uppercase tracking-widest leading-none">Emergency Protocol</p>
+                  <p className="text-xs font-semibold text-red-900 uppercase mt-1">Report Incident / Breakdown</p>
                </div>
             </div>
             <ChevronRight size={18} className="text-red-300" />
@@ -94,7 +94,7 @@ export default function DriverHome() {
          <div className="space-y-4">
             <div className="flex items-center justify-between px-1">
                <h3 className="text-xs font-semibold text-gray-800">Operational Schedule</h3>
-               <span className="text-xs font-black text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full uppercase tracking-widest">2 jobs today</span>
+               <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full uppercase tracking-widest">2 jobs today</span>
             </div>
             
             <div className="flex flex-col gap-3">
@@ -106,8 +106,8 @@ export default function DriverHome() {
                         </div>
                         <div className="min-w-0">
                            <div className="flex items-center gap-2 mb-1">
-                              <span className="text-xs font-black text-orange-600 bg-orange-50 px-2 py-0.5 rounded uppercase tracking-tighter">{job.priority}</span>
-                              <span className="text-xs font-black text-gray-400 uppercase tracking-widest">{job.id}</span>
+                              <span className="text-xs font-semibold text-orange-600 bg-orange-50 px-2 py-0.5 rounded uppercase tracking-tighter">{job.priority}</span>
+                              <span className="hero-metadata">{job.id}</span>
                            </div>
                            <p className="font-semibold text-gray-900 text-sm truncate leading-none">{job.area}</p>
                            <div className="flex items-center gap-2 text-xs font-bold text-gray-400 mt-2 uppercase">
@@ -137,5 +137,6 @@ export default function DriverHome() {
       </div>
    );
 }
+
 
 

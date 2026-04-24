@@ -55,7 +55,7 @@ export default function AdminExceptions() {
         {resolvedCount > 0 && (
            <button 
              onClick={clearResolved}
-             className="bg-hero-dark hover:bg-black text-brand px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-sm flex items-center gap-2"
+             className="bg-hero-dark hover:bg-black text-brand px-6 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-widest transition-all shadow-sm flex items-center gap-2"
            >
               <Trash2 size={14}/> Archive {resolvedCount} Resolved
            </button>
@@ -69,7 +69,7 @@ export default function AdminExceptions() {
            <div className="w-16 h-16 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mb-4">
               <CheckCircle size={32} />
            </div>
-           <h2 className="text-xl font-black text-gray-900 mb-1">All clear! No delivery issues</h2>
+           <h2 className="text-xl font-semibold text-gray-900 mb-1">All clear! No delivery issues</h2>
            <p className="text-sm text-gray-500 font-medium">All deliveries are moving smoothly across the network.</p>
         </div>
       ) : (
@@ -90,8 +90,8 @@ export default function AdminExceptions() {
                      onClick={() => navigate(`/admin/loads/${item.id}`)}
                      className={`p-4 md:w-48 flex flex-col items-center justify-center cursor-pointer transition-colors border-b md:border-b-0 md:border-r border-gray-100 group/id ${isResolved ? 'bg-transparent' : 'bg-gray-50/50 hover:bg-red-50'}`}
                    >
-                      <span className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">{item.time}</span>
-                      <div className="flex items-center gap-1.5 font-black text-gray-900 group-hover/id:text-red-500 transition-colors">
+                      <span className="hero-metadata mb-1">{item.time}</span>
+                      <div className="flex items-center gap-1.5 font-semibold text-gray-900 group-hover/id:text-red-500 transition-colors">
                          {item.id} <ChevronRight size={14}/>
                       </div>
                    </div>
@@ -103,20 +103,20 @@ export default function AdminExceptions() {
                       </div>
                       <div className="flex-1 min-w-0">
                          <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                            <span className={`text-xs font-black px-1.5 py-0.5 rounded border uppercase tracking-widest ${item.priority === 'Critical' ? 'bg-red-500 text-white border-red-500' : 'bg-gray-100 text-gray-500 border-gray-200'}`}>
+                            <span className={`text-xs font-semibold px-1.5 py-0.5 rounded border uppercase tracking-widest ${item.priority === 'Critical' ? 'bg-red-500 text-white border-red-500' : 'bg-gray-100 text-gray-500 border-gray-200'}`}>
                                {item.priority}
                             </span>
                             
                             {/* NEW: Status Badge in the middle */}
                             {isResolved && (
-                               <span className={`${config.badge} text-white px-2 py-0.5 rounded text-xs font-black uppercase tracking-widest flex items-center gap-1 shadow-sm`}>
+                               <span className={`${config.badge} text-white px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-widest flex items-center gap-1 shadow-sm`}>
                                   <StatusIcon size={10} strokeWidth={4}/> {item.status}
                                </span>
                             )}
 
-                            <span className="text-xs font-black text-gray-400 uppercase tracking-widest italic">{item.category}</span>
+                            <span className="hero-metadata italic">{item.category}</span>
                          </div>
-                         <h3 className="text-sm font-black text-gray-900 truncate">{item.title}</h3>
+                         <h3 className="text-sm font-semibold text-gray-900 truncate">{item.title}</h3>
                          <p className="text-xs font-medium text-gray-500 leading-tight truncate">{item.detail} • Driver: {item.driver}</p>
                       </div>
                    </div>
@@ -126,7 +126,7 @@ export default function AdminExceptions() {
                       <div className="relative w-full md:w-48">
                          <button 
                            onClick={(e) => { e.stopPropagation(); setActiveDropdown(activeDropdown === item.id ? null : item.id); }}
-                           className={`w-full flex items-center justify-between px-4 py-2.5 font-black text-xs uppercase tracking-widest rounded-xl transition-all ${isResolved ? 'bg-white border border-gray-200 text-gray-900 shadow-sm' : 'bg-[#FFCC00] text-black hover:bg-[#E6B800]'}`}
+                           className={`w-full flex items-center justify-between px-4 py-2.5 font-semibold text-xs uppercase tracking-widest rounded-xl transition-all ${isResolved ? 'bg-white border border-gray-200 text-gray-900 shadow-sm' : 'bg-[#FFCC00] text-black hover:bg-[#E6B800]'}`}
                          >
                             {isResolved ? item.status : 'Update Status'} <ChevronDown size={14} className={`transition-transform ${activeDropdown === item.id ? 'rotate-180' : ''}`}/>
                          </button>
@@ -148,7 +148,7 @@ export default function AdminExceptions() {
                                       <opt.icon size={16}/>
                                    </div>
                                    <div>
-                                      <p className="text-xs font-black uppercase text-gray-900 leading-none">{opt.label}</p>
+                                      <p className="text-xs font-semibold uppercase text-gray-900 leading-none">{opt.label}</p>
                                       <p className="text-xs text-gray-400 mt-1">{opt.desc}</p>
                                    </div>
                                 </button>
@@ -178,5 +178,6 @@ export default function AdminExceptions() {
     </div>
   );
 }
+
 
 

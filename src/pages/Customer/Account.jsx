@@ -32,7 +32,7 @@ export default function CustomerAccount() {
         <div className="mt-5 pt-5 border-t border-gray-100 flex justify-between items-center">
           <div>
             <p className="text-xs text-gray-400">Credit Limit</p>
-            <p className="font-black text-lg text-gray-900">$50,000 AUD</p>
+            <p className="font-semibold text-lg text-gray-900">$50,000 AUD</p>
           </div>
           <div>
             <p className="text-xs text-gray-400">Payment Terms</p>
@@ -61,4 +61,5 @@ export default function CustomerAccount() {
     </div>
   );
 }
+
 

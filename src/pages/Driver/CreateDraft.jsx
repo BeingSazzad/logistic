@@ -113,13 +113,13 @@ export default function DriverCreateDraft() {
         <div className="flex items-center gap-3 mt-2">
           <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-2xl px-4 py-2.5">
             <Car size={16} className="text-[#FFCC00]" />
-            <span className="text-xs font-black text-white uppercase tracking-widest">{vehicles.length} Vehicles Added</span>
+            <span className="text-xs font-semibold text-white uppercase tracking-widest">{vehicles.length} Vehicles Added</span>
           </div>
           <div className={`flex items-center gap-2 border rounded-2xl px-4 py-2.5 ${
             urgency === 'High' ? 'bg-red-900/30 border-red-800 text-red-400' : 'bg-white/5 border-white/10 text-gray-400'
           }`}>
             <AlertCircle size={14} />
-            <span className="text-xs font-black uppercase tracking-widest">{urgency} Priority</span>
+            <span className="text-xs font-semibold uppercase tracking-widest">{urgency} Priority</span>
           </div>
         </div>
       </div>
@@ -134,7 +134,7 @@ export default function DriverCreateDraft() {
           <select
             value={origin}
             onChange={e => setOrigin(e.target.value)}
-            className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-4 py-3.5 text-sm font-black text-gray-900 focus:outline-none focus:border-blue-400 appearance-none"
+            className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-4 py-3.5 text-sm font-semibold text-gray-900 focus:outline-none focus:border-blue-400 appearance-none"
           >
             <option value="">Select origin depot...</option>
             {DEPOTS.map(d => <option key={d}>{d}</option>)}
@@ -149,7 +149,7 @@ export default function DriverCreateDraft() {
           <select
             value={dest}
             onChange={e => setDest(e.target.value)}
-            className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-4 py-3.5 text-sm font-black text-gray-900 focus:outline-none focus:border-emerald-400 appearance-none"
+            className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-4 py-3.5 text-sm font-semibold text-gray-900 focus:outline-none focus:border-emerald-400 appearance-none"
           >
             <option value="">Select destination...</option>
             {DEST_LOCATIONS.map(d => <option key={d}>{d}</option>)}
@@ -166,7 +166,7 @@ export default function DriverCreateDraft() {
               <button
                 key={u}
                 onClick={() => setUrgency(u)}
-                className={`flex-1 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest border-2 transition-all ${
+                className={`flex-1 py-3.5 rounded-2xl text-xs font-semibold uppercase tracking-widest border-2 transition-all ${
                   urgency === u
                     ? u === 'High'
                       ? 'border-red-400 bg-red-50 text-red-600'
@@ -196,7 +196,7 @@ export default function DriverCreateDraft() {
                 value={vin}
                 onChange={e => { setVin(e.target.value); setVinError(''); }}
                 onKeyDown={e => e.key === 'Enter' && addVehicle()}
-                className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-4 py-3.5 pl-10 text-sm font-black text-gray-900 focus:outline-none focus:border-blue-400 uppercase tracking-widest transition-all"
+                className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-4 py-3.5 pl-10 text-sm font-semibold text-gray-900 focus:outline-none focus:border-blue-400 uppercase tracking-widest transition-all"
               />
             </div>
             <button
@@ -208,7 +208,7 @@ export default function DriverCreateDraft() {
           </div>
 
           {vinError && (
-            <p className="text-xs font-black text-red-500 uppercase tracking-widest px-1">{vinError}</p>
+            <p className="text-xs font-semibold text-red-500 uppercase tracking-widest px-1">{vinError}</p>
           )}
 
           {/* VIN List */}
@@ -220,7 +220,7 @@ export default function DriverCreateDraft() {
                     <Car size={18} className="text-blue-500" />
                   </div>
                   <div>
-                    <span className="font-mono text-sm font-black text-gray-900 tracking-widest">{v.vin}</span>
+                    <span className="font-mono text-sm font-semibold text-gray-900 tracking-widest">{v.vin}</span>
                     <p className="text-xs font-medium text-gray-400 mt-0.5">Unit #{idx + 1}</p>
                   </div>
                 </div>
@@ -232,7 +232,7 @@ export default function DriverCreateDraft() {
             {vehicles.length === 0 && (
               <div className="text-center py-6 text-gray-300">
                 <Car size={40} className="mx-auto mb-2 opacity-30" />
-                <p className="text-xs font-black uppercase tracking-widest">No vehicles added yet</p>
+                <p className="text-xs font-semibold uppercase tracking-widest">No vehicles added yet</p>
               </div>
             )}
           </div>
@@ -256,7 +256,7 @@ export default function DriverCreateDraft() {
         <button
           onClick={submitDraft}
           disabled={!canSubmit}
-          className={`py-5 rounded-3xl font-black uppercase tracking-[0.1em] text-sm flex items-center justify-center gap-3 transition-all shadow-xl active:scale-[0.97] ${
+          className={`py-5 rounded-3xl font-semibold uppercase tracking-[0.1em] text-sm flex items-center justify-center gap-3 transition-all shadow-xl active:scale-[0.97] ${
             canSubmit
               ? 'bg-[#111] text-[#FFCC00] hover:bg-black shadow-black/20'
               : 'bg-gray-100 text-gray-300 cursor-not-allowed'
@@ -274,4 +274,5 @@ export default function DriverCreateDraft() {
     </div>
   );
 }
+
 

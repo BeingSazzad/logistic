@@ -121,7 +121,7 @@ export default function AdminLoadDetail() {
                          )}
                       </div>
                       <div className={`w-full ${!isCurrent && !isCompleted ? 'opacity-30' : ''}`}>
-                         <p className={`text-xs font-black uppercase tracking-widest ${isCurrent ? 'text-yellow-700' : 'text-gray-400'}`}>{stage.type}</p>
+                         <p className={`text-xs font-semibold uppercase tracking-widest ${isCurrent ? 'text-yellow-700' : 'text-gray-400'}`}>{stage.type}</p>
                          <p className={`text-sm font-bold mt-0.5 ${isCurrent ? 'text-gray-900' : 'text-gray-600'}`}>{stage.label}</p>
                          <p className="text-xs text-gray-500 font-medium mt-1 leading-relaxed">
                             {stage.location} <span className="text-gray-300 mx-1">/</span> {stage.actor}
@@ -138,15 +138,15 @@ export default function AdminLoadDetail() {
              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                 <Truck size={60} />
              </div>
-             <h2 className="text-xs font-black text-[#FFCC00] tracking-[0.2em] uppercase mb-6 flex items-center gap-2">
+             <h2 className="text-xs font-semibold text-[#FFCC00] tracking-[0.2em] uppercase mb-6 flex items-center gap-2">
                 <ShieldAlert size={14}/> Terminal Management
              </h2>
              
              <div className="space-y-6 relative z-10">
                 <div className="p-4 bg-white/5 rounded-2xl border border-white/10">
-                   <p className="text-xs font-black uppercase text-gray-500 tracking-widest mb-2">Current Custodian</p>
+                   <p className="text-xs font-semibold uppercase text-gray-500 tracking-widest mb-2">Current Custodian</p>
                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-yellow-400 text-black flex items-center justify-center font-black">LH</div>
+                      <div className="w-10 h-10 rounded-xl bg-yellow-400 text-black flex items-center justify-center font-semibold">LH</div>
                       <div>
                          <p className="text-sm font-bold uppercase tracking-tight">Line-haul Fleet V-904</p>
                          <p className="text-xs text-gray-500 font-bold uppercase tracking-widest">In-Transit to MEL</p>
@@ -160,7 +160,7 @@ export default function AdminLoadDetail() {
                        <button
                          key={m.key}
                          onClick={() => setDeliveryMode(m.key)}
-                         className={`flex-1 py-2 rounded-lg text-xs font-black uppercase tracking-[0.15em] transition-all ${
+                         className={`flex-1 py-2 rounded-lg text-xs font-semibold uppercase tracking-[0.15em] transition-all ${
                            deliveryMode === m.key ? 'bg-[#FFCC00] text-black shadow' : 'text-gray-500 hover:text-gray-300'
                          }`}
                        >{m.label}</button>
@@ -168,7 +168,7 @@ export default function AdminLoadDetail() {
                    </div>
                    <button 
                      onClick={() => setActiveStage(prev => Math.min(5, prev + 1))}
-                     className="w-full bg-[#FFCC00] hover:bg-yellow-400 text-black py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-lg shadow-yellow-400/10 transition-all flex items-center justify-center gap-2"
+                     className="w-full bg-[#FFCC00] hover:bg-yellow-400 text-black py-4 rounded-2xl font-semibold text-xs uppercase tracking-[0.2em] shadow-lg shadow-yellow-400/10 transition-all flex items-center justify-center gap-2"
                    >
                      Authorize Handover <ArrowLeft size={16} className="rotate-180" />
                    </button>
@@ -186,7 +186,7 @@ export default function AdminLoadDetail() {
           {/* Consignor and Consignee */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="card bg-white p-5 shadow-sm border border-gray-100 flex flex-col gap-3">
-              <h3 className="text-xs font-black uppercase tracking-widest text-gray-400">Consignor (Sender)</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400">Consignor (Sender)</h3>
               <div>
                 <p className="text-sm font-bold text-gray-900">Acme Corp Logistics</p>
                 <p className="text-xs text-gray-500 font-medium mt-1">Warehouse 4, 12 Botany Rd, Alexandria NSW 2015</p>
@@ -194,7 +194,7 @@ export default function AdminLoadDetail() {
               </div>
             </div>
             <div className="card bg-white p-5 shadow-sm border border-gray-100 flex flex-col gap-3">
-              <h3 className="text-xs font-black uppercase tracking-widest text-gray-400">Consignee (Receiver)</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400">Consignee (Receiver)</h3>
               <div>
                 <p className="text-sm font-bold text-gray-900">Tech Solutions Ltd</p>
                 <p className="text-xs text-gray-500 font-medium mt-1">1 Innovation Dr, Port Botany NSW 2036</p>
@@ -208,7 +208,7 @@ export default function AdminLoadDetail() {
              <div className="absolute inset-0 bg-[#0f172a]" style={{ backgroundImage: 'radial-gradient(#1e293b 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
              <p className="z-10 text-slate-500 font-bold tracking-widest uppercase text-sm flex items-center gap-2"><MapPin/> Map Vector Integration Zone</p>
              <div className="absolute bottom-4 right-4 bg-white/10 backdrop-blur-md border border-white/10 p-3 rounded-xl z-10 text-white shadow-xl">
-               <p className="text-xs font-black uppercase tracking-widest text-[#FACC15] mb-1">Driver Location</p>
+               <p className="text-xs font-semibold uppercase tracking-widest text-[#FACC15] mb-1">Driver Location</p>
                <p className="text-sm font-bold truncate max-w-[200px]">Hume Highway, Goulburn NSW</p>
                <p className="text-xs text-slate-300 mt-1">Updated 2m ago</p>
              </div>
@@ -217,20 +217,20 @@ export default function AdminLoadDetail() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Operational Actors */}
             <div className="card bg-white p-5 shadow-sm border border-gray-100 flex flex-col gap-4">
-              <h3 className="text-xs font-black uppercase tracking-widest text-gray-400">Assigned Logistics Node</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400">Assigned Logistics Node</h3>
               
               <div className="p-3 bg-gray-50 rounded-xl border border-gray-100 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center text-indigo-600 shrink-0"><Truck size={20}/></div>
                 <div>
-                  <p className="text-xs font-black uppercase text-gray-400 tracking-widest">Fleet Vehicle</p>
+                  <p className="text-xs font-semibold uppercase text-gray-400 tracking-widest">Fleet Vehicle</p>
                   <p className="text-sm font-bold text-gray-900 mt-0.5">XQG-984 (Volvo FH16)</p>
                 </div>
               </div>
 
               <div className="p-3 bg-gray-50 rounded-xl border border-gray-100 flex items-center gap-3 cursor-pointer hover:border-yellow-300 transition-all" onClick={() => navigate('/admin/drivers/DRV-102')}>
-                <div className="w-10 h-10 rounded-lg bg-yellow-400 flex items-center justify-center text-black font-black text-lg shrink-0">JT</div>
+                <div className="w-10 h-10 rounded-lg bg-yellow-400 flex items-center justify-center text-black font-semibold text-lg shrink-0">JT</div>
                 <div>
-                  <p className="text-xs font-black uppercase text-gray-400 tracking-widest">Operator</p>
+                  <p className="text-xs font-semibold uppercase text-gray-400 tracking-widest">Operator</p>
                   <p className="text-sm font-bold text-gray-900 mt-0.5">Jack Taylor (DRV-102)</p>
                 </div>
               </div>
@@ -238,23 +238,23 @@ export default function AdminLoadDetail() {
 
             {/* Load Metadata */}
             <div className="card bg-white p-5 shadow-sm border border-gray-100 flex flex-col gap-4">
-               <h3 className="text-xs font-black uppercase tracking-widest text-gray-400">Cargo Declaration</h3>
+               <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-400">Cargo Declaration</h3>
                <div className="space-y-4">
                  <div className="flex justify-between border-b border-gray-50 pb-2">
                    <span className="text-xs font-bold text-gray-500">Commodity</span>
-                   <span className="text-sm font-black text-gray-900">Electronics</span>
+                   <span className="text-sm font-semibold text-gray-900">Electronics</span>
                  </div>
                  <div className="flex justify-between border-b border-gray-50 pb-2">
                    <span className="text-xs font-bold text-gray-500">Weight & Vol</span>
-                   <span className="text-sm font-black text-gray-900">18.42t / 41 CBM</span>
+                   <span className="text-sm font-semibold text-gray-900">18.42t / 41 CBM</span>
                  </div>
                  <div className="flex justify-between border-b border-gray-50 pb-2">
                    <span className="text-xs font-bold text-gray-500">Requirements</span>
-                   <span className="text-xs font-black text-white bg-blue-600 px-2 py-0.5 rounded uppercase tracking-widest">Fragile</span>
+                   <span className="text-xs font-semibold text-white bg-blue-600 px-2 py-0.5 rounded uppercase tracking-widest">Fragile</span>
                  </div>
                  <div className="flex justify-between">
                    <span className="text-xs font-bold text-gray-500">Revenue</span>
-                   <span className="text-sm font-black text-green-600">$1,420.00</span>
+                   <span className="text-sm font-semibold text-green-600">$1,420.00</span>
                  </div>
                </div>
             </div>
@@ -274,17 +274,17 @@ export default function AdminLoadDetail() {
           </div>
           <div className="p-5 grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-4 bg-gray-50 rounded-lg border border-gray-100 flex flex-col gap-2">
-              <p className="text-xs font-black text-gray-400 uppercase tracking-widest">Condition Note</p>
+              <p className="hero-metadata">Condition Note</p>
               <p className="text-sm font-bold text-gray-900">Minor scratch on back-left corner. Packaging intact.</p>
               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Logged by Jack Taylor · 10:42 AM</span>
             </div>
             <div className="p-4 bg-red-50 rounded-lg border border-red-100 flex flex-col gap-2">
-              <p className="text-xs font-black text-red-500 uppercase tracking-widest">Damage Tag</p>
+              <p className="text-xs font-semibold text-red-500 uppercase tracking-widest">Damage Tag</p>
               <p className="text-sm font-bold text-gray-900">Pallet 3 — Fragile sticker damaged</p>
               <span className="text-xs font-bold text-red-400 uppercase tracking-widest">Awaiting Sync · Admin Review Required</span>
             </div>
             <div className="p-4 bg-blue-50 rounded-lg border border-blue-100 flex flex-col gap-2">
-              <p className="text-xs font-black text-blue-500 uppercase tracking-widest">Odometer Reading</p>
+              <p className="text-xs font-semibold text-blue-500 uppercase tracking-widest">Odometer Reading</p>
               <p className="text-sm font-bold text-gray-900">142,541 KM — Fuel Stop (Goulburn BP)</p>
               <span className="text-xs font-bold text-blue-400 uppercase tracking-widest">Fuel Expense $180.50 · Pending Approval</span>
             </div>
@@ -304,7 +304,7 @@ export default function AdminLoadDetail() {
                     <PackageCheck size={20}/>
                  </div>
                  <div>
-                   <h2 className="text-lg font-black text-white tracking-tight uppercase">Handover Protocol</h2>
+                   <h2 className="text-lg font-semibold text-white tracking-tight uppercase">Handover Protocol</h2>
                    <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-0.5">Secure Proof of Delivery</p>
                  </div>
               </div>
@@ -319,7 +319,7 @@ export default function AdminLoadDetail() {
                     <div className="w-20 h-20 bg-[#FFCC00] rounded-full flex items-center justify-center text-black mb-6 shadow-xl shadow-[#FFCC00]/20 animate-bounce">
                        <CheckCircle2 size={40} />
                     </div>
-                    <h3 className="text-2xl font-black text-gray-900 uppercase">Handover Authorized</h3>
+                    <h3 className="text-2xl font-semibold text-gray-900 uppercase">Handover Authorized</h3>
                     <p className="text-sm font-bold text-gray-500 mt-2 max-w-sm">Load officially marked as delivered. Documents forwarded to Audit Queue.</p>
                  </div>
               ) : (
@@ -328,10 +328,10 @@ export default function AdminLoadDetail() {
                     {/* Left Col: Receiver Details */}
                     <div className="space-y-5">
                        <div>
-                         <h4 className="text-xs font-black text-gray-900 uppercase tracking-widest border-b border-gray-100 pb-2 mb-4">Receiver Identity</h4>
+                         <h4 className="text-xs font-semibold text-gray-900 uppercase tracking-widest border-b border-gray-100 pb-2 mb-4">Receiver Identity</h4>
                        </div>
                        <div className="space-y-1.5">
-                         <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Authority Type</label>
+                         <label className="text-xs font-semibold text-gray-500 uppercase tracking-widest">Authority Type</label>
                          <select className="input appearance-none cursor-pointer pr-10">
                             <option>Direct Consignee</option>
                             <option>Authorized Representative</option>
@@ -339,11 +339,11 @@ export default function AdminLoadDetail() {
                          </select>
                        </div>
                        <div className="space-y-1.5">
-                         <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Full Name</label>
+                         <label className="text-xs font-semibold text-gray-500 uppercase tracking-widest">Full Name</label>
                          <input type="text" placeholder="John Doe" className="input" />
                        </div>
                        <div className="space-y-1.5">
-                         <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Govt ID / Verification PIN</label>
+                         <label className="text-xs font-semibold text-gray-500 uppercase tracking-widest">Govt ID / Verification PIN</label>
                          <input type="text" placeholder="e.g. NID, Passport, Booking PIN" className="input" />
                        </div>
                     </div>
@@ -351,11 +351,11 @@ export default function AdminLoadDetail() {
                     {/* Right Col: Evidence */}
                     <div className="space-y-5">
                        <div>
-                         <h4 className="text-xs font-black text-gray-900 uppercase tracking-widest border-b border-gray-100 pb-2 mb-4">Documentary Evidence</h4>
+                         <h4 className="text-xs font-semibold text-gray-900 uppercase tracking-widest border-b border-gray-100 pb-2 mb-4">Documentary Evidence</h4>
                        </div>
 
                        <div className="space-y-1.5">
-                         <label className="text-xs font-black text-gray-500 uppercase tracking-widest flex justify-between">
+                         <label className="text-xs font-semibold text-gray-500 uppercase tracking-widest flex justify-between">
                             Signed Manifest / Paperwork <span className="text-blue-500 font-bold">Recommended</span>
                          </label>
                          <div className="w-full h-24 bg-blue-50/50 border-2 border-dashed border-blue-200 hover:border-blue-400 rounded-xl flex flex-col items-center justify-center text-blue-500 transition-colors cursor-pointer group">
@@ -365,7 +365,7 @@ export default function AdminLoadDetail() {
                        </div>
 
                        <div className="space-y-1.5">
-                         <label className="text-xs font-black text-gray-500 uppercase tracking-widest">Digital E-Signature (Optional)</label>
+                         <label className="text-xs font-semibold text-gray-500 uppercase tracking-widest">Digital E-Signature (Optional)</label>
                          <div className="w-full h-24 bg-gray-50 border border-gray-200 rounded-xl relative hover:border-gray-400 transition-colors cursor-crosshair flex items-center justify-center group overflow-hidden">
                             <span className="text-xs font-bold text-gray-400 uppercase tracking-widest group-hover:opacity-0 transition-opacity">Draw Signature</span>
                             <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
@@ -388,7 +388,7 @@ export default function AdminLoadDetail() {
                           }, 1000);
                        }}
                        disabled={podStatus === 'submitting'}
-                       className="px-8 py-3 bg-[#111] hover:bg-black text-[#FFCC00] rounded-lg font-black text-sm uppercase tracking-widest transition-all shadow-xl shadow-black/20 disabled:opacity-50 flex justify-center items-center gap-2"
+                       className="px-8 py-3 bg-[#111] hover:bg-black text-[#FFCC00] rounded-lg font-semibold text-sm uppercase tracking-widest transition-all shadow-xl shadow-black/20 disabled:opacity-50 flex justify-center items-center gap-2"
                      >
                        {podStatus === 'submitting' ? <div className="w-5 h-5 border-2 border-[#FFCC00]/30 border-t-[#FFCC00] rounded-full animate-spin"/> : 'Authorize Handover'}
                      </button>
@@ -406,7 +406,7 @@ export default function AdminLoadDetail() {
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden animate-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-[#FAFAFA]">
               <div>
-                <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest">Shipping Label</h3>
+                <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-widest">Shipping Label</h3>
                 <p className="text-xs text-gray-400 font-bold mt-0.5">Ready to print</p>
               </div>
               <button onClick={() => setShowLabelModal(false)} className="p-2 rounded-full hover:bg-gray-200 text-gray-400 transition-colors"><X size={16}/></button>
@@ -417,15 +417,15 @@ export default function AdminLoadDetail() {
                 <div className="flex justify-between items-start">
                   <div>
                     <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">HERO LOGISTICS</p>
-                    <p className="text-xs font-black text-gray-900 uppercase tracking-widest mt-0.5">Priority Freight</p>
+                    <p className="text-xs font-semibold text-gray-900 uppercase tracking-widest mt-0.5">Priority Freight</p>
                   </div>
-                  <span className="text-xs font-black bg-[#FFCC00] text-black px-2 py-0.5 rounded">EXPRESS</span>
+                  <span className="text-xs font-semibold bg-[#FFCC00] text-black px-2 py-0.5 rounded">EXPRESS</span>
                 </div>
                 <div className="border-t border-dashed border-gray-300 pt-3">
                   <p className="text-xs text-gray-400 uppercase tracking-widest">FROM</p>
-                  <p className="text-sm font-black text-gray-900">Sydney Central Depot</p>
+                  <p className="text-sm font-semibold text-gray-900">Sydney Central Depot</p>
                   <p className="text-xs text-gray-500 mt-2 uppercase tracking-widest">TO</p>
-                  <p className="text-sm font-black text-gray-900">Melbourne Depot</p>
+                  <p className="text-sm font-semibold text-gray-900">Melbourne Depot</p>
                 </div>
                 {/* Barcode placeholder */}
                 <div className="border-t border-dashed border-gray-300 pt-3">
@@ -435,7 +435,7 @@ export default function AdminLoadDetail() {
                         style={{ width: i % 3 === 0 ? '3px' : '2px', height: `${48 - (i % 5) * 4}px` }} />
                     ))}
                   </div>
-                  <p className="text-center text-xs font-black tracking-[0.3em] text-gray-900 mt-1">{id || 'SHP-9000'}</p>
+                  <p className="text-center text-xs font-semibold tracking-[0.3em] text-gray-900 mt-1">{id || 'SHP-9000'}</p>
                 </div>
                 <div className="border-t border-dashed border-gray-300 pt-3 flex justify-between text-xs text-gray-400 uppercase tracking-widest">
                   <span>Weight: 18.4t</span>
@@ -457,5 +457,6 @@ export default function AdminLoadDetail() {
     </div>
   );
 }
+
 
 

@@ -51,12 +51,12 @@ export default function AdminAddBranch() {
               <div className="w-8 h-8 rounded-lg bg-[#FFCC00]/10 flex items-center justify-center text-[#FFCC00]">
                  <Info size={18}/>
               </div>
-              <h3 className="text-xs font-black uppercase tracking-widest text-gray-900">Branch Details</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-900">Branch Details</h3>
            </div>
            
            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                 <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Branch Name</label>
+                 <label className="text-xs font-semibold uppercase tracking-widest text-gray-400 ml-1">Branch Name</label>
                  <input 
                    required
                    placeholder="e.g. Sydney West Depot"
@@ -66,7 +66,7 @@ export default function AdminAddBranch() {
                  />
               </div>
               <div className="space-y-2">
-                 <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Branch Type</label>
+                 <label className="text-xs font-semibold uppercase tracking-widest text-gray-400 ml-1">Branch Type</label>
                  <select 
                    className="w-full border border-gray-200 rounded-xl px-5 py-3 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 focus:border-[#FFCC00] transition-all appearance-none"
                    value={formData.type}
@@ -79,7 +79,7 @@ export default function AdminAddBranch() {
                  </select>
               </div>
               <div className="md:col-span-2 space-y-2">
-                 <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Address</label>
+                 <label className="text-xs font-semibold uppercase tracking-widest text-gray-400 ml-1">Address</label>
                  <div className="relative">
                     <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={16}/>
                     <input 
@@ -100,12 +100,12 @@ export default function AdminAddBranch() {
               <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-500">
                  <UserCog size={18}/>
               </div>
-              <h3 className="text-xs font-black uppercase tracking-widest text-gray-900">Management</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-900">Management</h3>
            </div>
            
            <div className="space-y-6">
               <div className="space-y-2">
-                 <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Manager Name</label>
+                 <label className="text-xs font-semibold uppercase tracking-widest text-gray-400 ml-1">Manager Name</label>
                  <input 
                    required
                    placeholder="Enter full name"
@@ -115,7 +115,7 @@ export default function AdminAddBranch() {
                  />
               </div>
               <div className="space-y-2">
-                 <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Phone Number</label>
+                 <label className="text-xs font-semibold uppercase tracking-widest text-gray-400 ml-1">Phone Number</label>
                  <div className="relative">
                     <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={16}/>
                     <input 
@@ -135,12 +135,12 @@ export default function AdminAddBranch() {
               <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-500">
                  <Clock size={18}/>
               </div>
-              <h3 className="text-xs font-black uppercase tracking-widest text-gray-900">Capacity & Hours</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-gray-900">Capacity & Hours</h3>
            </div>
            
            <div className="space-y-6">
               <div className="space-y-2">
-                 <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Working Hours</label>
+                 <label className="text-xs font-semibold uppercase tracking-widest text-gray-400 ml-1">Working Hours</label>
                  <input 
                    placeholder="e.g. 24/7 or 06:00 - 22:00"
                    className="w-full border border-gray-200 rounded-xl px-5 py-3 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 focus:border-[#FFCC00] transition-all"
@@ -149,7 +149,7 @@ export default function AdminAddBranch() {
                  />
               </div>
               <div className="space-y-2">
-                 <label className="text-xs font-black uppercase tracking-widest text-gray-400 ml-1">Storage Space (SQM)</label>
+                 <label className="text-xs font-semibold uppercase tracking-widest text-gray-400 ml-1">Storage Space (SQM)</label>
                  <input 
                    type="number"
                    placeholder="Total square meters"
@@ -166,14 +166,14 @@ export default function AdminAddBranch() {
            <button 
              type="button"
              onClick={() => navigate('/admin/branches')}
-             className="px-8 py-3 rounded-xl font-black text-xs uppercase tracking-widest text-gray-500 hover:text-black hover:bg-gray-50 transition-all active:scale-95"
+             className="px-8 py-3 rounded-xl font-semibold text-xs uppercase tracking-widest text-gray-500 hover:text-black hover:bg-gray-50 transition-all active:scale-95"
            >
               Cancel
            </button>
            <button 
              type="submit"
              disabled={loading}
-             className={`px-10 py-3 rounded-xl font-black text-xs uppercase tracking-widest flex items-center gap-3 transition-all active:scale-95 ${loading ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-[#FFCC00] text-black shadow-lg shadow-[#FFCC00]/20 hover:shadow-[#FFCC00]/40 hover:bg-[#E6B800]'}`}
+             className={`px-10 py-3 rounded-xl font-semibold text-xs uppercase tracking-widest flex items-center gap-3 transition-all active:scale-95 ${loading ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-[#FFCC00] text-black shadow-lg shadow-[#FFCC00]/20 hover:shadow-[#FFCC00]/40 hover:bg-[#E6B800]'}`}
            >
               {loading ? (
                 <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
@@ -185,4 +185,5 @@ export default function AdminAddBranch() {
     </div>
   );
 }
+
 

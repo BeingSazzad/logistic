@@ -114,7 +114,7 @@ export default function AdminUsers() {
                   className="hover:bg-gray-50/80 transition-all cursor-pointer group border-l-4 border-l-transparent hover:border-l-[#FFCC00]">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-lg bg-[#111] flex items-center justify-center text-[#FFCC00] font-black text-xs shrink-0 border-2 border-transparent group-hover:border-[#FFCC00] transition-colors">
+                      <div className="w-9 h-9 rounded-lg bg-[#111] flex items-center justify-center text-[#FFCC00] font-semibold text-xs shrink-0 border-2 border-transparent group-hover:border-[#FFCC00] transition-colors">
                         {u.name.split(' ').map(n=>n[0]).join('')}
                       </div>
                       <div>
@@ -124,7 +124,7 @@ export default function AdminUsers() {
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`text-xs font-black px-2.5 py-1 rounded-md border uppercase tracking-widest ${roleColor(u.role)}`}>{u.role}</span>
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-md border uppercase tracking-widest ${roleColor(u.role)}`}>{u.role}</span>
                   </td>
                   <td className="px-6 py-4">
                     <span className="text-xs font-bold text-gray-600">{u.branch}</span>
@@ -141,13 +141,13 @@ export default function AdminUsers() {
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`text-xs font-black px-2.5 py-1 rounded-md border uppercase tracking-widest ${u.status === 'Active' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 'bg-gray-100 text-gray-500 border-gray-200'}`}>
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-md border uppercase tracking-widest ${u.status === 'Active' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 'bg-gray-100 text-gray-500 border-gray-200'}`}>
                       {u.status === 'Active' ? <span className="flex items-center gap-1"><CheckCircle2 size={10}/> {u.status}</span> : u.status}
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right">
                     <button onClick={e => { e.stopPropagation(); navigate(`/admin/users/${u.id}`); }}
-                      className="text-xs font-black border border-gray-200 text-gray-600 hover:bg-gray-50 px-3 py-1.5 rounded-lg transition-all uppercase tracking-widest">
+                      className="text-xs font-semibold border border-gray-200 text-gray-600 hover:bg-gray-50 px-3 py-1.5 rounded-lg transition-all uppercase tracking-widest">
                       Manage →
                     </button>
                   </td>
@@ -160,5 +160,6 @@ export default function AdminUsers() {
     </div>
   );
 }
+
 
 

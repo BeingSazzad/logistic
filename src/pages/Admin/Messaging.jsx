@@ -40,19 +40,19 @@ export default function AdminMessaging() {
            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Company Help Desk</h1>
            <p className="text-sm text-gray-500 font-medium">Internal support management for drivers and dispatchers.</p>
         </div>
-        <button className="btn btn-primary px-6 py-2.5 text-xs font-black uppercase tracking-widest shadow-lg flex items-center gap-2">
+        <button className="btn btn-primary px-6 py-2.5 text-xs font-semibold uppercase tracking-widest shadow-lg flex items-center gap-2">
            <Plus size={14} /> New Manual Ticket
         </button>
       </div>
 
       {solvedToast && (
         <div className="fixed top-24 right-8 bg-emerald-600 text-white px-6 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-3 border border-emerald-700">
-           <CheckCircle2 size={18} /> <p className="text-sm font-black uppercase tracking-widest">Ticket Marked Resolved</p>
+           <CheckCircle2 size={18} /> <p className="text-sm font-semibold uppercase tracking-widest">Ticket Marked Resolved</p>
         </div>
       )}
       {sentToast && (
         <div className="fixed top-24 right-8 bg-[#111] text-[#FFCC00] px-6 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-3 border border-white/10">
-           <Send size={18} /> <p className="text-sm font-black uppercase tracking-widest">Reply Sent</p>
+           <Send size={18} /> <p className="text-sm font-semibold uppercase tracking-widest">Reply Sent</p>
         </div>
       )}
 
@@ -76,7 +76,7 @@ export default function AdminMessaging() {
                   className={`p-6 cursor-pointer transition-all hover:bg-white relative ${selectedTicket?.id === t.id ? 'bg-white shadow-[inset_4px_0_0_0_#FACC15]' : ''}`}
                 >
                    <div className="flex justify-between items-start mb-2">
-                      <span className="text-xs text-gray-400 font-black uppercase tracking-widest">{t.id}</span>
+                      <span className="text-xs text-gray-400 font-semibold uppercase tracking-widest">{t.id}</span>
                       <span className="text-xs text-gray-400 font-bold">{t.time}</span>
                    </div>
                    <h4 className="text-sm font-bold text-gray-900 mb-1 leading-tight">{t.issue}</h4>
@@ -86,7 +86,7 @@ export default function AdminMessaging() {
                          <span className="text-xs font-bold text-gray-500">{t.user}</span>
                       </div>
                       <span className="w-1 h-1 bg-gray-200 rounded-full"></span>
-                      <span className={`text-xs font-black uppercase px-2 py-0.5 rounded-full ${t.priority === 'High' ? 'bg-red-50 text-red-600' : 'bg-gray-50 text-gray-600'}`}>{t.priority}</span>
+                      <span className={`text-xs font-semibold uppercase px-2 py-0.5 rounded-full ${t.priority === 'High' ? 'bg-red-50 text-red-600' : 'bg-gray-50 text-gray-600'}`}>{t.priority}</span>
                    </div>
                 </div>
               ))}
@@ -102,13 +102,13 @@ export default function AdminMessaging() {
                     {selectedTicket.status === 'Resolved' ? <CheckCircle2 size={24} /> : <AlertCircle size={24} />}
                  </div>
                  <div>
-                    <h3 className="text-lg font-black text-gray-900 tracking-tight">{selectedTicket.issue}</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 tracking-tight">{selectedTicket.issue}</h3>
                     <p className="text-xs text-gray-500 font-bold uppercase tracking-widest">{selectedTicket.user} • {selectedTicket.role}</p>
                  </div>
               </div>
               <div className="flex gap-2">
                  <button className="p-2.5 border border-gray-100 hover:bg-gray-50 rounded-xl text-gray-400 transition-colors"><Phone size={18} /></button>
-                 <button onClick={handleMarkSolved} disabled={selectedTicket.status === 'Resolved'} className="btn btn-dark text-xs font-black uppercase tracking-widest px-6 shadow-sm disabled:opacity-40 disabled:cursor-not-allowed">Mark Solved</button>
+                 <button onClick={handleMarkSolved} disabled={selectedTicket.status === 'Resolved'} className="btn btn-dark text-xs font-semibold uppercase tracking-widest px-6 shadow-sm disabled:opacity-40 disabled:cursor-not-allowed">Mark Solved</button>
               </div>
            </div>
 
@@ -130,7 +130,7 @@ export default function AdminMessaging() {
               </div>
 
               <div className="text-center my-4">
-                 <span className="text-xs font-black uppercase tracking-[0.2em] text-gray-300">New message below</span>
+                 <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-300">New message below</span>
               </div>
            </div>
 
@@ -144,7 +144,7 @@ export default function AdminMessaging() {
                    className="input w-full min-h-[100px] resize-none pb-14 text-sm font-medium focus:bg-white focus:border-yellow-400 shadow-inner rounded-3xl"
                  />
                  <div className="absolute bottom-4 right-4 flex gap-3">
-                    <button onClick={handleSendReply} className="bg-[#111] hover:bg-black text-[#FACC15] px-6 py-2.5 rounded-2xl shadow-xl flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-all active:scale-95">
+                    <button onClick={handleSendReply} className="bg-[#111] hover:bg-black text-[#FACC15] px-6 py-2.5 rounded-2xl shadow-xl flex items-center gap-2 text-xs font-semibold uppercase tracking-widest transition-all active:scale-95">
                        <Send size={14} /> Send Reply
                     </button>
                  </div>
@@ -156,4 +156,5 @@ export default function AdminMessaging() {
     </div>
   );
 }
+
 

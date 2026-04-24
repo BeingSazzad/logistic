@@ -309,7 +309,7 @@ export default function PlatformDashboard() {
                                  <p className="text-xs font-medium text-gray-500 mt-0.5">{item.pct}% of total</p>
                              </div>
                          </div>
-                         <p className="text-lg font-black text-gray-900 tracking-tight">{item.price}<span className="text-xs font-semibold text-gray-600">/mo</span></p>
+                         <p className="text-lg font-semibold text-gray-900 tracking-tight">{item.price}<span className="text-xs font-semibold text-gray-600">/mo</span></p>
                      </div>
                      <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden shadow-inner">
                          <div className={`h-full rounded-full transition-all duration-1000 ${item.color}`} style={{ width: `${item.pct}%` }}></div>
@@ -324,4 +324,5 @@ export default function PlatformDashboard() {
     </div>
   );
 }
+
 

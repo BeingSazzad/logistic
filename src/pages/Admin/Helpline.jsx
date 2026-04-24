@@ -87,12 +87,12 @@ export default function AdminHelpline() {
                         <ArrowLeft size={16} />
                       </button>
                       <div>
-                        <h3 className="text-lg font-black text-gray-900">{selectedTicket.title}</h3>
+                        <h3 className="text-lg font-semibold text-gray-900">{selectedTicket.title}</h3>
                         <p className="text-xs font-bold text-gray-500">{selectedTicket.id} · {selectedTicket.user || 'HERO Support'}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className={`text-xs font-black uppercase tracking-widest px-3 py-1 rounded-md border ${
+                      <span className={`text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-md border ${
                         selectedTicket.status === 'Solved' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 
                         selectedTicket.status === 'Open' ? 'bg-red-50 text-red-600 border-red-100' : 'bg-amber-50 text-amber-600 border-amber-100'
                       }`}>
@@ -129,7 +129,7 @@ export default function AdminHelpline() {
                     </div>
                     
                     <div className="flex gap-4 flex-row-reverse">
-                      <div className="w-8 h-8 rounded-full bg-[#FFCC00] flex items-center justify-center text-black shrink-0 font-black text-xs uppercase">
+                      <div className="w-8 h-8 rounded-full bg-[#FFCC00] flex items-center justify-center text-black shrink-0 font-semibold text-xs uppercase">
                         ME
                       </div>
                       <div className="bg-gray-900 text-white rounded-2xl rounded-tr-sm p-4 text-sm font-medium max-w-[85%] shadow-md">
@@ -153,7 +153,7 @@ export default function AdminHelpline() {
                 </>
               ) : (
                 <>
-                  <h3 className="text-lg font-black text-gray-900 mb-6 shrink-0">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-6 shrink-0">
                     {activeFlow === 'team' ? 'Manage Internal Tickets' : 'Contact HERO Support'}
                   </h3>
                   
@@ -164,13 +164,13 @@ export default function AdminHelpline() {
                         <div key={t.id} onClick={() => setSelectedTicket(t)} className="p-5 border border-gray-100 rounded-xl flex items-center justify-between hover:border-gray-900 transition-colors cursor-pointer group">
                           <div>
                             <div className="flex items-center gap-2 mb-1">
-                              <span className="text-xs font-black text-white bg-gray-900 px-2 py-0.5 rounded uppercase tracking-widest">{t.id}</span>
+                              <span className="text-xs font-semibold text-white bg-gray-900 px-2 py-0.5 rounded uppercase tracking-widest">{t.id}</span>
                               <span className="text-xs font-bold text-gray-400">{t.date}</span>
                             </div>
                             <p className="text-sm font-bold text-gray-900 group-hover:text-black">{t.title}</p>
                             <p className="text-xs text-gray-500 mt-1 flex items-center gap-1.5"><Users size={12}/> {t.user}</p>
                           </div>
-                          <span className={`text-xs font-black uppercase tracking-widest px-3 py-1 rounded-md border ${
+                          <span className={`text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-md border ${
                             t.status === 'Open' ? 'bg-red-50 text-red-600 border-red-100' : 'bg-amber-50 text-amber-600 border-amber-100'
                           }`}>
                             {t.status}
@@ -182,7 +182,7 @@ export default function AdminHelpline() {
                     <div className="flex flex-col h-full">
                        <div className="flex-1 space-y-5">
                          <div>
-                            <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-1.5 ml-1">Subject / Issue Area</label>
+                            <label className="hero-metadata block mb-1.5 ml-1">Subject / Issue Area</label>
                             <input 
                               type="text" 
                               value={subject}
@@ -192,7 +192,7 @@ export default function AdminHelpline() {
                             />
                          </div>
                          <div>
-                            <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-1.5 ml-1">Detailed Description</label>
+                            <label className="hero-metadata block mb-1.5 ml-1">Detailed Description</label>
                             <textarea 
                               value={message}
                               onChange={(e) => setMessage(e.target.value)}
@@ -217,7 +217,7 @@ export default function AdminHelpline() {
         {/* Right: History & Info */}
         <div className="space-y-6">
            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 overflow-hidden h-[300px] flex flex-col">
-              <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4 shrink-0">Ticket History</h3>
+              <h3 className="hero-metadata mb-4 shrink-0">Ticket History</h3>
               <div className="space-y-3 overflow-y-auto pr-2 flex-1">
                  {tickets.map(t => (
                    <div key={t.id} onClick={() => setSelectedTicket(t)} className="p-3 rounded-xl border border-gray-50 hover:bg-gray-50 transition-colors cursor-pointer group">
@@ -226,7 +226,7 @@ export default function AdminHelpline() {
                          <span className="text-xs font-medium text-gray-500">{t.date}</span>
                       </div>
                       <p className="text-xs font-bold text-gray-800 group-hover:text-blue-600 transition-colors mb-2 leading-tight line-clamp-1">{t.title}</p>
-                      <span className={`text-xs font-black uppercase tracking-widest px-2 py-0.5 rounded border ${
+                      <span className={`text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded border ${
                         t.status === 'Solved' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-gray-50 text-gray-600 border-gray-200'
                       }`}>
                          {t.status}
@@ -243,7 +243,7 @@ export default function AdminHelpline() {
                       <HeadphonesIcon size={20} />
                    </div>
                    <div>
-                     <h3 className="font-black text-white text-sm">Direct Contact</h3>
+                     <h3 className="font-semibold text-white text-sm">Direct Contact</h3>
                      <p className="text-xs font-medium text-gray-500 uppercase tracking-widest">Enterprise Support</p>
                    </div>
                 </div>
@@ -252,14 +252,14 @@ export default function AdminHelpline() {
                      <Phone size={16} className="text-gray-400" />
                      <div>
                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Priority Hotline</p>
-                       <p className="text-sm font-black text-white">+1 (800) 555-0199</p>
+                       <p className="text-sm font-semibold text-white">+1 (800) 555-0199</p>
                      </div>
                    </div>
                    <div className="flex items-center gap-3 bg-gray-800 p-3 rounded-xl border border-gray-700 hover:border-gray-600 cursor-pointer transition-colors">
                      <Mail size={16} className="text-gray-400" />
                      <div>
                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Email Support</p>
-                       <p className="text-sm font-black text-white">support@hero.com</p>
+                       <p className="text-sm font-semibold text-white">support@hero.com</p>
                      </div>
                    </div>
                 </div>
@@ -271,5 +271,6 @@ export default function AdminHelpline() {
     </div>
   );
 }
+
 
 

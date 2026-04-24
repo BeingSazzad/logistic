@@ -27,7 +27,7 @@ export default function PlatformAnalytics() {
           <div key={s.label} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex items-center justify-between group">
             <div>
                <p className="text-xs text-gray-400 uppercase font-bold tracking-widest">{s.label}</p>
-               <p className="text-2xl font-black text-gray-900 mt-0.5">{s.value}</p>
+               <p className="text-2xl font-semibold text-gray-900 mt-0.5">{s.value}</p>
                <p className={`text-xs font-bold mt-1 ${s.up ? 'text-emerald-500' : 'text-red-500'}`}>{s.delta}</p>
             </div>
             <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-gray-50 text-gray-400"><s.icon size={20} /></div>
@@ -99,4 +99,5 @@ export default function PlatformAnalytics() {
     </div>
   );
 }
+
 

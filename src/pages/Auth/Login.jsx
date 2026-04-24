@@ -126,7 +126,7 @@ export default function Login() {
 
           <form onSubmit={handleLogin} className="flex flex-col gap-6">
             <div>
-              <label className="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2 ml-1">Email Address</label>
+              <label className="block hero-metadata mb-2 ml-1">Email Address</label>
               <input 
                 type="email" 
                 defaultValue="sarah@hero.com" 
@@ -138,7 +138,7 @@ export default function Login() {
 
             <div>
               <div className="flex justify-between items-center mb-2 ml-1">
-                <label className="text-xs font-black text-gray-400 uppercase tracking-widest">Password</label>
+                <label className="hero-metadata">Password</label>
                 <a href="#" className="text-xs text-yellow-600 font-bold hover:underline">Forgot password?</a>
               </div>
               <div className="relative">
@@ -160,7 +160,7 @@ export default function Login() {
             </div>
 
             <div>
-              <label className="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2 ml-1">Select Your Role</label>
+              <label className="block hero-metadata mb-2 ml-1">Select Your Role</label>
               <div className="relative">
                 <select 
                   value={role} 
@@ -192,3 +192,4 @@ export default function Login() {
     </div>
   );
 }
+

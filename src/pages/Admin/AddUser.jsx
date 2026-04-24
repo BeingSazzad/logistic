@@ -50,11 +50,11 @@ export default function AdminInviteUser() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
             <div className="p-5 border-b border-gray-100 bg-gray-50/50 flex items-center gap-3">
               <UserCog className="text-[#FFCC00]" size={18} />
-              <h2 className="text-xs font-black text-gray-500 uppercase tracking-widest">User Profile</h2>
+              <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-widest">User Profile</h2>
             </div>
             <div className="p-6 flex flex-col gap-5">
               <div>
-                <label className="block text-xs font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Full Name</label>
+                <label className="block hero-metadata mb-1.5 ml-1">Full Name</label>
                 <div className="relative group">
                   <UserCog className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#FFCC00] transition-colors" size={15}/>
                   <input type="text" placeholder="e.g. Liam Smith"
@@ -62,7 +62,7 @@ export default function AdminInviteUser() {
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Work Email</label>
+                <label className="block hero-metadata mb-1.5 ml-1">Work Email</label>
                 <div className="relative group">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#FFCC00] transition-colors" size={15}/>
                   <input type="email" placeholder="user@company.com"
@@ -70,7 +70,7 @@ export default function AdminInviteUser() {
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Assigned Branch</label>
+                <label className="block hero-metadata mb-1.5 ml-1">Assigned Branch</label>
                 <div className="relative">
                   <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={15}/>
                   <select value={selectedBranch} onChange={e => setSelectedBranch(e.target.value)}
@@ -86,8 +86,8 @@ export default function AdminInviteUser() {
           {/* Access summary */}
           <div className="bg-[#111] rounded-xl p-5 text-white border border-gray-800 relative overflow-hidden">
             <div className="absolute -right-4 -top-4 w-24 h-24 bg-[#FFCC00]/10 rounded-full blur-2xl pointer-events-none"/>
-            <p className="text-xs font-black text-[#FFCC00] uppercase tracking-widest mb-2 relative z-10">Selected Role</p>
-            <p className="text-base font-black text-white relative z-10">{ROLES.find(r => r.id === selectedRole)?.label}</p>
+            <p className="text-xs font-semibold text-[#FFCC00] uppercase tracking-widest mb-2 relative z-10">Selected Role</p>
+            <p className="text-base font-semibold text-white relative z-10">{ROLES.find(r => r.id === selectedRole)?.label}</p>
             <p className="text-xs text-gray-400 font-bold mt-1 relative z-10">{ROLES.find(r => r.id === selectedRole)?.access}</p>
             <p className="text-xs text-gray-500 mt-3 leading-relaxed relative z-10">{ROLES.find(r => r.id === selectedRole)?.desc}</p>
           </div>
@@ -99,7 +99,7 @@ export default function AdminInviteUser() {
             <div className="p-5 border-b border-gray-100 bg-gray-50/50 flex items-center gap-3">
               <Shield className="text-gray-400" size={18} />
               <div>
-                <h2 className="text-xs font-black text-gray-500 uppercase tracking-widest">Role & Access Matrix</h2>
+                <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-widest">Role & Access Matrix</h2>
                 <p className="text-xs text-gray-400 mt-0.5 font-medium">Access is scoped to the assigned branch unless set to All Branches.</p>
               </div>
             </div>
@@ -117,7 +117,7 @@ export default function AdminInviteUser() {
                       <div className="absolute -right-4 -top-4 w-24 h-24 bg-[#FFCC00]/10 rounded-full blur-2xl pointer-events-none"/>
                     )}
                     <div className="flex justify-between items-start relative z-10">
-                      <span className={`text-sm font-black tracking-wide ${isSelected && r.dark ? 'text-white' : 'text-gray-900'}`}>
+                      <span className={`text-sm font-semibold tracking-wide ${isSelected && r.dark ? 'text-white' : 'text-gray-900'}`}>
                         {r.label}
                       </span>
                       <div className={`w-5 h-5 rounded-full border-2 shrink-0 transition-all flex items-center justify-center ${
@@ -133,7 +133,7 @@ export default function AdminInviteUser() {
                     <p className={`text-xs leading-relaxed font-medium relative z-10 ${isSelected && r.dark ? 'text-gray-400' : 'text-gray-500'}`}>
                       {r.desc}
                     </p>
-                    <div className={`text-xs font-black uppercase tracking-widest px-2 py-0.5 rounded w-fit relative z-10 ${
+                    <div className={`text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded w-fit relative z-10 ${
                       isSelected && r.dark ? 'bg-[#FFCC00]/20 text-[#FFCC00]' : 'bg-gray-100 text-gray-500'
                     }`}>
                       {r.access}
@@ -149,5 +149,6 @@ export default function AdminInviteUser() {
     </div>
   );
 }
+
 
 

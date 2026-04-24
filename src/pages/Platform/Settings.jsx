@@ -64,10 +64,10 @@ export default function PlatformSettings() {
                 <div className="p-8 flex flex-col md:flex-row gap-10">
                    <div className="flex flex-col items-center gap-4">
                       <div className="w-32 h-32 rounded-2xl bg-[#111] flex flex-col items-center justify-center text-[#FFCC00] relative group cursor-pointer overflow-hidden border-4 border-white shadow-xl">
-                         <span className="text-4xl font-black">PO</span>
+                         <span className="text-4xl font-semibold">PO</span>
                          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center">
                             <Camera size={24} className="text-white mb-1" />
-                            <span className="text-xs text-white font-black uppercase">Upload</span>
+                            <span className="text-xs text-white font-semibold uppercase">Upload</span>
                          </div>
                       </div>
                       <p className="text-xs font-bold text-emerald-500 flex items-center gap-1">
@@ -104,7 +104,7 @@ export default function PlatformSettings() {
                          <label className="text-xs font-bold text-gray-400 uppercase tracking-widest px-1 leading-none">Platform Logo</label>
                          <div className="aspect-video w-full rounded-2xl bg-[#111] border-2 border-dashed border-gray-800 flex flex-col items-center justify-center text-gray-500 group hover:border-[#FFCC00] transition-colors cursor-pointer relative">
                             <Zap size={32} className="text-[#FFCC00] mb-2" />
-                            <span className="text-xs font-black uppercase tracking-widest">HERO LOGISTICS</span>
+                            <span className="text-xs font-semibold uppercase tracking-widest">HERO LOGISTICS</span>
                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center transition-opacity rounded-2xl">
                                <Camera size={20} className="text-white mb-1" />
                             </div>
@@ -231,10 +231,10 @@ export default function PlatformSettings() {
                    ].map((t, i) => (
                      <div key={i} className="p-6 flex items-center justify-between hover:bg-gray-50/50 transition-colors">
                         <div className="flex items-center gap-4">
-                           <div className="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center font-black text-[#FFCC00]">{t.name.split(' ').map(n=>n[0]).join('')}</div>
+                           <div className="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center font-semibold text-[#FFCC00]">{t.name.split(' ').map(n=>n[0]).join('')}</div>
                            <div>
-                              <p className="font-black text-gray-900 text-sm leading-none mb-1">{t.name}</p>
-                              <p className="text-xs font-black text-gray-400 uppercase">{t.role} · {t.email}</p>
+                              <p className="font-semibold text-gray-900 text-sm leading-none mb-1">{t.name}</p>
+                              <p className="text-xs font-semibold text-gray-400 uppercase">{t.role} · {t.email}</p>
                            </div>
                         </div>
                         <button className="text-xs font-bold text-red-500 hover:underline">Remove</button>
@@ -272,4 +272,5 @@ export default function PlatformSettings() {
     </div>
   );
 }
+
 

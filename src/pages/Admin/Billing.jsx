@@ -36,8 +36,8 @@ export default function AdminBilling() {
                 </div>
                 <div className="relative z-10 flex justify-between items-start">
                   <div>
-                    <span className="bg-[#FFCC00] text-black text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full mb-4 inline-block">Active Plan</span>
-                    <h2 className="text-3xl font-black mb-1">Enterprise Fleet</h2>
+                    <span className="bg-[#FFCC00] text-black text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-4 inline-block">Active Plan</span>
+                    <h2 className="text-3xl font-semibold mb-1">Enterprise Fleet</h2>
                     <p className="text-gray-400 text-sm font-medium">Billed annually at $12,000/yr</p>
                   </div>
                   <div className="text-right">
@@ -47,7 +47,7 @@ export default function AdminBilling() {
                 </div>
              </div>
              <div className="p-8">
-                <h3 className="text-sm font-black text-gray-900 uppercase tracking-widest mb-6">Plan Inclusions</h3>
+                <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-widest mb-6">Plan Inclusions</h3>
                 <div className="grid grid-cols-2 gap-y-4 gap-x-8">
                   {[
                     'Unlimited Branches & Warehouses',
@@ -79,7 +79,7 @@ export default function AdminBilling() {
 
           <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-8 flex justify-between items-center">
              <div>
-                <h3 className="text-lg font-black text-gray-900 mb-1">Cancellation</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">Cancellation</h3>
                 <p className="text-sm font-medium text-gray-500">You can cancel or pause your subscription at any time.</p>
              </div>
              <button className="btn bg-white border border-gray-200 text-red-600 hover:bg-red-50 hover:border-red-200 px-6 font-bold shadow-sm">
@@ -91,7 +91,7 @@ export default function AdminBilling() {
         {/* Payment Method & Invoices */}
         <div className="space-y-6">
            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 relative overflow-hidden">
-              <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-6">Payment Method</h3>
+              <h3 className="hero-metadata mb-6">Payment Method</h3>
               
               <div className="bg-gray-900 text-white rounded-2xl p-5 mb-6 relative hover:scale-[1.02] transition-transform cursor-pointer shadow-xl border border-gray-800">
                 <div className="flex justify-between items-start mb-8">
@@ -115,7 +115,7 @@ export default function AdminBilling() {
            </div>
 
            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
-              <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4">Billing History</h3>
+              <h3 className="hero-metadata mb-4">Billing History</h3>
               <div className="space-y-3">
                  {[
                    { date: '14 Sep 2025', amt: '$12,000.00', stat: 'Paid' },
@@ -126,7 +126,7 @@ export default function AdminBilling() {
                        <p className="text-sm font-bold text-gray-900">{inv.amt}</p>
                        <p className="text-xs font-medium text-gray-500">{inv.date}</p>
                      </div>
-                     <span className="text-xs font-black uppercase tracking-widest text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">
+                     <span className="text-xs font-semibold uppercase tracking-widest text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">
                        {inv.stat}
                      </span>
                    </div>
@@ -139,5 +139,6 @@ export default function AdminBilling() {
     </div>
   );
 }
+
 
 

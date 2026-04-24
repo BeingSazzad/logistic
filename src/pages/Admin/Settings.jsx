@@ -37,7 +37,7 @@ export default function AdminSettings() {
             
             <div className="shrink-0 flex flex-col justify-center items-center gap-4">
                <div className="w-32 h-32 rounded-full bg-gray-100 border-4 border-white shadow-lg overflow-hidden relative group cursor-pointer">
-                  <div className="absolute inset-0 bg-[#FFCC00] flex items-center justify-center text-4xl font-black text-black">
+                  <div className="absolute inset-0 bg-[#FFCC00] flex items-center justify-center text-4xl font-semibold text-black">
                      MA
                   </div>
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all">
@@ -52,15 +52,15 @@ export default function AdminSettings() {
 
             <div className="flex-1 flex flex-col gap-6">
               <div>
-                <label className="text-xs font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1">Full Name</label>
+                <label className="text-xs font-semibold text-gray-500 uppercase tracking-widest block mb-2 ml-1">Full Name</label>
                 <input type="text" className="input w-full md:w-3/4" defaultValue="Michael Adams" />
               </div>
               <div>
-                <label className="text-xs font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1">Contact Number</label>
+                <label className="text-xs font-semibold text-gray-500 uppercase tracking-widest block mb-2 ml-1">Contact Number</label>
                 <input type="tel" className="input w-full md:w-3/4" defaultValue="+61 412 345 678" />
               </div>
               <div className="pt-2 border-t border-gray-100">
-                <label className="text-xs font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1 flex items-center gap-1.5">
+                <label className="text-xs font-semibold text-gray-500 uppercase tracking-widest block mb-2 ml-1 flex items-center gap-1.5">
                   <Mail size={12} /> Login Email
                 </label>
                 <input 
@@ -87,15 +87,15 @@ export default function AdminSettings() {
           </div>
           <div className="p-8 space-y-6 max-w-lg">
             <div>
-              <label className="text-xs font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1">Current Password</label>
+              <label className="text-xs font-semibold text-gray-500 uppercase tracking-widest block mb-2 ml-1">Current Password</label>
               <input type="password" className="input w-full" placeholder="••••••••" />
             </div>
             <div>
-              <label className="text-xs font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1">New Password</label>
+              <label className="text-xs font-semibold text-gray-500 uppercase tracking-widest block mb-2 ml-1">New Password</label>
               <input type="password" className="input w-full" placeholder="New Password" />
             </div>
             <div>
-              <label className="text-xs font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1">Confirm New Password</label>
+              <label className="text-xs font-semibold text-gray-500 uppercase tracking-widest block mb-2 ml-1">Confirm New Password</label>
               <input type="password" className="input w-full" placeholder="Confirm Password" />
             </div>
             <button className="btn bg-gray-900 hover:bg-black text-white px-8 mt-4">
@@ -108,4 +108,5 @@ export default function AdminSettings() {
     </div>
   );
 }
+
 

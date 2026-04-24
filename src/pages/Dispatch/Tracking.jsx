@@ -99,7 +99,7 @@ export default function DispatchTracking() {
                      </div>
                   </div>
                   <div className="text-right">
-                     <span className={`text-xs font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${v.status === 'Moving' ? 'bg-emerald-50 text-emerald-600' : 'bg-gray-100 text-gray-500'}`}>{v.status}</span>
+                     <span className={`text-xs font-semibold uppercase tracking-widest px-2 py-0.5 rounded-full ${v.status === 'Moving' ? 'bg-emerald-50 text-emerald-600' : 'bg-gray-100 text-gray-500'}`}>{v.status}</span>
                      <p className="text-xs font-medium text-gray-400 mt-1 truncate max-w-[120px]">{v.loc}</p>
                   </div>
                 </div>
@@ -143,8 +143,8 @@ export default function DispatchTracking() {
                     <Bell size={16} />
                  </button>
                  <div className="bg-white border border-gray-200 rounded-hero-sm flex shadow-sm overflow-hidden">
-                    <button className="w-10 h-10 flex items-center justify-center text-gray-700 hover:bg-gray-50 transition-all font-black border-r border-gray-100 text-lg">+</button>
-                    <button className="w-10 h-10 flex items-center justify-center text-gray-700 hover:bg-gray-50 transition-all font-black text-lg">-</button>
+                    <button className="w-10 h-10 flex items-center justify-center text-gray-700 hover:bg-gray-50 transition-all font-semibold border-r border-gray-100 text-lg">+</button>
+                    <button className="w-10 h-10 flex items-center justify-center text-gray-700 hover:bg-gray-50 transition-all font-semibold text-lg">-</button>
                  </div>
               </div>
            </div>
@@ -159,7 +159,7 @@ export default function DispatchTracking() {
                    <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
                         <h4 className="text-sm font-semibold text-gray-900 truncate">{selectedVehicle.driver}</h4>
-                        <span className="text-xs font-black text-gray-500 px-2 py-0.5 bg-gray-100 rounded-full">{selectedVehicle.id}</span>
+                        <span className="text-xs font-semibold text-gray-500 px-2 py-0.5 bg-gray-100 rounded-full">{selectedVehicle.id}</span>
                       </div>
                       <p className="text-gray-400 text-xs font-medium mb-3 flex items-center gap-1.5 truncate">
                         <MapPin size={12} className="text-gray-300"/> {selectedVehicle.loc}
@@ -172,13 +172,13 @@ export default function DispatchTracking() {
                          ].map((item, i) => (
                            <div key={i} className="flex items-center gap-1.5">
                               <item.icon size={12} className="text-gray-400"/>
-                              <span className="text-xs font-black uppercase tracking-widest text-gray-600">{item.val}</span>
+                              <span className="text-xs font-semibold uppercase tracking-widest text-gray-600">{item.val}</span>
                            </div>
                          ))}
                       </div>
                    </div>
                    <div className="flex items-center gap-3">
-                      <button className="bg-brand hover:bg-brand-hover text-black px-5 py-2.5 rounded-hero-sm font-black text-xs uppercase tracking-widest shadow-sm transition-all">
+                      <button className="bg-brand hover:bg-brand-hover text-black px-5 py-2.5 rounded-hero-sm font-semibold text-xs uppercase tracking-widest shadow-sm transition-all">
                          Comm
                       </button>
                       <button 
@@ -197,5 +197,6 @@ export default function DispatchTracking() {
     </div>
   );
 }
+
 
 

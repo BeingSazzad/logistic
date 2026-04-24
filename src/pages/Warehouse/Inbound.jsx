@@ -87,14 +87,14 @@ function ReceiveVehicleModal({ handover, onClose, onConfirm }) {
            {/* Smart Scanner Simulation */}
            <div className={`border-2 rounded-3xl p-6 shadow-inner transition-all ${scanStatus.state === 'error' ? 'bg-red-50 border-red-200' : scanStatus.state === 'warning' ? 'bg-yellow-50 border-yellow-200' : scanStatus.state === 'success' ? 'bg-emerald-50 border-emerald-200' : 'bg-[#111] border-gray-800'}`}>
              <div className="flex justify-between items-center mb-3">
-               <label className="text-xs font-black uppercase text-gray-500 tracking-[0.2em] block">VIN Optical Scan Simulation</label>
-               <span className={`text-xs font-black uppercase tracking-widest ${scanStatus.state === 'error' ? 'text-red-400' : scanStatus.state === 'warning' ? 'text-yellow-400' : scanStatus.state === 'success' ? 'text-emerald-400' : 'text-gray-600'}`}>
+               <label className="text-xs font-semibold uppercase text-gray-500 tracking-[0.2em] block">VIN Optical Scan Simulation</label>
+               <span className={`text-xs font-semibold uppercase tracking-widest ${scanStatus.state === 'error' ? 'text-red-400' : scanStatus.state === 'warning' ? 'text-yellow-400' : scanStatus.state === 'success' ? 'text-emerald-400' : 'text-gray-600'}`}>
                   {scanStatus.msg || 'Awaiting Hardware Pulse...'}
                </span>
              </div>
              <div className="relative group">
                <Scan className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-[#FFCC00] transition-colors" size={20} />
-               <input type="text" autoFocus value={scanInput} onChange={e => setScanInput(e.target.value)} onKeyDown={handleScan} placeholder="SCAN VIN BARCODE..." className="w-full bg-black/40 border border-white/5 rounded-2xl py-4.5 pl-14 pr-4 text-sm font-black text-[#FFCC00] focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/50 shadow-2xl transition-all uppercase tracking-[0.1em]" />
+               <input type="text" autoFocus value={scanInput} onChange={e => setScanInput(e.target.value)} onKeyDown={handleScan} placeholder="SCAN VIN BARCODE..." className="w-full bg-black/40 border border-white/5 rounded-2xl py-4.5 pl-14 pr-4 text-sm font-semibold text-[#FFCC00] focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/50 shadow-2xl transition-all uppercase tracking-[0.1em]" />
              </div>
            </div>
 
@@ -133,16 +133,16 @@ function ReceiveVehicleModal({ handover, onClose, onConfirm }) {
                                 <Car size={20} />
                              </div>
                              <div>
-                               <p className={`font-mono font-black text-sm tracking-widest ${isScanned ? 'text-emerald-900' : exc ? 'text-red-900' : 'text-gray-900'}`}>{id}</p>
+                               <p className={`font-mono font-semibold text-sm tracking-widest ${isScanned ? 'text-emerald-900' : exc ? 'text-red-900' : 'text-gray-900'}`}>{id}</p>
                                <p className="text-xs font-medium text-gray-500 mt-1">
                                   {isScanned ? 'Marked In-Depot' : exc ? `Status: ${exc}` : 'Awaiting Check-in'}
                                </p>
                              </div>
                           </div>
                           <div className="flex gap-2">
-                             <button onClick={() => markOk(id)} className={`px-4 py-2 rounded-xl border text-xs font-black uppercase tracking-widest transition-all ${isScanned ? 'bg-emerald-500 text-white border-emerald-600' : 'bg-white text-gray-500 border-gray-200 hover:bg-emerald-50'}`}>OK</button>
-                             <button onClick={() => markException(id, 'Missing')} className={`px-4 py-2 rounded-xl border text-xs font-black uppercase tracking-widest transition-all ${exc === 'Missing' ? 'bg-red-500 text-white border-red-600' : 'bg-white text-gray-500 border-gray-200 hover:bg-red-50'}`}>Missing</button>
-                             <button onClick={() => markException(id, 'Damaged')} className={`px-4 py-2 rounded-xl border text-xs font-black uppercase tracking-widest transition-all ${exc === 'Damaged' ? 'bg-amber-500 text-white border-amber-600' : 'bg-white text-gray-500 border-gray-200 hover:bg-amber-50'}`}>Damaged</button>
+                             <button onClick={() => markOk(id)} className={`px-4 py-2 rounded-xl border text-xs font-semibold uppercase tracking-widest transition-all ${isScanned ? 'bg-emerald-500 text-white border-emerald-600' : 'bg-white text-gray-500 border-gray-200 hover:bg-emerald-50'}`}>OK</button>
+                             <button onClick={() => markException(id, 'Missing')} className={`px-4 py-2 rounded-xl border text-xs font-semibold uppercase tracking-widest transition-all ${exc === 'Missing' ? 'bg-red-500 text-white border-red-600' : 'bg-white text-gray-500 border-gray-200 hover:bg-red-50'}`}>Missing</button>
+                             <button onClick={() => markException(id, 'Damaged')} className={`px-4 py-2 rounded-xl border text-xs font-semibold uppercase tracking-widest transition-all ${exc === 'Damaged' ? 'bg-amber-500 text-white border-amber-600' : 'bg-white text-gray-500 border-gray-200 hover:bg-amber-50'}`}>Damaged</button>
                           </div>
                        </div>
 
@@ -151,13 +151,13 @@ function ReceiveVehicleModal({ handover, onClose, onConfirm }) {
                            <div className="flex-1 flex items-center gap-3">
                               <MapPin size={16} className="text-emerald-500" />
                               <div className="flex gap-2 flex-1">
-                                 <select value={assign.zone} onChange={e => updateAssignment(id, 'zone', e.target.value)} className="bg-white border border-emerald-200 rounded-xl px-3 py-2 text-xs font-black uppercase flex-1 outline-none focus:ring-2 focus:ring-emerald-400">
+                                 <select value={assign.zone} onChange={e => updateAssignment(id, 'zone', e.target.value)} className="bg-white border border-emerald-200 rounded-xl px-3 py-2 text-xs font-semibold uppercase flex-1 outline-none focus:ring-2 focus:ring-emerald-400">
                                     {ZONES.map(z => <option key={z}>{z}</option>)}
                                  </select>
-                                 <select value={assign.row} onChange={e => updateAssignment(id, 'row', e.target.value)} className="bg-white border border-emerald-200 rounded-xl px-3 py-2 text-xs font-black uppercase flex-1 outline-none focus:ring-2 focus:ring-emerald-400">
+                                 <select value={assign.row} onChange={e => updateAssignment(id, 'row', e.target.value)} className="bg-white border border-emerald-200 rounded-xl px-3 py-2 text-xs font-semibold uppercase flex-1 outline-none focus:ring-2 focus:ring-emerald-400">
                                     {ROWS.map(r => <option key={r}>Row {r}</option>)}
                                  </select>
-                                 <select value={assign.bay} onChange={e => updateAssignment(id, 'bay', e.target.value)} className="bg-white border border-emerald-200 rounded-xl px-3 py-2 text-xs font-black uppercase flex-1 outline-none focus:ring-2 focus:ring-emerald-400">
+                                 <select value={assign.bay} onChange={e => updateAssignment(id, 'bay', e.target.value)} className="bg-white border border-emerald-200 rounded-xl px-3 py-2 text-xs font-semibold uppercase flex-1 outline-none focus:ring-2 focus:ring-emerald-400">
                                     {BAYS.map(b => <option key={b}>Bay {b}</option>)}
                                  </select>
                               </div>
@@ -178,7 +178,7 @@ function ReceiveVehicleModal({ handover, onClose, onConfirm }) {
                <button 
                 onClick={onConfirm} 
                 disabled={!isComplete}
-                className={`px-10 py-5 text-xs uppercase tracking-[0.15em] font-black rounded-2xl shadow-xl flex items-center gap-3 transition-all ${isComplete ? 'bg-[#FFCC00] hover:bg-black hover:text-[#FFCC00] text-black active:scale-[0.98]' : 'bg-gray-100 text-gray-300 cursor-not-allowed'}`}
+                className={`px-10 py-5 text-xs uppercase tracking-[0.15em] font-semibold rounded-2xl shadow-xl flex items-center gap-3 transition-all ${isComplete ? 'bg-[#FFCC00] hover:bg-black hover:text-[#FFCC00] text-black active:scale-[0.98]' : 'bg-gray-100 text-gray-300 cursor-not-allowed'}`}
               >
                 <ShieldCheck size={20} /> Commit to Inventory
               </button>
@@ -246,7 +246,7 @@ export default function WarehouseInbound() {
             <input className="w-full bg-white border border-gray-200 rounded-2xl py-3.5 pl-12 pr-4 text-sm font-bold text-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-400 transition-all shadow-sm"
               placeholder="Filter Transfers by ID, Origin, or Driver..." value={search} onChange={e => setSearch(e.target.value)} />
           </div>
-          <button className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-200 rounded-2xl text-xs font-black text-gray-500 uppercase tracking-widest hover:bg-gray-50 shadow-sm">
+          <button className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-200 rounded-2xl text-xs font-semibold text-gray-500 uppercase tracking-widest hover:bg-gray-50 shadow-sm">
             <ChevronDown size={16} /> Filter Results
           </button>
         </div>
@@ -278,27 +278,27 @@ export default function WarehouseInbound() {
                       <div className="text-xs font-medium text-gray-500 mt-2">{r.driver}</div>
                     </td>
                     <td className="px-6 py-6 text-center">
-                      <div className="font-black text-gray-900 bg-gray-100 w-12 h-12 rounded-2xl flex items-center justify-center mx-auto text-lg shadow-inner group-hover:bg-[#FFCC00] transition-colors">{r.vehicles}</div>
+                      <div className="font-semibold text-gray-900 bg-gray-100 w-12 h-12 rounded-2xl flex items-center justify-center mx-auto text-lg shadow-inner group-hover:bg-[#FFCC00] transition-colors">{r.vehicles}</div>
                     </td>
                     <td className="px-6 py-6">
                       <div className="font-semibold text-gray-900 text-sm leading-none">{r.eta}</div>
-                      <div className="text-xs font-black text-blue-600 uppercase tracking-widest mt-2 bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-lg inline-block">{r.dock}</div>
+                      <div className="text-xs font-semibold text-blue-600 uppercase tracking-widest mt-2 bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-lg inline-block">{r.dock}</div>
                     </td>
                     <td className="px-6 py-6">
-                      <span className={`text-xs font-black px-3 py-2 rounded-xl border uppercase tracking-widest inline-flex items-center gap-2 shadow-sm ${cfg.cls}`}>
+                      <span className={`text-xs font-semibold px-3 py-2 rounded-xl border uppercase tracking-widest inline-flex items-center gap-2 shadow-sm ${cfg.cls}`}>
                         <cfg.icon size={12} strokeWidth={3} /> {status}
                       </span>
                     </td>
                     <td className="px-6 py-6 text-right">
                       {!isReceived ? (
                         <button onClick={() => setActiveHandover(r)}
-                          className="text-xs font-black text-black bg-[#FFCC00] hover:bg-black hover:text-[#FFCC00] px-6 py-3 rounded-xl transition-all uppercase tracking-[0.1em] flex items-center gap-2 shadow-lg ml-auto active:scale-95">
+                          className="text-xs font-semibold text-black bg-[#FFCC00] hover:bg-black hover:text-[#FFCC00] px-6 py-3 rounded-xl transition-all uppercase tracking-[0.1em] flex items-center gap-2 shadow-lg ml-auto active:scale-95">
                           <Scan size={16} /> Scan Manifest
                         </button>
                       ) : (
                         <div className="flex items-center justify-end gap-2 text-emerald-600">
                            <ShieldCheck size={20}/>
-                           <span className="text-xs font-black uppercase tracking-widest">Entry Verified</span>
+                           <span className="text-xs font-semibold uppercase tracking-widest">Entry Verified</span>
                         </div>
                       )}
                     </td>
@@ -324,4 +324,5 @@ export default function WarehouseInbound() {
     </div>
   );
 }
+
 

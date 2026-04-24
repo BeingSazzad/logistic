@@ -130,7 +130,7 @@ export default function DispatchDrivers() {
                 <tr className="hover:bg-gray-50 transition-all cursor-pointer group" key={drv.id} onClick={() => navigate(`/dispatch/drivers/${drv.id}`)}>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded border-2 border-transparent bg-[#111] flex items-center justify-center text-[#FFCC00] font-black text-xs shrink-0 group-hover:border-[#FFCC00] transition-colors">
+                      <div className="w-10 h-10 rounded border-2 border-transparent bg-[#111] flex items-center justify-center text-[#FFCC00] font-semibold text-xs shrink-0 group-hover:border-[#FFCC00] transition-colors">
                         {drv.name.split(' ').map(n => n[0]).join('')}
                       </div>
                       <div>
@@ -162,7 +162,7 @@ export default function DispatchDrivers() {
                         }`}>
                         {drv.status}
                       </span>
-                      <div className={`text-xs uppercase font-bold mt-0.5 flex items-center gap-1.5 tracking-widest ${drv.assigned === '-' ? 'text-gray-400' : 'text-gray-700 font-black'}`}>
+                      <div className={`text-xs uppercase font-bold mt-0.5 flex items-center gap-1.5 tracking-widest ${drv.assigned === '-' ? 'text-gray-400' : 'text-gray-700 font-semibold'}`}>
                         <MapPin size={10} /> {drv.assigned === '-' ? 'No Active Job' : drv.assigned}
                       </div>
                     </div>
@@ -183,7 +183,7 @@ export default function DispatchDrivers() {
                       {drv.certs?.length > 0 && (
                         <div className="flex flex-wrap gap-1">
                           {drv.certs.map(c => (
-                            <span key={c} className="text-xs font-black uppercase tracking-widest bg-gray-100 text-gray-700 px-1.5 py-0.5 rounded border border-gray-200">
+                            <span key={c} className="text-xs font-semibold uppercase tracking-widest bg-gray-100 text-gray-700 px-1.5 py-0.5 rounded border border-gray-200">
                               {c}
                             </span>
                           ))}
@@ -218,3 +218,4 @@ export default function DispatchDrivers() {
     </div>
   );
 }
+

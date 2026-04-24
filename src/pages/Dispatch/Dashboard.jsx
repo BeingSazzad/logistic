@@ -21,7 +21,7 @@ function StatusBadge({ status }) {
     'In Sorting': 'bg-violet-100 text-violet-700 border-violet-200',
     'Unassigned': 'badge-gray',
   };
-  return <span className={`badge ${map[status] ?? 'badge-gray'} text-xs font-black uppercase tracking-widest px-2 py-0.5`}>{status}</span>;
+  return <span className={`badge ${map[status] ?? 'badge-gray'} text-xs font-semibold uppercase tracking-widest px-2 py-0.5`}>{status}</span>;
 }
 
 export default function DispatchDashboard() {
@@ -134,7 +134,7 @@ export default function DispatchDashboard() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className={`w-8 h-8 rounded bg-gray-900 text-brand flex items-center justify-center font-black text-xs shadow-sm`}>
+                          <div className={`w-8 h-8 rounded bg-gray-900 text-brand flex items-center justify-center font-semibold text-xs shadow-sm`}>
                             {job.driver === 'Unassigned' ? '?' : job.driver[0]}
                           </div>
                           <div>
@@ -203,4 +203,5 @@ export default function DispatchDashboard() {
     </div>
   );
 }
+
 

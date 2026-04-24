@@ -115,8 +115,8 @@ export default function AssetRegistry() {
         ].map((k, i) => (
           <div key={i} className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
             <div>
-              <p className="text-xs text-gray-400 uppercase font-black tracking-widest">{k.label}</p>
-              <p className="text-3xl font-black text-gray-900 mt-1 leading-none">{k.val}</p>
+              <p className="text-xs text-gray-400 uppercase font-semibold tracking-widest">{k.label}</p>
+              <p className="text-3xl font-semibold text-gray-900 mt-1 leading-none">{k.val}</p>
             </div>
             <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${k.bg} ${k.color}`}>
               <k.icon size={20} />
@@ -162,7 +162,7 @@ export default function AssetRegistry() {
         {/* Table */}
         <div className="overflow-x-auto">
           <table className="w-full text-left">
-            <thead className="bg-gray-50/50 text-xs font-black text-gray-500 uppercase tracking-widest border-b border-gray-100">
+            <thead className="bg-gray-50/50 text-xs font-semibold text-gray-500 uppercase tracking-widest border-b border-gray-100">
               <tr>
                 <th className="px-6 py-4">Asset ID</th>
                 <th className="px-6 py-4">VIN / Registration</th>
@@ -190,21 +190,21 @@ export default function AssetRegistry() {
                         <Truck size={16} className="text-gray-400" />
                       </div>
                       <div>
-                        <div className="font-black text-[#111] text-sm">{a.id}</div>
+                        <div className="font-semibold text-[#111] text-sm">{a.id}</div>
                         <div className="text-xs text-gray-400 font-bold uppercase tracking-widest">{a.year}</div>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4">
                     <div className="font-mono text-xs font-bold text-gray-700 bg-gray-50 px-2 py-1 rounded border border-gray-200 inline-block mb-1">{a.vin}</div>
-                    <div className="text-xs font-black text-gray-500 uppercase tracking-widest">{a.rego}</div>
+                    <div className="text-xs font-semibold text-gray-500 uppercase tracking-widest">{a.rego}</div>
                   </td>
                   <td className="px-6 py-4">
                     <div className="font-bold text-sm text-gray-900">{a.make}</div>
                     <div className="text-xs text-gray-400 font-bold uppercase tracking-widest">{a.type}</div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="text-xs font-black px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-100">
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-100">
                       {a.niche}
                     </span>
                   </td>
@@ -214,17 +214,17 @@ export default function AssetRegistry() {
                     </span>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="text-sm font-black text-gray-900">{a.payload}</span>
+                    <span className="text-sm font-semibold text-gray-900">{a.payload}</span>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`text-xs font-black px-2.5 py-1 rounded border uppercase tracking-widest ${STATUS_STYLE[a.status] || STATUS_STYLE.Pending}`}>
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded border uppercase tracking-widest ${STATUS_STYLE[a.status] || STATUS_STYLE.Pending}`}>
                       {a.status}
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right" onClick={e => e.stopPropagation()}>
                     <button
                       onClick={() => navigate(`/dispatch/vehicles/${a.id}`)}
-                      className="text-xs font-black border border-gray-200 px-4 py-1.5 rounded-lg hover:bg-gray-50 bg-white transition-all uppercase tracking-widest shadow-sm">
+                      className="text-xs font-semibold border border-gray-200 px-4 py-1.5 rounded-lg hover:bg-gray-50 bg-white transition-all uppercase tracking-widest shadow-sm">
                       Details
                     </button>
                   </td>
@@ -249,7 +249,7 @@ export default function AssetRegistry() {
             {/* Modal Header */}
             <div className="sticky top-0 bg-white border-b border-gray-100 px-8 py-5 flex items-center justify-between z-10 rounded-t-2xl">
               <div>
-                <h2 className="text-lg font-black text-gray-900 tracking-tight">Register New Asset</h2>
+                <h2 className="text-lg font-semibold text-gray-900 tracking-tight">Register New Asset</h2>
                 <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mt-0.5">Permanent vehicle record — all fields saved to registry</p>
               </div>
               <button onClick={() => setShowModal(false)} className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-900 transition-all">
@@ -263,7 +263,7 @@ export default function AssetRegistry() {
               <section>
                 <div className="flex items-center gap-2 mb-4">
                   <Fingerprint size={16} className="text-blue-500" />
-                  <h3 className="text-xs font-black text-gray-900 uppercase tracking-widest">Vehicle Identity</h3>
+                  <h3 className="text-xs font-semibold text-gray-900 uppercase tracking-widest">Vehicle Identity</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="md:col-span-2">
@@ -298,7 +298,7 @@ export default function AssetRegistry() {
               <section>
                 <div className="flex items-center gap-2 mb-4">
                   <Tag size={16} className="text-violet-500" />
-                  <h3 className="text-xs font-black text-gray-900 uppercase tracking-widest">Classification</h3>
+                  <h3 className="text-xs font-semibold text-gray-900 uppercase tracking-widest">Classification</h3>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
                   {ASSET_TYPES.map(t => (
@@ -321,7 +321,7 @@ export default function AssetRegistry() {
               <section>
                 <div className="flex items-center gap-2 mb-4">
                   <Ruler size={16} className="text-emerald-500" />
-                  <h3 className="text-xs font-black text-gray-900 uppercase tracking-widest">Dimensions & Payload</h3>
+                  <h3 className="text-xs font-semibold text-gray-900 uppercase tracking-widest">Dimensions & Payload</h3>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div>
@@ -369,3 +369,4 @@ export default function AssetRegistry() {
     </div>
   );
 }
+

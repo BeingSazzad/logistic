@@ -57,7 +57,7 @@ export default function Tenants() {
                       <p className="text-xs font-medium text-gray-500 mt-0.5">{p.desc}</p>
                     </div>
                     <div className="text-right">
-                      <p className="font-black text-gray-900">{p.price}</p>
+                      <p className="font-semibold text-gray-900">{p.price}</p>
                       {p.recommended && <span className="text-xs bg-[#FFCC00] text-black px-2 py-0.5 rounded font-bold uppercase tracking-widest mt-1 inline-block">Recommended</span>}
                     </div>
                   </div>
@@ -213,7 +213,7 @@ export default function Tenants() {
                       </div>
                    </td>
                    <td className="px-6 py-5">
-                      <span className="text-sm font-black text-[#111]">{t.mrr ? `$${t.mrr}` : '—'}</span>
+                      <span className="text-sm font-semibold text-[#111]">{t.mrr ? `$${t.mrr}` : '—'}</span>
                    </td>
                    <td className="px-6 py-5 text-right">
                       <button className="text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors uppercase tracking-widest" onClick={(e) => { e.stopPropagation(); window.location.href = `/platform/tenants/${t.id}`}}>
@@ -229,5 +229,6 @@ export default function Tenants() {
     </div>
   );
 }
+
 
 
