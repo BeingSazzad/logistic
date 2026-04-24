@@ -39,7 +39,7 @@ export default function Subscriptions() {
   ];
 
   const featureRows = [
-    'Shipment Management',
+    'Load Management',
     'Multi-Branch Support',
     'API & Integrations',
     'Custom Branding / White Label',
@@ -99,7 +99,7 @@ export default function Subscriptions() {
             {plans.map((p, i) => (
               <div key={i} className="flex flex-col border border-gray-100 rounded-xl overflow-hidden hover:border-[#FFCC00] hover:shadow-xl transition-all group relative">
                  {p.recommended && (
-                    <div className="absolute top-4 right-4 bg-[#FFCC00] text-orange-900 text-[10px] font-bold px-2.5 py-0.5 rounded shadow-sm">Popular</div>
+                    <div className="absolute top-4 right-4 bg-[#FFCC00] text-orange-900 text-xs font-bold px-2.5 py-0.5 rounded shadow-sm">Popular</div>
                  )}
                  <div className={`h-1.5 w-full ${p.color}`}></div>
                  <div className="p-5 flex-1 flex flex-col">
@@ -110,7 +110,7 @@ export default function Subscriptions() {
                        {p.price}
                        {p.price !== 'Custom' && <span className="text-xs text-gray-500 font-medium">/mo</span>}
                     </div>
-                    <p className="text-[10px] text-gray-400 font-medium mb-5">{p.billing}</p>
+                    <p className="text-xs text-gray-400 font-medium mb-5">{p.billing}</p>
                     <div className="space-y-2 mb-6">
                        <div className="flex items-center gap-2 text-xs font-medium text-gray-700"><CheckCircle2 size={14} className="text-emerald-500 shrink-0"/> {p.users}</div>
                        <div className="flex items-center gap-2 text-xs font-medium text-gray-700"><CheckCircle2 size={14} className="text-emerald-500 shrink-0"/> {p.fleet}</div>
@@ -271,3 +271,4 @@ function PlanEditorModal({ onClose, editingPlan }) {
     </div>
   );
 }
+

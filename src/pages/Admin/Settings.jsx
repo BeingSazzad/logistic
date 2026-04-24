@@ -31,7 +31,7 @@ export default function AdminSettings() {
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="p-6 border-b border-gray-100 bg-[#FAFAFA]">
             <h3 className="font-bold text-gray-900 text-sm uppercase tracking-wide">Personal Details</h3>
-            <p className="text-[11px] font-medium text-gray-500 mt-0.5">Your identity on the platform</p>
+            <p className="text-xs font-medium text-gray-500 mt-0.5">Your identity on the platform</p>
           </div>
           <div className="p-8 flex flex-col md:flex-row gap-8">
             
@@ -47,20 +47,20 @@ export default function AdminSettings() {
                <button className="text-xs font-bold text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 px-4 py-1.5 rounded-lg shadow-sm">
                  Upload Photo
                </button>
-               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-center mt-2">Super Admin</span>
+               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest text-center mt-2">Super Admin</span>
             </div>
 
             <div className="flex-1 flex flex-col gap-6">
               <div>
-                <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1">Full Name</label>
+                <label className="text-xs font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1">Full Name</label>
                 <input type="text" className="input w-full md:w-3/4" defaultValue="Michael Adams" />
               </div>
               <div>
-                <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1">Contact Number</label>
+                <label className="text-xs font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1">Contact Number</label>
                 <input type="tel" className="input w-full md:w-3/4" defaultValue="+61 412 345 678" />
               </div>
               <div className="pt-2 border-t border-gray-100">
-                <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1 flex items-center gap-1.5">
+                <label className="text-xs font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1 flex items-center gap-1.5">
                   <Mail size={12} /> Login Email
                 </label>
                 <input 
@@ -69,7 +69,7 @@ export default function AdminSettings() {
                   readOnly 
                   defaultValue="michael@hero.com.au" 
                 />
-                <p className="text-[9px] text-gray-400 mt-1.5 font-bold ml-1">Account ownership transfers must go through support.</p>
+                <p className="text-xs text-gray-400 mt-1.5 font-bold ml-1">Account ownership transfers must go through support.</p>
               </div>
             </div>
 
@@ -82,20 +82,20 @@ export default function AdminSettings() {
             <Lock size={16} className="text-gray-500" />
             <div>
               <h3 className="font-bold text-[#111] text-sm uppercase tracking-wide">Safety & Security</h3>
-              <p className="text-[11px] font-medium text-gray-500 mt-0.5">Update your password and 2FA settings</p>
+              <p className="text-xs font-medium text-gray-500 mt-0.5">Update your password and 2FA settings</p>
             </div>
           </div>
           <div className="p-8 space-y-6 max-w-lg">
             <div>
-              <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1">Current Password</label>
+              <label className="text-xs font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1">Current Password</label>
               <input type="password" className="input w-full" placeholder="••••••••" />
             </div>
             <div>
-              <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1">New Password</label>
+              <label className="text-xs font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1">New Password</label>
               <input type="password" className="input w-full" placeholder="New Password" />
             </div>
             <div>
-              <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1">Confirm New Password</label>
+              <label className="text-xs font-black text-gray-500 uppercase tracking-widest block mb-2 ml-1">Confirm New Password</label>
               <input type="password" className="input w-full" placeholder="Confirm Password" />
             </div>
             <button className="btn bg-gray-900 hover:bg-black text-white px-8 mt-4">
@@ -108,3 +108,4 @@ export default function AdminSettings() {
     </div>
   );
 }
+

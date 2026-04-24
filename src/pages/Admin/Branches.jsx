@@ -5,8 +5,8 @@ import { Building2, Plus, Users, Truck, Package, Settings, MapPin, UserCog, Glob
 export default function AdminBranches() {
   const navigate = useNavigate();
   const branches = [
-    { id: 'SYD-CENTRAL', name: 'Sydney Central Hub', type: 'Primary Hub', location: 'Strathfield, NSW', manager: 'Michael Adams', staff: 42, activeDocs: 18, capacity: '92%', status: 'Online', performance: 98 },
-    { id: 'MEL-HUB', name: 'Melbourne Hub', type: 'Primary Hub', location: 'Tullamarine, VIC', manager: 'Sarah Mitchell', staff: 14, activeDocs: 6, capacity: '45%', status: 'Online', performance: 84 },
+    { id: 'SYD-CENTRAL', name: 'Sydney Central Depot', type: 'Primary Depot', location: 'Strathfield, NSW', manager: 'Michael Adams', staff: 42, activeDocs: 18, capacity: '92%', status: 'Online', performance: 98 },
+    { id: 'MEL-Depot', name: 'Melbourne Depot', type: 'Primary Depot', location: 'Tullamarine, VIC', manager: 'Sarah Mitchell', staff: 14, activeDocs: 6, capacity: '45%', status: 'Online', performance: 84 },
     { id: 'BNE-PORT', name: 'Brisbane Port Branch', type: 'Local Branch', location: 'Lytton, QLD', manager: 'Liam Smith', staff: 28, activeDocs: 12, capacity: '78%', status: 'Maintenance', performance: 72 },
   ];
 
@@ -21,7 +21,7 @@ export default function AdminBranches() {
           </div>
           <div>
             <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Branch List</h1>
-            <p className="text-sm text-gray-500 mt-1">Manage hubs and delivery centers across your area.</p>
+            <p className="text-sm text-gray-500 mt-1">Manage Depots and delivery centers across your area.</p>
           </div>
         </div>
         <button
@@ -47,7 +47,7 @@ export default function AdminBranches() {
               <stat.icon size={18} />
             </div>
             <div>
-              <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1.5">{stat.label}</p>
+              <p className="text-xs font-black text-gray-400 uppercase tracking-widest leading-none mb-1.5">{stat.label}</p>
               <p className="text-xl font-black text-gray-900 leading-none">{stat.value}</p>
             </div>
           </div>
@@ -57,17 +57,17 @@ export default function AdminBranches() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-2">
         {branches.map(branch => (
           <div key={branch.id} onClick={() => navigate(`/admin/branches/${branch.id}`)} className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:border-[#FFCC00] cursor-pointer transition-all relative overflow-hidden group flex flex-col hover:shadow-xl">
-            <div className={`h-1.5 w-full absolute top-0 left-0 ${branch.type === 'Primary Hub' ? 'bg-[#FFCC00]' : 'bg-gray-200'}`}></div>
+            <div className={`h-1.5 w-full absolute top-0 left-0 ${branch.type === 'Primary Depot' ? 'bg-[#FFCC00]' : 'bg-gray-200'}`}></div>
 
             <div className="p-7 flex-1">
               <div className="flex justify-between items-start mb-5">
                 <div className="flex items-center gap-3">
-                  <span className={`text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-md border ${branch.type === 'Primary Hub' ? 'bg-[#FFFBEB] text-[#9A7B00] border-[#FFCC00]/40' : 'bg-gray-50 text-gray-600 border-gray-200'}`}>
+                  <span className={`text-xs font-black uppercase tracking-widest px-2.5 py-1 rounded-md border ${branch.type === 'Primary Depot' ? 'bg-[#FFFBEB] text-[#9A7B00] border-[#FFCC00]/40' : 'bg-gray-50 text-gray-600 border-gray-200'}`}>
                     {branch.type}
                   </span>
                   <div className="flex items-center gap-1.5 bg-gray-50 px-2 py-1 rounded-md border border-gray-100">
                     <span className={`w-1.5 h-1.5 rounded-full ${branch.status === 'Online' ? 'bg-emerald-500' : 'bg-amber-500 animate-pulse'}`}></span>
-                    <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{branch.status}</span>
+                    <span className="text-xs font-black text-gray-400 uppercase tracking-widest">{branch.status}</span>
                   </div>
                 </div>
                 <div className="text-xs font-black text-emerald-600 bg-emerald-50 px-2 py-1 rounded border border-emerald-100">
@@ -77,20 +77,20 @@ export default function AdminBranches() {
 
               <h2 className="text-2xl font-black text-gray-900 tracking-tight mb-1 group-hover:text-[#FFCC00] transition-colors">{branch.name}</h2>
               <div className="flex flex-col gap-1.5 mb-8">
-                <p className="text-[11px] font-bold text-gray-400 flex items-center gap-1.5 uppercase tracking-widest"><MapPin size={13} className="text-gray-300" /> {branch.location}</p>
+                <p className="text-xs font-bold text-gray-400 flex items-center gap-1.5 uppercase tracking-widest"><MapPin size={13} className="text-gray-300" /> {branch.location}</p>
                 <div className="flex items-center gap-2 mt-1">
-                  <div className="w-6 h-6 rounded bg-[#111] text-[#FFCC00] flex items-center justify-center font-black text-[8px]">{branch.manager.split(' ').map(n => n[0]).join('')}</div>
-                  <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Lead: {branch.manager}</p>
+                  <div className="w-6 h-6 rounded bg-[#111] text-[#FFCC00] flex items-center justify-center font-black text-xs">{branch.manager.split(' ').map(n => n[0]).join('')}</div>
+                  <p className="text-xs font-black text-gray-500 uppercase tracking-widest">Lead: {branch.manager}</p>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="bg-gray-50 rounded-xl p-3.5 border border-gray-100 group-hover:bg-white transition-colors">
-                  <p className="text-[9px] font-black uppercase text-gray-400 tracking-widest flex items-center gap-2 mb-1.5"><Users size={12} /> Staff Count</p>
+                  <p className="text-xs font-black uppercase text-gray-400 tracking-widest flex items-center gap-2 mb-1.5"><Users size={12} /> Staff Count</p>
                   <p className="text-xl font-black text-gray-900 leading-none">{branch.staff}</p>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-3.5 border border-gray-100 group-hover:bg-white transition-colors">
-                  <p className="text-[9px] font-black uppercase text-gray-400 tracking-widest flex items-center gap-2 mb-1.5"><Truck size={12} /> Vehicles</p>
+                  <p className="text-xs font-black uppercase text-gray-400 tracking-widest flex items-center gap-2 mb-1.5"><Truck size={12} /> Vehicles</p>
                   <p className="text-xl font-black text-gray-900 leading-none">{branch.activeDocs}</p>
                 </div>
               </div>
@@ -98,8 +98,8 @@ export default function AdminBranches() {
               <div>
                 <div className="flex justify-between items-end mb-2">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-[#111]">Storage Usage</span>
-                    <span className={`text-[9px] font-black px-1.5 py-0.5 rounded ${parseInt(branch.capacity) > 90 ? 'bg-red-50 text-red-600' : 'bg-emerald-50 text-emerald-600'}`}>
+                    <span className="text-xs font-black uppercase tracking-widest text-[#111]">Storage Usage</span>
+                    <span className={`text-xs font-black px-1.5 py-0.5 rounded ${parseInt(branch.capacity) > 90 ? 'bg-red-50 text-red-600' : 'bg-emerald-50 text-emerald-600'}`}>
                       {parseInt(branch.capacity) > 90 ? 'Full' : 'Ok'}
                     </span>
                   </div>
@@ -112,10 +112,10 @@ export default function AdminBranches() {
             </div>
 
             <div className="border-t border-gray-50 p-5 bg-gray-50/50 flex justify-between items-center group-hover:bg-[#111] group-hover:text-white transition-all">
-              <span className="text-[10px] font-black tracking-[0.2em] text-gray-400 group-hover:text-[#FFCC00] transition-colors uppercase">{branch.id}</span>
+              <span className="text-xs font-black tracking-[0.2em] text-gray-400 group-hover:text-[#FFCC00] transition-colors uppercase">{branch.id}</span>
               <button
                 onClick={(e) => { e.stopPropagation(); navigate(`/admin/branches/${branch.id}`); }}
-                className="text-[11px] font-black uppercase tracking-widest flex items-center gap-2"
+                className="text-xs font-black uppercase tracking-widest flex items-center gap-2"
               >
                 Manage Branch <ArrowUpRight size={14} />
               </button>
@@ -126,3 +126,4 @@ export default function AdminBranches() {
     </div>
   );
 }
+

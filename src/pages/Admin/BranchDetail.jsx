@@ -10,7 +10,7 @@ import {
 // ── Mock DB ──────────────────────────────────────────────────────────────────
 const BRANCH_DB = {
   'SYD-CENTRAL': {
-    id: 'SYD-CENTRAL', name: 'Sydney Central Hub', type: 'Primary Hub',
+    id: 'SYD-CENTRAL', name: 'Sydney Central Depot', type: 'Primary Depot',
     location: 'Strathfield, NSW 2135', manager: 'Michael Adams',
     phone: '+61 2 9111 2222', operatingHours: '24/7', status: 'Online',
     capacity: 92, dockCount: 18, capacity_label: '92%',
@@ -42,8 +42,8 @@ const BRANCH_DB = {
       { id: 'SHP-9041', customer: 'Tech Solutions', status: 'Issue', driver: 'Lucas Jones',  eta: 'Delayed' },
     ],
   },
-  'MEL-HUB': {
-    id: 'MEL-HUB', name: 'Melbourne Hub', type: 'Primary Hub',
+  'MEL-Depot': {
+    id: 'MEL-Depot', name: 'Melbourne Depot', type: 'Primary Depot',
     location: 'Tullamarine, VIC 3043', manager: 'Sarah Mitchell',
     phone: '+61 3 8111 2222', operatingHours: '06:00 – 22:00', status: 'Online',
     capacity: 45, dockCount: 6, capacity_label: '45%',
@@ -128,13 +128,13 @@ export default function AdminBranchDetail() {
           <div>
             <div className="flex items-center gap-3 flex-wrap">
               <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{b.name}</h1>
-              <span className={`text-[10px] font-black px-2.5 py-1 rounded border uppercase tracking-widest ${b.type === 'Primary Hub' ? 'bg-amber-50 text-amber-700 border-amber-200' : 'bg-gray-100 text-gray-600 border-gray-200'}`}>{b.type}</span>
-              <span className={`text-[10px] font-black px-2.5 py-1 rounded border uppercase tracking-widest flex items-center gap-1 ${b.status === 'Online' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 'bg-[#FEF2F2] text-[#DC2626] border-[#FEE2E2]'}`}>
+              <span className={`text-xs font-black px-2.5 py-1 rounded border uppercase tracking-widest ${b.type === 'Primary Depot' ? 'bg-amber-50 text-amber-700 border-amber-200' : 'bg-gray-100 text-gray-600 border-gray-200'}`}>{b.type}</span>
+              <span className={`text-xs font-black px-2.5 py-1 rounded border uppercase tracking-widest flex items-center gap-1 ${b.status === 'Online' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 'bg-[#FEF2F2] text-[#DC2626] border-[#FEE2E2]'}`}>
                 <span className={`w-1.5 h-1.5 rounded-full ${b.status === 'Online' ? 'bg-emerald-500 animate-pulse' : 'bg-red-500'}`}></span>
                 {b.status}
               </span>
             </div>
-            <p className="text-[11px] text-gray-400 mt-1.5 uppercase tracking-widest font-bold flex items-center gap-2">
+            <p className="text-xs text-gray-400 mt-1.5 uppercase tracking-widest font-bold flex items-center gap-2">
               <MapPin size={11} className="text-gray-300"/> {b.location}
               <span className="text-gray-200">·</span>
               <Phone size={11} className="text-gray-300"/> {b.phone}
@@ -175,7 +175,7 @@ export default function AdminBranchDetail() {
         ].map((s, i) => (
           <div key={i} className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm flex items-center justify-between">
             <div>
-              <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest leading-none">{s.label}</p>
+              <p className="text-xs font-black text-gray-400 uppercase tracking-widest leading-none">{s.label}</p>
               <p className="text-2xl font-black text-gray-900 mt-1.5 leading-none">{s.val}</p>
             </div>
             <div className={`w-9 h-9 rounded-lg ${s.bg} ${s.border} border flex items-center justify-center ${s.color} shrink-0`}>
@@ -188,7 +188,7 @@ export default function AdminBranchDetail() {
       {/* ── Dock Capacity Bar ── */}
       <div className="mx-2 bg-white rounded-xl border border-gray-100 shadow-sm px-6 py-4 flex items-center gap-6">
         <div className="shrink-0">
-          <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Dock Capacity</p>
+          <p className="text-xs font-black text-gray-400 uppercase tracking-widest">Dock Capacity</p>
           <p className="text-lg font-black text-gray-900 mt-0.5">{b.capacity}%</p>
         </div>
         <div className="flex-1">
@@ -200,8 +200,8 @@ export default function AdminBranchDetail() {
           </div>
         </div>
         <div className="shrink-0 text-right">
-          <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{b.dockCount} Active Docks</p>
-          <p className={`text-[10px] font-black mt-0.5 ${b.capacity > 80 ? 'text-red-500' : b.capacity > 60 ? 'text-amber-500' : 'text-emerald-500'}`}>
+          <p className="text-xs font-black text-gray-400 uppercase tracking-widest">{b.dockCount} Active Docks</p>
+          <p className={`text-xs font-black mt-0.5 ${b.capacity > 80 ? 'text-red-500' : b.capacity > 60 ? 'text-amber-500' : 'text-emerald-500'}`}>
             {b.capacity > 80 ? '⚠ Near Capacity' : b.capacity > 60 ? 'Moderate Load' : 'Low Load'}
           </p>
         </div>
@@ -228,7 +228,7 @@ export default function AdminBranchDetail() {
             <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
               <div className="px-6 py-4 border-b border-gray-100 bg-gray-50/50 flex items-center gap-2">
                 <Building2 size={14} className="text-gray-400"/>
-                <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Branch Profile</h3>
+                <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest">Branch Profile</h3>
               </div>
               <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
@@ -240,7 +240,7 @@ export default function AdminBranchDetail() {
                   { label: 'Branch ID',      val: b.id },
                 ].map((f, i) => (
                   <div key={i}>
-                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5">{f.label}</p>
+                    <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1.5">{f.label}</p>
                     {editing ? (
                       <input defaultValue={f.val} className="w-full border border-[#FFCC00] bg-[#FFFBEB] rounded-lg px-4 py-2.5 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20" />
                     ) : (
@@ -256,16 +256,16 @@ export default function AdminBranchDetail() {
               <div className="px-6 py-4 border-b border-gray-100 bg-gray-50/50 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Package size={14} className="text-gray-400"/>
-                  <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Recent Shipments</h3>
+                  <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest">Recent Loads</h3>
                 </div>
-                <button onClick={() => setActiveTab('jobs')} className="text-[10px] font-black text-gray-400 hover:text-gray-700 uppercase tracking-widest flex items-center gap-1">
+                <button onClick={() => setActiveTab('jobs')} className="text-xs font-black text-gray-400 hover:text-gray-700 uppercase tracking-widest flex items-center gap-1">
                   View All <ChevronRight size={12}/>
                 </button>
               </div>
               <table className="w-full text-left">
                 <thead className="hero-table-header">
                   <tr>
-                    <th className="px-5 py-3">Shipment</th>
+                    <th className="px-5 py-3">Load</th>
                     <th className="px-5 py-3">Status</th>
                     <th className="px-5 py-3">Driver</th>
                     <th className="px-5 py-3">ETA</th>
@@ -273,14 +273,14 @@ export default function AdminBranchDetail() {
                 </thead>
                 <tbody className="divide-y divide-gray-50">
                   {b.recentJobs.map(j => (
-                    <tr key={j.id} onClick={() => navigate(`/admin/shipments/${j.id}`)}
+                    <tr key={j.id} onClick={() => navigate(`/admin/loads/${j.id}`)}
                       className="hover:bg-gray-50/80 cursor-pointer transition-all">
                       <td className="px-5 py-3.5">
                         <div className="font-black text-sm text-gray-900">{j.id}</div>
-                        <div className="text-[10px] text-gray-400 font-bold mt-0.5">{j.customer}</div>
+                        <div className="text-xs text-gray-400 font-bold mt-0.5">{j.customer}</div>
                       </td>
                       <td className="px-5 py-3.5">
-                        <span className={`text-[9px] font-black px-2 py-1 rounded border uppercase tracking-widest ${jobStatusStyle(j.status)}`}>{j.status}</span>
+                        <span className={`text-xs font-black px-2 py-1 rounded border uppercase tracking-widest ${jobStatusStyle(j.status)}`}>{j.status}</span>
                       </td>
                       <td className="px-5 py-3.5 text-xs font-bold text-gray-600">{j.driver}</td>
                       <td className="px-5 py-3.5 text-xs font-bold text-gray-600">{j.eta}</td>
@@ -296,23 +296,23 @@ export default function AdminBranchDetail() {
             {/* Operations Control */}
             <div className="bg-[#111] rounded-xl p-6 text-white shadow-xl border border-gray-800 relative overflow-hidden">
               <div className="absolute -right-6 -top-6 w-32 h-32 bg-[#FFCC00]/10 rounded-full blur-3xl pointer-events-none"/>
-              <h3 className="text-[10px] font-black uppercase tracking-widest mb-5 text-[#FFCC00] flex items-center gap-2 relative z-10">
+              <h3 className="text-xs font-black uppercase tracking-widest mb-5 text-[#FFCC00] flex items-center gap-2 relative z-10">
                 <Settings size={14}/> Operations Control
               </h3>
               <div className="space-y-3 relative z-10">
                 {b.status === 'Online' ? (
-                  <button className="w-full py-3 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 rounded-xl font-black text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 transition-all">
+                  <button className="w-full py-3 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all">
                     <Power size={14}/> Force Offline
                   </button>
                 ) : (
-                  <button className="w-full py-3 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 rounded-xl font-black text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 transition-all">
+                  <button className="w-full py-3 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all">
                     <Power size={14}/> Bring Online
                   </button>
                 )}
-                <button onClick={() => setActiveTab('authority')} className="w-full py-3 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl font-black text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 transition-all">
+                <button onClick={() => setActiveTab('authority')} className="w-full py-3 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all">
                   <Shield size={14}/> View Authority Roster
                 </button>
-                <button onClick={() => navigate('/admin/users/add')} className="w-full py-3 bg-[#FFCC00]/10 hover:bg-[#FFCC00]/20 text-[#FFCC00] border border-[#FFCC00]/20 rounded-xl font-black text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 transition-all">
+                <button onClick={() => navigate('/admin/users/add')} className="w-full py-3 bg-[#FFCC00]/10 hover:bg-[#FFCC00]/20 text-[#FFCC00] border border-[#FFCC00]/20 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all">
                   <UserPlus size={14}/> Add Staff to Branch
                 </button>
               </div>
@@ -322,17 +322,17 @@ export default function AdminBranchDetail() {
             <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
               <div className="px-5 py-4 border-b border-gray-100 bg-gray-50/50 flex items-center gap-2">
                 <Shield size={14} className="text-gray-400"/>
-                <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Authority</h3>
+                <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest">Authority</h3>
               </div>
               <div className="divide-y divide-gray-50">
                 {b.authority.slice(0, 4).map(u => (
                   <div key={u.id} className="flex items-center gap-3 px-5 py-3.5 hover:bg-gray-50/60 cursor-pointer" onClick={() => navigate(`/admin/users/${u.id}`)}>
-                    <div className="w-8 h-8 rounded-lg bg-[#111] flex items-center justify-center text-[#FFCC00] font-black text-[10px] shrink-0">{u.initials}</div>
+                    <div className="w-8 h-8 rounded-lg bg-[#111] flex items-center justify-center text-[#FFCC00] font-black text-xs shrink-0">{u.initials}</div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold text-gray-900 truncate">{u.name}</p>
-                      <p className="text-[10px] text-gray-400 font-bold">{u.role}</p>
+                      <p className="text-xs text-gray-400 font-bold">{u.role}</p>
                     </div>
-                    <span className={`text-[9px] font-black px-2 py-0.5 rounded border uppercase tracking-widest shrink-0 ${u.status === 'Active' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-gray-100 text-gray-400 border-gray-200'}`}>{u.status}</span>
+                    <span className={`text-xs font-black px-2 py-0.5 rounded border uppercase tracking-widest shrink-0 ${u.status === 'Active' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-gray-100 text-gray-400 border-gray-200'}`}>{u.status}</span>
                   </div>
                 ))}
                 {b.authority.length === 0 && (
@@ -354,7 +354,7 @@ export default function AdminBranchDetail() {
             <div className="px-6 py-4 border-b border-gray-100 bg-gray-50/50 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Shield size={14} className="text-gray-400"/>
-                <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Authority & Access Roster — {b.name}</h3>
+                <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest">Authority & Access Roster — {b.name}</h3>
               </div>
               <button onClick={() => navigate('/admin/users/add')} className="btn btn-primary py-2 px-4 text-xs">
                 <UserPlus size={13}/> Add Member
@@ -383,15 +383,15 @@ export default function AdminBranchDetail() {
                     className="hover:bg-gray-50/80 cursor-pointer transition-all group border-l-4 border-l-transparent hover:border-l-[#FFCC00]">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-lg bg-[#111] flex items-center justify-center text-[#FFCC00] font-black text-[10px] shrink-0 border-2 border-transparent group-hover:border-[#FFCC00] transition-colors">{u.initials}</div>
+                        <div className="w-9 h-9 rounded-lg bg-[#111] flex items-center justify-center text-[#FFCC00] font-black text-xs shrink-0 border-2 border-transparent group-hover:border-[#FFCC00] transition-colors">{u.initials}</div>
                         <div>
                           <div className="font-bold text-gray-900 text-sm">{u.name}</div>
-                          <div className="text-[10px] text-gray-400 font-bold mt-0.5">{u.email}</div>
+                          <div className="text-xs text-gray-400 font-bold mt-0.5">{u.email}</div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className={`text-[9px] font-black px-2.5 py-1 rounded border uppercase tracking-widest ${roleColor(u.role)}`}>{u.role}</span>
+                      <span className={`text-xs font-black px-2.5 py-1 rounded border uppercase tracking-widest ${roleColor(u.role)}`}>{u.role}</span>
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2 text-xs font-bold text-gray-600">
@@ -401,11 +401,11 @@ export default function AdminBranchDetail() {
                     </td>
                     <td className="px-6 py-4 text-xs font-bold text-gray-500">{u.since}</td>
                     <td className="px-6 py-4">
-                      <span className={`text-[9px] font-black px-2.5 py-1 rounded border uppercase tracking-widest ${u.status === 'Active' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-gray-100 text-gray-500 border-gray-200'}`}>{u.status}</span>
+                      <span className={`text-xs font-black px-2.5 py-1 rounded border uppercase tracking-widest ${u.status === 'Active' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-gray-100 text-gray-500 border-gray-200'}`}>{u.status}</span>
                     </td>
                     <td className="px-6 py-4 text-right">
                       <button onClick={e => { e.stopPropagation(); navigate(`/admin/users/${u.id}`); }}
-                        className="text-[10px] font-black border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50 uppercase tracking-widest transition-all">
+                        className="text-xs font-black border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50 uppercase tracking-widest transition-all">
                         Manage →
                       </button>
                     </td>
@@ -424,7 +424,7 @@ export default function AdminBranchDetail() {
             <div className="px-6 py-4 border-b border-gray-100 bg-gray-50/50 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <UserCog size={14} className="text-gray-400"/>
-                <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Driver Roster — {b.name}</h3>
+                <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest">Driver Roster — {b.name}</h3>
               </div>
               <button onClick={() => navigate('/admin/drivers/add')} className="btn btn-primary py-2 px-4 text-xs">
                 <UserPlus size={13}/> Add Driver
@@ -452,7 +452,7 @@ export default function AdminBranchDetail() {
                   <tr key={d.id} className="hover:bg-gray-50/80 cursor-pointer transition-all group border-l-4 border-l-transparent hover:border-l-[#FFCC00]">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-lg bg-[#111] flex items-center justify-center text-[#FFCC00] font-black text-[10px] shrink-0 border-2 border-transparent group-hover:border-[#FFCC00] transition-colors">
+                        <div className="w-9 h-9 rounded-lg bg-[#111] flex items-center justify-center text-[#FFCC00] font-black text-xs shrink-0 border-2 border-transparent group-hover:border-[#FFCC00] transition-colors">
                           {d.name.split(' ').map(n=>n[0]).join('')}
                         </div>
                         <div className="font-bold text-gray-900 text-sm">{d.name}</div>
@@ -461,7 +461,7 @@ export default function AdminBranchDetail() {
                     <td className="px-6 py-4 font-black text-gray-700 text-sm">{d.vehicle}</td>
                     <td className="px-6 py-4 text-xs font-bold text-gray-500">{d.type}</td>
                     <td className="px-6 py-4">
-                      <span className={`text-[9px] font-black px-2.5 py-1 rounded border uppercase tracking-widest ${driverStatusStyle(d.status)}`}>{d.status}</span>
+                      <span className={`text-xs font-black px-2.5 py-1 rounded border uppercase tracking-widest ${driverStatusStyle(d.status)}`}>{d.status}</span>
                     </td>
                     <td className="px-6 py-4 text-xs font-bold text-gray-700">{d.load}</td>
                     <td className="px-6 py-4 text-xs font-bold text-gray-600">{d.eta}</td>
@@ -484,7 +484,7 @@ export default function AdminBranchDetail() {
           <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-100 bg-gray-50/50 flex items-center gap-2">
               <Truck size={14} className="text-gray-400"/>
-              <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Fleet Assets — {b.name}</h3>
+              <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest">Fleet Assets — {b.name}</h3>
             </div>
             <table className="w-full text-left">
               <thead className="hero-table-header">
@@ -508,7 +508,7 @@ export default function AdminBranchDetail() {
                     <td className="px-6 py-4 font-black text-gray-900 text-sm">{v.id}</td>
                     <td className="px-6 py-4 text-xs font-bold text-gray-500">{v.type}</td>
                     <td className="px-6 py-4">
-                      <span className={`text-[9px] font-black px-2.5 py-1 rounded border uppercase tracking-widest ${
+                      <span className={`text-xs font-black px-2.5 py-1 rounded border uppercase tracking-widest ${
                         v.status === 'In Service'  ? 'bg-blue-50 text-blue-600 border-blue-100' :
                         v.status === 'Parked'      ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
                         'bg-red-50 text-red-600 border-red-100'
@@ -517,7 +517,7 @@ export default function AdminBranchDetail() {
                     <td className="px-6 py-4 text-xs font-bold text-gray-500">{v.lastService}</td>
                     <td className="px-6 py-4 text-right">
                       <button onClick={e => { e.stopPropagation(); navigate(`/admin/fleet/${v.id}`); }}
-                        className="text-[10px] font-black border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50 uppercase tracking-widest transition-all">
+                        className="text-xs font-black border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50 uppercase tracking-widest transition-all">
                         Details →
                       </button>
                     </td>
@@ -535,12 +535,12 @@ export default function AdminBranchDetail() {
           <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-100 bg-gray-50/50 flex items-center gap-2">
               <Package size={14} className="text-gray-400"/>
-              <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Recent Jobs — {b.name}</h3>
+              <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest">Recent Jobs — {b.name}</h3>
             </div>
             <table className="w-full text-left">
               <thead className="hero-table-header">
                 <tr>
-                  <th className="px-6 py-4">Shipment</th>
+                  <th className="px-6 py-4">Load</th>
                   <th className="px-6 py-4">Customer</th>
                   <th className="px-6 py-4">Status</th>
                   <th className="px-6 py-4">Driver</th>
@@ -555,18 +555,18 @@ export default function AdminBranchDetail() {
                     <p className="text-sm font-bold">No recent jobs for this branch</p>
                   </td></tr>
                 ) : b.recentJobs.map(j => (
-                  <tr key={j.id} onClick={() => navigate(`/admin/shipments/${j.id}`)}
+                  <tr key={j.id} onClick={() => navigate(`/admin/loads/${j.id}`)}
                     className="hover:bg-gray-50/80 cursor-pointer transition-all border-l-4 border-l-transparent hover:border-l-[#FFCC00]">
                     <td className="px-6 py-4 font-black text-gray-900 text-sm">{j.id}</td>
                     <td className="px-6 py-4 text-xs font-bold text-gray-600">{j.customer}</td>
                     <td className="px-6 py-4">
-                      <span className={`text-[9px] font-black px-2.5 py-1 rounded border uppercase tracking-widest ${jobStatusStyle(j.status)}`}>{j.status}</span>
+                      <span className={`text-xs font-black px-2.5 py-1 rounded border uppercase tracking-widest ${jobStatusStyle(j.status)}`}>{j.status}</span>
                     </td>
                     <td className="px-6 py-4 text-xs font-bold text-gray-600">{j.driver}</td>
                     <td className="px-6 py-4 text-xs font-bold text-gray-600">{j.eta}</td>
                     <td className="px-6 py-4 text-right">
-                      <button onClick={e => { e.stopPropagation(); navigate(`/admin/shipments/${j.id}`); }}
-                        className="text-[10px] font-black border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50 uppercase tracking-widest transition-all">
+                      <button onClick={e => { e.stopPropagation(); navigate(`/admin/loads/${j.id}`); }}
+                        className="text-xs font-black border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50 uppercase tracking-widest transition-all">
                         View →
                       </button>
                     </td>
@@ -580,3 +580,4 @@ export default function AdminBranchDetail() {
     </div>
   );
 }
+

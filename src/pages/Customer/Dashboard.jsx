@@ -9,10 +9,10 @@ import { useNavigate } from 'react-router-dom';
 export default function CustomerDashboard() {
   const navigate = useNavigate();
 
-  const shipments = [
-    { id: 'SHP-9042', origin: 'Sydney Terminal', dest: 'Melbourne Hub', status: 'In Transit', eta: '5:30 PM', progress: 65, alert: false, type: 'Freight' },
+  const Loads = [
+    { id: 'SHP-9042', origin: 'Sydney Terminal', dest: 'Melbourne Depot', status: 'In Transit', eta: '5:30 PM', progress: 65, alert: false, type: 'Freight' },
     { id: 'SHP-9048', origin: 'Melbourne WH-B', dest: 'Adelaide Port', status: 'At Pickup', eta: '9:00 AM', progress: 15, alert: false, type: 'LTL' },
-    { id: 'SHP-9031', origin: 'Brisbane Hub', dest: 'Sydney Terminal', status: 'Delayed +45m', eta: '7:15 PM', progress: 45, alert: true, type: 'Express' },
+    { id: 'SHP-9031', origin: 'Brisbane Depot', dest: 'Sydney Terminal', status: 'Delayed +45m', eta: '7:15 PM', progress: 45, alert: true, type: 'Express' },
   ];
 
   return (
@@ -36,7 +36,7 @@ export default function CustomerDashboard() {
             <div className="flex flex-col gap-4 w-full md:w-auto">
                <div className="grid grid-cols-2 gap-3">
                   <div className="bg-white/5 backdrop-blur-md p-4 rounded-hero-md border border-white/10 shadow-inner">
-                     <span className="hero-metadata text-gray-500 block mb-1">Active Shipments</span>
+                     <span className="hero-metadata text-gray-500 block mb-1">Active Loads</span>
                      <span className="text-2xl font-black text-brand">03</span>
                   </div>
                   <div className="bg-white/5 backdrop-blur-md p-4 rounded-hero-md border border-white/10 shadow-inner">
@@ -54,7 +54,7 @@ export default function CustomerDashboard() {
       {/* ── 2. Real-time Tracking Grid ── */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
          
-         {/* Live Shipment List */}
+         {/* Live Load List */}
          <div className="lg:col-span-2 space-y-5">
             <div className="flex justify-between items-end px-2">
                <div>
@@ -65,7 +65,7 @@ export default function CustomerDashboard() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-               {shipments.map(s => (
+               {Loads.map(s => (
                   <div key={s.id} onClick={() => navigate('/customer/tracking')} className={`bg-white rounded-[2rem] border p-6 flex flex-col gap-6 hover:shadow-2xl transition-all cursor-pointer group active:scale-[0.98] ${s.alert ? 'border-red-100 bg-red-50/10' : 'border-gray-50'}`}>
                      <div className="flex justify-between items-start">
                         <div className="flex items-center gap-3">
@@ -74,10 +74,10 @@ export default function CustomerDashboard() {
                            </div>
                            <div>
                               <p className="font-black text-gray-900 text-sm tracking-tight">{s.id}</p>
-                              <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{s.type}</span>
+                              <span className="text-xs font-black text-gray-400 uppercase tracking-widest">{s.type}</span>
                            </div>
                         </div>
-                        <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border ${s.status === 'Delivered' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : s.alert ? 'bg-red-50 text-red-500 border-red-200 animate-pulse' : 'bg-blue-50 text-blue-600 border-blue-100'}`}>
+                        <span className={`text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full border ${s.status === 'Delivered' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : s.alert ? 'bg-red-50 text-red-500 border-red-200 animate-pulse' : 'bg-blue-50 text-blue-600 border-blue-100'}`}>
                            {s.status}
                         </span>
                      </div>
@@ -96,8 +96,8 @@ export default function CustomerDashboard() {
 
                      <div className="mt-auto">
                         <div className="flex justify-between items-end mb-2">
-                           <span className="text-[10px] font-black uppercase text-gray-400 tracking-widest flex items-center gap-1.5"><Clock size={12}/> Progress</span>
-                           <span className="text-[10px] font-black text-gray-900 tracking-widest">ETA: {s.eta}</span>
+                           <span className="text-xs font-black uppercase text-gray-400 tracking-widest flex items-center gap-1.5"><Clock size={12}/> Progress</span>
+                           <span className="text-xs font-black text-gray-900 tracking-widest">ETA: {s.eta}</span>
                         </div>
                         <div className="w-full h-1.5 bg-gray-50 rounded-full overflow-hidden border border-gray-100/50">
                            <div className={`h-full transition-all duration-1000 ${s.alert ? 'bg-red-500' : 'bg-[#FACC15]'}`} style={{ width: `${s.progress}%` }}></div>
@@ -113,7 +113,7 @@ export default function CustomerDashboard() {
                   </div>
                   <div>
                      <p className="text-sm font-black text-gray-900 uppercase tracking-tight">Need another load?</p>
-                     <p className="text-[10px] font-bold text-gray-400 uppercase mt-1">Instant Manifest Creation</p>
+                     <p className="text-xs font-bold text-gray-400 uppercase mt-1">Instant Manifest Creation</p>
                   </div>
                </div>
             </div>
@@ -132,7 +132,7 @@ export default function CustomerDashboard() {
                      <Wallet size={14}/> Outstanding Balance
                   </h3>
                   <p className="text-4xl font-black text-gray-900 tracking-tighter">$4,887.50</p>
-                  <p className="text-[10px] font-bold text-gray-400 mt-2 uppercase tracking-widest">Across 3 Unpaid Invoices</p>
+                  <p className="text-xs font-bold text-gray-400 mt-2 uppercase tracking-widest">Across 3 Unpaid Invoices</p>
                </div>
                <button onClick={() => navigate('/customer/invoices')} className="w-full bg-[#111] hover:bg-black text-white py-4 rounded-2xl font-black uppercase text-xs tracking-widest transition-all active:scale-95 flex items-center justify-center gap-3">
                   Resolve Now <ArrowRight size={14}/>
@@ -149,7 +149,7 @@ export default function CustomerDashboard() {
                      </div>
                      <div>
                         <p className="text-xs font-black text-gray-900 uppercase">Live Assistance</p>
-                        <p className="text-[10px] font-bold text-gray-400 uppercase">Average response: 2m</p>
+                        <p className="text-xs font-bold text-gray-400 uppercase">Average response: 2m</p>
                      </div>
                   </div>
                   <button className="w-full py-3.5 text-xs font-black text-gray-900 uppercase tracking-widest border-2 border-gray-200 rounded-2xl hover:bg-white transition-all">Open Helpline</button>
@@ -163,3 +163,4 @@ export default function CustomerDashboard() {
     </div>
   );
 }
+

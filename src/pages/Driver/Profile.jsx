@@ -41,20 +41,20 @@ export default function DriverProfile() {
                       <Camera size={14} />
                    </button>
                 </div>
-                <p className="text-[10px] uppercase font-black text-gray-400 tracking-widest mt-4">Tap to update avatar</p>
+                <p className="text-xs uppercase font-black text-gray-400 tracking-widest mt-4">Tap to update avatar</p>
              </div>
              
              <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm space-y-4">
                <div>
-                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Full Name</label>
+                  <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Full Name</label>
                   <input type="text" defaultValue={user?.name || "James Mitchell"} className="w-full bg-gray-50 border border-gray-100 focus:border-[#FFCC00] focus:bg-white rounded-xl py-3.5 px-4 text-sm font-bold text-gray-900 shadow-sm transition-all outline-none" />
                </div>
                <div>
-                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Mobile Number</label>
+                  <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Mobile Number</label>
                   <input type="text" defaultValue="+61 412 345 678" className="w-full bg-gray-50 border border-gray-100 focus:border-[#FFCC00] focus:bg-white rounded-xl py-3.5 px-4 text-sm font-bold text-gray-900 shadow-sm transition-all outline-none" />
                </div>
                <div>
-                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2 px-1 flex items-center gap-1.5"><Mail size={12}/> Login Email</label>
+                  <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2 px-1 flex items-center gap-1.5"><Mail size={12}/> Login Email</label>
                   <input type="email" defaultValue={user?.email || "j.mitchell@hero.com.au"} readOnly className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3.5 px-4 text-sm font-bold text-gray-400 cursor-not-allowed outline-none shadow-inner" />
                </div>
                <button onClick={() => setActiveView('main')} className="w-full py-4 bg-[#FFCC00] hover:bg-[#E6B800] text-black font-black uppercase text-xs tracking-widest rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 mt-4 active:scale-95">Save Changes</button>
@@ -76,15 +76,15 @@ export default function DriverProfile() {
           <div className="p-5 flex flex-col gap-5 mt-2">
              <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm space-y-4">
                <div>
-                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Current Password</label>
+                 <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Current Password</label>
                  <input type="password" placeholder="••••••••" className="w-full bg-gray-50 border border-gray-100 focus:border-gray-300 focus:bg-white rounded-xl py-3.5 px-4 text-sm font-bold text-gray-900 shadow-sm transition-all outline-none" />
                </div>
                <div>
-                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">New Password</label>
+                 <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">New Password</label>
                  <input type="password" placeholder="New Password" className="w-full bg-gray-50 border border-gray-100 focus:border-gray-300 focus:bg-white rounded-xl py-3.5 px-4 text-sm font-bold text-gray-900 shadow-sm transition-all outline-none" />
                </div>
                <div>
-                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Confirm New Password</label>
+                 <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Confirm New Password</label>
                  <input type="password" placeholder="Confirm Password" className="w-full bg-gray-50 border border-gray-100 focus:border-gray-300 focus:bg-white rounded-xl py-3.5 px-4 text-sm font-bold text-gray-900 shadow-sm transition-all outline-none" />
                </div>
                <button onClick={() => setActiveView('main')} className="w-full py-4 bg-[#111] hover:bg-black text-[#FFCC00] font-black uppercase text-xs tracking-widest rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 mt-4 active:scale-95"><Shield size={16}/> Update Password</button>
@@ -151,15 +151,15 @@ export default function DriverProfile() {
                     <div className="min-w-0">
                       <p className="text-sm font-black text-gray-900 leading-none">{doc.name}</p>
                       <div className="flex items-center gap-2 mt-1">
-                        <span className="text-[8px] font-black text-gray-400 uppercase tracking-widest bg-gray-100 px-1.5 py-0.5 rounded leading-none">{doc.type}</span>
-                        <p className={`text-[10px] font-bold tracking-tight ${doc.ok ? 'text-gray-400' : 'text-red-700 font-black uppercase'}`}>
+                        <span className="text-xs font-black text-gray-400 uppercase tracking-widest bg-gray-100 px-1.5 py-0.5 rounded leading-none">{doc.type}</span>
+                        <p className={`text-xs font-bold tracking-tight ${doc.ok ? 'text-gray-400' : 'text-red-700 font-black uppercase'}`}>
                           {doc.ok ? `Expires ${doc.expiry}` : `Expired ${doc.expiry}`}
                         </p>
                       </div>
                     </div>
                   </div>
                   {!doc.ok && (
-                    <button className="bg-red-600 hover:bg-red-700 text-white text-[10px] font-black uppercase px-3 py-2 rounded-lg shadow-lg active:scale-95 transition-all">
+                    <button className="bg-red-600 hover:bg-red-700 text-white text-xs font-black uppercase px-3 py-2 rounded-lg shadow-lg active:scale-95 transition-all">
                       Renew
                     </button>
                   )}
@@ -188,11 +188,11 @@ export default function DriverProfile() {
              <div className="grid grid-cols-2 gap-3 mb-6">
                <div className="bg-[#FFCC00] rounded-2xl p-5 shadow-sm text-center">
                  <p className="text-3xl font-black text-black">128</p>
-                 <p className="text-[10px] font-black uppercase text-black/60 tracking-widest mt-1">Total Trips</p>
+                 <p className="text-xs font-black uppercase text-black/60 tracking-widest mt-1">Total Trips</p>
                </div>
                <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm text-center">
                  <p className="text-3xl font-black text-[#111]">94%</p>
-                 <p className="text-[10px] font-black uppercase text-gray-400 tracking-widest mt-1">On-Time</p>
+                 <p className="text-xs font-black uppercase text-gray-400 tracking-widest mt-1">On-Time</p>
                </div>
              </div>
              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col gap-4">
@@ -266,18 +266,18 @@ export default function DriverProfile() {
                    </div>
                    <div>
                      <h3 className="font-black text-white text-lg">GET HELP NOW</h3>
-                     <p className="text-[10px] font-medium text-gray-400 uppercase tracking-widest mt-0.5">Internal Team Support Ticket</p>
+                     <p className="text-xs font-medium text-gray-500 uppercase tracking-widest mt-0.5">Internal Team Support Ticket</p>
                    </div>
                 </div>
              </div>
              
              <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm space-y-5">
                <div>
-                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Subject</label>
+                  <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Subject</label>
                   <input type="text" placeholder="e.g. Schedule Error, App Glitch..." className="w-full bg-gray-50 border border-gray-100 focus:border-[#FFCC00] focus:bg-white rounded-xl py-3.5 px-4 text-sm font-bold text-gray-900 shadow-sm transition-all outline-none" />
                </div>
                <div>
-                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Description</label>
+                  <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Description</label>
                   <textarea placeholder="Describe the issue you're facing..." className="w-full min-h-[140px] resize-none bg-gray-50 border border-gray-100 focus:border-[#FFCC00] focus:bg-white rounded-xl py-3.5 px-4 text-sm font-bold text-gray-900 shadow-sm transition-all outline-none" />
                </div>
                <button onClick={() => { alert('Support ticket sent to Admin.'); setActiveView('main'); }} className="w-full py-4 bg-[#FFCC00] hover:bg-[#E6B800] text-black font-black uppercase text-xs tracking-widest rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 mt-4 active:scale-95">
@@ -304,7 +304,7 @@ export default function DriverProfile() {
           </div>
           <div>
             <h2 className="text-xl font-black tracking-tight text-white mb-0.5">{user?.name || 'James Mitchell'}</h2>
-            <p className="text-[10px] font-black text-[#FFCC00] uppercase tracking-widest">{user?.role || 'Heavy Vehicle Driver'} · {user?.branchName || 'Sydney Area'}</p>
+            <p className="text-xs font-black text-[#FFCC00] uppercase tracking-widest">{user?.role || 'Heavy Vehicle Driver'} · {user?.branchName || 'Sydney Area'}</p>
           </div>
         </div>
 
@@ -415,3 +415,5 @@ export default function DriverProfile() {
     </div>
   );
 }
+
+

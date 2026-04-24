@@ -7,10 +7,10 @@ import {
 } from 'lucide-react';
 
 const jobs = [
-  { id: 'SHP-20481', customer: 'Acme Corp',          route: 'Sydney Hub → Melbourne Hub',  driver: 'Jack Taylor',  vehicle: 'TRK-102', status: 'In Transit', progress: 65, eta: '2:45 PM', nextStop: 'Melbourne Terminal' },
-  { id: 'SHP-20482', customer: 'Tech Solutions Ltd',  route: 'Brisbane Depot → Sydney Hub',      driver: 'Liam Smith',  vehicle: 'VAN-08',   status: 'Arriving Soon',  progress: 85, eta: '4:30 PM', nextStop: 'Sydney Central Hub' },
-  { id: 'SHP-20483', customer: 'Global Traders',      route: 'Perth Hub → Adelaide Hub',   driver: 'Noah Williams',   vehicle: 'TRK-05',   status: 'In Sorting',   progress: 100, eta: 'Done', nextStop: 'Adelaide Terminal' },
-  { id: 'SHP-20484', customer: 'Express Goods',       route: 'Sydney Hub → Newcastle Depot',  driver: 'Unassigned',   vehicle: '-',        status: 'Unassigned',   progress: 0, eta: '-', nextStop: 'Newcastle Depot' },
+  { id: 'SHP-20481', customer: 'Acme Corp',          route: 'Sydney Depot → Melbourne Depot',  driver: 'Jack Taylor',  vehicle: 'TRK-102', status: 'In Transit', progress: 65, eta: '2:45 PM', nextStop: 'Melbourne Terminal' },
+  { id: 'SHP-20482', customer: 'Tech Solutions Ltd',  route: 'Brisbane Depot → Sydney Depot',      driver: 'Liam Smith',  vehicle: 'VAN-08',   status: 'Arriving Soon',  progress: 85, eta: '4:30 PM', nextStop: 'Sydney Central Depot' },
+  { id: 'SHP-20483', customer: 'Global Traders',      route: 'Perth Depot → Adelaide Depot',   driver: 'Noah Williams',   vehicle: 'TRK-05',   status: 'In Sorting',   progress: 100, eta: 'Done', nextStop: 'Adelaide Terminal' },
+  { id: 'SHP-20484', customer: 'Express Goods',       route: 'Sydney Depot → Newcastle Depot',  driver: 'Unassigned',   vehicle: '-',        status: 'Unassigned',   progress: 0, eta: '-', nextStop: 'Newcastle Depot' },
 ];
 
 function StatusBadge({ status }) {
@@ -20,7 +20,7 @@ function StatusBadge({ status }) {
     'In Sorting': 'bg-violet-100 text-violet-700 border-violet-200',
     'Unassigned': 'badge-gray',
   };
-  return <span className={`badge ${map[status] ?? 'badge-gray'} text-[10px] font-black uppercase tracking-widest`}>{status}</span>;
+  return <span className={`badge ${map[status] ?? 'badge-gray'} text-xs font-black uppercase tracking-widest`}>{status}</span>;
 }
 
 export default function DispatchDashboard() {
@@ -76,10 +76,10 @@ export default function DispatchDashboard() {
               <Zap size={14}/> Auto-Assign
            </button>
            <button 
-             onClick={() => navigate('/dispatch/shipments/create')} 
+             onClick={() => navigate('/dispatch/loads/create')} 
              className="bg-[#FFCC00] hover:bg-[#E6B800] text-black px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm"
           >
-             <Plus size={16} strokeWidth={3} /> Create Shipment
+             <Plus size={16} strokeWidth={3} /> Create Load
           </button>
         </div>
       </div>
@@ -99,19 +99,19 @@ export default function DispatchDashboard() {
       {/* ── KPI Cards ── */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 px-2 mb-6">
         <div className="card p-5 flex items-center justify-between">
-          <div><p className="hero-metadata leading-tight text-hero-neutral">Active Shipments</p><p className="text-2xl font-black text-hero-dark mt-1.5 leading-none">42</p></div>
+          <div><p className="hero-metadata leading-tight text-gray-600">Active Loads</p><p className="text-2xl font-black text-hero-dark mt-1.5 leading-none">42</p></div>
           <div className="w-10 h-10 rounded-hero-sm border border-blue-100 flex items-center justify-center bg-blue-50 text-blue-500"><Package size={20}/></div>
         </div>
         <div className="card p-5 flex items-center justify-between">
-          <div><p className="hero-metadata leading-tight text-hero-neutral">Drivers On Duty</p><p className="text-2xl font-black text-hero-dark mt-1.5 leading-none">18 <span className="text-sm text-hero-neutral tracking-tighter">/24</span></p></div>
+          <div><p className="hero-metadata leading-tight text-gray-600">Drivers On Duty</p><p className="text-2xl font-black text-hero-dark mt-1.5 leading-none">18 <span className="text-sm text-gray-600 tracking-tighter">/24</span></p></div>
           <div className="w-10 h-10 rounded-hero-sm border border-hero-success/20 flex items-center justify-center bg-hero-success/10 text-hero-success"><Truck size={20}/></div>
         </div>
         <div className="card p-5 flex items-center justify-between">
-          <div><p className="hero-metadata leading-tight text-hero-neutral">Average Delay</p><p className="text-2xl font-black text-hero-warning mt-1.5 leading-none">+4<span className="text-sm font-bold text-hero-neutral tracking-tighter">m</span></p></div>
+          <div><p className="hero-metadata leading-tight text-gray-600">Average Delay</p><p className="text-2xl font-black text-hero-warning mt-1.5 leading-none">+4<span className="text-sm font-bold text-gray-600 tracking-tighter">m</span></p></div>
           <div className="w-10 h-10 rounded-hero-sm border border-hero-warning/20 flex items-center justify-center bg-hero-warning/10 text-hero-warning"><Clock size={20}/></div>
         </div>
         <div className="card p-5 flex items-center justify-between">
-          <div><p className="hero-metadata leading-tight text-hero-neutral">Deliveries Completed</p><p className="text-2xl font-black text-hero-dark mt-1.5 leading-none">92%</p></div>
+          <div><p className="hero-metadata leading-tight text-gray-600">Deliveries Completed</p><p className="text-2xl font-black text-hero-dark mt-1.5 leading-none">92%</p></div>
           <div className="w-10 h-10 rounded-hero-sm border border-violet-100 flex items-center justify-center bg-violet-50 text-violet-500"><CheckCircle2 size={20}/></div>
         </div>
       </div>
@@ -145,9 +145,9 @@ export default function DispatchDashboard() {
 
               <div className="overflow-x-auto flex-1">
                  <table className="w-full text-left">
-                    <thead className="bg-[#FAFAFA] text-[10px] font-bold text-gray-500 uppercase tracking-widest border-b border-gray-100">
+                    <thead className="bg-[#FAFAFA] text-xs font-bold text-gray-500 uppercase tracking-widest border-b border-gray-100">
                        <tr>
-                          <th className="px-6 py-4">Shipment</th>
+                          <th className="px-6 py-4">Load</th>
                           <th className="px-6 py-4">Logistics Flow</th>
                           <th className="px-6 py-4">Resource</th>
                           <th className="px-6 py-4 text-right">Actions</th>
@@ -156,39 +156,39 @@ export default function DispatchDashboard() {
                     <tbody className="divide-y divide-gray-100">
                        {filteredAndSortedJobs.length > 0 ? (
                          filteredAndSortedJobs.map(job => (
-                           <tr key={job.id} className="hover:bg-gray-50 transition-colors group cursor-pointer" onClick={() => navigate(`/dispatch/shipments/${job.id}`)}>
+                           <tr key={job.id} className="hover:bg-gray-50 transition-colors group cursor-pointer" onClick={() => navigate(`/dispatch/loads/${job.id}`)}>
                               <td className="px-6 py-4">
                                  <div className="font-bold text-[#111] text-sm">{job.id}</div>
-                                 <div className="text-[10px] text-gray-400 uppercase font-bold tracking-widest mt-0.5 truncate max-w-[150px]">{job.customer}</div>
+                                 <div className="text-xs text-gray-400 uppercase font-bold tracking-widest mt-0.5 truncate max-w-[150px]">{job.customer}</div>
                               </td>
                               <td className="px-6 py-4">
                                  <p className="text-xs font-bold text-gray-700 mb-1.5">{job.route}</p>
                                  <div className="flex items-center gap-3">
                                     <StatusBadge status={job.status} />
-                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1.5"><MapPin size={12}/> {job.nextStop}</span>
+                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1.5"><MapPin size={12}/> {job.nextStop}</span>
                                  </div>
                               </td>
                               <td className="px-6 py-4">
                                  <div className="flex items-center gap-3">
-                                    <div className={`w-9 h-9 rounded border-2 border-transparent flex items-center justify-center font-black text-[10px] shrink-0 transition-colors ${job.driver === 'Unassigned' ? 'bg-red-50 text-red-500 border border-red-100' : 'bg-[#111] text-[#FFCC00] group-hover:border-[#FFCC00]'}`}>
+                                    <div className={`w-9 h-9 rounded border-2 border-transparent flex items-center justify-center font-black text-xs shrink-0 transition-colors ${job.driver === 'Unassigned' ? 'bg-red-50 text-red-500 border border-red-100' : 'bg-[#111] text-[#FFCC00] group-hover:border-[#FFCC00]'}`}>
                                        {job.driver === 'Unassigned' ? '?' : job.driver[0]}
                                     </div>
                                     <div>
                                        <div className={`text-xs font-bold leading-tight ${job.driver === 'Unassigned' ? 'text-red-500' : 'text-[#111]'}`}>{job.driver}</div>
-                                       <div className={`text-[9px] uppercase font-bold tracking-widest mt-0.5 ${job.vehicle === '-' ? 'text-gray-300' : 'text-gray-400'}`}>{job.vehicle}</div>
+                                       <div className={`text-xs uppercase font-bold tracking-widest mt-0.5 ${job.vehicle === '-' ? 'text-gray-300' : 'text-gray-400'}`}>{job.vehicle}</div>
                                     </div>
                                  </div>
                               </td>
                               <td className="px-6 py-4 text-right">
                                  {job.status === 'Arriving Soon' ? (
                                     <button 
-                                      onClick={(e) => { e.stopPropagation(); alert(`Received ${job.id} into SYDNEY HUB`); }}
-                                      className="bg-[#111] text-[#FFCC00] text-[9px] font-black uppercase px-4 py-2 rounded-lg shadow-lg hover:bg-black transition-all tracking-[0.1em] whitespace-nowrap"
+                                      onClick={(e) => { e.stopPropagation(); alert(`Received ${job.id} into SYDNEY Depot`); }}
+                                      className="bg-[#111] text-[#FFCC00] text-xs font-black uppercase px-4 py-2 rounded-lg shadow-lg hover:bg-black transition-all tracking-[0.1em] whitespace-nowrap"
                                     >
-                                       Check-in Hub
+                                       Check-in Depot
                                     </button>
                                  ) : (
-                                    <button className="text-[10px] font-black text-blue-600 hover:text-white border border-blue-200 hover:bg-blue-600 px-4 py-2 rounded-lg transition-all shadow-sm uppercase tracking-widest whitespace-nowrap" onClick={(e)=>{e.stopPropagation(); navigate(`/dispatch/shipments/${job.id}`);}}>
+                                    <button className="text-xs font-black text-blue-600 hover:text-white border border-blue-200 hover:bg-blue-600 px-4 py-2 rounded-lg transition-all shadow-sm uppercase tracking-widest whitespace-nowrap" onClick={(e)=>{e.stopPropagation(); navigate(`/dispatch/loads/${job.id}`);}}>
                                        Manage Next Leg
                                     </button>
                                  )}
@@ -197,7 +197,7 @@ export default function DispatchDashboard() {
                          ))
                        ) : (
                          <tr>
-                            <td colSpan="4" className="px-6 py-12 text-center text-gray-400 font-bold uppercase tracking-widest text-xs">No matching shipments found</td>
+                            <td colSpan="4" className="px-6 py-12 text-center text-gray-400 font-bold uppercase tracking-widest text-xs">No matching Loads found</td>
                          </tr>
                        )}
                     </tbody>
@@ -222,12 +222,12 @@ export default function DispatchDashboard() {
                     <h4 className="text-xs font-bold uppercase text-white tracking-widest flex items-center gap-2">
                        <MapPin size={14} className="text-[#FFCC00]"/> Network Map
                     </h4>
-                    <span className="text-[10px] font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded border border-emerald-400/20 uppercase tracking-widest flex items-center gap-1.5">
+                    <span className="text-xs font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded border border-emerald-400/20 uppercase tracking-widest flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Live Connect
                     </span>
                  </div>
                  <div className="text-center">
-                    <button className="bg-white/10 hover:bg-white/20 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-2.5 rounded-lg transition-all backdrop-blur-sm border border-white/10">Open Dashboard</button>
+                    <button className="bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-widest px-4 py-2.5 rounded-lg transition-all backdrop-blur-sm border border-white/10">Open Dashboard</button>
                  </div>
               </div>
            </div>
@@ -246,7 +246,7 @@ export default function DispatchDashboard() {
                       <div className={`mt-1.5 w-2 h-2 shrink-0 rounded-full animate-pulse ${a.level === 'Critical' ? 'bg-red-500' : 'bg-amber-500'}`}></div>
                       <div>
                          <p className="text-xs font-bold text-[#111] leading-snug">{a.msg}</p>
-                         <p className="text-[10px] font-bold text-gray-400 mt-1 uppercase tracking-widest">{a.time} • {a.level}</p>
+                         <p className="text-xs font-bold text-gray-400 mt-1 uppercase tracking-widest">{a.time} • {a.level}</p>
                       </div>
                    </div>
                  ))}
@@ -260,3 +260,5 @@ export default function DispatchDashboard() {
     </div>
   );
 }
+
+

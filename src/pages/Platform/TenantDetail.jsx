@@ -21,7 +21,7 @@ export default function TenantDetail() {
     country: 'Australia',
     plan: 'Professional',
     joined: '12 Jan 2025',
-    stats: { admins: 2, dispatchers: 5, drivers: 18, shipments: 342 }
+    stats: { admins: 2, dispatchers: 5, drivers: 18, Loads: 342 }
   };
 
   return (
@@ -131,6 +131,38 @@ export default function TenantDetail() {
               <button onClick={() => setModal('activity')} className="w-full btn bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-700 justify-start h-11">View Company User Activity</button>
             </div>
           </div>
+
+          {/* New Niche Configuration Card */}
+          <div className="bg-white rounded-2xl border border-blue-100 shadow-sm p-5 bg-gradient-to-b from-white to-blue-50/30">
+            <div className="flex items-center gap-2 mb-4">
+               <Shield size={16} className="text-blue-600" />
+               <p className="text-xs text-blue-900 font-black uppercase tracking-wider">Service Niches Configuration</p>
+            </div>
+            
+            <p className="text-xs text-blue-700/70 font-medium mb-4 leading-relaxed italic">
+              Toggle specific niche features for this tenant. This dynamically updates their Load forms and asset management modules.
+            </p>
+
+            <div className="space-y-3">
+              {[
+                { id: 'car', label: 'Car Transport', desc: 'VIN tracking, Rego, Dimensions' },
+                { id: 'freight', label: 'General Freight', desc: 'Pallets, Weight, Cubic measurements' },
+                { id: 'dangerous', label: 'Dangerous Goods', desc: 'UN Numbers, Hazard classes, Certs' }
+              ].map(niche => (
+                <label key={niche.id} className="flex items-start gap-3 p-3 bg-white border border-gray-200 rounded-xl cursor-pointer hover:border-blue-400 transition-all group shadow-sm">
+                  <input type="checkbox" className="mt-1 w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" defaultChecked={niche.id === 'car'} />
+                  <div>
+                    <p className="text-sm font-bold text-gray-900 group-hover:text-blue-700">{niche.label}</p>
+                    <p className="text-xs text-gray-500 font-medium">{niche.desc}</p>
+                  </div>
+                </label>
+              ))}
+            </div>
+
+            <button className="w-full mt-4 btn bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-lg shadow-blue-200 transition-all active:scale-[0.98]">
+              Update Feature Access
+            </button>
+          </div>
         </div>
       </div>
       {/* ── Action Modals ── */}
@@ -217,9 +249,9 @@ export default function TenantDetail() {
                         <Package size={18} />
                      </div>
                      <div>
-                        <p className="text-sm font-semibold text-gray-900 border-b border-gray-50 pb-1 mb-1.5"><span className="text-red-600">Deleted</span> Shipment #SHD-9021</p>
+                        <p className="text-sm font-semibold text-gray-900 border-b border-gray-50 pb-1 mb-1.5"><span className="text-red-600">Deleted</span> Load #SHD-9021</p>
                         <p className="text-xs text-gray-500">Action performed by <span className="font-semibold text-gray-700">Dispatcher John</span> from IP 192.168.1.4</p>
-                        <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mt-1.5">Today, 10:15 AM</p>
+                        <p className="text-xs uppercase font-bold text-gray-400 tracking-wider mt-1.5">Today, 10:15 AM</p>
                      </div>
                   </div>
                   <div className="p-5 flex items-start gap-4 hover:bg-gray-50 transition-colors">
@@ -229,7 +261,7 @@ export default function TenantDetail() {
                      <div>
                         <p className="text-sm font-semibold text-gray-900 border-b border-gray-50 pb-1 mb-1.5"><span className="text-emerald-600">Invited User</span> Mike (Driver)</p>
                         <p className="text-xs text-gray-500">Action performed by <span className="font-semibold text-gray-700">Company Admin</span> from IP 192.168.1.4</p>
-                        <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mt-1.5">Yesterday, 4:30 PM</p>
+                        <p className="text-xs uppercase font-bold text-gray-400 tracking-wider mt-1.5">Yesterday, 4:30 PM</p>
                      </div>
                   </div>
                   <div className="p-5 flex items-start gap-4 hover:bg-gray-50 transition-colors">
@@ -239,7 +271,7 @@ export default function TenantDetail() {
                      <div>
                         <p className="text-sm font-semibold text-gray-900 border-b border-gray-50 pb-1 mb-1.5"><span className="text-blue-600">Completed Trip</span> Sydney Route #4</p>
                         <p className="text-xs text-gray-500">Action performed by <span className="font-semibold text-gray-700">Driver Sam</span> via Mobile App (iOS 17)</p>
-                        <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mt-1.5">Yesterday, 9:00 AM</p>
+                        <p className="text-xs uppercase font-bold text-gray-400 tracking-wider mt-1.5">Yesterday, 9:00 AM</p>
                      </div>
                   </div>
                </div>
@@ -254,3 +286,4 @@ export default function TenantDetail() {
     </div>
   );
 }
+

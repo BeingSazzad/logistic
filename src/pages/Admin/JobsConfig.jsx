@@ -12,11 +12,11 @@ export default function AdminJobsConfig() {
             <Settings2 size={20} />
           </div>
           <div>
-            <h1 className="hero-h1">Global Shipment Monitor</h1>
-            <p className="hero-body text-hero-neutral mt-1">Configure systemic status flows, automation triggers, and POD compliance requirements</p>
+            <h1 className="hero-h1">Global Load Monitor</h1>
+            <p className="hero-body text-gray-600 mt-1">Configure systemic status flows, automation triggers, and POD compliance requirements</p>
           </div>
         </div>
-        <button className="bg-hero-dark hover:bg-black text-brand px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shadow-sm">
+        <button className="bg-hero-dark hover:bg-black text-brand px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-sm">
           Save System Global Config
         </button>
       </div>
@@ -25,17 +25,17 @@ export default function AdminJobsConfig() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 px-2">
         
-        {/* Shipment Architecture (Left 8 Units) */}
+        {/* Load Architecture (Left 8 Units) */}
         <div className="lg:col-span-8 space-y-8">
           
           {/* Active Status Pipelines */}
           <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden flex flex-col group hover:border-brand/40 transition-all">
              <div className="p-6 border-b border-gray-50 flex justify-between items-center bg-gray-50/30">
                 <div>
-                  <h3 className="text-xs font-black text-hero-dark uppercase tracking-widest">Shipment Status Pipelines</h3>
-                  <p className="text-[10px] text-gray-400 font-bold uppercase mt-1">Core logistics lifecycle control</p>
+                  <h3 className="text-xs font-black text-hero-dark uppercase tracking-widest">Load Status Pipelines</h3>
+                  <p className="text-xs text-gray-400 font-bold uppercase mt-1">Core logistics lifecycle control</p>
                 </div>
-                <button className="text-blue-600 hover:text-blue-700 text-[10px] font-black uppercase tracking-widest flex items-center gap-2"><Plus size={14}/> Define New Status</button>
+                <button className="text-blue-600 hover:text-blue-700 text-xs font-black uppercase tracking-widest flex items-center gap-2"><Plus size={14}/> Define New Status</button>
              </div>
              
              <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -52,7 +52,7 @@ export default function AdminJobsConfig() {
                         </div>
                         <div>
                            <p className="text-xs font-black text-hero-dark uppercase tracking-tight">{type.name}</p>
-                           <p className="text-[10px] font-bold text-gray-400 uppercase mt-0.5">{type.desc}</p>
+                           <p className="text-xs font-bold text-gray-400 uppercase mt-0.5">{type.desc}</p>
                         </div>
                      </div>
                      <div className="relative inline-flex items-center cursor-pointer">
@@ -68,7 +68,7 @@ export default function AdminJobsConfig() {
           <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden flex flex-col group hover:border-hero-success/40 transition-all">
              <div className="p-6 border-b border-gray-50 bg-gray-50/30">
                 <h3 className="text-xs font-black text-hero-dark uppercase tracking-widest">Compliance & POD Requirements</h3>
-                <p className="text-[10px] text-gray-400 font-bold uppercase mt-1">Proof of Delivery (POD) Validation Rules</p>
+                <p className="text-xs text-gray-400 font-bold uppercase mt-1">Proof of Delivery (POD) Validation Rules</p>
              </div>
              <div className="p-8 space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -83,12 +83,12 @@ export default function AdminJobsConfig() {
                            <input type="checkbox" defaultChecked className="w-4 h-4 rounded border-gray-300 accent-hero-success cursor-pointer" />
                         </div>
                         <p className="text-xs font-black text-hero-dark uppercase tracking-widest">{pod.label}</p>
-                        <p className="text-[9px] font-bold text-gray-400 uppercase leading-relaxed">{pod.desc}</p>
+                        <p className="text-xs font-bold text-gray-400 uppercase leading-relaxed">{pod.desc}</p>
                      </div>
                    ))}
                 </div>
-                <div className="p-4 bg-gray-800 rounded-2xl text-[10px] text-gray-300 font-bold uppercase tracking-widest leading-relaxed">
-                   <p className="flex items-center gap-2"><Info size={14} className="text-brand"/> Automated validation is active. Non-compliant shipments will be flagged as a "Delivery Issue" automatically after 30 minutes of delivery completion.</p>
+                <div className="p-4 bg-gray-800 rounded-2xl text-xs text-gray-300 font-bold uppercase tracking-widest leading-relaxed">
+                   <p className="flex items-center gap-2"><Info size={14} className="text-brand"/> Automated validation is active. Non-compliant Loads will be flagged as a "Delivery Issue" automatically after 30 minutes of delivery completion.</p>
                 </div>
              </div>
           </div>
@@ -106,7 +106,7 @@ export default function AdminJobsConfig() {
               
               <div className="space-y-6 relative z-10">
                  <div>
-                    <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest block mb-2">Default Calculation Model</label>
+                    <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2">Default Calculation Model</label>
                     <select className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs font-black uppercase tracking-widest focus:border-brand focus:outline-none transition-all">
                        <option>Flat Fee + Distance</option>
                        <option>Strict Distance Matrix</option>
@@ -114,14 +114,14 @@ export default function AdminJobsConfig() {
                     </select>
                  </div>
                  <div>
-                    <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest block mb-2">Base Minimum (AUD)</label>
+                    <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2">Base Minimum (AUD)</label>
                     <div className="relative">
                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-brand font-black text-xs">$</span>
                        <input type="number" defaultValue="250.00" className="w-full bg-white/5 border border-white/10 rounded-xl pl-8 pr-4 py-3 text-xs font-black uppercase tracking-widest focus:border-brand focus:outline-none transition-all" />
                     </div>
                  </div>
                  <div className="pt-4">
-                    <button className="w-full bg-brand text-hero-dark py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:scale-[1.02] transition-all active:scale-95 shadow-xl">Update Logic Matrix</button>
+                    <button className="w-full bg-brand text-hero-dark py-4 rounded-xl text-xs font-black uppercase tracking-widest hover:scale-[1.02] transition-all active:scale-95 shadow-xl">Update Logic Matrix</button>
                  </div>
               </div>
            </div>
@@ -136,7 +136,7 @@ export default function AdminJobsConfig() {
                    { label: 'E-Manifest Generation', enabled: true },
                  ].map((t, i) => (
                     <div key={i} className="flex justify-between items-center py-2">
-                       <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{t.label}</span>
+                       <span className="text-xs font-black text-gray-500 uppercase tracking-widest">{t.label}</span>
                        <div className="relative inline-flex items-center cursor-pointer">
                           <input type="checkbox" defaultChecked={t.enabled} className="sr-only peer" />
                           <div className="w-8 h-4 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-blue-600"></div>
@@ -152,4 +152,6 @@ export default function AdminJobsConfig() {
     </div>
   );
 }
+
+
 

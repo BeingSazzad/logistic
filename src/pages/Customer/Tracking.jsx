@@ -16,7 +16,7 @@ const trips = [
     steps: [
       { city: 'Sydney CBD', label: 'Collected from Customer', done: true },
       { city: 'Sydney Depot', label: 'Processing at Depot', done: true },
-      { city: 'Goulburn Hub', label: 'Departed Central Hub', done: true },
+      { city: 'Goulburn Depot', label: 'Departed Central Depot', done: true },
       { city: 'Albury', label: 'Inter-city Transit', current: true },
       { city: 'Melbourne Depot', label: 'Awaiting Arrival', done: false },
       { city: 'Melbourne CBD', label: 'Out for Delivery', done: false }
@@ -29,12 +29,12 @@ const trips = [
     status: 'Out for delivery', 
     currentCity: 'Melbourne (St Kilda)',
     progress: 92, 
-    from: 'Melbourne Hub', 
+    from: 'Melbourne Depot', 
     to: 'St Kilda', 
     phone: '0423 567 890',
     steps: [
-      { city: 'Brisbane Hub', label: 'Line-haul Departed', done: true },
-      { city: 'Melbourne Hub', label: 'Sorting at Hub', done: true },
+      { city: 'Brisbane Depot', label: 'Line-haul Departed', done: true },
+      { city: 'Melbourne Depot', label: 'Sorting at Depot', done: true },
       { city: 'Melbourne Depot', label: 'Staged for Delivery', done: true },
       { city: 'Melbourne CBD', label: 'With Courier', current: true }
     ]
@@ -59,11 +59,11 @@ export default function CustomerTracking() {
     <div className="flex flex-col gap-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Live Tracking</h1>
-        <p className="text-sm text-gray-500 mt-1">{trips.length} active shipments</p>
+        <p className="text-sm text-gray-500 mt-1">{trips.length} active Loads</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Shipment selector */}
+        {/* Load selector */}
         <div className="lg:col-span-1 flex flex-col gap-3">
           {trips.map(t => (
             <button key={t.id} onClick={() => setSelected(t)}
@@ -71,7 +71,7 @@ export default function CustomerTracking() {
               <p className="font-bold text-gray-900 text-sm">{t.id}</p>
               <div className="flex items-center gap-1 text-xs text-gray-500 mt-1"><MapPin size={10} />{t.from} → {t.to}</div>
               <div className="flex justify-between items-center mt-2">
-                <span className="text-[10px] font-black uppercase text-yellow-700 bg-yellow-100 px-2 py-0.5 rounded-full">{t.status}</span>
+                <span className="text-xs font-black uppercase text-yellow-700 bg-yellow-100 px-2 py-0.5 rounded-full">{t.status}</span>
                 <span className="text-xs text-gray-500 flex items-center gap-1"><Clock size={10} /> ETA {t.eta}</span>
               </div>
               <div className="w-full h-1.5 bg-gray-100 rounded-full mt-2 overflow-hidden">
@@ -105,7 +105,7 @@ export default function CustomerTracking() {
             </div>
           </div>
 
-            {/* Trip Detail & Network Journey (Hub-to-Hub) */}
+            {/* Trip Detail & Network Journey (Depot-to-Depot) */}
             <div className="bg-white rounded-3xl border border-gray-100 shadow-xl overflow-hidden">
               <div className="p-8 border-b border-gray-100 flex justify-between items-start bg-gradient-to-r from-gray-50 to-white">
                 <div>
@@ -115,15 +115,15 @@ export default function CustomerTracking() {
                   </p>
                 </div>
                 <div className="text-right">
-                  <span className="text-black bg-yellow-400 text-[10px] font-black uppercase px-4 py-2 rounded-xl shadow-lg shadow-yellow-400/20">{selected.status}</span>
+                  <span className="text-black bg-yellow-400 text-xs font-black uppercase px-4 py-2 rounded-xl shadow-lg shadow-yellow-400/20">{selected.status}</span>
                   <div className="mt-3 flex flex-col items-end">
-                     <p className="text-[10px] font-black text-brand uppercase tracking-widest">Active Node</p>
+                     <p className="text-xs font-black text-brand uppercase tracking-widest">Active Node</p>
                      <p className="text-xs font-bold text-gray-900 mt-1">{selected.currentCity}</p>
                   </div>
                 </div>
               </div>
 
-              {/* Dynamic Network Path (Hub to Hub) */}
+              {/* Dynamic Network Path (Depot to Depot) */}
               <div className="p-10 bg-white">
                  <div className="relative space-y-12">
                     {/* The Progress Line */}
@@ -141,10 +141,10 @@ export default function CustomerTracking() {
                          {/* Content */}
                          <div className={`flex-1 transition-all duration-500 ${step.done ? 'opacity-60' : step.current ? 'opacity-100' : 'opacity-20'}`}>
                             <div className="flex justify-between items-center">
-                               <p className={`text-[10px] font-black uppercase tracking-[0.2em] ${step.current ? 'text-yellow-600' : 'text-gray-400'}`}>
+                               <p className={`text-xs font-black uppercase tracking-[0.2em] ${step.current ? 'text-yellow-600' : 'text-gray-400'}`}>
                                   {step.city}
                                </p>
-                               {step.done && <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded tracking-widest uppercase">Scanned</span>}
+                               {step.done && <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded tracking-widest uppercase">Scanned</span>}
                             </div>
                             
                             <div className={`mt-2 p-4 rounded-2xl border transition-all ${step.current ? 'bg-gray-900 border-gray-800 shadow-2xl translate-x-1' : 'bg-gray-50/50 border-gray-100'}`}>
@@ -152,7 +152,7 @@ export default function CustomerTracking() {
                                   {step.label}
                                </p>
                                {step.current && (
-                                  <p className="text-[10px] font-medium text-gray-400 mt-2 leading-relaxed">
+                                  <p className="text-xs font-medium text-gray-500 mt-2 leading-relaxed">
                                      Our automated sorting facility is preparing this parcel for the next inter-city line-haul truck.
                                   </p>
                                )}
@@ -170,17 +170,17 @@ export default function CustomerTracking() {
                        <Truck size={22} />
                     </div>
                     <div>
-                       <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">In Transit via Hub</p>
+                       <p className="text-xs font-black text-gray-400 uppercase tracking-widest">In Transit via Depot</p>
                        <p className="text-xs font-bold text-gray-900">Consolidated Loading</p>
                     </div>
                  </div>
                  <div className="text-right">
-                    <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Network Speed</p>
+                    <p className="text-xs font-black text-gray-400 uppercase tracking-widest">Network Speed</p>
                     <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest">Standard Express</p>
                  </div>
               </div>
 
-              <div className="p-5 bg-black text-[#FFCC00] text-[10px] font-black uppercase tracking-[0.3em] text-center flex items-center justify-center gap-4 group">
+              <div className="p-5 bg-black text-[#FFCC00] text-xs font-black uppercase tracking-[0.3em] text-center flex items-center justify-center gap-4 group">
                  <div className="w-2 h-2 rounded-full bg-[#FFCC00] animate-pulse"></div>
                  AUSTRALIAN LOGISTICS NETWORK LIVE FEED
               </div>
@@ -190,3 +190,5 @@ export default function CustomerTracking() {
     </div>
   );
 }
+
+

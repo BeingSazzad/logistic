@@ -6,12 +6,12 @@ import {
 } from 'lucide-react';
 
 const RAW_USERS = [
-  { id: 'USR-01', name: 'Sarah Mitchell', email: 'sarah.m@hero.com', role: 'Dispatcher', branch: 'Sydney Central Hub', status: 'Active',  lastLogin: '10 mins ago', access: 'Full' },
-  { id: 'USR-02', name: 'Jack Taylor',    email: 'jack.t@hero.com',  role: 'Driver',     branch: 'Sydney Central Hub', status: 'Active',  lastLogin: '2 days ago',  access: 'Mobile Only' },
-  { id: 'USR-03', name: 'Oliver Brown',   email: 'oliver.b@hero.com',role: 'Dispatcher', branch: 'Melbourne Hub',      status: 'Offline', lastLogin: '1 week ago',  access: 'Full' },
-  { id: 'USR-04', name: 'Liam Smith',     email: 'liam.s@hero.com',  role: 'Driver',     branch: 'Sydney Central Hub', status: 'Active',  lastLogin: '1 hr ago',    access: 'Mobile Only' },
+  { id: 'USR-01', name: 'Sarah Mitchell', email: 'sarah.m@hero.com', role: 'Dispatcher', branch: 'Sydney Central Depot', status: 'Active',  lastLogin: '10 mins ago', access: 'Full' },
+  { id: 'USR-02', name: 'Jack Taylor',    email: 'jack.t@hero.com',  role: 'Driver',     branch: 'Sydney Central Depot', status: 'Active',  lastLogin: '2 days ago',  access: 'Mobile Only' },
+  { id: 'USR-03', name: 'Oliver Brown',   email: 'oliver.b@hero.com',role: 'Dispatcher', branch: 'Melbourne Depot',      status: 'Offline', lastLogin: '1 week ago',  access: 'Full' },
+  { id: 'USR-04', name: 'Liam Smith',     email: 'liam.s@hero.com',  role: 'Driver',     branch: 'Sydney Central Depot', status: 'Active',  lastLogin: '1 hr ago',    access: 'Mobile Only' },
   { id: 'USR-05', name: 'Michael Adams',  email: 'mike.a@hero.com',  role: 'Accounts',   branch: 'All Branches',       status: 'Active',  lastLogin: 'Now',         access: 'Full' },
-  { id: 'USR-06', name: 'Noah Williams',  email: 'noah.w@hero.com',  role: 'Driver',     branch: 'Melbourne Hub',      status: 'Active',  lastLogin: '30 mins ago', access: 'Mobile Only' },
+  { id: 'USR-06', name: 'Noah Williams',  email: 'noah.w@hero.com',  role: 'Driver',     branch: 'Melbourne Depot',      status: 'Active',  lastLogin: '30 mins ago', access: 'Mobile Only' },
   { id: 'USR-07', name: 'Emma Stevens',   email: 'emma.s@hero.com',  role: 'Warehouse',  branch: 'Brisbane Port',      status: 'Offline', lastLogin: '3 days ago',  access: 'Floor Devices' },
 ];
 
@@ -33,7 +33,7 @@ export default function AdminUsers() {
   const [sortKey, setSortKey] = useState('name');
   const [sortOrder, setSortOrder] = useState('asc');
 
-  const branches = ['All', 'Sydney Central Hub', 'Melbourne Hub', 'Brisbane Port', 'All Branches'];
+  const branches = ['All', 'Sydney Central Depot', 'Melbourne Depot', 'Brisbane Port', 'All Branches'];
 
   const filtered = useMemo(() => {
     return RAW_USERS.filter(u => {
@@ -56,7 +56,7 @@ export default function AdminUsers() {
           </div>
           <div>
             <h1 className="hero-h1">Identity & Access</h1>
-            <p className="hero-body text-hero-neutral mt-1">Manage platform operators, roles, and branch permissions.</p>
+            <p className="hero-body text-gray-600 mt-1">Manage platform operators, roles, and branch permissions.</p>
           </div>
         </div>
         <button onClick={() => navigate('/admin/users/invite')} className="btn btn-primary">
@@ -78,7 +78,7 @@ export default function AdminUsers() {
           </div>
           <div className="flex gap-3 w-full xl:w-auto">
             <div className="relative w-full xl:w-56 group">
-              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-hero-neutral pointer-events-none" size={15} />
+              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600 pointer-events-none" size={15} />
               <select 
                 value={branchFilter} 
                 onChange={e => setBranchFilter(e.target.value)}
@@ -88,7 +88,7 @@ export default function AdminUsers() {
               </select>
             </div>
             <div className="relative flex-1 xl:w-72 group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-hero-neutral group-focus-within:text-brand transition-colors" size={15} />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 group-focus-within:text-brand transition-colors" size={15} />
               <input type="text" value={search} onChange={e => setSearch(e.target.value)}
                 placeholder="Search by Operator or Branch..." className="input pl-10 w-full" />
             </div>
@@ -119,12 +119,12 @@ export default function AdminUsers() {
                       </div>
                       <div>
                         <div className="font-bold text-[#111] text-sm">{u.name}</div>
-                        <div className="text-[10px] text-gray-400 font-bold mt-0.5 flex items-center gap-1"><Mail size={10}/> {u.email}</div>
+                        <div className="text-xs text-gray-400 font-bold mt-0.5 flex items-center gap-1"><Mail size={10}/> {u.email}</div>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`text-[10px] font-black px-2.5 py-1 rounded-md border uppercase tracking-widest ${roleColor(u.role)}`}>{u.role}</span>
+                    <span className={`text-xs font-black px-2.5 py-1 rounded-md border uppercase tracking-widest ${roleColor(u.role)}`}>{u.role}</span>
                   </td>
                   <td className="px-6 py-4">
                     <span className="text-xs font-bold text-gray-600">{u.branch}</span>
@@ -141,13 +141,13 @@ export default function AdminUsers() {
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`text-[10px] font-black px-2.5 py-1 rounded-md border uppercase tracking-widest ${u.status === 'Active' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 'bg-gray-100 text-gray-500 border-gray-200'}`}>
+                    <span className={`text-xs font-black px-2.5 py-1 rounded-md border uppercase tracking-widest ${u.status === 'Active' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 'bg-gray-100 text-gray-500 border-gray-200'}`}>
                       {u.status === 'Active' ? <span className="flex items-center gap-1"><CheckCircle2 size={10}/> {u.status}</span> : u.status}
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right">
                     <button onClick={e => { e.stopPropagation(); navigate(`/admin/users/${u.id}`); }}
-                      className="text-[10px] font-black border border-gray-200 text-gray-600 hover:bg-gray-50 px-3 py-1.5 rounded-lg transition-all uppercase tracking-widest">
+                      className="text-xs font-black border border-gray-200 text-gray-600 hover:bg-gray-50 px-3 py-1.5 rounded-lg transition-all uppercase tracking-widest">
                       Manage →
                     </button>
                   </td>
@@ -160,3 +160,5 @@ export default function AdminUsers() {
     </div>
   );
 }
+
+

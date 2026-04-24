@@ -67,10 +67,10 @@ export default function PlatformSettings() {
                          <span className="text-4xl font-black">PO</span>
                          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center">
                             <Camera size={24} className="text-white mb-1" />
-                            <span className="text-[9px] text-white font-black uppercase">Upload</span>
+                            <span className="text-xs text-white font-black uppercase">Upload</span>
                          </div>
                       </div>
-                      <p className="text-[10px] font-bold text-emerald-500 flex items-center gap-1">
+                      <p className="text-xs font-bold text-emerald-500 flex items-center gap-1">
                          <CheckCircle2 size={10}/> Verified
                       </p>
                    </div>
@@ -101,10 +101,10 @@ export default function PlatformSettings() {
                 <div className="p-8 space-y-8">
                    <div className="flex flex-col md:flex-row gap-10 items-start">
                       <div className="w-full md:w-1/3 flex flex-col gap-4">
-                         <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-1 leading-none">Platform Logo</label>
+                         <label className="text-xs font-bold text-gray-400 uppercase tracking-widest px-1 leading-none">Platform Logo</label>
                          <div className="aspect-video w-full rounded-2xl bg-[#111] border-2 border-dashed border-gray-800 flex flex-col items-center justify-center text-gray-500 group hover:border-[#FFCC00] transition-colors cursor-pointer relative">
                             <Zap size={32} className="text-[#FFCC00] mb-2" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">HERO LOGISTICS</span>
+                            <span className="text-xs font-black uppercase tracking-widest">HERO LOGISTICS</span>
                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center transition-opacity rounded-2xl">
                                <Camera size={20} className="text-white mb-1" />
                             </div>
@@ -142,7 +142,7 @@ export default function PlatformSettings() {
                       <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest flex items-center gap-2">
                         <Lock size={14} className="text-[#FFCC00]"/> Password & Security
                       </h3>
-                      <button className="text-[10px] font-bold text-[#FFCC00] hover:underline uppercase tracking-widest">Setup 2FA</button>
+                      <button className="text-xs font-bold text-[#FFCC00] hover:underline uppercase tracking-widest">Setup 2FA</button>
                    </div>
                    <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-10">
                       <div className="space-y-6">
@@ -179,7 +179,7 @@ export default function PlatformSettings() {
                    <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest">Payment Gateway</h3>
                    <div className="flex items-center gap-2 px-3 py-1 bg-emerald-50 border border-emerald-100 rounded-full">
                       <CheckCircle2 size={12} className="text-emerald-500"/>
-                      <span className="text-[10px] font-bold text-emerald-600">Connected</span>
+                      <span className="text-xs font-bold text-emerald-600">Connected</span>
                    </div>
                 </div>
                 <div className="p-8 flex flex-col gap-10">
@@ -190,7 +190,7 @@ export default function PlatformSettings() {
                       </div>
                       <div className="flex-1">
                          <h4 className="text-[#635BFF] font-bold text-lg tracking-tight mb-0.5">Stripe Connect Gateway</h4>
-                         <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Account ID: acct_1N9x8221_HERO_ROOT</p>
+                         <p className="text-xs text-gray-500 font-bold uppercase tracking-widest">Account ID: acct_1N9x8221_HERO_ROOT</p>
                       </div>
                       <button className="bg-white px-5 py-2.5 rounded-xl border border-gray-100 text-xs font-bold text-gray-700 shadow-sm hover:bg-gray-50 transition-all">Open Stripe</button>
                    </div>
@@ -234,7 +234,7 @@ export default function PlatformSettings() {
                            <div className="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center font-black text-[#FFCC00]">{t.name.split(' ').map(n=>n[0]).join('')}</div>
                            <div>
                               <p className="font-black text-gray-900 text-sm leading-none mb-1">{t.name}</p>
-                              <p className="text-[10px] font-black text-gray-400 uppercase">{t.role} · {t.email}</p>
+                              <p className="text-xs font-black text-gray-400 uppercase">{t.role} · {t.email}</p>
                            </div>
                         </div>
                         <button className="text-xs font-bold text-red-500 hover:underline">Remove</button>
@@ -272,3 +272,4 @@ export default function PlatformSettings() {
     </div>
   );
 }
+

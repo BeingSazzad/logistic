@@ -73,7 +73,7 @@ export default function PlatformTransactions() {
 
         <div className="overflow-x-auto">
           <table className="w-full text-left">
-            <thead className="bg-[#FAFAFA] text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+            <thead className="bg-[#FAFAFA] text-xs font-bold text-gray-400 uppercase tracking-wider">
               <tr>
                 <th className="px-6 py-4">Transaction ID</th>
                 <th className="px-6 py-4">Date & Time</th>
@@ -103,7 +103,7 @@ export default function PlatformTransactions() {
                     <div className="font-black text-[#111]">{txn.amount}</div>
                   </td>
                   <td className="px-6 py-5">
-                    <span className={`text-[10px] font-bold px-3 py-1 rounded-md border inline-flex items-center gap-1.5 ${
+                    <span className={`text-xs font-bold px-3 py-1 rounded-md border inline-flex items-center gap-1.5 ${
                       txn.status === 'Paid' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 'bg-yellow-50 text-yellow-700 border-yellow-200'
                     }`}>
                       {txn.status === 'Paid' ? <CheckCircle2 size={10}/> : <Clock size={10}/>}
@@ -124,3 +124,4 @@ export default function PlatformTransactions() {
     </div>
   );
 }
+

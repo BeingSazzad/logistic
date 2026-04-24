@@ -52,22 +52,22 @@ export default function AdminAddCustomer() {
              </div>
              <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                <div>
-                  <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Company Legal Name</label>
+                  <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Company Legal Name</label>
                   <input type="text" placeholder="e.g. Acme Corp Logistics" className="w-full bg-white border border-gray-200 focus:border-[#FFCC00] rounded-lg py-2.5 px-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20" />
                </div>
                <div>
-                  <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">ABN / Business ID</label>
+                  <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">ABN / Business ID</label>
                   <input type="text" placeholder="11-digit ABN" className="w-full bg-white border border-gray-200 focus:border-[#FFCC00] rounded-lg py-2.5 px-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20" />
                </div>
                <div className="md:col-span-2">
-                  <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Billing / HQ Address</label>
+                  <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Billing / HQ Address</label>
                   <div className="relative group">
                      <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#FFCC00] transition-colors" size={16}/>
                      <input type="text" placeholder="Street Address" className="w-full bg-white border border-gray-200 focus:border-[#FFCC00] rounded-lg py-2.5 pl-12 pr-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20" />
                   </div>
                </div>
                <div className="md:col-span-2">
-                  <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Primary Billing Email</label>
+                  <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Primary Billing Email</label>
                   <div className="relative group">
                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#FFCC00] transition-colors" size={16}/>
                      <input type="email" placeholder="accounts@company.com" className="w-full bg-white border border-gray-200 focus:border-[#FFCC00] rounded-lg py-2.5 pl-12 pr-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20" />
@@ -88,11 +88,11 @@ export default function AdminAddCustomer() {
               
               <div className="space-y-6 relative z-10">
                  <div>
-                    <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Credit Limit (AUD)</label>
+                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Credit Limit (AUD)</label>
                     <input type="number" placeholder="50000" className="w-full bg-white/10 border border-white/20 rounded-lg py-2.5 px-4 text-sm font-medium text-white shadow-sm transition-all focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/10" />
                  </div>
                  <div>
-                    <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Payment Terms</label>
+                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Payment Terms</label>
                     <select className="w-full bg-white/10 border border-white/20 rounded-lg py-2.5 px-4 text-sm font-medium text-white appearance-none cursor-pointer focus:outline-none focus:border-white/40 leading-tight">
                       <option className="text-black">Net 30 Days</option>
                       <option className="text-black">Net 14 Days</option>
@@ -102,7 +102,7 @@ export default function AdminAddCustomer() {
                     </select>
                  </div>
                  <div>
-                    <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Currency Selection</label>
+                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Currency Selection</label>
                     <select className="w-full bg-white/10 border border-white/20 rounded-lg py-2.5 px-4 text-sm font-medium text-white appearance-none cursor-pointer focus:outline-none focus:border-white/40 leading-tight">
                       <option className="text-black">AUD ($)</option>
                       <option className="text-black">USD ($)</option>
@@ -128,3 +128,4 @@ export default function AdminAddCustomer() {
     </div>
   );
 }
+

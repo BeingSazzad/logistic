@@ -90,7 +90,7 @@ export default function AuditLogs() {
 
         <div className="overflow-x-auto">
            <table className="w-full text-left">
-             <thead className="bg-[#FAFAFA] text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+             <thead className="bg-[#FAFAFA] text-xs font-bold text-gray-400 uppercase tracking-wider">
                <tr>
                  <th className="px-6 py-4">Timestamp</th>
                  <th className="px-6 py-4">Actor</th>
@@ -109,7 +109,7 @@ export default function AuditLogs() {
                       <div className="font-bold text-[#111] text-sm">{log.actor}</div>
                    </td>
                    <td className="px-6 py-5">
-                      <span className={`text-[10px] font-bold px-3 py-1 rounded-md border inline-flex items-center gap-1.5 ${actionColors[log.action]}`}>
+                      <span className={`text-xs font-bold px-3 py-1 rounded-md border inline-flex items-center gap-1.5 ${actionColors[log.action]}`}>
                         <CheckCircle size={10} /> {log.action}
                       </span>
                    </td>
@@ -135,3 +135,4 @@ export default function AuditLogs() {
     </div>
   );
 }
+

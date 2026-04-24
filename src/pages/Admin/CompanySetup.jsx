@@ -22,7 +22,7 @@ export default function AdminCompanySetup() {
             <div className="w-24 h-24 bg-gray-100 rounded-2xl flex items-center justify-center text-gray-400 border border-dashed border-gray-300 relative group overflow-hidden">
               <Layout size={32} />
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
-                <span className="text-[10px] text-white font-bold uppercase">Upload Logo</span>
+                <span className="text-xs text-white font-bold uppercase">Upload Logo</span>
               </div>
             </div>
             <div className="flex-1">
@@ -34,14 +34,25 @@ export default function AdminCompanySetup() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Business Type / Niche</label>
-              <select className="input font-bold text-gray-800">
-                <option>General Freight & Logistics</option>
-                <option>Car / Vehicle Transport</option>
-                <option>Container Services</option>
-                <option>Refrigerated / Cold Chain</option>
-                <option>Custom Logistics Config</option>
-              </select>
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Business Specializations</label>
+              <div className="flex flex-col gap-2">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" className="w-4 h-4 rounded text-[#FFCC00] focus:ring-[#FFCC00]" defaultChecked />
+                  <span className="text-sm font-bold text-gray-800">General Freight</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" className="w-4 h-4 rounded text-[#FFCC00] focus:ring-[#FFCC00]" defaultChecked />
+                  <span className="text-sm font-bold text-gray-800">Car / Vehicle Transport</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" className="w-4 h-4 rounded text-[#FFCC00] focus:ring-[#FFCC00]" />
+                  <span className="text-sm font-bold text-gray-800">Dangerous Goods (DG)</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" className="w-4 h-4 rounded text-[#FFCC00] focus:ring-[#FFCC00]" />
+                  <span className="text-sm font-bold text-gray-800">Refrigerated / Cold Chain</span>
+                </label>
+              </div>
             </div>
             <div>
               <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Support Phone Number</label>
@@ -86,3 +97,4 @@ export default function AdminCompanySetup() {
     </div>
   );
 }
+

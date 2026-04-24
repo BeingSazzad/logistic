@@ -11,7 +11,7 @@ const RAW_DRIVERS = [
   { id: 'DRV-101', name: 'Noah Williams', phone: '+61 412 888 123', status: 'Active', rating: 4.8, license: 'MC Class', vehicle: 'XQG-984', region: 'Sydney Metro' },
   { id: 'DRV-102', name: 'Jack Taylor',   phone: '+61 412 888 456', status: 'On Trip', rating: 4.9, license: 'HC Class', vehicle: 'BGT-221', region: 'Melbourne SE' },
   { id: 'DRV-103', name: 'Oliver Brown',  phone: '+61 412 888 789', status: 'Offline', rating: 4.5, license: 'HR Class', vehicle: 'None', region: 'Brisbane NW' },
-  { id: 'DRV-104', name: 'Liam Smith',    phone: '+61 412 888 000', status: 'Active', rating: 4.7, license: 'HC Class', vehicle: 'KLY-004', region: 'Adelaide Hub' },
+  { id: 'DRV-104', name: 'Liam Smith',    phone: '+61 412 888 000', status: 'Active', rating: 4.7, license: 'HC Class', vehicle: 'KLY-004', region: 'Adelaide Depot' },
 ];
 
 export default function AdminDriverManagement() {
@@ -43,7 +43,7 @@ export default function AdminDriverManagement() {
           </div>
           <div>
             <h1 className="hero-h1">Drivers</h1>
-            <p className="hero-body text-hero-neutral mt-1">Manage fleet vehicle operators, credentials, and deployment zones.</p>
+            <p className="hero-body text-gray-600 mt-1">Manage fleet vehicle operators, credentials, and deployment zones.</p>
           </div>
         </div>
         <button 
@@ -66,7 +66,7 @@ export default function AdminDriverManagement() {
          ].map((stat, i) => (
            <div key={i} className="card p-5 flex items-center justify-between group hover:border-brand transition-colors">
               <div>
-                 <p className="hero-metadata text-hero-neutral mb-2">{stat.label}</p>
+                 <p className="hero-metadata text-gray-600 mb-2">{stat.label}</p>
                  <p className="text-2xl font-black text-hero-dark leading-none">{stat.value}</p>
               </div>
               <div className={`w-11 h-11 rounded-hero-sm flex items-center justify-center ${stat.bg} ${stat.color} border border-gray-50`}>
@@ -110,7 +110,7 @@ export default function AdminDriverManagement() {
 
         <div className="overflow-x-auto">
            <table className="w-full text-left">
-             <thead className="bg-[#FAFAFA] text-[10px] font-bold text-gray-500 uppercase tracking-widest border-b border-gray-100">
+             <thead className="bg-[#FAFAFA] text-xs font-bold text-gray-500 uppercase tracking-widest border-b border-gray-100">
                <tr>
                  <th className="px-6 py-4">Identity & ID</th>
                  <th className="px-6 py-4">Credentials</th>
@@ -129,14 +129,14 @@ export default function AdminDriverManagement() {
                        </div>
                        <div>
                          <div className="font-bold text-[#111] text-sm">{d.name}</div>
-                         <div className="text-[10px] font-bold text-gray-400 tracking-widest uppercase mt-0.5">{d.id} • {d.phone}</div>
+                         <div className="text-xs font-bold text-gray-400 tracking-widest uppercase mt-0.5">{d.id} • {d.phone}</div>
                        </div>
                      </div>
                    </td>
                    <td className="px-6 py-4">
                       <div className="flex flex-col">
                          <span className="text-xs font-bold text-[#111]">{d.license}</span>
-                         <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">{d.vehicle}</span>
+                         <span className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-0.5">{d.vehicle}</span>
                       </div>
                    </td>
                    <td className="px-6 py-4">
@@ -145,7 +145,7 @@ export default function AdminDriverManagement() {
                       </div>
                    </td>
                    <td className="px-6 py-4">
-                     <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md border uppercase tracking-widest ${
+                     <span className={`text-xs font-bold px-2.5 py-1 rounded-md border uppercase tracking-widest ${
                         d.status === 'Active' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 
                         d.status === 'On Trip' ? 'bg-[#EFF6FF] text-[#2563EB] border-[#DBEAFE]' : 
                         'bg-[#FEF2F2] text-[#DC2626] border-[#FEE2E2]'
@@ -154,7 +154,7 @@ export default function AdminDriverManagement() {
                      </span>
                    </td>
                    <td className="px-6 py-4 text-right">
-                      <button className="text-[10px] font-bold text-blue-600 hover:text-white border border-blue-200 hover:bg-blue-600 hover:border-blue-600 px-3 py-1.5 rounded-lg transition-colors uppercase tracking-widest" onClick={(e) => { e.stopPropagation(); navigate(`/admin/drivers/${d.id}`); }}>
+                      <button className="text-xs font-bold text-blue-600 hover:text-white border border-blue-200 hover:bg-blue-600 hover:border-blue-600 px-3 py-1.5 rounded-lg transition-colors uppercase tracking-widest" onClick={(e) => { e.stopPropagation(); navigate(`/admin/drivers/${d.id}`); }}>
                         Manage
                       </button>
                    </td>
@@ -167,3 +167,5 @@ export default function AdminDriverManagement() {
     </div>
   );
 }
+
+

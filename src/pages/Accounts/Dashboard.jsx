@@ -51,11 +51,11 @@ export default function AccountsDashboard() {
           <div key={i} className="card p-5 flex items-center justify-between group">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <p className="hero-metadata leading-tight text-hero-neutral">{k.label}</p>
+                <p className="hero-metadata leading-tight text-gray-600">{k.label}</p>
               </div>
               <div className="flex items-end gap-2">
                  <p className="text-2xl font-black text-hero-dark leading-none">{k.val}</p>
-                 <span className={`text-[10px] font-bold pb-0.5 ${k.up ? 'text-hero-success' : 'text-hero-danger'}`}>{k.diff}</span>
+                 <span className={`text-xs font-bold pb-0.5 ${k.up ? 'text-hero-success' : 'text-hero-danger'}`}>{k.diff}</span>
               </div>
             </div>
             <div className={`w-10 h-10 rounded-hero-sm flex items-center justify-center border border-gray-50 ${k.bg} ${k.color}`}>
@@ -72,7 +72,7 @@ export default function AccountsDashboard() {
             <div className="flex justify-between items-center mb-6">
                <div>
                   <h3 className="hero-h1 text-xl">Recent Billings</h3>
-                  <p className="hero-metadata text-hero-neutral mt-2">Latest verified invoices for the current period</p>
+                  <p className="hero-metadata text-gray-600 mt-2">Latest verified invoices for the current period</p>
                </div>
                <button onClick={() => navigate('/accounts/invoices')} className="btn btn-outline py-2 px-4">View All Ledger</button>
             </div>
@@ -81,18 +81,18 @@ export default function AccountsDashboard() {
                {recentInvoices.map((inv, i) => (
                  <div key={i} className="flex items-center justify-between p-4 bg-gray-50/50 rounded-lg border border-transparent hover:border-gray-200 hover:bg-white transition-all group">
                     <div className="flex items-center gap-4">
-                       <div className="w-10 h-10 bg-white rounded-lg border border-gray-200 shadow-sm flex items-center justify-center font-bold text-[10px] text-gray-400 group-hover:text-black">
+                       <div className="w-10 h-10 bg-white rounded-lg border border-gray-200 shadow-sm flex items-center justify-center font-bold text-xs text-gray-400 group-hover:text-black">
                          #LOG
                        </div>
                        <div>
                           <p className="text-sm font-black text-gray-900 uppercase">{inv.customer}</p>
-                          <p className="text-[10px] font-bold text-gray-400">{inv.id} • {inv.date}</p>
+                          <p className="text-xs font-bold text-gray-400">{inv.id} • {inv.date}</p>
                        </div>
                     </div>
                     <div className="flex items-center gap-8">
                        <div className="text-right">
                           <p className="text-sm font-black text-gray-900">{inv.amount}</p>
-                          <p className={`text-[9px] font-black uppercase tracking-widest ${inv.status === 'Approved' ? 'text-emerald-500' : 'text-amber-500'}`}>{inv.status}</p>
+                          <p className={`text-xs font-black uppercase tracking-widest ${inv.status === 'Approved' ? 'text-emerald-500' : 'text-amber-500'}`}>{inv.status}</p>
                        </div>
                        <ChevronRight size={16} className="text-gray-300 group-hover:text-black"/>
                     </div>
@@ -112,17 +112,17 @@ export default function AccountsDashboard() {
                <div className="space-y-6 relative z-10">
                   <div className="flex justify-between items-end border-b border-white/10 pb-4">
                      <div>
-                        <p className="text-[9px] font-black text-gray-500 uppercase mb-1">Total Payouts Due</p>
+                        <p className="text-xs font-black text-gray-500 uppercase mb-1">Total Payouts Due</p>
                         <p className="text-2xl font-black">$18,400</p>
                      </div>
-                     <span onClick={() => navigate('/accounts/settlements')} className="text-[9px] font-black text-[#FFCC00] uppercase underline cursor-pointer hover:text-yellow-300 transition-colors">Reconcile</span>
+                     <span onClick={() => navigate('/accounts/settlements')} className="text-xs font-black text-[#FFCC00] uppercase underline cursor-pointer hover:text-yellow-300 transition-colors">Reconcile</span>
                   </div>
                   <div className="flex justify-between items-end border-b border-white/10 pb-4">
                      <div>
-                        <p className="text-[9px] font-black text-gray-500 uppercase mb-1">Unverified PODs</p>
+                        <p className="text-xs font-black text-gray-500 uppercase mb-1">Unverified PODs</p>
                         <p className="text-2xl font-black">12 Items</p>
                      </div>
-                     <span onClick={() => navigate('/accounts/pod-review')} className="text-[9px] font-black text-[#FFCC00] uppercase underline cursor-pointer hover:text-yellow-300 transition-colors">Verify Now</span>
+                     <span onClick={() => navigate('/accounts/pod-review')} className="text-xs font-black text-[#FFCC00] uppercase underline cursor-pointer hover:text-yellow-300 transition-colors">Verify Now</span>
                   </div>
                </div>
 
@@ -138,7 +138,7 @@ export default function AccountsDashboard() {
                   </div>
                   <div>
                      <h4 className="text-sm font-black text-gray-900 uppercase tracking-tight">Tax Projection</h4>
-                     <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Quarterly Forecast</p>
+                     <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Quarterly Forecast</p>
                   </div>
                </div>
                <div className="space-y-3">
@@ -158,3 +158,5 @@ export default function AccountsDashboard() {
     </div>
   );
 }
+
+

@@ -19,23 +19,23 @@ export default function PODReview() {
     return (
       <div className="w-full max-w-[1440px] mx-auto flex flex-col gap-6">
         <div className="flex items-center gap-4">
-          <button onClick={() => setSelected(null)} className="flex items-center gap-2 text-sm font-semibold text-hero-neutral hover:text-hero-dark transition-colors">
+          <button onClick={() => setSelected(null)} className="flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-hero-dark transition-colors">
             ← Back to Queue
           </button>
           <h1 className="hero-h1">POD Review — {pod.id}</h1>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Left: Shipment Details */}
+          {/* Left: Load Details */}
           <div className="card p-6">
-            <h3 className="hero-card-title mb-4">Shipment Details</h3>
+            <h3 className="hero-card-title mb-4">Load Details</h3>
             <div className="space-y-4">
               {[
                 ['Customer', pod.customer], ['Route', pod.route], ['Driver', pod.driver],
                 ['Invoice Value', pod.value], ['Delivery Window', pod.window], ['Actual Delivery', pod.delivered],
               ].map(([k, v]) => (
                 <div key={k} className="flex justify-between border-b border-gray-50 pb-2">
-                  <span className="hero-metadata text-hero-neutral">{k}</span>
+                  <span className="hero-metadata text-gray-600">{k}</span>
                   <span className="text-sm font-bold text-hero-dark">{v}</span>
                 </div>
               ))}
@@ -127,7 +127,7 @@ export default function PODReview() {
               className="btn btn-primary flex-1 py-4 text-base">
               <CheckCircle2 size={18} /> Approve POD & Generate Invoice
             </button>
-            <button className="btn btn-outline border-hero-neutral/20 text-hero-neutral px-8">
+            <button className="btn btn-outline border-hero-neutral/20 text-gray-600 px-8">
               Hold for Review
             </button>
           </div>
@@ -135,7 +135,7 @@ export default function PODReview() {
           <div className="bg-hero-success/10 border border-hero-success/20 rounded-hero-md p-6 text-center">
             <CheckCircle2 size={32} className="text-hero-success mx-auto mb-2" />
             <p className="font-bold text-hero-dark">POD Approved — Invoice Generated</p>
-            <p className="hero-body text-hero-neutral mt-1">Invoice sent to {pod.customer} · Driver notified</p>
+            <p className="hero-body text-gray-600 mt-1">Invoice sent to {pod.customer} · Driver notified</p>
             <button onClick={() => setSelected(null)} className="btn btn-primary mt-6">Back to Queue</button>
           </div>
         )}
@@ -148,7 +148,7 @@ export default function PODReview() {
       <div className="flex justify-between items-end px-2">
         <div>
           <h1 className="hero-h1">POD Review Queue</h1>
-          <p className="hero-metadata text-hero-neutral mt-1">{pods.length - approved.length} pending · {approved.length} approved today</p>
+          <p className="hero-metadata text-gray-600 mt-1">{pods.length - approved.length} pending · {approved.length} approved today</p>
         </div>
       </div>
 
@@ -175,7 +175,7 @@ export default function PODReview() {
                       <span className="text-sm font-bold text-hero-dark">{pod.customer}</span>
                       {pod.toll > 0 && <span className="badge badge-blue">TOLL ${pod.toll}</span>}
                     </div>
-                    <p className="hero-metadata text-hero-neutral lowercase">{pod.route} · {pod.driver} · {pod.delivered}</p>
+                    <p className="hero-metadata text-gray-600 lowercase">{pod.route} · {pod.driver} · {pod.delivered}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-6">
@@ -196,3 +196,4 @@ export default function PODReview() {
     </div>
   );
 }
+

@@ -6,7 +6,7 @@
  *  - shortCode : 3-letter display code used in badges/tables
  *  - name      : Official full name — USE THIS everywhere in UI text
  *  - type      : Facility type
- *  - city      : City/region label used in shipment origin/dest fields
+ *  - city      : City/region label used in Load origin/dest fields
  *  - state     : Australian state
  */
 
@@ -14,8 +14,8 @@ export const BRANCHES = [
   {
     id:        'SYD-CENTRAL',
     shortCode: 'SYD',
-    name:      'Sydney Central Hub',
-    type:      'Primary Hub',
+    name:      'Sydney Central Depot',
+    type:      'Primary Depot',
     city:      'Sydney',
     state:     'NSW',
     location:  'Strathfield, NSW 2135',
@@ -25,10 +25,10 @@ export const BRANCHES = [
     status:    'Online',
   },
   {
-    id:        'MEL-HUB',
+    id:        'MEL-Depot',
     shortCode: 'MEL',
-    name:      'Melbourne Hub',
-    type:      'Primary Hub',
+    name:      'Melbourne Depot',
+    type:      'Primary Depot',
     city:      'Melbourne',
     state:     'VIC',
     location:  'Tullamarine, VIC 3043',

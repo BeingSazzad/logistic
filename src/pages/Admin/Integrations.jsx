@@ -36,13 +36,13 @@ export default function AdminIntegrations() {
             <Blocks size={20} />
           </div>
           <div>
-            <h1 className="hero-h1">Hub Integrations</h1>
-            <p className="hero-body text-hero-neutral mt-1">Manage API handshakes, external Webhooks, and ecosystem connections</p>
+            <h1 className="hero-h1">Depot Integrations</h1>
+            <p className="hero-body text-gray-600 mt-1">Manage API handshakes, external Webhooks, and ecosystem connections</p>
           </div>
         </div>
         <div className="flex gap-4">
-          <button className="bg-white border border-gray-200 px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-gray-50 transition-all shadow-sm flex items-center gap-2"><RefreshCw size={14}/> Sync All Webhooks</button>
-          <button className="bg-hero-dark hover:bg-black text-brand px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shadow-sm flex items-center gap-2"><Plus size={16}/> Add Webhook</button>
+          <button className="bg-white border border-gray-200 px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-gray-50 transition-all shadow-sm flex items-center gap-2"><RefreshCw size={14}/> Sync All Webhooks</button>
+          <button className="bg-hero-dark hover:bg-black text-brand px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-sm flex items-center gap-2"><Plus size={16}/> Add Webhook</button>
         </div>
       </div>
 
@@ -68,13 +68,13 @@ export default function AdminIntegrations() {
                         <h4 className="text-sm font-black text-hero-dark uppercase tracking-widest leading-tight">
                           {int.name}
                         </h4>
-                        <p className="text-[10px] font-bold text-gray-400 uppercase mt-2 leading-relaxed tracking-tight">{int.desc}</p>
+                        <p className="text-xs font-bold text-gray-400 uppercase mt-2 leading-relaxed tracking-tight">{int.desc}</p>
                         
                         <div className="mt-6 flex items-center justify-between">
-                          <code className="text-[9px] font-black text-gray-400 bg-gray-50 px-2 py-1 rounded-lg border border-gray-100 uppercase tracking-widest">
+                          <code className="text-xs font-black text-gray-400 bg-gray-50 px-2 py-1 rounded-lg border border-gray-100 uppercase tracking-widest">
                             {int.id} • {int.version}
                           </code>
-                          <button className={`flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.1em] px-4 py-2 rounded-xl border transition-all ${int.status ? 'text-red-500 border-red-100 hover:bg-red-50' : 'bg-hero-dark text-brand border-hero-dark shadow-md'}`}>
+                          <button className={`flex items-center gap-2 text-xs font-black uppercase tracking-[0.1em] px-4 py-2 rounded-xl border transition-all ${int.status ? 'text-red-500 border-red-100 hover:bg-red-50' : 'bg-hero-dark text-brand border-hero-dark shadow-md'}`}>
                             {int.status ? <Power size={12} strokeWidth={3}/> : <Plus size={12} strokeWidth={3}/>}
                             {int.status ? 'Term Terminal' : 'Establish Connect'}
                           </button>
@@ -90,3 +90,5 @@ export default function AdminIntegrations() {
     </div>
   );
 }
+
+

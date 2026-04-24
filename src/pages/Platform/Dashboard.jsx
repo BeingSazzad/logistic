@@ -60,16 +60,16 @@ export default function PlatformDashboard() {
       <div className="flex justify-between items-center mb-2 px-2">
         <div>
           <h1 className="hero-h1">Platform Overview</h1>
-          <p className="hero-body text-hero-neutral mt-1 flex items-center gap-2">System Center • <span className="text-hero-success font-medium flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-hero-success animate-pulse"></span> All Systems Online</span></p>
+          <p className="hero-body text-gray-600 mt-1 flex items-center gap-2">System Center • <span className="text-hero-success font-medium flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-hero-success animate-pulse"></span> All Systems Online</span></p>
         </div>
         <div className="flex items-center gap-4 bg-white px-5 py-2.5 rounded-lg border border-gray-100 shadow-sm">
            <div className="flex flex-col items-center">
-              <span className="hero-metadata text-hero-neutral flex items-center gap-1"><Server size={10}/> API Status</span>
+              <span className="hero-metadata text-gray-600 flex items-center gap-1"><Server size={10}/> API Status</span>
               <span className="text-sm font-semibold text-hero-dark">99.9%</span>
            </div>
            <div className="w-px h-6 bg-gray-100"></div>
            <div className="flex flex-col items-center">
-              <span className="hero-metadata text-hero-neutral flex items-center gap-1"><Database size={10}/> Load Speed</span>
+              <span className="hero-metadata text-gray-600 flex items-center gap-1"><Database size={10}/> Load Speed</span>
               <span className="text-sm font-semibold text-hero-dark">14ms</span>
            </div>
         </div>
@@ -197,7 +197,7 @@ export default function PlatformDashboard() {
                                <div className="w-full bg-red-400 rounded-t-sm transition-all" style={{ height: `${hLost}%` }}></div>
                             </div>
                          </div>
-                         <span className="text-xs font-medium text-gray-400 mt-1">{m}</span>
+                         <span className="text-xs font-medium text-gray-500 mt-1">{m}</span>
                       </div>
                     )
                   })}
@@ -239,7 +239,7 @@ export default function PlatformDashboard() {
                             {/* Inner line/fill aesthetic */}
                             <div className="w-full bg-blue-500 absolute bottom-0 rounded-t-sm opacity-90 group-hover:opacity-100" style={{ height: '100%' }}></div>
                          </div>
-                         <span className="text-xs font-medium text-gray-400 mt-1">{m}</span>
+                         <span className="text-xs font-medium text-gray-500 mt-1">{m}</span>
                       </div>
                     )
                   })}
@@ -268,7 +268,7 @@ export default function PlatformDashboard() {
                           <p className="font-semibold text-gray-900 text-sm mb-0.5">{t.name}</p>
                           <div className="flex items-center gap-2">
                              <span className={`badge ${t.status === 'active' ? 'badge-green' : 'badge-yellow'}`}>{t.status}</span>
-                             <span className="text-xs font-medium text-gray-400">{t.plan} Plan</span>
+                             <span className="text-xs font-medium text-gray-500">{t.plan} Plan</span>
                           </div>
                        </div>
                     </div>
@@ -309,7 +309,7 @@ export default function PlatformDashboard() {
                                  <p className="text-xs font-medium text-gray-500 mt-0.5">{item.pct}% of total</p>
                              </div>
                          </div>
-                         <p className="text-lg font-black text-gray-900 tracking-tight">{item.price}<span className="text-xs font-semibold text-gray-400">/mo</span></p>
+                         <p className="text-lg font-black text-gray-900 tracking-tight">{item.price}<span className="text-xs font-semibold text-gray-600">/mo</span></p>
                      </div>
                      <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden shadow-inner">
                          <div className={`h-full rounded-full transition-all duration-1000 ${item.color}`} style={{ width: `${item.pct}%` }}></div>
@@ -324,3 +324,4 @@ export default function PlatformDashboard() {
     </div>
   );
 }
+

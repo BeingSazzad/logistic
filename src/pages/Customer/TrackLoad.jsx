@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Search, Package, MapPin, CheckCircle2, Clock, Truck, AlertCircle, ChevronRight } from 'lucide-react';
 
-// ── Mock shipment database ──────────────────────────────────────────────────
-const SHIPMENTS = {
+// ── Mock Load database ──────────────────────────────────────────────────
+const LoadS = {
   'SHP-20481': {
     id: 'SHP-20481',
     status: 'In Transit',
@@ -25,7 +25,7 @@ const SHIPMENTS = {
     id: 'SHP-20502',
     status: 'Delivered',
     service: 'Normal',
-    origin: 'Melbourne Hub, VIC',
+    origin: 'Melbourne Depot, VIC',
     destination: 'Parramatta, NSW',
     estimatedDelivery: 'Apr 10, 2:45 PM',
     weight: '1.8t',
@@ -66,7 +66,7 @@ const statusConfig = {
   'Exception':       { color: 'text-red-600',     bg: 'bg-red-50',     border: 'border-red-100',    icon: <AlertCircle size={14} /> },
 };
 
-export default function TrackShipment() {
+export default function TrackLoad() {
   const [query, setQuery]       = useState('');
   const [result, setResult]     = useState(null);
   const [searched, setSearched] = useState(false);
@@ -77,7 +77,7 @@ export default function TrackShipment() {
     setLoading(true);
     setSearched(false);
     setTimeout(() => {
-      setResult(SHIPMENTS[query.trim().toUpperCase()] || null);
+      setResult(LoadS[query.trim().toUpperCase()] || null);
       setSearched(true);
       setLoading(false);
     }, 600);
@@ -94,13 +94,13 @@ export default function TrackShipment() {
           <Package size={16} className="text-black" />
         </div>
         <span className="text-white font-bold text-sm tracking-tight">HERO Logistics</span>
-        <span className="text-gray-600 text-xs ml-auto">Track your shipment</span>
+        <span className="text-gray-600 text-xs ml-auto">Track your Load</span>
       </div>
 
       {/* ── Hero Search ── */}
       <div className="flex flex-col items-center justify-center px-4 pt-16 pb-10">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">Track Your Shipment</h1>
-        <p className="text-gray-400 text-sm mb-8 text-center">Enter your shipment ID to get real-time status</p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">Track Your Load</h1>
+        <p className="text-gray-400 text-sm mb-8 text-center">Enter your Load ID to get real-time status</p>
 
         <div className="w-full max-w-lg flex gap-3">
           <div className="relative flex-1">
@@ -130,7 +130,7 @@ export default function TrackShipment() {
         {/* Quick try hints */}
         <div className="flex items-center gap-2 mt-4 flex-wrap justify-center">
           <span className="text-xs text-gray-400">Try:</span>
-          {Object.keys(SHIPMENTS).map(id => (
+          {Object.keys(LoadS).map(id => (
             <button
               key={id}
               onClick={() => { setQuery(id); }}
@@ -152,7 +152,7 @@ export default function TrackShipment() {
               <div className="w-12 h-12 rounded-2xl bg-gray-100 flex items-center justify-center mx-auto mb-3">
                 <AlertCircle size={22} className="text-gray-400" />
               </div>
-              <p className="text-sm font-semibold text-gray-900">Shipment not found</p>
+              <p className="text-sm font-semibold text-gray-900">Load not found</p>
               <p className="text-xs text-gray-400 mt-1">Check the ID and try again, or contact support.</p>
             </div>
           )}
@@ -165,7 +165,7 @@ export default function TrackShipment() {
               <div className="px-6 py-5 border-b border-gray-50 flex items-center justify-between">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <p className="text-xs font-medium text-gray-400">Shipment ID</p>
+                    <p className="text-xs font-medium text-gray-500">Load ID</p>
                     <span className="text-xs font-bold text-gray-700 font-mono">{result.id}</span>
                   </div>
                   <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold ${cfg.bg} ${cfg.color} ${cfg.border} border`}>
@@ -173,7 +173,7 @@ export default function TrackShipment() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wider">Est. Delivery</p>
+                  <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">Est. Delivery</p>
                   <p className="text-sm font-bold text-gray-900 mt-0.5">{result.estimatedDelivery}</p>
                 </div>
               </div>
@@ -195,7 +195,7 @@ export default function TrackShipment() {
                     <MapPin size={11} />
                     <span>{result.progress === 100 ? 'Delivered' : `${result.progress}% complete`}</span>
                   </div>
-                  <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-md
+                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-md
                     ${result.service === 'Direct' ? 'bg-red-50 text-red-600' :
                       result.service === 'Express' ? 'bg-amber-50 text-amber-600' :
                       'bg-gray-50 text-gray-500'}`}>
@@ -207,18 +207,18 @@ export default function TrackShipment() {
               {/* Details */}
               <div className="px-6 py-4 grid grid-cols-2 gap-4 border-b border-gray-50">
                 <div>
-                  <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider mb-1">Weight</p>
+                  <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Weight</p>
                   <p className="text-sm font-semibold text-gray-900">{result.weight}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider mb-1">Contents</p>
+                  <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Contents</p>
                   <p className="text-sm font-semibold text-gray-900">{result.items}</p>
                 </div>
               </div>
 
               {/* Timeline */}
               <div className="px-6 py-5">
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Tracking Timeline</p>
+                <p className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">Tracking Timeline</p>
                 <div className="relative pl-5 space-y-4 before:absolute before:left-0 before:top-1 before:bottom-1 before:w-px before:bg-gray-100">
                   {result.timeline.map((step, i) => (
                     <div key={i} className="relative flex items-start gap-3">
@@ -248,3 +248,5 @@ export default function TrackShipment() {
     </div>
   );
 }
+
+

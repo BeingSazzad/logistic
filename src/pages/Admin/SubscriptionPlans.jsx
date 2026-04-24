@@ -97,7 +97,7 @@ export default function AdminSubscriptionPlans() {
             className={`px-8 py-2.5 rounded-lg text-sm font-bold transition-all relative z-10 flex items-center gap-2 ${billingCycle === 'yearly' ? 'text-gray-900 shadow-sm bg-white' : 'text-gray-500 hover:text-gray-700'}`}
           >
             Yearly Billing
-            <span className="text-[9px] font-black uppercase tracking-widest text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-full">Save 20%</span>
+            <span className="text-xs font-black uppercase tracking-widest text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-full">Save 20%</span>
           </button>
         </div>
       </div>
@@ -108,7 +108,7 @@ export default function AdminSubscriptionPlans() {
           <div key={index} className={`relative rounded-3xl border transition-all ${plan.popular ? 'border-[#FFCC00] shadow-xl md:-translate-y-4 bg-white z-10' : 'border-gray-200 bg-white shadow-sm hover:shadow-md'}`}>
              
              {plan.popular && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#FFCC00] text-black text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#FFCC00] text-black text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
                   <Zap size={14} fill="currentColor" /> Most Popular
                 </div>
              )}
@@ -124,7 +124,7 @@ export default function AdminSubscriptionPlans() {
                   <span className="text-4xl font-black text-gray-900">${billingCycle === 'yearly' ? plan.yearlyPrice : plan.monthlyPrice}</span>
                   <span className="text-sm font-bold text-gray-500">/mo</span>
                   {billingCycle === 'yearly' && (
-                    <p className="text-[11px] font-medium text-emerald-600 mt-2 tracking-tight">Billed ${plan.yearlyPrice * 12} annually</p>
+                    <p className="text-xs font-medium text-emerald-600 mt-2 tracking-tight">Billed ${plan.yearlyPrice * 12} annually</p>
                   )}
                 </div>
 
@@ -142,7 +142,7 @@ export default function AdminSubscriptionPlans() {
              </div>
 
              <div className="p-8 bg-gray-50 border-t border-gray-100 rounded-b-3xl">
-                <p className="text-[10px] font-black text-gray-900 uppercase tracking-widest mb-4">What's included</p>
+                <p className="text-xs font-black text-gray-900 uppercase tracking-widest mb-4">What's included</p>
                 <div className="space-y-4">
                   {plan.features.map((feat, i) => (
                     <div key={i} className="flex items-start gap-3">
@@ -159,3 +159,4 @@ export default function AdminSubscriptionPlans() {
     </div>
   );
 }
+

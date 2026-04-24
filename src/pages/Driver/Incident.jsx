@@ -20,7 +20,7 @@ export default function DriverIncident() {
         </button>
         <div>
            <h1 className="text-white font-black text-lg tracking-tight uppercase leading-none">Emergency Protocol</h1>
-           <p className="text-[9px] font-black text-red-100 uppercase tracking-widest mt-1">Incident & Breakdown Response</p>
+           <p className="text-xs font-black text-red-100 uppercase tracking-widest mt-1">Incident & Breakdown Response</p>
         </div>
       </div>
 
@@ -40,7 +40,7 @@ export default function DriverIncident() {
            <div className="space-y-6">
               
               <div>
-                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Incident Type</label>
+                 <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Incident Type</label>
                  <select className="w-full bg-white border border-gray-100 py-4 px-5 rounded-2xl text-sm font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-400/20 focus:border-red-400 transition-all shadow-sm appearance-none">
                     <option>Vehicle Collision (Major)</option>
                     <option>Minor Scratch / Dent</option>
@@ -52,7 +52,7 @@ export default function DriverIncident() {
               </div>
 
               <div>
-                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Location Details</label>
+                 <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Location Details</label>
                  <div className="relative">
                     <input type="text" placeholder="Fetching current GPS..." className="w-full bg-white border border-gray-100 py-4 pl-12 pr-4 rounded-2xl text-sm font-bold focus:outline-none shadow-sm" />
                     <MapPin size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-red-500" />
@@ -60,7 +60,7 @@ export default function DriverIncident() {
               </div>
 
               <div>
-                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Description of Events</label>
+                 <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2 px-1">Description of Events</label>
                  <textarea 
                     placeholder="Describe exactly what happened..." 
                     className="w-full min-h-[120px] bg-white border border-gray-100 py-4 px-5 rounded-2xl text-sm font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-400/20 focus:border-red-400 transition-all shadow-sm resize-none"
@@ -70,11 +70,11 @@ export default function DriverIncident() {
               <div className="grid grid-cols-2 gap-3">
                  <button className="flex flex-col items-center justify-center p-6 bg-white border border-gray-100 rounded-3xl gap-2 shadow-sm hover:bg-gray-50 active:scale-95 transition-all">
                     <Camera size={24} className="text-gray-400" />
-                    <span className="text-[9px] font-black uppercase text-gray-400 tracking-widest">Add Photos</span>
+                    <span className="text-xs font-black uppercase text-gray-400 tracking-widest">Add Photos</span>
                  </button>
                  <button className="flex flex-col items-center justify-center p-6 bg-white border border-gray-100 rounded-3xl gap-2 shadow-sm hover:bg-gray-50 active:scale-95 transition-all">
                     <Phone size={24} className="text-gray-400" />
-                    <span className="text-[9px] font-black uppercase text-gray-400 tracking-widest">Call Dispatch</span>
+                    <span className="text-xs font-black uppercase text-gray-400 tracking-widest">Call Dispatch</span>
                  </button>
               </div>
 
@@ -98,7 +98,7 @@ export default function DriverIncident() {
               <div className="w-10 h-10 bg-emerald-50 rounded-2xl flex items-center justify-center shrink-0">
                  <Clock size={20} className="text-emerald-600" />
               </div>
-              <p className="text-[10px] font-bold text-emerald-900 uppercase leading-snug">Safety Checklist: Turn on hazards and move to a safe zone if possible.</p>
+              <p className="text-xs font-bold text-emerald-900 uppercase leading-snug">Safety Checklist: Turn on hazards and move to a safe zone if possible.</p>
            </div>
 
            <button 
@@ -113,3 +113,4 @@ export default function DriverIncident() {
     </div>
   );
 }
+

@@ -54,6 +54,7 @@
 }
 
 @layer utilities {
+
   /* Custom utility extensions if needed */
   .hidden-scrollbar::-webkit-scrollbar {
     width: 0;

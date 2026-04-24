@@ -25,11 +25,11 @@ export default function DriverHome() {
                   JT
                </div>
                <div>
-                  <p className="text-[9px] font-black text-gray-500 uppercase tracking-widest leading-none">Primary Operator</p>
+                  <p className="text-xs font-black text-gray-500 uppercase tracking-widest leading-none">Primary Operator</p>
                   <p className="text-sm font-black text-white mt-1 uppercase">Jack Taylor</p>
                   <div className="flex items-center gap-1.5 mt-1">
                      <div className={`w-1.5 h-1.5 rounded-full ${isOnline ? 'bg-emerald-500 animate-pulse' : 'bg-gray-500'}`}></div>
-                     <span className={`text-[9px] font-black uppercase tracking-widest ${isOnline ? 'text-emerald-500' : 'text-gray-500'}`}>{isOnline ? 'Online' : 'Offline'}</span>
+                     <span className={`text-xs font-black uppercase tracking-widest ${isOnline ? 'text-emerald-500' : 'text-gray-500'}`}>{isOnline ? 'Online' : 'Offline'}</span>
                   </div>
                </div>
             </div>
@@ -49,7 +49,7 @@ export default function DriverHome() {
                <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center shrink-0 text-emerald-600">
                   <ShieldCheck size={28} />
                </div>
-               <span className="text-[10px] font-black uppercase tracking-tight">Compliance</span>
+               <span className="text-xs font-black uppercase tracking-tight text-center">Compliance</span>
             </button>
             <button 
                onClick={() => navigate('/driver/active')} 
@@ -58,7 +58,20 @@ export default function DriverHome() {
                <div className="w-12 h-12 bg-black/10 rounded-2xl flex items-center justify-center shrink-0">
                   <Navigation size={28} className="text-black" />
                </div>
-               <span className="text-[10px] font-black uppercase tracking-tight">Route</span>
+               <span className="text-xs font-black uppercase tracking-tight text-center">Route</span>
+            </button>
+            <button 
+               onClick={() => navigate('/driver/draft')} 
+               className="col-span-2 bg-blue-50 hover:bg-blue-100 text-blue-900 p-4 rounded-2xl shadow-sm active:scale-[0.98] transition-all flex items-center gap-4 border border-blue-100"
+            >
+               <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center shrink-0">
+                  <Package size={24} className="text-blue-600" />
+               </div>
+               <div className="text-left flex-1">
+                  <span className="block text-[10px] font-black uppercase tracking-widest text-blue-500 mb-0.5">Quick Action</span>
+                  <span className="block text-sm font-black uppercase tracking-tight text-blue-900">Create Draft Load</span>
+               </div>
+               <ChevronRight size={20} className="text-blue-300" />
             </button>
          </div>
 
@@ -70,7 +83,7 @@ export default function DriverHome() {
                   <ShieldAlert size={20} className="absolute" />
                </div>
                <div className="text-left">
-                  <p className="text-[10px] font-black text-red-600 uppercase tracking-widest leading-none">Emergency Protocol</p>
+                  <p className="text-xs font-black text-red-600 uppercase tracking-widest leading-none">Emergency Protocol</p>
                   <p className="text-xs font-black text-red-900 uppercase mt-1">Report Incident / Breakdown</p>
                </div>
             </div>
@@ -80,24 +93,24 @@ export default function DriverHome() {
          {/* ── 4. Strategic: Up Next ── */}
          <div className="space-y-4">
             <div className="flex items-center justify-between px-1">
-               <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Operational Schedule</h3>
-               <span className="text-[9px] font-black text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full uppercase tracking-widest">2 jobs today</span>
+               <h3 className="text-xs font-black text-gray-400 uppercase tracking-[0.2em]">Operational Schedule</h3>
+               <span className="text-xs font-black text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full uppercase tracking-widest">2 jobs today</span>
             </div>
             
             <div className="flex flex-col gap-3">
                {upcoming.map((job) => (
-                  <div key={job.id} onClick={() => navigate('/driver/shipments')} className="bg-white rounded-3xl border border-gray-100 shadow-sm p-5 flex items-center justify-between group active:scale-[0.98] transition-all cursor-pointer">
+                  <div key={job.id} onClick={() => navigate('/driver/loads')} className="bg-white rounded-3xl border border-gray-100 shadow-sm p-5 flex items-center justify-between group active:scale-[0.98] transition-all cursor-pointer">
                      <div className="flex items-center gap-4 min-w-0">
                         <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-gray-400 shrink-0 border border-gray-100 group-hover:bg-[#FFCC00] group-hover:text-black group-hover:border-transparent transition-all">
                            <Package size={22} />
                         </div>
                         <div className="min-w-0">
                            <div className="flex items-center gap-2 mb-1">
-                              <span className="text-[9px] font-black text-orange-600 bg-orange-50 px-2 py-0.5 rounded uppercase tracking-tighter">{job.priority}</span>
-                              <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{job.id}</span>
+                              <span className="text-xs font-black text-orange-600 bg-orange-50 px-2 py-0.5 rounded uppercase tracking-tighter">{job.priority}</span>
+                              <span className="text-xs font-black text-gray-400 uppercase tracking-widest">{job.id}</span>
                            </div>
                            <p className="font-black text-gray-900 text-sm tracking-tight truncate leading-none uppercase">{job.area}</p>
-                           <div className="flex items-center gap-2 text-[10px] font-bold text-gray-400 mt-2 uppercase">
+                           <div className="flex items-center gap-2 text-xs font-bold text-gray-400 mt-2 uppercase">
                               <span className="flex items-center gap-1 leading-none"><Clock size={12} /> {job.time}</span>
                            </div>
                         </div>
@@ -116,7 +129,7 @@ export default function DriverHome() {
                <AlertTriangle size={20} className="text-blue-600" />
             </div>
             <div>
-               <p className="text-[9px] font-black text-blue-600 uppercase tracking-[0.2em]">Operational Alert</p>
+               <p className="text-xs font-black text-blue-600 uppercase tracking-[0.2em]">Operational Alert</p>
                <p className="text-xs font-bold text-blue-900 mt-1 leading-tight">Sydney Heavy Rain: Expect +15m delay in CBD route.</p>
             </div>
          </div>
@@ -124,3 +137,4 @@ export default function DriverHome() {
       </div>
    );
 }
+

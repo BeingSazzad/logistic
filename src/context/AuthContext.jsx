@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
     name: 'Sarah Mitchell',
     role: 'dispatcher',
     branchId: 'SYD-CENTRAL',
-    branchName: 'Sydney Central Hub',
+    branchName: 'Sydney Central Depot',
     email: 'sarah.m@herologistics.com'
   });
 

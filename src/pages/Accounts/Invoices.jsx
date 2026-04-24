@@ -61,7 +61,7 @@ export default function Invoices() {
           { label: 'Avg Days to Pay',   value: '24 days',  color: 'text-blue-600' },
         ].map(s => (
           <div key={s.label} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
-            <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">{s.label}</p>
+            <p className="text-xs text-gray-400 uppercase font-bold tracking-widest">{s.label}</p>
             <p className={`text-2xl font-black mt-1 ${s.color}`}>{s.value}</p>
           </div>
         ))}
@@ -87,7 +87,7 @@ export default function Invoices() {
 
         <div className="overflow-x-auto">
           <table className="w-full text-left">
-            <thead className="bg-[#FAFAFA] text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+            <thead className="bg-[#FAFAFA] text-xs font-bold text-gray-400 uppercase tracking-wider">
               <tr>
                 <th className="px-6 py-4">Invoice Details</th>
                 <th className="px-6 py-4">Customer</th>
@@ -105,7 +105,7 @@ export default function Invoices() {
                   <tr key={inv.id} className="hover:bg-gray-50/50 transition-all group">
                     <td className="px-6 py-5">
                       <div className="font-bold text-[#111] text-[15px]">{inv.id}</div>
-                      <div className="text-[11px] text-gray-400 font-medium mt-0.5">{inv.job}</div>
+                      <div className="text-xs text-gray-400 font-medium mt-0.5">{inv.job}</div>
                     </td>
                     <td className="px-6 py-5">
                       <div className="font-bold text-[#111] text-sm">{inv.customer}</div>
@@ -116,11 +116,11 @@ export default function Invoices() {
                     <td className="px-6 py-5">
                       <div className={`text-sm font-bold ${inv.status === 'overdue' ? 'text-red-500' : 'text-gray-700'}`}>
                         {inv.due}
-                        {inv.days && <span className="ml-1 text-[10px] font-bold text-red-400">({inv.days}d overdue)</span>}
+                        {inv.days && <span className="ml-1 text-xs font-bold text-red-400">({inv.days}d overdue)</span>}
                       </div>
                     </td>
                     <td className="px-6 py-5">
-                      <span className={`text-[10px] font-bold px-3 py-1 rounded-md border inline-flex items-center gap-1.5 ${cfg.cls}`}>
+                      <span className={`text-xs font-bold px-3 py-1 rounded-md border inline-flex items-center gap-1.5 ${cfg.cls}`}>
                         <cfg.icon size={10} />
                         {isSent ? 'Sent' : cfg.label}
                       </span>
@@ -153,3 +153,4 @@ export default function Invoices() {
     </div>
   );
 }
+

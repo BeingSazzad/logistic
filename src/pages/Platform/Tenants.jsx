@@ -3,11 +3,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { CheckCircle2, XCircle, Clock, Plus, Search, Building2, ChevronDown } from 'lucide-react';
 
 const tenants = [
-  { id: 'T-001', name: 'HERO Logistics Pty Ltd',  status: 'active',    plan: 'Pro',        users: 18, shipments: 342, mrr: 149,  joined: '12 Jan 2025' },
-  { id: 'T-002', name: 'FastMove AU',              status: 'trial',     plan: 'Starter',    users: 3,  shipments: 47,  mrr: 0,    joined: '5 Apr 2026', trial: 3 },
-  { id: 'T-003', name: 'QuickShip Pty Ltd',        status: 'suspended', plan: 'Basic',      users: 0,  shipments: 0,   mrr: 0,    joined: '3 Aug 2024' },
-  { id: 'T-004', name: 'OzFreight Co',             status: 'active',    plan: 'Enterprise', users: 54, shipments: 1240,mrr: 599,  joined: '1 Mar 2024' },
-  { id: 'T-005', name: 'SunState Transport',       status: 'active',    plan: 'Pro',        users: 11, shipments: 198, mrr: 149,  joined: '19 Sep 2025' },
+  { id: 'T-001', name: 'HERO Logistics Pty Ltd',  status: 'active',    plan: 'Pro',        users: 18, Loads: 342, mrr: 149,  joined: '12 Jan 2025' },
+  { id: 'T-002', name: 'FastMove AU',              status: 'trial',     plan: 'Starter',    users: 3,  Loads: 47,  mrr: 0,    joined: '5 Apr 2026', trial: 3 },
+  { id: 'T-003', name: 'QuickShip Pty Ltd',        status: 'suspended', plan: 'Basic',      users: 0,  Loads: 0,   mrr: 0,    joined: '3 Aug 2024' },
+  { id: 'T-004', name: 'OzFreight Co',             status: 'active',    plan: 'Enterprise', users: 54, Loads: 1240,mrr: 599,  joined: '1 Mar 2024' },
+  { id: 'T-005', name: 'SunState Transport',       status: 'active',    plan: 'Pro',        users: 11, Loads: 198, mrr: 149,  joined: '19 Sep 2025' },
 ];
 
 export default function Tenants() {
@@ -46,9 +46,9 @@ export default function Tenants() {
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Subscription Plan</h2>
             <div className="space-y-3">
               {[
-                { plan: 'Starter', price: '$49/mo', desc: '1 branch · 3 users · 50 shipments/mo' },
-                { plan: 'Pro',     price: '$149/mo',desc: '5 branches · 15 users · 500 shipments/mo', recommended: true },
-                { plan: 'Enterprise', price: 'Custom', desc: 'Unlimited branches, users & shipments' },
+                { plan: 'Starter', price: '$49/mo', desc: '1 branch · 3 users · 50 Loads/mo' },
+                { plan: 'Pro',     price: '$149/mo',desc: '5 branches · 15 users · 500 Loads/mo', recommended: true },
+                { plan: 'Enterprise', price: 'Custom', desc: 'Unlimited branches, users & Loads' },
               ].map(p => (
                 <div key={p.plan} className={`border-2 rounded-xl p-4 cursor-pointer transition-all ${p.recommended ? 'border-[#FFCC00] bg-yellow-50/30' : 'border-gray-100 hover:border-gray-300'}`}>
                   <div className="flex justify-between items-start">
@@ -58,7 +58,7 @@ export default function Tenants() {
                     </div>
                     <div className="text-right">
                       <p className="font-black text-gray-900">{p.price}</p>
-                      {p.recommended && <span className="text-[10px] bg-[#FFCC00] text-black px-2 py-0.5 rounded font-bold uppercase tracking-widest mt-1 inline-block">Recommended</span>}
+                      {p.recommended && <span className="text-xs bg-[#FFCC00] text-black px-2 py-0.5 rounded font-bold uppercase tracking-widest mt-1 inline-block">Recommended</span>}
                     </div>
                   </div>
                 </div>
@@ -117,7 +117,7 @@ export default function Tenants() {
       <div className="flex justify-between items-center mb-2 px-2">
         <div>
           <h1 className="hero-h1">Companies</h1>
-          <p className="hero-body text-hero-neutral mt-1">Manage all companies using the platform and their accounts.</p>
+          <p className="hero-body text-gray-600 mt-1">Manage all companies using the platform and their accounts.</p>
         </div>
         <button 
           onClick={() => navigate('/platform/tenants/new')} 
@@ -172,7 +172,7 @@ export default function Tenants() {
 
         <div className="overflow-x-auto">
            <table className="w-full text-left">
-             <thead className="bg-[#FAFAFA] text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+             <thead className="bg-[#FAFAFA] text-xs font-bold text-gray-400 uppercase tracking-wider">
                <tr>
                  <th className="px-6 py-4">Company Details</th>
                  <th className="px-6 py-4">Status</th>
@@ -191,12 +191,12 @@ export default function Tenants() {
                        </div>
                        <div>
                          <div className="font-bold text-[#111] text-[15px]">{t.name}</div>
-                         <div className="text-[11px] text-gray-400 font-medium tracking-tight mt-0.5">{t.id} • {t.joined}</div>
+                         <div className="text-xs text-gray-400 font-medium tracking-tight mt-0.5">{t.id} • {t.joined}</div>
                        </div>
                      </div>
                    </td>
                    <td className="px-6 py-5">
-                     <span className={`text-[10px] font-bold px-3 py-1 rounded-md border inline-flex items-center gap-1 ${
+                     <span className={`text-xs font-bold px-3 py-1 rounded-md border inline-flex items-center gap-1 ${
                         t.status === 'active' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 
                         t.status === 'trial' ? 'bg-yellow-50 text-yellow-700 border-yellow-200' :
                         'bg-[#FEF2F2] text-[#DC2626] border-[#FEE2E2]'
@@ -209,7 +209,7 @@ export default function Tenants() {
                    <td className="px-6 py-5">
                       <div className="flex flex-col">
                          <span className="text-sm font-bold text-[#111]">{t.plan}</span>
-                         <span className="text-[11px] text-gray-400 mt-0.5 font-medium">{t.shipments} shipments/mo</span>
+                         <span className="text-xs text-gray-400 mt-0.5 font-medium">{t.Loads} Loads/mo</span>
                       </div>
                    </td>
                    <td className="px-6 py-5">
@@ -229,3 +229,5 @@ export default function Tenants() {
     </div>
   );
 }
+
+

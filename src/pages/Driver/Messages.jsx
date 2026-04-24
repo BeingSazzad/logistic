@@ -65,14 +65,14 @@ export default function DriverMessages() {
                </div>
                <div>
                   <h1 className="font-bold text-sm tracking-tight">Fleet Support</h1>
-                  <p className="text-[9px] text-[#FFCC00] font-black uppercase tracking-widest mt-0.5">SYD_DISPATCH_01</p>
+                  <p className="text-xs text-[#FFCC00] font-black uppercase tracking-widest mt-0.5">SYD_DISPATCH_01</p>
                </div>
             </div>
          </div>
          <div className="flex items-center gap-2">
             <button className="p-2.5 bg-red-600/10 hover:bg-red-600 text-red-500 hover:text-white rounded-xl transition-all border border-red-500/20 active:scale-95 flex items-center gap-1.5 px-3">
                <AlertTriangle size={16} />
-               <span className="text-[10px] font-black uppercase tracking-tighter">Emergency</span>
+               <span className="text-xs font-black uppercase tracking-tighter">Emergency</span>
             </button>
          </div>
       </div>
@@ -83,7 +83,7 @@ export default function DriverMessages() {
         className="flex-1 overflow-y-auto px-4 py-6 flex flex-col gap-6 scroll-smooth pb-10"
       >
          <div className="text-center">
-            <span className="text-[10px] font-black text-gray-400 bg-gray-100 border border-gray-200 px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">Shift Started: 08:00 AM</span>
+            <span className="text-xs font-black text-gray-400 bg-gray-100 border border-gray-200 px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">Shift Started: 08:00 AM</span>
          </div>
          
          {messages.map((m) => (
@@ -95,7 +95,7 @@ export default function DriverMessages() {
                }`}>
                  {m.text}
                </div>
-               <div className={`flex items-center gap-2 mt-1.5 text-[9px] font-bold text-gray-400 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity`}>
+               <div className={`flex items-center gap-2 mt-1.5 text-xs font-bold text-gray-400 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity`}>
                   <Clock size={10} /> {m.time}
                   {m.sender === 'driver' && <CheckCircle2 size={10} className="text-emerald-500" />}
                </div>
@@ -103,14 +103,14 @@ export default function DriverMessages() {
          ))}
       </div>
 
-      {/* ── Action Hub: Quick Replies & SOS ── */}
+      {/* ── Action Depot: Quick Replies & SOS ── */}
       <div className="bg-white border-t border-gray-100 p-4 shrink-0 shadow-[0_-10px_20px_rgba(0,0,0,0.03)]">
          <div className="flex gap-2 overflow-x-auto pb-4 no-scrollbar">
             {quickReplies.map(reply => (
                <button 
                   key={reply}
                   onClick={() => handleSendMessage(reply)}
-                  className={`whitespace-nowrap px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest border transition-all active:scale-95 ${
+                  className={`whitespace-nowrap px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest border transition-all active:scale-95 ${
                      reply === 'SOS' 
                      ? 'bg-red-50 text-red-600 border-red-100 font-black' 
                      : 'bg-gray-50 text-gray-500 border-gray-100 hover:bg-gray-100 text-gray-700'
@@ -146,3 +146,4 @@ export default function DriverMessages() {
     </div>
   );
 }
+

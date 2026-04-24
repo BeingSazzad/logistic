@@ -1,13 +1,13 @@
 import { create } from 'zustand';
 
-// Simulated Frontend-Only State Store for Shipments/Dashboard
-export const useShipmentStore = create((set) => ({
-  shipmentYear: '2026',
+// Simulated Frontend-Only State Store for Loads/Dashboard
+export const useLoadStore = create((set) => ({
+  LoadYear: '2026',
   revenueYear: '2026',
   
   // Overview Metrics
   metrics: {
-    totalShipments: '12,482',
+    totalLoads: '12,482',
     activeVehicles: '415',
     totalRevenue: '$1.2M',
     pendingIssues: '84',
@@ -17,7 +17,7 @@ export const useShipmentStore = create((set) => ({
   },
 
   // Monthly Data
-  shipmentData: [32, 45, 38, 52, 65, 58, 72, 85, 92, 88, 105, 120],
+  LoadData: [32, 45, 38, 52, 65, 58, 72, 85, 92, 88, 105, 120],
   incomeData: [120, 150, 180, 140, 210, 250, 230, 280, 310, 290, 340, 420], // in $k
 
   distData: [
@@ -33,6 +33,6 @@ export const useShipmentStore = create((set) => ({
   ],
 
   // Actions
-  setShipmentYear: (year) => set({ shipmentYear: year }),
+  setLoadYear: (year) => set({ LoadYear: year }),
   setRevenueYear: (year) => set({ revenueYear: year }),
 }));

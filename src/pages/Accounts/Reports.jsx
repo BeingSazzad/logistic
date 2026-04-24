@@ -48,7 +48,7 @@ export default function AccountsReports() {
                 <div className="flex-1 bg-emerald-500 rounded-t-sm hover:opacity-80 transition-opacity" style={{ height: `${(revenue[i]/max)*180}px` }} title={`$${revenue[i]}K`} />
                 <div className="flex-1 bg-red-400 rounded-t-sm hover:opacity-80 transition-opacity" style={{ height: `${(costs[i]/max)*180}px` }}   title={`$${costs[i]}K`} />
               </div>
-              <span className="text-[10px] text-gray-500 font-semibold">{m}</span>
+              <span className="text-xs text-gray-500 font-semibold">{m}</span>
             </div>
           ))}
         </div>
@@ -58,7 +58,7 @@ export default function AccountsReports() {
       <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
         <div className="p-5 border-b border-gray-100"><h3 className="font-bold text-gray-900">Monthly Breakdown</h3></div>
         <table className="w-full text-left">
-          <thead className="bg-gray-50 text-gray-400 text-[11px] uppercase tracking-wider border-b border-gray-100">
+          <thead className="bg-gray-50 text-gray-400 text-xs uppercase tracking-wider border-b border-gray-100">
             <tr>
               <th className="px-6 py-3">Month</th>
               <th className="px-6 py-3 text-right">Revenue</th>
@@ -84,3 +84,4 @@ export default function AccountsReports() {
     </div>
   );
 }
+

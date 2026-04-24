@@ -32,12 +32,13 @@ const createItem = (id) => ({
   collapsed: false,
 });
 
-export default function AdminCreateShipment() {
+export default function DispatchCreateJob() {
   const user = useAuthStore(state => state.user);
   const navigate = useNavigate();
   const [priority, setPriority] = useState('Normal');
   const [paymentBy, setPaymentBy] = useState('Sender');
   const [transferType, setTransferType] = useState('Direct'); // 'Branch' | 'Direct'
+  const [targetBranch, setTargetBranch] = useState('');
 
   // Sender state
   const [senderMode, setSenderMode] = useState('registered');
@@ -83,6 +84,9 @@ export default function AdminCreateShipment() {
     setItems(prev => prev.map(i => i.id === id ? { ...i, collapsed: !i.collapsed } : i));
   };
 
+  const totalWeight = items.reduce((sum, i) => sum + (parseFloat(i.weight) || 0), 0);
+  const totalQty = items.reduce((sum, i) => sum + (parseInt(i.qty) || 0), 0);
+
   const copyPickupFromSender = (id) => {
     if (!selectedSender) return;
     updateItem(id, 'pickupAddress', selectedSender.address);
@@ -101,9 +105,6 @@ export default function AdminCreateShipment() {
     updateItem(id, 'dropoffAddress', prevDropoff);
   };
 
-  const totalWeight = items.reduce((sum, i) => sum + (parseFloat(i.weight) || 0), 0);
-  const totalQty = items.reduce((sum, i) => sum + (parseInt(i.qty) || 0), 0);
-
   return (
     <div className="flex flex-col gap-6 w-full max-w-[1440px] mx-auto pb-12">
 
@@ -111,7 +112,7 @@ export default function AdminCreateShipment() {
       <div className="flex justify-between items-center mb-2 px-2">
         <div className="flex items-center gap-4">
           <button
-            onClick={() => navigate('/admin/shipments')}
+            onClick={() => navigate('/dispatch/shipments')}
             className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-all shadow-sm"
           >
             <ArrowLeft size={20} />
@@ -130,7 +131,7 @@ export default function AdminCreateShipment() {
           </div>
         </div>
         <div className="flex gap-4">
-          <button onClick={() => navigate('/admin/shipments')} className="btn btn-outline text-hero-neutral">
+          <button onClick={() => navigate('/dispatch/shipments')} className="btn btn-outline text-hero-neutral">
             Cancel
           </button>
           <button className="btn btn-primary pl-6 pr-8">
@@ -156,7 +157,7 @@ export default function AdminCreateShipment() {
             </button>
           ))}
         </div>
-        <span className="text-xs font-bold text-gray-500">Creating as: <span className="text-[#FFCC00]">{user?.name || 'Admin'} ({user?.role || 'Admin'})</span></span>
+        <span className="text-xs font-bold text-gray-500">Creating as: <span className="text-[#FFCC00]">{user?.name} (Dispatcher)</span></span>
       </div>
 
       <div className="w-full h-px bg-gray-200/60 mb-2"></div>
@@ -217,7 +218,7 @@ export default function AdminCreateShipment() {
               ) : (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widests mb-1.5 ml-1">Search Registered Customer *</label>
+                    <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Search Registered Customer *</label>
                     <div className="relative">
                       <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
                       <input
@@ -243,9 +244,9 @@ export default function AdminCreateShipment() {
                             </div>
                             <div className="min-w-0">
                               <p className="font-bold text-sm text-gray-900 truncate">{u.name}</p>
-                              <p className="text-[10px] text-gray-400 uppercase tracking-widests font-bold">{u.phone} · {u.type}</p>
+                              <p className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">{u.phone} · {u.type}</p>
                             </div>
-                            <span className="text-[9px] text-gray-400 font-black uppercase tracking-widests shrink-0 border border-gray-100 px-2 py-0.5 rounded-md">{u.id}</span>
+                            <span className="text-[9px] text-gray-400 font-black uppercase tracking-widest shrink-0 border border-gray-100 px-2 py-0.5 rounded-md">{u.id}</span>
                           </button>
                         ))}
                       </div>
@@ -254,7 +255,6 @@ export default function AdminCreateShipment() {
 
                   {selectedSender && (
                     <div className="bg-[#FFFBEB] border-2 border-[#FFCC00] rounded-2xl p-5 relative overflow-hidden">
-                      <div className="absolute top-0 right-0 w-24 h-24 bg-[#FFCC00]/10 rounded-bl-full pointer-events-none"></div>
                       <div className="flex items-center gap-5">
                         <div className="w-14 h-14 rounded-2xl bg-[#111] flex items-center justify-center text-[#FFCC00] font-black text-lg shadow-xl shrink-0">
                           {selectedSender.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
@@ -262,7 +262,7 @@ export default function AdminCreateShipment() {
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
                             <h4 className="font-black text-gray-900 text-base tracking-tight">{selectedSender.name}</h4>
-                            <span className="text-[9px] font-black text-[#9A7B00] bg-[#FFCC00]/20 border border-[#FFCC00]/40 px-2 py-0.5 rounded uppercase tracking-widests">{selectedSender.id}</span>
+                            <span className="text-[9px] font-black text-[#9A7B00] bg-[#FFCC00]/20 border border-[#FFCC00]/40 px-2 py-0.5 rounded uppercase tracking-widest">{selectedSender.id}</span>
                           </div>
                           <div className="flex flex-col gap-1">
                             <p className="text-[11px] font-bold text-gray-500 flex items-center gap-1.5"><Phone size={11} />{selectedSender.phone}</p>
@@ -272,7 +272,7 @@ export default function AdminCreateShipment() {
                         </div>
                         <div className="flex flex-col items-end gap-2 shrink-0">
                           <CheckCircle2 size={22} className="text-[#FFCC00]" />
-                          <button onClick={clearSender} className="text-[10px] text-gray-400 hover:text-red-500 font-black uppercase tracking-widests transition-colors">Change</button>
+                          <button onClick={clearSender} className="text-[10px] text-gray-400 hover:text-red-500 font-black uppercase tracking-widest transition-colors">Change</button>
                         </div>
                       </div>
                     </div>
@@ -293,7 +293,7 @@ export default function AdminCreateShipment() {
               </div>
               <button
                 onClick={addItem}
-                className="flex items-center gap-2 bg-[#111] hover:bg-black text-[#FFCC00] px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widests transition-all shadow-sm"
+                className="flex items-center gap-2 bg-[#111] hover:bg-black text-[#FFCC00] px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all shadow-sm"
               >
                 <Plus size={14} strokeWidth={3} /> Add Item
               </button>
@@ -301,8 +301,6 @@ export default function AdminCreateShipment() {
 
             {items.map((item, idx) => (
               <div key={item.id} className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-
-                {/* Item Header */}
                 <div
                   className="p-4 flex items-center justify-between cursor-pointer hover:bg-gray-50/50 transition-colors"
                   onClick={() => toggleCollapse(item.id)}
@@ -317,45 +315,30 @@ export default function AdminCreateShipment() {
                         {item.packaging && <span className="text-gray-400 font-medium ml-2 text-xs">· {item.packaging}</span>}
                       </p>
                       <p className="text-[10px] text-gray-400 font-medium mt-0.5">
-                        {item.pickupAddress ? `📍 ${item.pickupAddress.slice(0, 35)}${item.pickupAddress.length > 35 ? '...' : ''}` : 'Pickup address not set'}
-                        {item.dropoffAddress && ` → ${item.dropoffAddress.slice(0, 25)}...`}
+                        {item.pickupAddress ? `📍 ${item.pickupAddress.slice(0, 35)}...` : 'Pickup address not set'}
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2" onClick={e => e.stopPropagation()}>
+                  <div className="flex items-center gap-2">
                     {items.length > 1 && (
-                      <button
-                        onClick={() => removeItem(item.id)}
-                        className="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
-                      >
+                      <button onClick={e => { e.stopPropagation(); removeItem(item.id); }} className="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-red-500 rounded-lg transition-all">
                         <Trash2 size={14} />
                       </button>
                     )}
-                    {item.collapsed
-                      ? <ChevronDown size={18} className="text-gray-400" />
-                      : <ChevronUp size={18} className="text-gray-400" />
-                    }
+                    {item.collapsed ? <ChevronDown size={18} /> : <ChevronUp size={18} />}
                   </div>
                 </div>
 
-                {/* Item Form — collapsed/expanded */}
                 {!item.collapsed && (
                   <div className="border-t border-gray-50 p-5 flex flex-col gap-5">
-
-                    {/* Description & Packaging */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                       <div>
-                        <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widests mb-1.5 ml-1">Item Description *</label>
-                        <input
-                          type="text"
-                          placeholder="e.g. Toyota Camry 2020, Electronics pallet, Furniture set"
-                          value={item.description}
-                          onChange={e => updateItem(item.id, 'description', e.target.value)}
-                          className="input"
-                        />
+                        <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Item Description *</label>
+                        <input type="text" value={item.description} onChange={e => updateItem(item.id, 'description', e.target.value)} className="input" />
                       </div>
                       <div>
-                        <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widests mb-1.5 ml-1">Packaging Type</label>
+                        <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Packaging Type</label>
+                      <div className="relative group">
                         <select
                           value={item.packaging}
                           onChange={e => updateItem(item.id, 'packaging', e.target.value)}
@@ -363,117 +346,68 @@ export default function AdminCreateShipment() {
                         >
                           {PACKAGING_TYPES.map(p => <option key={p}>{p}</option>)}
                         </select>
+                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none group-focus-within:text-violet-500 transition-colors" size={16} />
+                      </div>
                       </div>
                       <div>
-                        <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widests mb-1.5 ml-1">Quantity</label>
-                        <input
-                          type="number"
-                          min="1"
-                          value={item.qty}
-                          onChange={e => updateItem(item.id, 'qty', e.target.value)}
-                          className="w-full bg-white border border-gray-200 focus:border-violet-400 rounded-lg py-2.5 px-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-violet-500/20"
-                        />
+                        <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Quantity</label>
+                        <input type="number" value={item.qty} onChange={e => updateItem(item.id, 'qty', e.target.value)} className="input" />
                       </div>
                       <div>
-                        <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widests mb-1.5 ml-1">Weight (KG)</label>
-                        <input
-                          type="number"
-                          placeholder="0"
-                          value={item.weight}
-                          onChange={e => updateItem(item.id, 'weight', e.target.value)}
-                          className="w-full bg-white border border-gray-200 focus:border-violet-400 rounded-lg py-2.5 px-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-violet-500/20"
-                        />
+                        <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Weight (KG)</label>
+                        <input type="number" value={item.weight} onChange={e => updateItem(item.id, 'weight', e.target.value)} className="input" />
                       </div>
                     </div>
 
-                    {/* Pickup Address */}
                     <div className="bg-blue-50/50 border border-blue-100 rounded-xl p-4 flex flex-col gap-3">
                       <div className="flex justify-between items-center">
-                        <label className="text-[10px] font-black text-blue-700 uppercase tracking-widests flex items-center gap-1.5">
+                        <label className="text-[10px] font-black text-blue-700 uppercase tracking-widest flex items-center gap-1.5">
                           <MapPin size={12} /> Pickup Address *
                         </label>
                         <div className="flex items-center gap-2">
-                          {selectedSender && (
-                            <button
-                              onClick={() => copyPickupFromSender(item.id)}
-                              className="text-[9px] font-black uppercase tracking-widests px-2.5 py-1 rounded border border-blue-200 bg-white text-blue-600 hover:bg-blue-100 transition-all flex items-center gap-1"
-                            >
-                              <Copy size={10} /> Same as Sender
-                            </button>
-                          )}
-                          {idx > 0 && (
-                            <button
-                              onClick={() => copyPickupFromPrev(idx, item.id)}
-                              className="text-[9px] font-black uppercase tracking-widests px-2.5 py-1 rounded border border-gray-200 bg-white text-gray-500 hover:bg-gray-50 transition-all flex items-center gap-1"
-                            >
-                              <Copy size={10} /> Same as Item {idx}
-                            </button>
-                          )}
+                           {selectedSender && (
+                             <button onClick={() => copyPickupFromSender(item.id)} className="text-[9px] font-black uppercase tracking-widest px-2 py-1 rounded border border-blue-200 bg-white text-blue-600 hover:bg-blue-50 transition-all flex items-center gap-1">
+                               <Copy size={10} /> Same as Sender
+                             </button>
+                           )}
                         </div>
                       </div>
-                      <div className="relative group">
-                        <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-blue-400 group-focus-within:text-blue-600 transition-colors" size={16} />
-                        <input
-                          type="text"
-                          placeholder="Full pickup address..."
-                          value={item.pickupAddress}
-                          onChange={e => updateItem(item.id, 'pickupAddress', e.target.value)}
-                          className="w-full bg-white border border-blue-200 focus:border-blue-400 rounded-lg py-2.5 pl-11 pr-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-                        />
-                      </div>
+                      <input type="text" value={item.pickupAddress} onChange={e => updateItem(item.id, 'pickupAddress', e.target.value)} placeholder="Full pickup address..." className="input !border-blue-200" />
                     </div>
 
-                    {/* Drop-off Address */}
                     <div className="bg-emerald-50/50 border border-emerald-100 rounded-xl p-4 flex flex-col gap-3">
                       <div className="flex justify-between items-center">
-                        <label className="text-[10px] font-black text-emerald-700 uppercase tracking-widests flex items-center gap-1.5">
+                        <label className="text-[10px] font-black text-emerald-700 uppercase tracking-widest flex items-center gap-1.5">
                           <Navigation size={12} /> Drop-off Address *
                         </label>
                         {idx > 0 && (
-                          <button
-                            onClick={() => copyDropoffFromPrev(idx, item.id)}
-                            className="text-[9px] font-black uppercase tracking-widests px-2.5 py-1 rounded border border-gray-200 bg-white text-gray-500 hover:bg-gray-50 transition-all flex items-center gap-1"
-                          >
+                          <button onClick={() => copyDropoffFromPrev(idx, item.id)} className="text-[9px] font-black uppercase tracking-widest px-2 py-1 rounded border border-gray-200 bg-white text-gray-400 hover:bg-gray-50 transition-all flex items-center gap-1">
                             <Copy size={10} /> Same as Item {idx}
                           </button>
                         )}
                       </div>
-                      <div className="relative group">
-                        <Navigation className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-400 group-focus-within:text-emerald-600 transition-colors" size={16} />
-                        <input
-                          type="text"
-                          placeholder="Full drop-off address..."
-                          value={item.dropoffAddress}
-                          onChange={e => updateItem(item.id, 'dropoffAddress', e.target.value)}
-                          className="w-full bg-white border border-emerald-200 focus:border-emerald-400 rounded-lg py-2.5 pl-11 pr-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
-                        />
-                      </div>
-
-                      {/* Hub-to-Hub branch selector per item */}
+                      <input type="text" value={item.dropoffAddress} onChange={e => updateItem(item.id, 'dropoffAddress', e.target.value)} placeholder="Full drop-off address..." className="input !border-emerald-200" />
                       {transferType === 'Branch' && (
-                        <div className="relative group mt-1">
-                          <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-emerald-500 transition-colors" size={16} />
+                        <div className="relative group">
                           <select
                             value={item.targetBranch || ''}
                             onChange={e => updateItem(item.id, 'targetBranch', e.target.value)}
-                            className="w-full bg-white border border-emerald-200 focus:border-emerald-400 rounded-lg py-2.5 pl-11 pr-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500/20 appearance-none cursor-pointer"
+                            className="input !border-emerald-200 pr-10 appearance-none cursor-pointer"
                           >
                             <option value="">Select Destination Branch...</option>
                             <option value="SYD-CENTRAL">Sydney Central Hub (SYD)</option>
                             <option value="MEL-HUB">Melbourne Hub (MEL)</option>
                             <option value="BNE-PORT">Brisbane Port Branch (BNE)</option>
                           </select>
-                          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={16} />
+                          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none group-focus-within:text-emerald-500 transition-colors" size={16} />
                         </div>
                       )}
                     </div>
-
                   </div>
                 )}
               </div>
             ))}
 
-            {/* Add Item CTA */}
             <button
               onClick={addItem}
               className="w-full py-4 border-2 border-dashed border-gray-200 rounded-xl text-sm font-bold text-gray-400 hover:border-violet-300 hover:text-violet-500 hover:bg-violet-50/30 transition-all flex items-center justify-center gap-2"
@@ -485,77 +419,36 @@ export default function AdminCreateShipment() {
 
         {/* ── Sidebar ── */}
         <div className="lg:col-span-4 flex flex-col gap-6">
-
-          {/* Order Summary */}
-          <div className="bg-[#111] rounded-xl p-6 text-white shadow-xl border border-gray-800 relative overflow-hidden group">
-            <div className="absolute -right-6 -top-6 w-32 h-32 bg-[#FFCC00]/10 rounded-full blur-3xl group-hover:bg-[#FFCC00]/20 transition-all"></div>
-            <h3 className="text-xs font-black uppercase tracking-widests mb-4 text-[#FFCC00] flex items-center justify-center gap-2 border-b border-white/10 pb-4">
+          <div className="bg-[#111] rounded-xl p-6 text-white shadow-xl border border-gray-800">
+            <h3 className="text-xs font-black uppercase tracking-widest mb-4 text-[#FFCC00] flex items-center justify-center gap-2 border-b border-white/10 pb-4">
               <Box size={16} /> Order Summary
             </h3>
-
-            {/* Item Quick List */}
-            <div className="space-y-2 mb-5 max-h-48 overflow-y-auto pr-1">
-              {items.map((item, idx) => (
-                <div key={item.id} className="flex items-start gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
-                  <span className="w-5 h-5 rounded bg-violet-500/20 text-violet-400 flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">{idx + 1}</span>
-                  <div className="min-w-0">
-                    <p className="text-xs font-bold text-white truncate">{item.description || `Item ${idx + 1}`}</p>
-                    <p className="text-[9px] text-gray-500 font-bold uppercase mt-0.5">{item.qty} × {item.packaging}</p>
-                    {item.dropoffAddress && (
-                      <p className="text-[9px] text-gray-600 mt-0.5 truncate">→ {item.dropoffAddress}</p>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Totals */}
-            {/* Totals Section */}
-            <div className="space-y-5 border-t border-white/10 pt-5">
-              
+            <div className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-white/5 rounded-xl p-3 text-center border border-white/5">
-                  <p className="text-[9px] text-gray-500 uppercase tracking-widest font-bold mb-1">Total Items</p>
-                  <p className="text-xl font-black text-white">{totalQty}</p>
+                  <p className="text-[9px] text-gray-500 uppercase font-bold mb-1">Total Items</p>
+                  <p className="text-xl font-black">{totalQty}</p>
                 </div>
                 <div className="bg-white/5 rounded-xl p-3 text-center border border-white/5">
-                  <p className="text-[9px] text-gray-500 uppercase tracking-widest font-bold mb-1">Total Weight</p>
-                  <p className="text-xl font-black text-white">{totalWeight > 0 ? `${totalWeight} KG` : '—'}</p>
+                  <p className="text-[9px] text-gray-500 uppercase font-bold mb-1">Total Weight</p>
+                  <p className="text-xl font-black">{totalWeight} KG</p>
                 </div>
               </div>
-
-              {/* Service Level Selection */}
-              {/* CONSOLIDATED SERVICE SELECTOR (LESS IS MORE) */}
               <div>
-                <label className="block text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2.5 ml-1">Service Level</label>
-                <div className="flex bg-white/5 p-1 rounded-xl border border-white/5 gap-1.5">
+                <label className="block text-[9px] font-black text-gray-400 uppercase tracking-widest mb-2">Service Level</label>
+                <div className="flex bg-white/5 p-1 rounded-xl gap-1.5">
                   {['Normal', 'Express', 'Direct'].map(l => (
-                    <button
-                      key={l}
-                      onClick={() => setPriority(l)}
-                      className={`flex-1 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${priority === l ? 'bg-[#FFCC00] text-black shadow-lg' : 'text-gray-500 hover:text-white'}`}
-                    >
+                    <button key={l} onClick={() => setPriority(l)} className={`flex-1 py-3 rounded-lg text-[10px] font-black uppercase transition-all ${priority === l ? 'bg-[#FFCC00] text-black shadow-lg' : 'text-gray-500'}`}>
                       {l}
                     </button>
                   ))}
                 </div>
-                <div className="flex justify-between mt-2.5 px-1">
-                   <span className="text-[10px] font-black text-[#FFCC00] uppercase tracking-widest">{priority} handling</span>
-                   <span className="text-[9px] font-bold text-gray-500 italic uppercase">Est. {priority === 'Direct' ? 'Immediate' : (priority === 'Express' ? '24 Hours' : 'Standard')}</span>
-                </div>
               </div>
-
-              <div className="flex items-center justify-between bg-white/5 p-3 rounded-xl border border-white/5 mb-4">
+              <div className="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5 mb-4">
                 <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Billing Method</span>
                 <div className="flex gap-2">
                   {['Sender', 'Receiver'].map(t => (
-                    <button
-                      key={t}
-                      onClick={() => setPaymentBy(t)}
-                      className={`px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all ${paymentBy === t ? 'bg-[#FFCC00] text-black' : 'text-gray-500 hover:text-white'}`}
-                    >
-                      {t}
-                    </button>
+                    <button key={t} onClick={() => setPaymentBy(t)} className={`px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all ${paymentBy === t ? 'bg-[#FFCC00] text-black' : 'text-gray-500 hover:text-white'}`}>{t}</button>
                   ))}
                 </div>
               </div>
@@ -604,26 +497,13 @@ export default function AdminCreateShipment() {
             </div>
           </div>
 
-          {/* Terms */}
           <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm flex flex-col gap-5">
-            <h3 className="text-xs font-black text-gray-900 uppercase tracking-widests flex items-center gap-2">
+            <h3 className="text-xs font-black text-gray-900 uppercase tracking-widest flex items-center gap-2">
               <Shield size={16} className="text-emerald-500" /> Terms & Conditions
             </h3>
             <p className="text-xs font-medium text-gray-600 leading-relaxed">
-              By creating this shipment, you confirm all items are correctly declared and do not contain restricted, illegal, or undeclared dangerous materials.
+              By creating this shipment, you confirm all items are correctly declared.
             </p>
-            {items.some(i => i.packaging === 'Dangerous Goods') && (
-              <div className="bg-red-50 border border-red-200 rounded-xl p-3 flex items-start gap-2">
-                <AlertCircle size={16} className="text-red-500 shrink-0 mt-0.5" />
-                <p className="text-[10px] font-bold text-red-700">Dangerous Goods detected. A certified driver with DG certification will be required.</p>
-              </div>
-            )}
-            <div className="pt-4 border-t border-gray-100">
-              <label className="flex items-center gap-3 cursor-pointer group">
-                <input type="checkbox" className="w-4 h-4 rounded border-gray-300 accent-yellow-400 cursor-pointer" />
-                <span className="text-[10px] font-black text-gray-500 uppercase tracking-widests group-hover:text-gray-900 transition-colors">I confirm all details are correct</span>
-              </label>
-            </div>
           </div>
         </div>
       </div>

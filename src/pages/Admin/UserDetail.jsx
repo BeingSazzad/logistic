@@ -7,15 +7,15 @@ import {
 } from 'lucide-react';
 
 const USER_DB = {
-  'USR-01': { id: 'USR-01', name: 'Sarah Mitchell', email: 'sarah.m@hero.com', phone: '+61 411 000 001', role: 'Dispatcher', branch: 'Sydney Central Hub', branchId: 'SYD-CENTRAL', status: 'Active', lastLogin: '10 mins ago', access: 'Full', joined: 'Mar 15, 2024', sessions: 1842, twoFA: true },
-  'USR-02': { id: 'USR-02', name: 'Jack Taylor',    email: 'jack.t@hero.com',  phone: '+61 412 000 002', role: 'Driver',     branch: 'Sydney Central Hub', branchId: 'SYD-CENTRAL', status: 'Active', lastLogin: '2 days ago',  access: 'Mobile Only', joined: 'Jan 08, 2024', sessions: 3201, twoFA: false },
-  'USR-03': { id: 'USR-03', name: 'Oliver Brown',   email: 'oliver.b@hero.com', phone: '+61 413 000 003', role: 'Dispatcher', branch: 'Melbourne Hub', branchId: 'MEL-HUB', status: 'Offline', lastLogin: '1 week ago',  access: 'Full', joined: 'Jun 01, 2024', sessions: 744, twoFA: false },
-  'USR-04': { id: 'USR-04', name: 'Liam Smith',     email: 'liam.s@hero.com',  phone: '+61 414 000 004', role: 'Driver',     branch: 'Sydney Central Hub', branchId: 'SYD-CENTRAL', status: 'Active', lastLogin: '1 hr ago',    access: 'Mobile Only', joined: 'Feb 20, 2024', sessions: 2807, twoFA: false },
+  'USR-01': { id: 'USR-01', name: 'Sarah Mitchell', email: 'sarah.m@hero.com', phone: '+61 411 000 001', role: 'Dispatcher', branch: 'Sydney Central Depot', branchId: 'SYD-CENTRAL', status: 'Active', lastLogin: '10 mins ago', access: 'Full', joined: 'Mar 15, 2024', sessions: 1842, twoFA: true },
+  'USR-02': { id: 'USR-02', name: 'Jack Taylor',    email: 'jack.t@hero.com',  phone: '+61 412 000 002', role: 'Driver',     branch: 'Sydney Central Depot', branchId: 'SYD-CENTRAL', status: 'Active', lastLogin: '2 days ago',  access: 'Mobile Only', joined: 'Jan 08, 2024', sessions: 3201, twoFA: false },
+  'USR-03': { id: 'USR-03', name: 'Oliver Brown',   email: 'oliver.b@hero.com', phone: '+61 413 000 003', role: 'Dispatcher', branch: 'Melbourne Depot', branchId: 'MEL-Depot', status: 'Offline', lastLogin: '1 week ago',  access: 'Full', joined: 'Jun 01, 2024', sessions: 744, twoFA: false },
+  'USR-04': { id: 'USR-04', name: 'Liam Smith',     email: 'liam.s@hero.com',  phone: '+61 414 000 004', role: 'Driver',     branch: 'Sydney Central Depot', branchId: 'SYD-CENTRAL', status: 'Active', lastLogin: '1 hr ago',    access: 'Mobile Only', joined: 'Feb 20, 2024', sessions: 2807, twoFA: false },
   'USR-05': { id: 'USR-05', name: 'Michael Adams',  email: 'mike.a@hero.com',  phone: '+61 415 000 005', role: 'Accounts',   branch: 'All Branches', branchId: 'ALL', status: 'Active', lastLogin: 'Now', access: 'Full', joined: 'Nov 01, 2023', sessions: 5100, twoFA: true },
 };
 
 const ROLES = ['Dispatcher', 'Driver', 'Warehouse', 'Accounts'];
-const BRANCHES = ['Sydney Central Hub', 'Melbourne Hub', 'Brisbane Port'];
+const BRANCHES = ['Sydney Central Depot', 'Melbourne Depot', 'Brisbane Port'];
 const ACCESS_LEVELS = ['Full', 'Mobile Only', 'Floor Devices', 'Read Only'];
 
 const roleColor = r => {
@@ -67,10 +67,10 @@ export default function AdminUserDetail() {
           <div>
             <div className="flex items-center gap-3">
               <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{u.name}</h1>
-              <span className={`text-[10px] font-black px-2.5 py-1 rounded border uppercase tracking-widest ${roleColor(u.role)}`}>{u.role}</span>
-              <span className={`text-[10px] font-black px-2.5 py-1 rounded border uppercase tracking-widest ${accountStatus === 'Active' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 'bg-red-50 text-red-600 border-red-200'}`}>{accountStatus}</span>
+              <span className={`text-xs font-black px-2.5 py-1 rounded border uppercase tracking-widest ${roleColor(u.role)}`}>{u.role}</span>
+              <span className={`text-xs font-black px-2.5 py-1 rounded border uppercase tracking-widest ${accountStatus === 'Active' ? 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' : 'bg-red-50 text-red-600 border-red-200'}`}>{accountStatus}</span>
             </div>
-            <p className="text-[11px] text-gray-500 mt-1 uppercase tracking-widest font-medium">{u.id} · {u.email} · Joined {u.joined}</p>
+            <p className="text-xs text-gray-500 mt-1 uppercase tracking-widest font-medium">{u.id} · {u.email} · Joined {u.joined}</p>
           </div>
         </div>
         <div className="flex gap-3">
@@ -103,7 +103,7 @@ export default function AdminUserDetail() {
               { label: 'Last Login', val: u.lastLogin },
             ].map((s, i) => (
               <div key={i} className={`rounded-xl border p-5 shadow-sm ${s.alert ? 'bg-amber-50 border-amber-100' : 'bg-white border-gray-100'}`}>
-                <p className={`text-[10px] font-black uppercase tracking-widest ${s.alert ? 'text-amber-500' : 'text-gray-400'}`}>{s.label}</p>
+                <p className={`text-xs font-black uppercase tracking-widest ${s.alert ? 'text-amber-500' : 'text-gray-400'}`}>{s.label}</p>
                 <p className={`text-xl font-black mt-1 ${s.alert ? 'text-amber-600' : 'text-gray-900'}`}>{s.val}</p>
               </div>
             ))}
@@ -112,22 +112,22 @@ export default function AdminUserDetail() {
           {/* Role & Access Config */}
           <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
             <div className="p-5 border-b border-gray-100 bg-[#FAFAFA] flex items-center justify-between">
-              <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2"><Shield size={12}/> Role & Access Configuration</h3>
-              {editing && <span className="text-[10px] font-black text-[#FFCC00] bg-[#111] px-2.5 py-1 rounded uppercase tracking-widest">Edit Mode</span>}
+              <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest flex items-center gap-2"><Shield size={12}/> Role & Access Configuration</h3>
+              {editing && <span className="text-xs font-black text-[#FFCC00] bg-[#111] px-2.5 py-1 rounded uppercase tracking-widest">Edit Mode</span>}
             </div>
             <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block">System Role</label>
+                <label className="text-xs font-black text-gray-400 uppercase tracking-widest block">System Role</label>
                 {editing ? (
                   <select value={role} onChange={e => setRole(e.target.value)} className="w-full border border-[#FFCC00] rounded-xl px-4 py-2.5 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 bg-[#FFFBEB]">
                     {ROLES.map(r => <option key={r}>{r}</option>)}
                   </select>
                 ) : (
-                  <span className={`text-[11px] font-black px-3 py-1.5 rounded-lg border uppercase tracking-widest inline-block ${roleColor(role)}`}>{role}</span>
+                  <span className={`text-xs font-black px-3 py-1.5 rounded-lg border uppercase tracking-widest inline-block ${roleColor(role)}`}>{role}</span>
                 )}
               </div>
               <div className="space-y-2">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block">Assigned Branch</label>
+                <label className="text-xs font-black text-gray-400 uppercase tracking-widest block">Assigned Branch</label>
                 {editing ? (
                   <select value={branch} onChange={e => setBranch(e.target.value)} className="w-full border border-[#FFCC00] rounded-xl px-4 py-2.5 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 bg-[#FFFBEB]">
                     {BRANCHES.map(b => <option key={b}>{b}</option>)}
@@ -137,7 +137,7 @@ export default function AdminUserDetail() {
                 )}
               </div>
               <div className="space-y-2">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block">Access Level</label>
+                <label className="text-xs font-black text-gray-400 uppercase tracking-widest block">Access Level</label>
                 {editing ? (
                   <select value={access} onChange={e => setAccess(e.target.value)} className="w-full border border-[#FFCC00] rounded-xl px-4 py-2.5 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 bg-[#FFFBEB]">
                     {ACCESS_LEVELS.map(a => <option key={a}>{a}</option>)}
@@ -152,15 +152,15 @@ export default function AdminUserDetail() {
           {/* Contact Info */}
           <div className="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 overflow-hidden">
             <div className="p-5 border-b border-gray-100 bg-[#FAFAFA]">
-              <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Contact Details</h3>
+              <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest">Contact Details</h3>
             </div>
             <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-1"><Mail size={11}/> Email Address</label>
+                <label className="text-xs font-black text-gray-400 uppercase tracking-widest flex items-center gap-1"><Mail size={11}/> Email Address</label>
                 <input type="email" defaultValue={u.email} readOnly={!editing} className={`w-full border rounded-xl px-4 py-2.5 text-sm font-bold outline-none transition-all ${editing ? 'border-[#FFCC00] focus:ring-2 focus:ring-[#FFCC00]/20 bg-[#FFFBEB]' : 'border-gray-100 bg-gray-50 text-gray-400 cursor-not-allowed'}`} />
               </div>
               <div className="space-y-2">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-1"><Phone size={11}/> Phone</label>
+                <label className="text-xs font-black text-gray-400 uppercase tracking-widest flex items-center gap-1"><Phone size={11}/> Phone</label>
                 <input type="tel" defaultValue={u.phone} readOnly={!editing} className={`w-full border rounded-xl px-4 py-2.5 text-sm font-bold outline-none transition-all ${editing ? 'border-[#FFCC00] focus:ring-2 focus:ring-[#FFCC00]/20 bg-[#FFFBEB]' : 'border-gray-100 bg-gray-50 text-gray-400 cursor-not-allowed'}`} />
               </div>
             </div>
@@ -177,8 +177,8 @@ export default function AdminUserDetail() {
               </div>
               <div>
                 <h3 className="text-xl font-black text-white leading-none">{u.name}</h3>
-                <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mt-2">{u.id}</p>
-                <p className="text-[10px] text-gray-500 font-bold mt-0.5">{u.branch}</p>
+                <p className="text-xs text-gray-400 font-black uppercase tracking-widest mt-2">{u.id}</p>
+                <p className="text-xs text-gray-500 font-bold mt-0.5">{u.branch}</p>
               </div>
             </div>
           </div>
@@ -186,21 +186,21 @@ export default function AdminUserDetail() {
           {/* Security Actions */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
             <div className="p-4 border-b border-gray-100 bg-[#FAFAFA]">
-              <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Security Actions</h3>
+              <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest">Security Actions</h3>
             </div>
             <div className="p-4 flex flex-col gap-2">
-              <button onClick={() => showToast('Password reset link sent to user email')} className="w-full py-3 bg-white border border-gray-200 rounded-xl text-[10px] font-black uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
+              <button onClick={() => showToast('Password reset link sent to user email')} className="w-full py-3 bg-white border border-gray-200 rounded-xl text-xs font-black uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
                 <Key size={14}/> Reset Password
               </button>
-              <button onClick={() => showToast('User session explicitly terminated (Forced Logout)')} className="w-full py-3 bg-white border border-gray-200 rounded-xl text-[10px] font-black uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
+              <button onClick={() => showToast('User session explicitly terminated (Forced Logout)')} className="w-full py-3 bg-white border border-gray-200 rounded-xl text-xs font-black uppercase tracking-widest text-gray-600 hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm">
                 <Lock size={14}/> Force Logout
               </button>
               {accountStatus === 'Active' ? (
-                <button onClick={() => { setAccountStatus('Suspended'); showToast('Account suspended'); }} className="w-full py-3 bg-red-50 border border-red-100 rounded-xl text-[10px] font-black uppercase tracking-widest text-red-600 hover:bg-red-100 transition-all flex items-center justify-center gap-2 mt-1">
+                <button onClick={() => { setAccountStatus('Suspended'); showToast('Account suspended'); }} className="w-full py-3 bg-red-50 border border-red-100 rounded-xl text-xs font-black uppercase tracking-widest text-red-600 hover:bg-red-100 transition-all flex items-center justify-center gap-2 mt-1">
                   <AlertTriangle size={14}/> Suspend Account
                 </button>
               ) : (
-                <button onClick={() => { setAccountStatus('Active'); showToast('Account reactivated'); }} className="w-full py-3 bg-emerald-50 border border-emerald-100 rounded-xl text-[10px] font-black uppercase tracking-widest text-emerald-600 hover:bg-emerald-100 transition-all flex items-center justify-center gap-2 mt-1">
+                <button onClick={() => { setAccountStatus('Active'); showToast('Account reactivated'); }} className="w-full py-3 bg-emerald-50 border border-emerald-100 rounded-xl text-xs font-black uppercase tracking-widest text-emerald-600 hover:bg-emerald-100 transition-all flex items-center justify-center gap-2 mt-1">
                   <Unlock size={14}/> Reactivate Account
                 </button>
               )}
@@ -211,3 +211,4 @@ export default function AdminUserDetail() {
     </div>
   );
 }
+

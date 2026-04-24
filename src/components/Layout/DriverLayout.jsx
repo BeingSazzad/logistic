@@ -6,7 +6,7 @@ import { House, Map, FileText, User, Bell, Zap, Receipt, MessageSquare } from 'l
 // as it simulates a native phone app, not a desktop portal.
 const bottomNav = [
   { to: '/driver', label: 'Home', icon: House, end: true },
-  { to: '/driver/shipments', label: 'Assigned', icon: FileText },
+  { to: '/driver/loads', label: 'Assigned', icon: FileText },
   { to: '/driver/active', label: 'Active Route', icon: Map },
   { to: '/driver/expenses', label: 'Expenses', icon: Receipt },
   { to: '/driver/profile', label: 'Profile', icon: User },
@@ -19,7 +19,7 @@ export default function DriverLayout() {
   const getPageTitle = () => {
     const path = location.pathname;
     if (path === '/driver') return 'Dashboard';
-    if (path.startsWith('/driver/shipments')) return 'Assigned Jobs';
+    if (path.startsWith('/driver/loads')) return 'Assigned Jobs';
     if (path === '/driver/active') return 'Active Route';
     if (path === '/driver/messages') return 'Messenger';
     if (path === '/driver/profile') return 'My Profile';
@@ -35,7 +35,7 @@ export default function DriverLayout() {
       <div className="w-[390px] h-[844px] bg-white flex flex-col relative shadow-2xl rounded-[40px] overflow-hidden border-4 border-gray-800">
 
         {/* Status bar */}
-        <div className="bg-[#111] text-white flex justify-between items-center px-6 pt-3 pb-1 text-[11px] font-semibold shrink-0">
+        <div className="bg-[#111] text-white flex justify-between items-center px-6 pt-3 pb-1 text-xs font-semibold shrink-0">
           <span>9:41</span>
           <div className="flex items-center gap-1.5">
             <span>●●●</span>
@@ -79,7 +79,7 @@ export default function DriverLayout() {
                       color={isActive ? '#111' : '#9CA3AF'}
                       strokeWidth={isActive ? 2.5 : 1.5}
                     />
-                    <span className={`text-[9px] leading-none uppercase ${isActive ? 'font-black text-[#111]' : 'font-normal text-gray-400'}`}>
+                    <span className={`text-xs leading-none uppercase ${isActive ? 'font-black text-[#111]' : 'font-normal text-gray-400'}`}>
                       {label}
                     </span>
                   </div>
@@ -92,3 +92,4 @@ export default function DriverLayout() {
     </div>
   );
 }
+

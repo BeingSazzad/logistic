@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { HeadphonesIcon, AlertCircle, CheckCircle2, MessageSquare, ArrowLeft, Send } from 'lucide-react';
 
 const mockDB = {
-  'TKT-041': { tenant: 'HERO Logistics', user: 'Sarah Mitchell', issue: 'Cannot create shipment — 500 error on submit', priority: 'High', status: 'open', created: '2 hrs ago', replies: [] },
+  'TKT-041': { tenant: 'HERO Logistics', user: 'Sarah Mitchell', issue: 'Cannot create Load — 500 error on submit', priority: 'High', status: 'open', created: '2 hrs ago', replies: [] },
   'TKT-040': { tenant: 'FastMove AU', user: 'James Brown', issue: 'Dispatch page loads very slowly (>10s)', priority: 'Medium', status: 'open', created: '4 hrs ago', replies: [] },
   'TKT-039': { tenant: 'OzFreight Co', user: 'Lisa Park', issue: 'Driver GPS not updating on map', priority: 'High', status: 'resolved', created: '1 day ago', 
     replies: [
@@ -54,8 +54,8 @@ export default function PlatformSupportDetail() {
           <div>
             <div className="flex items-center gap-3">
               <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{id}</h1>
-              <span className={`text-[10px] font-black uppercase px-2 py-1 rounded ${pCfg.bg} ${pCfg.text}`}>{ticket.priority} Priority</span>
-              {isResolved && <span className="text-[10px] font-black uppercase px-2 py-1 rounded bg-gray-200 text-gray-600">Resolved</span>}
+              <span className={`text-xs font-black uppercase px-2 py-1 rounded ${pCfg.bg} ${pCfg.text}`}>{ticket.priority} Priority</span>
+              {isResolved && <span className="text-xs font-black uppercase px-2 py-1 rounded bg-gray-200 text-gray-600">Resolved</span>}
             </div>
             <p className="text-sm text-gray-500 mt-1">{ticket.tenant} · {ticket.user} · Opened {ticket.created}</p>
           </div>
@@ -102,7 +102,7 @@ export default function PlatformSupportDetail() {
                     <div className={`p-4 shadow-sm text-base ${isOwner ? 'bg-gray-900 text-white rounded-2xl rounded-tr-sm border-gray-800' : 'bg-gray-50 text-gray-800 rounded-2xl rounded-tl-sm border border-gray-100'}`}>
                       {r.text}
                     </div>
-                    <span className="text-[11px] font-semibold text-gray-400 mt-1.5 px-1">{r.time}</span>
+                    <span className="text-xs font-semibold text-gray-600 mt-1.5 px-1">{r.time}</span>
                   </div>
                 </div>
               );
@@ -133,3 +133,5 @@ export default function PlatformSupportDetail() {
     </div>
   );
 }
+
+

@@ -76,17 +76,17 @@ export default function AdminMessaging() {
                   className={`p-6 cursor-pointer transition-all hover:bg-white relative ${selectedTicket?.id === t.id ? 'bg-white shadow-[inset_4px_0_0_0_#FACC15]' : ''}`}
                 >
                    <div className="flex justify-between items-start mb-2">
-                      <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest">{t.id}</span>
-                      <span className="text-[10px] text-gray-400 font-bold">{t.time}</span>
+                      <span className="text-xs text-gray-400 font-black uppercase tracking-widest">{t.id}</span>
+                      <span className="text-xs text-gray-400 font-bold">{t.time}</span>
                    </div>
                    <h4 className="text-sm font-bold text-gray-900 mb-1 leading-tight">{t.issue}</h4>
                    <div className="flex items-center gap-2">
                       <div className="flex items-center gap-1.5">
-                         <div className="w-4 h-4 rounded-full bg-gray-200 flex items-center justify-center text-[8px] font-bold text-gray-600">{t.user[0]}</div>
-                         <span className="text-[10px] font-bold text-gray-500">{t.user}</span>
+                         <div className="w-4 h-4 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold text-gray-600">{t.user[0]}</div>
+                         <span className="text-xs font-bold text-gray-500">{t.user}</span>
                       </div>
                       <span className="w-1 h-1 bg-gray-200 rounded-full"></span>
-                      <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-full ${t.priority === 'High' ? 'bg-red-50 text-red-600' : 'bg-gray-50 text-gray-600'}`}>{t.priority}</span>
+                      <span className={`text-xs font-black uppercase px-2 py-0.5 rounded-full ${t.priority === 'High' ? 'bg-red-50 text-red-600' : 'bg-gray-50 text-gray-600'}`}>{t.priority}</span>
                    </div>
                 </div>
               ))}
@@ -108,7 +108,7 @@ export default function AdminMessaging() {
               </div>
               <div className="flex gap-2">
                  <button className="p-2.5 border border-gray-100 hover:bg-gray-50 rounded-xl text-gray-400 transition-colors"><Phone size={18} /></button>
-                 <button onClick={handleMarkSolved} disabled={selectedTicket.status === 'Resolved'} className="btn btn-dark text-[10px] font-black uppercase tracking-widest px-6 shadow-sm disabled:opacity-40 disabled:cursor-not-allowed">Mark Solved</button>
+                 <button onClick={handleMarkSolved} disabled={selectedTicket.status === 'Resolved'} className="btn btn-dark text-xs font-black uppercase tracking-widest px-6 shadow-sm disabled:opacity-40 disabled:cursor-not-allowed">Mark Solved</button>
               </div>
            </div>
 
@@ -119,18 +119,18 @@ export default function AdminMessaging() {
                  <div className="bg-gray-100 text-gray-800 p-5 rounded-3xl rounded-tl-none border border-gray-200 text-sm leading-relaxed font-medium">
                     {selectedTicket.issue}. This is preventing me from finishing the delivery sync for JOB-2048. Is there a known issue with the Sydney Metro server?
                  </div>
-                 <span className="text-[10px] text-gray-400 font-bold px-2">{selectedTicket.user} • 10:45 AM</span>
+                 <span className="text-xs text-gray-400 font-bold px-2">{selectedTicket.user} • 10:45 AM</span>
               </div>
 
               <div className="flex flex-col gap-2 self-end max-w-[80%] items-end">
                  <div className="bg-[#111] text-white p-5 rounded-3xl rounded-tr-none shadow-xl text-sm leading-relaxed">
                     Hey {selectedTicket.user.split(' ')[0]}, I've just checked the status page. There was a minor blip in the API gateway. I've force-synced your session from here. Please try again now.
                  </div>
-                 <span className="text-[10px] text-gray-400 font-bold flex items-center gap-1 px-2">Sent By Michael (Admin) <CheckCircle2 size={10} className="text-emerald-500" /></span>
+                 <span className="text-xs text-gray-400 font-bold flex items-center gap-1 px-2">Sent By Michael (Admin) <CheckCircle2 size={10} className="text-emerald-500" /></span>
               </div>
 
               <div className="text-center my-4">
-                 <span className="text-[9px] font-black uppercase tracking-[0.2em] text-gray-300">New message below</span>
+                 <span className="text-xs font-black uppercase tracking-[0.2em] text-gray-300">New message below</span>
               </div>
            </div>
 
@@ -156,3 +156,4 @@ export default function AdminMessaging() {
     </div>
   );
 }
+

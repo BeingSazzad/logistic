@@ -6,12 +6,12 @@ import {
 } from 'lucide-react';
 
 const RAW_CUSTOMERS = [
-  { id: 'CUST-001', name: 'Acme Corp Logistics',      contact: 'John Smith',   email: 'john@acme.com.au',    phone: '+61 411 000 001', creditLimit: 50000,  terms: 'Net 30', status: 'Active',    shipments: 142, revenue: '$28,400', rating: 4.8 },
-  { id: 'CUST-002', name: 'Tech Solutions Ltd',       contact: 'Emma Watson',  email: 'emma@techsol.com',    phone: '+61 412 000 002', creditLimit: 10000,  terms: 'Net 14', status: 'Active',    shipments: 38,  revenue: '$7,200',  rating: 4.5 },
-  { id: 'CUST-003', name: 'Global Traders Australia', contact: 'Lucas Brown',  email: 'lucas@globaltr.com',  phone: '+61 413 000 003', creditLimit: 150000, terms: 'Net 60', status: 'On Hold',   shipments: 0,   revenue: '$0',      rating: 3.2 },
-  { id: 'CUST-004', name: 'Fresh Markets AU',         contact: 'Ben Chu',      email: 'ben@freshmarkets.com', phone: '+61 414 000 004', creditLimit: 25000,  terms: 'Net 14', status: 'Active',    shipments: 89,  revenue: '$14,600', rating: 4.9 },
-  { id: 'CUST-005', name: 'Southport Logistics',      contact: 'Sarah Miller', email: 'sarah@southport.com', phone: '+61 415 000 005', creditLimit: 80000,  terms: 'Net 30', status: 'Active',    shipments: 204, revenue: '$41,300', rating: 4.7 },
-  { id: 'CUST-006', name: 'Blue River Exports',       contact: 'Mike Tan',     email: 'mike@blueriver.com',  phone: '+61 416 000 006', creditLimit: 5000,   terms: 'Net 7',  status: 'Suspended', shipments: 0,   revenue: '$0',      rating: 2.8 },
+  { id: 'CUST-001', name: 'Acme Corp Logistics',      contact: 'John Smith',   email: 'john@acme.com.au',    phone: '+61 411 000 001', creditLimit: 50000,  terms: 'Net 30', status: 'Active',    Loads: 142, revenue: '$28,400', rating: 4.8 },
+  { id: 'CUST-002', name: 'Tech Solutions Ltd',       contact: 'Emma Watson',  email: 'emma@techsol.com',    phone: '+61 412 000 002', creditLimit: 10000,  terms: 'Net 14', status: 'Active',    Loads: 38,  revenue: '$7,200',  rating: 4.5 },
+  { id: 'CUST-003', name: 'Global Traders Australia', contact: 'Lucas Brown',  email: 'lucas@globaltr.com',  phone: '+61 413 000 003', creditLimit: 150000, terms: 'Net 60', status: 'On Hold',   Loads: 0,   revenue: '$0',      rating: 3.2 },
+  { id: 'CUST-004', name: 'Fresh Markets AU',         contact: 'Ben Chu',      email: 'ben@freshmarkets.com', phone: '+61 414 000 004', creditLimit: 25000,  terms: 'Net 14', status: 'Active',    Loads: 89,  revenue: '$14,600', rating: 4.9 },
+  { id: 'CUST-005', name: 'Southport Logistics',      contact: 'Sarah Miller', email: 'sarah@southport.com', phone: '+61 415 000 005', creditLimit: 80000,  terms: 'Net 30', status: 'Active',    Loads: 204, revenue: '$41,300', rating: 4.7 },
+  { id: 'CUST-006', name: 'Blue River Exports',       contact: 'Mike Tan',     email: 'mike@blueriver.com',  phone: '+61 416 000 006', creditLimit: 5000,   terms: 'Net 7',  status: 'Suspended', Loads: 0,   revenue: '$0',      rating: 2.8 },
 ];
 
 const STATUS_TABS = ['All', 'Active', 'On Hold', 'Suspended'];
@@ -81,7 +81,7 @@ export default function AdminCustomers() {
                 className="appearance-none bg-white border border-gray-200 hover:border-gray-300 text-gray-900 text-sm font-normal rounded-lg pl-9 pr-10 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 cursor-pointer shadow-sm">
                 <option value="name">Sort by Name</option>
                 <option value="creditLimit">Sort by Credit</option>
-                <option value="shipments">Sort by Shipments</option>
+                <option value="Loads">Sort by Loads</option>
                 <option value="rating">Sort by Rating</option>
               </select>
               <ArrowDownUp size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
@@ -96,13 +96,13 @@ export default function AdminCustomers() {
 
         <div className="overflow-x-auto">
           <table className="w-full text-left">
-            <thead className="bg-[#FAFAFA] text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100">
+            <thead className="bg-[#FAFAFA] text-xs font-black text-gray-400 uppercase tracking-widest border-b border-gray-100">
               <tr>
                 <th className="px-6 py-4">Company</th>
                 <th className="px-6 py-4">Primary Contact</th>
                 <th className="px-6 py-4">Credit Limit</th>
                 <th className="px-6 py-4">Terms</th>
-                <th className="px-6 py-4">Shipments</th>
+                <th className="px-6 py-4">Loads</th>
                 <th className="px-6 py-4">Rating</th>
                 <th className="px-6 py-4">Status</th>
                 <th className="px-6 py-4 text-right">Actions</th>
@@ -119,39 +119,39 @@ export default function AdminCustomers() {
                       </div>
                       <div>
                         <div className="font-bold text-[#111] text-sm">{c.name}</div>
-                        <div className="text-[10px] text-gray-400 font-bold tracking-widest uppercase mt-0.5">{c.id}</div>
+                        <div className="text-xs text-gray-400 font-bold tracking-widest uppercase mt-0.5">{c.id}</div>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4">
                     <div className="text-sm font-bold text-gray-700">{c.contact}</div>
-                    <div className="text-[10px] text-gray-400 font-bold mt-0.5 flex items-center gap-1"><Mail size={10}/> {c.email}</div>
+                    <div className="text-xs text-gray-400 font-bold mt-0.5 flex items-center gap-1"><Mail size={10}/> {c.email}</div>
                   </td>
                   <td className="px-6 py-4">
                     <span className="text-sm font-black text-gray-900">${c.creditLimit.toLocaleString()}</span>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="flex items-center gap-1.5 text-[10px] font-black text-gray-600 bg-gray-100 w-max px-3 py-1.5 rounded-md border border-gray-200">
+                    <div className="flex items-center gap-1.5 text-xs font-black text-gray-600 bg-gray-100 w-max px-3 py-1.5 rounded-md border border-gray-200">
                       <CreditCard size={11}/> {c.terms}
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-sm font-black text-gray-900">{c.shipments}</div>
-                    <div className="text-[10px] text-emerald-600 font-bold">{c.revenue}</div>
+                    <div className="text-sm font-black text-gray-900">{c.Loads}</div>
+                    <div className="text-xs text-emerald-600 font-bold">{c.revenue}</div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="flex items-center gap-1 text-[11px] font-black text-amber-500">
+                    <div className="flex items-center gap-1 text-xs font-black text-amber-500">
                       <Star size={12} className="fill-amber-400"/> {c.rating}
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`text-[10px] font-black px-2.5 py-1 rounded-md border uppercase tracking-widest ${statusStyle(c.status)}`}>
+                    <span className={`text-xs font-black px-2.5 py-1 rounded-md border uppercase tracking-widest ${statusStyle(c.status)}`}>
                       {c.status}
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right">
                     <button onClick={e => { e.stopPropagation(); navigate(`/admin/customers/${c.id}`); }}
-                      className="text-[10px] font-black border border-gray-200 text-gray-600 hover:bg-gray-50 px-3 py-1.5 rounded-lg transition-all uppercase tracking-widest">
+                      className="text-xs font-black border border-gray-200 text-gray-600 hover:bg-gray-50 px-3 py-1.5 rounded-lg transition-all uppercase tracking-widest">
                       View →
                     </button>
                   </td>
@@ -164,3 +164,4 @@ export default function AdminCustomers() {
     </div>
   );
 }
+

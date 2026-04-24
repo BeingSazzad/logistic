@@ -92,7 +92,7 @@ export default function AdminHelpline() {
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-md border ${
+                      <span className={`text-xs font-black uppercase tracking-widest px-3 py-1 rounded-md border ${
                         selectedTicket.status === 'Solved' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 
                         selectedTicket.status === 'Open' ? 'bg-red-50 text-red-600 border-red-100' : 'bg-amber-50 text-amber-600 border-amber-100'
                       }`}>
@@ -101,14 +101,14 @@ export default function AdminHelpline() {
                       {selectedTicket.status !== 'Solved' ? (
                         <button 
                           onClick={handleResolve} 
-                          className="text-[10px] bg-white border border-gray-200 text-gray-700 font-bold px-3 py-1 rounded-md hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 transition-colors uppercase tracking-widest"
+                          className="text-xs bg-white border border-gray-200 text-gray-700 font-bold px-3 py-1 rounded-md hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 transition-colors uppercase tracking-widest"
                         >
                           Resolve
                         </button>
                       ) : (
                         <button 
                           onClick={handleDelete} 
-                          className="text-[10px] bg-white border border-gray-200 text-red-600 font-bold px-3 py-1 rounded-md hover:bg-red-50 hover:border-red-200 transition-colors uppercase tracking-widest"
+                          className="text-xs bg-white border border-gray-200 text-red-600 font-bold px-3 py-1 rounded-md hover:bg-red-50 hover:border-red-200 transition-colors uppercase tracking-widest"
                         >
                           Delete
                         </button>
@@ -124,7 +124,7 @@ export default function AdminHelpline() {
                       </div>
                       <div className="bg-gray-50 border border-gray-100 rounded-2xl rounded-tl-sm p-4 text-sm font-medium text-gray-700 max-w-[85%]">
                         <p>Hi, I am having trouble with the system today. Could you please look into the issue regarding {selectedTicket.title}?</p>
-                        <p className="text-[10px] text-gray-400 mt-2 font-bold">{selectedTicket.date}</p>
+                        <p className="text-xs text-gray-400 mt-2 font-bold">{selectedTicket.date}</p>
                       </div>
                     </div>
                     
@@ -134,7 +134,7 @@ export default function AdminHelpline() {
                       </div>
                       <div className="bg-gray-900 text-white rounded-2xl rounded-tr-sm p-4 text-sm font-medium max-w-[85%] shadow-md">
                         <p>Hello! We have received your request and our team is looking into it right now. We will update you shortly.</p>
-                        <p className="text-[10px] text-gray-400 mt-2 font-bold">10 mins ago</p>
+                        <p className="text-xs text-gray-400 mt-2 font-bold">10 mins ago</p>
                       </div>
                     </div>
                   </div>
@@ -164,13 +164,13 @@ export default function AdminHelpline() {
                         <div key={t.id} onClick={() => setSelectedTicket(t)} className="p-5 border border-gray-100 rounded-xl flex items-center justify-between hover:border-gray-900 transition-colors cursor-pointer group">
                           <div>
                             <div className="flex items-center gap-2 mb-1">
-                              <span className="text-[10px] font-black text-white bg-gray-900 px-2 py-0.5 rounded uppercase tracking-widest">{t.id}</span>
-                              <span className="text-[10px] font-bold text-gray-400">{t.date}</span>
+                              <span className="text-xs font-black text-white bg-gray-900 px-2 py-0.5 rounded uppercase tracking-widest">{t.id}</span>
+                              <span className="text-xs font-bold text-gray-400">{t.date}</span>
                             </div>
                             <p className="text-sm font-bold text-gray-900 group-hover:text-black">{t.title}</p>
                             <p className="text-xs text-gray-500 mt-1 flex items-center gap-1.5"><Users size={12}/> {t.user}</p>
                           </div>
-                          <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-md border ${
+                          <span className={`text-xs font-black uppercase tracking-widest px-3 py-1 rounded-md border ${
                             t.status === 'Open' ? 'bg-red-50 text-red-600 border-red-100' : 'bg-amber-50 text-amber-600 border-amber-100'
                           }`}>
                             {t.status}
@@ -182,7 +182,7 @@ export default function AdminHelpline() {
                     <div className="flex flex-col h-full">
                        <div className="flex-1 space-y-5">
                          <div>
-                            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-1.5 ml-1">Subject / Issue Area</label>
+                            <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-1.5 ml-1">Subject / Issue Area</label>
                             <input 
                               type="text" 
                               value={subject}
@@ -192,7 +192,7 @@ export default function AdminHelpline() {
                             />
                          </div>
                          <div>
-                            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block mb-1.5 ml-1">Detailed Description</label>
+                            <label className="text-xs font-black text-gray-400 uppercase tracking-widest block mb-1.5 ml-1">Detailed Description</label>
                             <textarea 
                               value={message}
                               onChange={(e) => setMessage(e.target.value)}
@@ -202,7 +202,7 @@ export default function AdminHelpline() {
                          </div>
                        </div>
                        <div className="pt-6 border-t border-gray-50 flex justify-between items-center gap-6 shrink-0 mt-4">
-                          <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">SLA: <span className="text-gray-900">Next Business Day</span></p>
+                          <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">SLA: <span className="text-gray-900">Next Business Day</span></p>
                           <button className="btn btn-primary px-8 rounded-xl flex items-center gap-2">
                              <Send size={16} /> Submit Ticket
                           </button>
@@ -217,16 +217,16 @@ export default function AdminHelpline() {
         {/* Right: History & Info */}
         <div className="space-y-6">
            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 overflow-hidden h-[300px] flex flex-col">
-              <h3 className="text-[11px] font-black text-gray-400 uppercase tracking-widest mb-4 shrink-0">Ticket History</h3>
+              <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4 shrink-0">Ticket History</h3>
               <div className="space-y-3 overflow-y-auto pr-2 flex-1">
                  {tickets.map(t => (
                    <div key={t.id} onClick={() => setSelectedTicket(t)} className="p-3 rounded-xl border border-gray-50 hover:bg-gray-50 transition-colors cursor-pointer group">
                       <div className="flex justify-between items-start mb-1.5">
-                         <span className="text-[10px] font-bold text-gray-400 tracking-tighter">{t.id}</span>
-                         <span className="text-[10px] font-medium text-gray-400">{t.date}</span>
+                         <span className="text-xs font-bold text-gray-400 tracking-tighter">{t.id}</span>
+                         <span className="text-xs font-medium text-gray-500">{t.date}</span>
                       </div>
                       <p className="text-xs font-bold text-gray-800 group-hover:text-blue-600 transition-colors mb-2 leading-tight line-clamp-1">{t.title}</p>
-                      <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded border ${
+                      <span className={`text-xs font-black uppercase tracking-widest px-2 py-0.5 rounded border ${
                         t.status === 'Solved' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-gray-50 text-gray-600 border-gray-200'
                       }`}>
                          {t.status}
@@ -244,21 +244,21 @@ export default function AdminHelpline() {
                    </div>
                    <div>
                      <h3 className="font-black text-white text-sm">Direct Contact</h3>
-                     <p className="text-[10px] font-medium text-gray-400 uppercase tracking-widest">Enterprise Support</p>
+                     <p className="text-xs font-medium text-gray-500 uppercase tracking-widest">Enterprise Support</p>
                    </div>
                 </div>
                 <div className="space-y-4">
                    <div className="flex items-center gap-3 bg-gray-800 p-3 rounded-xl border border-gray-700 hover:border-gray-600 cursor-pointer transition-colors">
                      <Phone size={16} className="text-gray-400" />
                      <div>
-                       <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Priority Hotline</p>
+                       <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Priority Hotline</p>
                        <p className="text-sm font-black text-white">+1 (800) 555-0199</p>
                      </div>
                    </div>
                    <div className="flex items-center gap-3 bg-gray-800 p-3 rounded-xl border border-gray-700 hover:border-gray-600 cursor-pointer transition-colors">
                      <Mail size={16} className="text-gray-400" />
                      <div>
-                       <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Email Support</p>
+                       <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Email Support</p>
                        <p className="text-sm font-black text-white">support@hero.com</p>
                      </div>
                    </div>
@@ -271,3 +271,5 @@ export default function AdminHelpline() {
     </div>
   );
 }
+
+

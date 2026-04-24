@@ -48,14 +48,14 @@ export default function AdminExceptions() {
           </div>
           <div>
             <h1 className="hero-h1">Delivery Issues</h1>
-            <p className="hero-body text-hero-neutral mt-1">{issues.length} delivery problems requiring attention across the network</p>
+            <p className="hero-body text-gray-600 mt-1">{issues.length} delivery problems requiring attention across the network</p>
           </div>
         </div>
         
         {resolvedCount > 0 && (
            <button 
              onClick={clearResolved}
-             className="bg-hero-dark hover:bg-black text-brand px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shadow-sm flex items-center gap-2"
+             className="bg-hero-dark hover:bg-black text-brand px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-sm flex items-center gap-2"
            >
               <Trash2 size={14}/> Archive {resolvedCount} Resolved
            </button>
@@ -87,10 +87,10 @@ export default function AdminExceptions() {
 
                    {/* Parcel ID */}
                    <div 
-                     onClick={() => navigate(`/admin/shipments/${item.id}`)}
+                     onClick={() => navigate(`/admin/loads/${item.id}`)}
                      className={`p-4 md:w-48 flex flex-col items-center justify-center cursor-pointer transition-colors border-b md:border-b-0 md:border-r border-gray-100 group/id ${isResolved ? 'bg-transparent' : 'bg-gray-50/50 hover:bg-red-50'}`}
                    >
-                      <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">{item.time}</span>
+                      <span className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">{item.time}</span>
                       <div className="flex items-center gap-1.5 font-black text-gray-900 group-hover/id:text-red-500 transition-colors">
                          {item.id} <ChevronRight size={14}/>
                       </div>
@@ -103,21 +103,21 @@ export default function AdminExceptions() {
                       </div>
                       <div className="flex-1 min-w-0">
                          <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                            <span className={`text-[8px] font-black px-1.5 py-0.5 rounded border uppercase tracking-widest ${item.priority === 'Critical' ? 'bg-red-500 text-white border-red-500' : 'bg-gray-100 text-gray-500 border-gray-200'}`}>
+                            <span className={`text-xs font-black px-1.5 py-0.5 rounded border uppercase tracking-widest ${item.priority === 'Critical' ? 'bg-red-500 text-white border-red-500' : 'bg-gray-100 text-gray-500 border-gray-200'}`}>
                                {item.priority}
                             </span>
                             
                             {/* NEW: Status Badge in the middle */}
                             {isResolved && (
-                               <span className={`${config.badge} text-white px-2 py-0.5 rounded text-[8px] font-black uppercase tracking-widest flex items-center gap-1 shadow-sm`}>
+                               <span className={`${config.badge} text-white px-2 py-0.5 rounded text-xs font-black uppercase tracking-widest flex items-center gap-1 shadow-sm`}>
                                   <StatusIcon size={10} strokeWidth={4}/> {item.status}
                                </span>
                             )}
 
-                            <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest italic">{item.category}</span>
+                            <span className="text-xs font-black text-gray-400 uppercase tracking-widest italic">{item.category}</span>
                          </div>
                          <h3 className="text-sm font-black text-gray-900 truncate">{item.title}</h3>
-                         <p className="text-xs font-medium text-gray-400 leading-tight truncate">{item.detail} • Driver: {item.driver}</p>
+                         <p className="text-xs font-medium text-gray-500 leading-tight truncate">{item.detail} • Driver: {item.driver}</p>
                       </div>
                    </div>
 
@@ -126,7 +126,7 @@ export default function AdminExceptions() {
                       <div className="relative w-full md:w-48">
                          <button 
                            onClick={(e) => { e.stopPropagation(); setActiveDropdown(activeDropdown === item.id ? null : item.id); }}
-                           className={`w-full flex items-center justify-between px-4 py-2.5 font-black text-[10px] uppercase tracking-widest rounded-xl transition-all ${isResolved ? 'bg-white border border-gray-200 text-gray-900 shadow-sm' : 'bg-[#FFCC00] text-black hover:bg-[#E6B800]'}`}
+                           className={`w-full flex items-center justify-between px-4 py-2.5 font-black text-xs uppercase tracking-widest rounded-xl transition-all ${isResolved ? 'bg-white border border-gray-200 text-gray-900 shadow-sm' : 'bg-[#FFCC00] text-black hover:bg-[#E6B800]'}`}
                          >
                             {isResolved ? item.status : 'Update Status'} <ChevronDown size={14} className={`transition-transform ${activeDropdown === item.id ? 'rotate-180' : ''}`}/>
                          </button>
@@ -136,7 +136,7 @@ export default function AdminExceptions() {
                               {[
                                 { label: 'Mark Resolved', desc: 'Issue is fully fixed', status: 'Resolved', icon: Check, color: 'emerald', hover: 'hover:bg-emerald-50', iconBg: 'bg-emerald-50', iconCol: 'text-emerald-600', iconFull: 'bg-emerald-600' },
                                 { label: 'Deliver Again', desc: 'Retry delivery attempt', status: 'Redelivery', icon: RefreshCw, color: 'blue', hover: 'hover:bg-blue-50', iconBg: 'bg-blue-50', iconCol: 'text-blue-600', iconFull: 'bg-blue-600' },
-                                { label: 'Return to Hub', desc: 'Bring back to branch', status: 'Returned', icon: RotateCcw, color: 'amber', hover: 'hover:bg-amber-50', iconBg: 'bg-amber-50', iconCol: 'text-amber-600', iconFull: 'bg-amber-600' },
+                                { label: 'Return to Depot', desc: 'Bring back to branch', status: 'Returned', icon: RotateCcw, color: 'amber', hover: 'hover:bg-amber-50', iconBg: 'bg-amber-50', iconCol: 'text-amber-600', iconFull: 'bg-amber-600' },
                                 { label: 'Mark Damaged', desc: 'Report items broken', status: 'Damaged', icon: PackageX, color: 'red', hover: 'hover:bg-red-50', iconBg: 'bg-red-50', iconCol: 'text-red-600', iconFull: 'bg-red-600' },
                               ].map((opt) => (
                                 <button 
@@ -148,8 +148,8 @@ export default function AdminExceptions() {
                                       <opt.icon size={16}/>
                                    </div>
                                    <div>
-                                      <p className="text-[10px] font-black uppercase text-gray-900 leading-none">{opt.label}</p>
-                                      <p className="text-[9px] text-gray-400 mt-1">{opt.desc}</p>
+                                      <p className="text-xs font-black uppercase text-gray-900 leading-none">{opt.label}</p>
+                                      <p className="text-xs text-gray-400 mt-1">{opt.desc}</p>
                                    </div>
                                 </button>
                               ))}
@@ -170,7 +170,7 @@ export default function AdminExceptions() {
          <div className="w-8 h-8 rounded-lg bg-[#FFCC00] flex items-center justify-center text-black shrink-0 shadow-sm">
             <Info size={18}/>
          </div>
-         <p className="text-[11px] font-bold text-gray-400">
+         <p className="text-xs font-bold text-gray-400">
             Issues now display their status in the middle column next to the priority. Track and clear resolved issues using the top action bar.
          </p>
       </div>
@@ -178,3 +178,5 @@ export default function AdminExceptions() {
     </div>
   );
 }
+
+

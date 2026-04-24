@@ -16,7 +16,7 @@ export default function AdminAuditLogs() {
       <div className="flex justify-between items-center mb-2 px-2">
         <div>
           <h1 className="hero-h1">System Audit Logs</h1>
-          <p className="hero-body text-hero-neutral mt-1">Activity traceability including role changes, login history, and data mutations.</p>
+          <p className="hero-body text-gray-600 mt-1">Activity traceability including role changes, login history, and data mutations.</p>
         </div>
         <button className="bg-gray-900 hover:bg-black text-[#FFCC00] px-6 py-2.5 rounded-lg font-bold flex items-center gap-2 transition-all shadow-sm">
           <Download size={16}/> Export Logs
@@ -39,7 +39,7 @@ export default function AdminAuditLogs() {
 
         <div className="overflow-x-auto">
           <table className="w-full text-left">
-            <thead className="bg-[#FAFAFA] text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+            <thead className="bg-[#FAFAFA] text-xs font-bold text-gray-400 uppercase tracking-wider">
               <tr>
                 <th className="px-6 py-4">Ref ID</th>
                 <th className="px-6 py-4">User & Role</th>
@@ -57,7 +57,7 @@ export default function AdminAuditLogs() {
                   </td>
                   <td className="px-6 py-5">
                     <div className="font-bold text-[#111] text-[15px]">{log.user}</div>
-                    <div className="text-[11px] uppercase font-bold text-gray-400 mt-0.5">{log.role}</div>
+                    <div className="text-xs uppercase font-bold text-gray-400 mt-0.5">{log.role}</div>
                   </td>
                   <td className="px-6 py-5">
                     <div className="font-bold text-gray-700 text-sm">{log.action}</div>
@@ -80,3 +80,5 @@ export default function AdminAuditLogs() {
     </div>
   );
 }
+
+

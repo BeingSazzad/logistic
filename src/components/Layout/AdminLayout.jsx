@@ -9,7 +9,7 @@ import { useAuthStore } from '../../store/authStore';
 
 const navConfig = [
   { type: 'link', label: 'Dashboard', icon: LayoutDashboard, to: '/admin', end: true },
-  { type: 'link', label: 'Shipments', icon: Package, to: '/admin/shipments' },
+  { type: 'link', label: 'Loads', icon: Package, to: '/admin/loads' },
   { type: 'link', label: 'Vehicles', icon: Network, to: '/admin/fleet' },
   {
     type: 'group', label: 'Operations', icon: Briefcase,
@@ -17,6 +17,7 @@ const navConfig = [
       { to: '/admin/branches', label: 'Branches' },
       { to: '/admin/drivers', label: 'Drivers' },
       { to: '/admin/customers', label: 'Customers' },
+      { to: '/admin/vehicle-registry', label: 'Vehicle Registry' },
       { to: '/admin/safety-checklists', label: 'Safety Checklists' },
       { to: '/admin/exceptions', label: 'Delivery Issues' },
     ]

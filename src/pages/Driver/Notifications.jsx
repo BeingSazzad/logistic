@@ -70,7 +70,7 @@ export default function DriverNotifications() {
                       {!notif.read && <span className="w-2 h-2 rounded-full bg-[#FACC15]"></span>}
                     </div>
                     <p className="text-xs text-gray-500 font-medium leading-relaxed">{notif.message}</p>
-                    <span className="text-[10px] font-bold text-gray-400 mt-2 block uppercase tracking-wider">{notif.time}</span>
+                    <span className="text-xs font-bold text-gray-400 mt-2 block uppercase tracking-wider">{notif.time}</span>
                   </div>
                 </div>
               </div>
@@ -88,3 +88,4 @@ export default function DriverNotifications() {
     </div>
   );
 }
+

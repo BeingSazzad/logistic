@@ -15,9 +15,9 @@ const vehicle = {
   cap: '20t',
   fuelType: 'Diesel',
   status: 'Active',
-  depot: 'Sydney Central Hub',
+  depot: 'Sydney Central Depot',
   assignedDriver: { id: 'DRV-102', name: 'Jack Taylor' },
-  currentShipment: { id: 'SHP-20481', route: 'Sydney Port → Blacktown DC', progress: 65 },
+  currentLoad: { id: 'SHP-20481', route: 'Sydney Port → Blacktown DC', progress: 65 },
   odometer: '184,220 km',
   fuelLog: [
     { date: 'Today 09:14', litres: '120L', cost: '$228.00', station: 'Caltex Chullora' },
@@ -38,10 +38,10 @@ const vehicle = {
 };
 
 const availableDrivers = [
-  { id: 'DRV-102', name: 'Jack Taylor',  status: 'Available', depot: 'Sydney Central Hub' },
-  { id: 'DRV-087', name: 'Maria Santos', status: 'Available', depot: 'Sydney Central Hub' },
-  { id: 'DRV-091', name: 'Chris Nguyen', status: 'On Leave',  depot: 'Melbourne Hub' },
-  { id: 'DRV-044', name: 'Devon Clarke', status: 'Available', depot: 'Sydney Central Hub' },
+  { id: 'DRV-102', name: 'Jack Taylor',  status: 'Available', depot: 'Sydney Central Depot' },
+  { id: 'DRV-087', name: 'Maria Santos', status: 'Available', depot: 'Sydney Central Depot' },
+  { id: 'DRV-091', name: 'Chris Nguyen', status: 'On Leave',  depot: 'Melbourne Depot' },
+  { id: 'DRV-044', name: 'Devon Clarke', status: 'Available', depot: 'Sydney Central Depot' },
   { id: 'DRV-058', name: 'Priya Mehta',  status: 'On Shift',  depot: 'Brisbane Port' },
 ];
 
@@ -77,7 +77,7 @@ export default function AdminVehicleDetail() {
             <ArrowLeft size={18} />
           </button>
           <div>
-            <p className="text-xs font-medium text-gray-400 mb-0.5">Fleet Asset / {vehicle.id}</p>
+            <p className="text-xs font-medium text-gray-500 mb-0.5">Fleet Asset / {vehicle.id}</p>
             <h1 className="text-xl font-bold text-gray-900 leading-tight">{vehicle.make}</h1>
             <p className="text-sm text-gray-400">{vehicle.reg} · {vehicle.year}</p>
           </div>
@@ -143,7 +143,7 @@ export default function AdminVehicleDetail() {
             )}
             {/* VIN chip — always visible */}
             <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-md px-3 py-2 rounded-xl border border-white/10">
-              <p className="text-[9px] font-semibold text-[#FFCC00] uppercase tracking-widest mb-0.5">VIN</p>
+              <p className="text-xs font-semibold text-[#FFCC00] uppercase tracking-widest mb-0.5">VIN</p>
               <p className="text-xs font-bold text-white font-mono tracking-tight">{vehicle.vin}</p>
             </div>
           </div>
@@ -172,10 +172,10 @@ export default function AdminVehicleDetail() {
           <div className="bg-[#111] rounded-2xl p-4 relative overflow-hidden">
             <div className="absolute right-0 top-0 w-16 h-16 bg-white/5 rounded-bl-full pointer-events-none"></div>
             <div className="flex justify-between items-center mb-3 relative z-10">
-              <span className="text-xs font-medium text-gray-400">Current Driver</span>
+              <span className="text-xs font-medium text-gray-500">Current Driver</span>
               <button
                 onClick={() => setShowDriverPicker(true)}
-                className="text-[10px] font-bold text-black bg-[#FFCC00] hover:bg-[#E6B800] transition-colors px-2.5 py-1.5 rounded-lg"
+                className="text-xs font-bold text-black bg-[#FFCC00] hover:bg-[#E6B800] transition-colors px-2.5 py-1.5 rounded-lg"
               >
                 Change Driver
               </button>
@@ -211,7 +211,7 @@ export default function AdminVehicleDetail() {
               <div key={kpi.label} className="group bg-white p-4 rounded-2xl border border-gray-100 shadow-sm hover:border-[#FFCC00] hover:shadow-md transition-all cursor-default">
                 <div className="flex items-center gap-2 mb-2 text-gray-400 group-hover:text-[#FFCC00] transition-colors">
                   {kpi.icon}
-                  <p className="text-[10px] font-semibold uppercase tracking-wider">{kpi.label}</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider">{kpi.label}</p>
                 </div>
                 <p className="text-xl font-bold text-gray-900">{kpi.value} <span className="text-xs text-gray-400 font-medium">{kpi.unit}</span></p>
               </div>
@@ -224,7 +224,7 @@ export default function AdminVehicleDetail() {
               <MapPin size={16} />
             </div>
             <div className="min-w-0">
-              <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider">Home Depot</p>
+              <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Home Depot</p>
               <p className="text-sm font-semibold text-gray-900 truncate">{vehicle.depot}</p>
             </div>
           </div>
@@ -236,11 +236,11 @@ export default function AdminVehicleDetail() {
                 <Clock size={16} />
               </div>
               <div>
-                <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider">Next Service</p>
+                <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">Next Service</p>
                 <p className="text-sm font-semibold text-gray-900">{vehicle.service.nextService}</p>
               </div>
             </div>
-            <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-lg
+            <span className={`text-xs font-semibold px-2.5 py-1 rounded-lg
               ${vehicle.service.nextServiceStatus === 'OK'
                 ? 'bg-emerald-50 text-emerald-700'
                 : 'bg-red-50 text-red-600'}`}>
@@ -278,7 +278,7 @@ export default function AdminVehicleDetail() {
 
                 {/* Specs */}
                 <div>
-                  <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <h3 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4 flex items-center gap-2">
                     <Settings size={14} className="text-gray-300" /> Specifications
                   </h3>
                   <div className="grid grid-cols-2 gap-x-8 gap-y-4">
@@ -291,18 +291,18 @@ export default function AdminVehicleDetail() {
                       { label: 'VIN',          value: vehicle.vin },
                     ].map(spec => (
                       <div key={spec.label} className="flex justify-between items-center border-b border-gray-50 pb-3">
-                        <span className="text-xs font-medium text-gray-400">{spec.label}</span>
+                        <span className="text-xs font-medium text-gray-500">{spec.label}</span>
                         <span className="text-sm font-semibold text-gray-900">{spec.value}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Current Shipment */}
+                {/* Current Load */}
                 <div className="rounded-xl border border-gray-100 overflow-hidden">
                   <div className="px-4 py-3 border-b border-gray-50 flex justify-between items-center bg-gray-50/50">
                     <div className="flex items-center gap-2 text-sm font-semibold text-gray-900">
-                      <Route size={14} className="text-gray-400" /> Active Shipment
+                      <Route size={14} className="text-gray-400" /> Active Load
                     </div>
                     <span className="text-xs font-semibold px-2 py-1 rounded bg-emerald-50 text-emerald-700 border border-emerald-100">
                       In Transit
@@ -311,14 +311,14 @@ export default function AdminVehicleDetail() {
                   <div className="p-4">
                     <div className="flex items-start gap-2 mb-4">
                       <MapPin size={14} className="text-gray-400 mt-0.5 shrink-0" />
-                      <p className="text-sm font-semibold text-gray-900">{vehicle.currentShipment.route}</p>
+                      <p className="text-sm font-semibold text-gray-900">{vehicle.currentLoad.route}</p>
                     </div>
                     <div className="flex justify-between mb-1.5">
                       <span className="text-xs text-gray-400">Route progress</span>
-                      <span className="text-xs font-semibold text-emerald-600">{vehicle.currentShipment.progress}%</span>
+                      <span className="text-xs font-semibold text-emerald-600">{vehicle.currentLoad.progress}%</span>
                     </div>
                     <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                      <div className="h-full bg-emerald-500 rounded-full transition-all" style={{ width: `${vehicle.currentShipment.progress}%` }}></div>
+                      <div className="h-full bg-emerald-500 rounded-full transition-all" style={{ width: `${vehicle.currentLoad.progress}%` }}></div>
                     </div>
                   </div>
                 </div>
@@ -345,7 +345,7 @@ export default function AdminVehicleDetail() {
 
               {/* Recent Activity */}
               <div className="lg:col-span-4">
-                <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Recent Activity</h3>
+                <h3 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">Recent Activity</h3>
                 <div className="relative pl-5 space-y-6 before:absolute before:left-0 before:top-1 before:bottom-1 before:w-px before:bg-gray-100">
                   {[
                     { label: 'Telematics Pulse', meta: 'Today 14:20 · Optimal',  dot: 'bg-emerald-500' },
@@ -377,7 +377,7 @@ export default function AdminVehicleDetail() {
                 { label: 'Odometer',      value: vehicle.odometer },
               ].map(item => (
                 <div key={item.label} className="bg-gray-50 p-4 rounded-xl border border-gray-100">
-                  <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider mb-1.5">{item.label}</p>
+                  <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1.5">{item.label}</p>
                   <p className="text-sm font-semibold text-gray-900">{item.value}</p>
                 </div>
               ))}
@@ -388,7 +388,7 @@ export default function AdminVehicleDetail() {
           {activeTab === 'Maintenance' && (
             <div className="flex flex-col gap-5">
               <div className="flex items-center justify-between">
-                <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-2">
+                <h3 className="text-xs font-semibold text-gray-600 uppercase tracking-wider flex items-center gap-2">
                   <Wrench size={14} /> Service Schedule
                 </h3>
                 <span className="text-xs font-semibold text-emerald-600 flex items-center gap-1">
@@ -397,17 +397,17 @@ export default function AdminVehicleDetail() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
-                  <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider mb-1">Last Service</p>
+                  <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Last Service</p>
                   <p className="text-sm font-semibold text-gray-900">{vehicle.service.lastService}</p>
                 </div>
                 <div className="bg-amber-50 p-4 rounded-xl border border-amber-100">
-                  <p className="text-[10px] font-medium text-amber-600 uppercase tracking-wider mb-1">Next Due</p>
+                  <p className="text-xs font-medium text-amber-600 uppercase tracking-wider mb-1">Next Due</p>
                   <p className="text-sm font-semibold text-gray-900">{vehicle.service.nextService}</p>
                 </div>
               </div>
               <div className="overflow-x-auto rounded-xl border border-gray-100">
                 <table className="w-full text-left text-sm">
-                  <thead className="bg-gray-50 text-xs font-semibold text-gray-400 uppercase tracking-wider border-b border-gray-100">
+                  <thead className="bg-gray-50 text-xs font-semibold text-gray-600 uppercase tracking-wider border-b border-gray-100">
                     <tr>
                       <th className="px-5 py-3">Date</th>
                       <th className="px-5 py-3">Type</th>
@@ -433,7 +433,7 @@ export default function AdminVehicleDetail() {
           {/* ── LOGS ── */}
           {activeTab === 'Logs' && (
             <div className="flex flex-col gap-4">
-              <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-2">
+              <h3 className="text-xs font-semibold text-gray-600 uppercase tracking-wider flex items-center gap-2">
                 <Droplet size={14} /> Fuel Logs
               </h3>
               <div className="divide-y divide-gray-50 rounded-xl border border-gray-100 overflow-hidden">
@@ -506,7 +506,7 @@ export default function AdminVehicleDetail() {
                       <p className="text-sm font-semibold text-gray-900">{driver.name}</p>
                       <p className="text-xs text-gray-400">{driver.id} · {driver.depot}</p>
                     </div>
-                    <span className={`text-[10px] font-semibold px-2 py-1 rounded-lg shrink-0
+                    <span className={`text-xs font-semibold px-2 py-1 rounded-lg shrink-0
                       ${driver.status === 'Available' ? 'bg-emerald-50 text-emerald-700' :
                         driver.status === 'On Shift'  ? 'bg-blue-50 text-blue-600' :
                                                         'bg-gray-100 text-gray-500'}`}>
@@ -532,3 +532,5 @@ export default function AdminVehicleDetail() {
     </div>
   );
 }
+
+

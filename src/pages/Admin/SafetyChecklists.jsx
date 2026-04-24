@@ -28,7 +28,7 @@ const DEFAULT_CHECKLISTS = [
   },
   {
     id: 'CL-002', name: 'Dangerous Goods Check', active: true, category: 'Cargo',
-    appliesTo: 'DG Certified Drivers', triggerOn: 'DG Shipments Only', allowFlexible: false,
+    appliesTo: 'DG Certified Drivers', triggerOn: 'DG Loads Only', allowFlexible: false,
     items: [
       { id: 1, label: 'DG manifest verified and onboard', type: 'checkbox', required: true },
       { id: 2, label: 'Hazmat placards correctly displayed', type: 'checkbox', required: true },
@@ -39,7 +39,7 @@ const DEFAULT_CHECKLISTS = [
   },
   {
     id: 'CL-003', name: 'Cold Chain Monitoring', active: false, category: 'Cargo',
-    appliesTo: 'Reefer Vehicle Drivers', triggerOn: 'Cold Chain Shipments',
+    appliesTo: 'Reefer Vehicle Drivers', triggerOn: 'Cold Chain Loads',
     items: [
       { id: 1, label: 'Refrigeration unit temperature set correctly', type: 'checkbox', required: true },
       { id: 2, label: 'Current temperature reading (°C)', type: 'number', required: true },
@@ -114,8 +114,8 @@ export default function AdminSafetyChecklists() {
           <ShieldCheck size={18} />
         </div>
         <div>
-          <p className="text-[10px] font-black text-[#FFCC00] uppercase tracking-widest">Trip Block Enforcement Active</p>
-          <p className="text-xs font-medium text-gray-400 mt-0.5">
+          <p className="text-xs font-black text-[#FFCC00] uppercase tracking-widest">Trip Block Enforcement Active</p>
+          <p className="text-xs font-medium text-gray-500 mt-0.5">
             Drivers cannot start a trip until all required checklist items are completed. {activeCount} checklist{activeCount !== 1 ? 's' : ''} currently enforced.
           </p>
         </div>
@@ -140,20 +140,20 @@ export default function AdminSafetyChecklists() {
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
                     <h3 className="text-sm font-black text-gray-900">{cl.name}</h3>
-                    <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest border border-gray-200 bg-gray-50 px-2 py-0.5 rounded">{cl.id}</span>
-                    <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded ${cl.active ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'}`}>
+                    <span className="text-xs font-black text-gray-400 uppercase tracking-widest border border-gray-200 bg-gray-50 px-2 py-0.5 rounded">{cl.id}</span>
+                    <span className={`text-xs font-black uppercase tracking-widest px-2 py-0.5 rounded ${cl.active ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'}`}>
                       {cl.active ? '● Active' : '○ Inactive'}
                     </span>
-                    <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded ${cl.allowFlexible ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700'}`}>
+                    <span className={`text-xs font-black uppercase tracking-widest px-2 py-0.5 rounded ${cl.allowFlexible ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700'}`}>
                       {cl.allowFlexible ? 'Flexible' : 'Strict Execution'}
                     </span>
                   </div>
                   <div className="flex items-center gap-3 mt-1.5 flex-wrap">
-                    <span className="text-[10px] font-bold text-gray-500 flex items-center gap-1"><ShieldCheck size={10} /> {cl.appliesTo}</span>
+                    <span className="text-xs font-bold text-gray-500 flex items-center gap-1"><ShieldCheck size={10} /> {cl.appliesTo}</span>
                     <span className="text-gray-200">·</span>
-                    <span className="text-[10px] font-bold text-blue-500 flex items-center gap-1"><Zap size={10} /> {cl.triggerOn}</span>
+                    <span className="text-xs font-bold text-blue-500 flex items-center gap-1"><Zap size={10} /> {cl.triggerOn}</span>
                     <span className="text-gray-200">·</span>
-                    <span className="text-[10px] font-bold text-gray-500">{cl.items.length} items · {cl.items.filter(i => i.required).length} required</span>
+                    <span className="text-xs font-bold text-gray-500">{cl.items.length} items · {cl.items.filter(i => i.required).length} required</span>
                   </div>
                 </div>
               </div>
@@ -191,7 +191,7 @@ export default function AdminSafetyChecklists() {
             {/* Preview Panel */}
             {previewId === cl.id && (
               <div className="border-t border-gray-50 p-5 bg-gray-50/50 animate-in slide-in-from-top-2 duration-200">
-                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3">Driver View Preview</p>
+                <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-3">Driver View Preview</p>
                 <div className="bg-[#111] rounded-2xl p-5 max-w-sm mx-auto">
                   <div className="flex items-center gap-3 mb-5 pb-4 border-b border-white/10">
                     <div className="w-8 h-8 bg-[#FFCC00] rounded-lg flex items-center justify-center text-black">
@@ -199,7 +199,7 @@ export default function AdminSafetyChecklists() {
                     </div>
                     <div>
                       <p className="text-white font-black text-sm">{cl.name}</p>
-                      <p className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Pre-trip safety gate</p>
+                      <p className="text-gray-500 text-xs font-bold uppercase tracking-widest">Pre-trip safety gate</p>
                     </div>
                   </div>
                   <div className="space-y-3">
@@ -207,7 +207,7 @@ export default function AdminSafetyChecklists() {
                       <div key={i} className="flex items-center gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
                         <div className="w-5 h-5 rounded border-2 border-gray-600 shrink-0"></div>
                         <p className="text-xs font-medium text-gray-300 leading-tight flex-1">{item.label}</p>
-                        {item.required && <span className="text-[8px] font-black text-red-400 uppercase tracking-widest shrink-0">Req</span>}
+                        {item.required && <span className="text-xs font-black text-red-400 uppercase tracking-widest shrink-0">Req</span>}
                       </div>
                     ))}
                   </div>
@@ -266,17 +266,17 @@ function NewChecklistModal({ onClose, onCreate }) {
           {/* Basic Info */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="md:col-span-2">
-              <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1.5">Checklist Name *</label>
+              <label className="block text-xs font-black text-gray-500 uppercase tracking-widest mb-1.5">Checklist Name *</label>
               <input value={name} onChange={e => setName(e.target.value)} placeholder="e.g. Night Shift Pre-Check" className="input w-full" />
             </div>
             <div>
-              <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1.5">Category</label>
+              <label className="block text-xs font-black text-gray-500 uppercase tracking-widest mb-1.5">Category</label>
               <select value={category} onChange={e => setCategory(e.target.value)} className="input w-full">
                 {CATEGORY_OPTIONS.map(c => <option key={c}>{c}</option>)}
               </select>
             </div>
             <div>
-              <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1.5">Applies To</label>
+              <label className="block text-xs font-black text-gray-500 uppercase tracking-widest mb-1.5">Applies To</label>
               <select value={appliesTo} onChange={e => setAppliesTo(e.target.value)} className="input w-full">
                 <option>All Drivers</option>
                 <option>DG Certified Drivers</option>
@@ -285,12 +285,12 @@ function NewChecklistModal({ onClose, onCreate }) {
               </select>
             </div>
             <div>
-              <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1.5">Trigger On</label>
+              <label className="block text-xs font-black text-gray-500 uppercase tracking-widest mb-1.5">Trigger On</label>
               <select value={triggerOn} onChange={e => setTriggerOn(e.target.value)} className="input w-full">
                 <option>Every Trip</option>
                 <option>First Trip of Day</option>
-                <option>DG Shipments Only</option>
-                <option>Cold Chain Shipments</option>
+                <option>DG Loads Only</option>
+                <option>Cold Chain Loads</option>
                 <option>Interstate Trips</option>
               </select>
             </div>
@@ -301,7 +301,7 @@ function NewChecklistModal({ onClose, onCreate }) {
                 </div>
                 <div>
                   <span className="text-sm font-bold text-gray-900 block leading-none">Allow trip without full checklist</span>
-                  <span className="text-[10px] text-gray-500 font-medium">Makes this checklist flexible (driver can skip and proceed)</span>
+                  <span className="text-xs text-gray-500 font-medium">Makes this checklist flexible (driver can skip and proceed)</span>
                 </div>
                 <input type="checkbox" className="hidden" checked={allowFlexible} onChange={e => setAllowFlexible(e.target.checked)} />
               </label>
@@ -311,8 +311,8 @@ function NewChecklistModal({ onClose, onCreate }) {
           {/* Items Builder */}
           <div>
             <div className="flex justify-between items-center mb-3">
-              <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest flex items-center gap-2"><ClipboardList size={12} /> Checklist Items</label>
-              <button onClick={addItem} className="text-[9px] font-black uppercase tracking-widest px-3 py-1.5 bg-gray-900 text-[#FFCC00] rounded-lg flex items-center gap-1.5 hover:bg-black transition-colors">
+              <label className="text-xs font-black text-gray-500 uppercase tracking-widest flex items-center gap-2"><ClipboardList size={12} /> Checklist Items</label>
+              <button onClick={addItem} className="text-xs font-black uppercase tracking-widest px-3 py-1.5 bg-gray-900 text-[#FFCC00] rounded-lg flex items-center gap-1.5 hover:bg-black transition-colors">
                 <Plus size={11} strokeWidth={3} /> Add Item
               </button>
             </div>
@@ -320,7 +320,7 @@ function NewChecklistModal({ onClose, onCreate }) {
               {items.map((item, idx) => (
                 <div key={item.id} className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100">
                   <GripVertical size={16} className="text-gray-300 shrink-0 cursor-grab" />
-                  <span className="w-5 h-5 rounded bg-gray-200 text-gray-500 flex items-center justify-center text-[10px] font-black shrink-0">{idx + 1}</span>
+                  <span className="w-5 h-5 rounded bg-gray-200 text-gray-500 flex items-center justify-center text-xs font-black shrink-0">{idx + 1}</span>
                   <input
                     type="text"
                     value={item.label}
@@ -331,11 +331,11 @@ function NewChecklistModal({ onClose, onCreate }) {
                   <select
                     value={item.type}
                     onChange={e => updateItem(item.id, 'type', e.target.value)}
-                    className="bg-white border border-gray-200 rounded-lg py-2 px-3 text-[10px] font-bold text-gray-700 focus:outline-none w-36 shrink-0"
+                    className="bg-white border border-gray-200 rounded-lg py-2 px-3 text-xs font-bold text-gray-700 focus:outline-none w-36 shrink-0"
                   >
                     {FIELD_TYPES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
                   </select>
-                  <label className="flex items-center gap-1.5 text-[10px] font-black text-gray-500 uppercase tracking-widest shrink-0 cursor-pointer">
+                  <label className="flex items-center gap-1.5 text-xs font-black text-gray-500 uppercase tracking-widest shrink-0 cursor-pointer">
                     <input type="checkbox" checked={item.required} onChange={e => updateItem(item.id, 'required', e.target.checked)} className="w-3.5 h-3.5 accent-red-500" />
                     Req.
                   </label>
@@ -380,7 +380,7 @@ function EditChecklistModal({ checklist, onClose, onSave }) {
         </div>
         <div className="p-6 overflow-y-auto flex-1 space-y-5">
           <div>
-            <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1.5">Checklist Name</label>
+            <label className="block text-xs font-black text-gray-500 uppercase tracking-widest mb-1.5">Checklist Name</label>
             <input value={data.name} onChange={e => setData(d => ({ ...d, name: e.target.value }))} className="input w-full" />
           </div>
           <div className="pt-2 border-t border-gray-100">
@@ -390,31 +390,31 @@ function EditChecklistModal({ checklist, onClose, onSave }) {
               </div>
               <div>
                 <span className="text-sm font-bold text-gray-900 block leading-none">Allow trip without full checklist</span>
-                <span className="text-[10px] text-gray-500 font-medium">Makes this checklist flexible (driver can skip and proceed)</span>
+                <span className="text-xs text-gray-500 font-medium">Makes this checklist flexible (driver can skip and proceed)</span>
               </div>
               <input type="checkbox" className="hidden" checked={data.allowFlexible} onChange={e => setData(d => ({ ...d, allowFlexible: e.target.checked }))} />
             </label>
           </div>
           <div>
             <div className="flex justify-between items-center mb-3">
-              <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest flex items-center gap-2"><ClipboardList size={12} /> Items</label>
-              <button onClick={addItem} className="text-[9px] font-black uppercase tracking-widest px-3 py-1.5 bg-gray-900 text-[#FFCC00] rounded-lg flex items-center gap-1.5">
+              <label className="text-xs font-black text-gray-500 uppercase tracking-widest flex items-center gap-2"><ClipboardList size={12} /> Items</label>
+              <button onClick={addItem} className="text-xs font-black uppercase tracking-widest px-3 py-1.5 bg-gray-900 text-[#FFCC00] rounded-lg flex items-center gap-1.5">
                 <Plus size={11} strokeWidth={3} /> Add
               </button>
             </div>
             <div className="space-y-2">
               {data.items.map((item, idx) => (
                 <div key={item.id} className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100">
-                  <span className="w-5 h-5 rounded bg-gray-200 text-gray-500 flex items-center justify-center text-[10px] font-black shrink-0">{idx + 1}</span>
+                  <span className="w-5 h-5 rounded bg-gray-200 text-gray-500 flex items-center justify-center text-xs font-black shrink-0">{idx + 1}</span>
                   <input
                     type="text" value={item.label}
                     onChange={e => updateItem(item.id, 'label', e.target.value)}
                     className="flex-1 bg-white border border-gray-200 rounded-lg py-2 px-3 text-xs font-medium text-gray-900 focus:outline-none focus:border-gray-400"
                   />
-                  <select value={item.type} onChange={e => updateItem(item.id, 'type', e.target.value)} className="bg-white border border-gray-200 rounded-lg py-2 px-2 text-[10px] font-bold text-gray-700 focus:outline-none w-32 shrink-0">
+                  <select value={item.type} onChange={e => updateItem(item.id, 'type', e.target.value)} className="bg-white border border-gray-200 rounded-lg py-2 px-2 text-xs font-bold text-gray-700 focus:outline-none w-32 shrink-0">
                     {FIELD_TYPES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
                   </select>
-                  <label className="flex items-center gap-1 text-[10px] font-black text-gray-500 uppercase tracking-widest shrink-0 cursor-pointer">
+                  <label className="flex items-center gap-1 text-xs font-black text-gray-500 uppercase tracking-widest shrink-0 cursor-pointer">
                     <input type="checkbox" checked={item.required} onChange={e => updateItem(item.id, 'required', e.target.checked)} className="w-3.5 h-3.5 accent-red-500" />
                     Req.
                   </label>
@@ -434,3 +434,5 @@ function EditChecklistModal({ checklist, onClose, onSave }) {
     </div>
   );
 }
+
+

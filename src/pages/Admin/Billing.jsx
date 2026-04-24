@@ -36,12 +36,12 @@ export default function AdminBilling() {
                 </div>
                 <div className="relative z-10 flex justify-between items-start">
                   <div>
-                    <span className="bg-[#FFCC00] text-black text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-4 inline-block">Active Plan</span>
+                    <span className="bg-[#FFCC00] text-black text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full mb-4 inline-block">Active Plan</span>
                     <h2 className="text-3xl font-black mb-1">Enterprise Fleet</h2>
                     <p className="text-gray-400 text-sm font-medium">Billed annually at $12,000/yr</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-[10px] uppercase font-bold text-gray-400 tracking-widest mb-1">Next Billing Date</p>
+                    <p className="text-xs uppercase font-bold text-gray-400 tracking-widest mb-1">Next Billing Date</p>
                     <p className="text-lg font-bold">14 Sep 2026</p>
                   </div>
                 </div>
@@ -91,7 +91,7 @@ export default function AdminBilling() {
         {/* Payment Method & Invoices */}
         <div className="space-y-6">
            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 relative overflow-hidden">
-              <h3 className="text-[11px] font-black text-gray-400 uppercase tracking-widest mb-6">Payment Method</h3>
+              <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-6">Payment Method</h3>
               
               <div className="bg-gray-900 text-white rounded-2xl p-5 mb-6 relative hover:scale-[1.02] transition-transform cursor-pointer shadow-xl border border-gray-800">
                 <div className="flex justify-between items-start mb-8">
@@ -111,11 +111,11 @@ export default function AdminBilling() {
               <button className="w-full btn bg-[#635BFF] hover:bg-[#5249E5] text-white py-3 rounded-xl shadow-md flex items-center justify-center gap-2 mb-2 font-bold transition-colors">
                 Manage in Stripe <ExternalLink size={16} />
               </button>
-              <p className="text-[10px] font-medium text-gray-400 text-center leading-tight">Secure billing portal provided by Stripe, Inc.</p>
+              <p className="text-xs font-medium text-gray-500 text-center leading-tight">Secure billing portal provided by Stripe, Inc.</p>
            </div>
 
            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
-              <h3 className="text-[11px] font-black text-gray-400 uppercase tracking-widest mb-4">Billing History</h3>
+              <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4">Billing History</h3>
               <div className="space-y-3">
                  {[
                    { date: '14 Sep 2025', amt: '$12,000.00', stat: 'Paid' },
@@ -124,9 +124,9 @@ export default function AdminBilling() {
                    <div key={i} className="flex justify-between items-center p-3 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-100 cursor-pointer transition-colors group">
                      <div>
                        <p className="text-sm font-bold text-gray-900">{inv.amt}</p>
-                       <p className="text-[10px] font-medium text-gray-400">{inv.date}</p>
+                       <p className="text-xs font-medium text-gray-500">{inv.date}</p>
                      </div>
-                     <span className="text-[10px] font-black uppercase tracking-widest text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">
+                     <span className="text-xs font-black uppercase tracking-widest text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">
                        {inv.stat}
                      </span>
                    </div>
@@ -139,3 +139,5 @@ export default function AdminBilling() {
     </div>
   );
 }
+
+

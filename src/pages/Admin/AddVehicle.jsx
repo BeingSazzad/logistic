@@ -90,11 +90,11 @@ export default function AdminAddVehicle() {
              </div>
              <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                <div>
-                  <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Reg / Number Plate</label>
+                  <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Reg / Number Plate</label>
                   <input type="text" placeholder="e.g. XQG-984" className="w-full bg-white border border-gray-200 focus:border-[#FFCC00] rounded-lg py-2.5 px-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20" />
                </div>
                <div>
-                  <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Vehicle Category</label>
+                  <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Vehicle Category</label>
                   <select className="w-full bg-white border border-gray-200 rounded-lg py-2.5 px-4 text-sm font-medium text-gray-900 shadow-sm appearance-none cursor-pointer focus:outline-none focus:border-[#FFCC00] focus:ring-2 focus:ring-[#FFCC00]/20">
                     <option>Heavy Truck (Semi)</option>
                     <option>B-Double</option>
@@ -105,18 +105,18 @@ export default function AdminAddVehicle() {
                   </select>
                </div>
                <div className="md:col-span-2">
-                  <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">VIN / Chassis Number</label>
+                  <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">VIN / Chassis Number</label>
                   <div className="relative group">
                      <Key className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#FFCC00] transition-colors" size={16}/>
                      <input type="text" placeholder="17-digit identification" className="w-full bg-white border border-gray-200 focus:border-[#FFCC00] rounded-lg py-2.5 pl-12 pr-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20 font-mono" />
                   </div>
                </div>
                <div>
-                  <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Make & Model</label>
+                  <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Make & Model</label>
                   <input type="text" placeholder="e.g. Kenworth T610" className="w-full bg-white border border-gray-200 focus:border-[#FFCC00] rounded-lg py-2.5 px-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20" />
                </div>
                <div>
-                  <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Year of Manufacture</label>
+                  <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Year of Manufacture</label>
                   <input type="number" placeholder="2024" className="w-full bg-white border border-gray-200 focus:border-[#FFCC00] rounded-lg py-2.5 px-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20" />
                </div>
              </div>
@@ -131,18 +131,18 @@ export default function AdminAddVehicle() {
              </div>
              <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                   <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Payload Capacity (Tonnes)</label>
+                   <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Payload Capacity (Tonnes)</label>
                    <input type="number" placeholder="e.g. 22" className="w-full bg-white border border-gray-200 rounded-lg py-2.5 px-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:border-gray-300" />
                 </div>
                 <div>
-                   <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Initial Odometer (km)</label>
+                   <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Initial Odometer (km)</label>
                    <div className="relative group">
                      <Gauge className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-gray-800 transition-colors" size={16}/>
                      <input type="number" placeholder="12500" className="w-full bg-white border border-gray-200 rounded-lg py-2.5 pl-12 pr-4 text-sm font-medium text-gray-900 shadow-sm transition-all focus:outline-none focus:border-gray-300" />
                    </div>
                 </div>
                 <div className="md:col-span-2">
-                   <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Fuel Type / Powertrain</label>
+                   <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Fuel Type / Powertrain</label>
                    <select className="w-full bg-white border border-gray-200 rounded-lg py-2.5 px-4 text-sm font-medium text-gray-900 shadow-sm appearance-none cursor-pointer">
                      <option>Diesel Engine</option>
                      <option>Battery Electric (BEV)</option>
@@ -187,7 +187,7 @@ export default function AdminAddVehicle() {
                 </div>
              </div>
              <div className="p-5 border-t border-gray-100">
-                <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Additional Notes</label>
+                <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Additional Notes</label>
                 <textarea className="w-full bg-white border border-gray-200 rounded-lg py-2.5 px-4 text-sm font-medium text-gray-900 shadow-sm min-h-[100px] resize-y focus:outline-none focus:ring-2 focus:ring-[#FFCC00]/20" placeholder="Special requirements or history..."></textarea>
              </div>
            </div>
@@ -201,7 +201,7 @@ export default function AdminAddVehicle() {
               
               <div className="space-y-6 relative z-10">
                  <div>
-                    <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Initial Status</label>
+                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Initial Status</label>
                     <select className="w-full bg-white/10 border border-white/20 rounded-lg py-2.5 px-4 text-sm font-medium text-white appearance-none cursor-pointer focus:outline-none focus:border-white/40 leading-tight">
                       <option className="text-black">Active / Available</option>
                       <option className="text-black">In Maintenance</option>
@@ -209,10 +209,10 @@ export default function AdminAddVehicle() {
                     </select>
                  </div>
                  <div>
-                    <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2"><MapPin size={10}/> Default Depot</label>
+                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2"><MapPin size={10}/> Default Depot</label>
                     <select className="w-full bg-white/10 border border-white/20 rounded-lg py-2.5 px-4 text-sm font-medium text-white appearance-none cursor-pointer focus:outline-none focus:border-white/40 leading-tight">
-                      <option className="text-black">Sydney Central Hub</option>
-                      <option className="text-black">Melbourne Hub</option>
+                      <option className="text-black">Sydney Central Depot</option>
+                      <option className="text-black">Melbourne Depot</option>
                       <option className="text-black">Brisbane Port</option>
                     </select>
                  </div>
@@ -225,3 +225,4 @@ export default function AdminAddVehicle() {
     </div>
   );
 }
+

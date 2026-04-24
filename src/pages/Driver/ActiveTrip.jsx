@@ -68,7 +68,7 @@ export default function ActiveTrip() {
                   <Navigation size={28} className="text-[#111] -rotate-45" />
                </div>
                <div className="flex flex-col justify-center">
-                  <p className="text-[#FFCC00] text-[9px] font-bold uppercase tracking-[0.2em] leading-none mb-1">In 800 Meters</p>
+                  <p className="text-[#FFCC00] text-xs font-bold uppercase tracking-[0.2em] leading-none mb-1">In 800 Meters</p>
                   <h2 className="text-white text-base font-bold leading-none">Turn Right onto York Street</h2>
                </div>
             </div>
@@ -99,14 +99,14 @@ export default function ActiveTrip() {
               {/* Header Section */}
               <div className="flex flex-col items-center">
                  <div className="flex flex-col items-center leading-none">
-                    <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Next Milestone</p>
+                    <p className="text-xs font-black text-gray-400 uppercase tracking-widest">Next Milestone</p>
                     <div className="flex items-center gap-1 mt-1">
                        <div className="w-1.5 h-1.5 bg-orange-600 rounded-full animate-pulse"></div>
-                       <span className="text-[9px] font-black text-orange-600 uppercase tracking-widest">Priority Asset</span>
+                       <span className="text-xs font-black text-orange-600 uppercase tracking-widest">Priority Asset</span>
                     </div>
                  </div>
                  <h2 className="text-xl font-black text-gray-900 leading-tight mt-2 uppercase tracking-tight">SYD CBD Terminal</h2>
-                 <p className="text-[10px] font-black text-gray-400 mt-1.5 flex items-center justify-center gap-1.5 uppercase tracking-widest">
+                 <p className="text-xs font-black text-gray-400 mt-1.5 flex items-center justify-center gap-1.5 uppercase tracking-widest">
                     <MapPin size={12} className="text-red-500" /> 127 York St, Sydney NSW 2000
                  </p>
               </div>
@@ -114,30 +114,30 @@ export default function ActiveTrip() {
               {/* Telemetry Strip - Centered and Fixed Layout */}
               <div className="bg-[#111] rounded-2xl p-4 flex items-center justify-between shadow-xl border border-white/5">
                  <div className="flex flex-col items-center flex-1">
-                    <p className="text-[8px] font-black text-gray-400 uppercase mb-1">Distance</p>
+                    <p className="text-xs font-black text-gray-400 uppercase mb-1">Distance</p>
                     <div className="flex items-baseline gap-0.5">
                        <span className="text-lg font-black text-white">1.2</span>
-                       <span className="text-[9px] font-black text-gray-500 uppercase">km</span>
+                       <span className="text-xs font-black text-gray-500 uppercase">km</span>
                     </div>
                  </div>
                  
                  <div className="w-px h-6 bg-white/5 mx-1"></div>
                  
                  <div className="flex flex-col items-center flex-1">
-                    <p className="text-[8px] font-black text-gray-400 uppercase mb-1">EST. Time</p>
+                    <p className="text-xs font-black text-gray-400 uppercase mb-1">EST. Time</p>
                     <div className="flex items-baseline gap-0.5">
                        <span className="text-lg font-black text-white">08</span>
-                       <span className="text-[9px] font-black text-gray-500 uppercase">min</span>
+                       <span className="text-xs font-black text-gray-500 uppercase">min</span>
                     </div>
                  </div>
                  
                  <div className="w-px h-6 bg-white/5 mx-1"></div>
                  
                  <div className="flex flex-col items-center flex-1">
-                    <p className="text-[8px] font-black text-gray-400 uppercase mb-1">Schedule</p>
+                    <p className="text-xs font-black text-gray-400 uppercase mb-1">Schedule</p>
                     <div className="flex items-baseline gap-0.5">
                        <span className="text-lg font-black text-white">08:00</span>
-                       <span className="text-[9px] font-black text-gray-500 uppercase">am</span>
+                       <span className="text-xs font-black text-gray-500 uppercase">am</span>
                     </div>
                  </div>
               </div>
@@ -166,7 +166,7 @@ export default function ActiveTrip() {
             {step === 'Arrived' && (
               <div className="space-y-4">
                 <div className="bg-emerald-50 text-emerald-900 p-8 rounded-3xl border border-emerald-100 flex flex-col items-center">
-                   <p className="text-[10px] font-black text-emerald-600 uppercase mb-2 font-mono">Gate Wait Timer</p>
+                   <p className="text-xs font-black text-emerald-600 uppercase mb-2 font-mono">Gate Wait Timer</p>
                    <p className="text-5xl font-black tracking-tighter tabular-nums">{formatTime(waitTime)}</p>
                 </div>
                 <button
@@ -233,15 +233,15 @@ export default function ActiveTrip() {
         <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-sm font-bold text-gray-800">Shift Summary</h3>
-            <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">Online</span>
+            <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">Online</span>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-gray-50 p-4 rounded-2xl border border-gray-100">
-              <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider block mb-1">Time Driven</p>
+              <p className="text-xs font-medium text-gray-500 uppercase tracking-wider block mb-1">Time Driven</p>
               <p className="text-lg font-bold text-gray-900">0h 12m</p>
             </div>
             <div className="bg-gray-50 p-4 rounded-2xl border border-gray-100">
-              <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider block mb-1">Duty Left</p>
+              <p className="text-xs font-medium text-gray-500 uppercase tracking-wider block mb-1">Duty Left</p>
               <p className="text-lg font-bold text-[#FACC15]">11h 48m</p>
             </div>
           </div>
@@ -282,3 +282,5 @@ export default function ActiveTrip() {
     </div>
   );
 }
+
+

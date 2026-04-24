@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useShipmentStore } from '../../store/shipmentStore';
+import { useLoadStore } from '../../store/LoadStore';
 import DashboardUI from '../../components/Admin/DashboardUI';
 
 export default function AdminDashboard() {
@@ -8,27 +8,27 @@ export default function AdminDashboard() {
   
   // Zustand State Management mapped purely to state (Frontend ONLY layout)
   const { 
-    shipmentYear, 
-    setShipmentYear,
+    LoadYear, 
+    setLoadYear,
     revenueYear,
     setRevenueYear,
-    shipmentData, 
+    LoadData, 
     incomeData,
     metrics,
     distData, 
     recentActivities 
-  } = useShipmentStore();
+  } = useLoadStore();
 
   const months = ['J','F','M','A','M','J','J','A','S','O','N','D'];
 
   return (
     <DashboardUI 
       navigate={navigate}
-      shipmentYear={shipmentYear}
-      setShipmentYear={setShipmentYear}
+      LoadYear={LoadYear}
+      setLoadYear={setLoadYear}
       revenueYear={revenueYear}
       setRevenueYear={setRevenueYear}
-      shipmentData={shipmentData}
+      LoadData={LoadData}
       incomeData={incomeData}
       metrics={metrics}
       distData={distData}

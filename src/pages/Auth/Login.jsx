@@ -38,7 +38,7 @@ export default function Login() {
       name: 'Sarah Mitchell',
       role: roleMap[role] || role,
       branchId: 'SYD-CENTRAL',
-      branchName: 'Sydney Central Hub',
+      branchName: 'Sydney Central Depot',
       email: 'sarah.m@herologistics.com'
     };
 

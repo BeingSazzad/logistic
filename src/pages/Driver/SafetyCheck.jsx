@@ -41,7 +41,7 @@ export default function SafetyCheck() {
         </button>
         <div>
            <h1 className="text-white font-black text-lg tracking-tight uppercase leading-none">Vehicle Compliance</h1>
-           <p className="text-[9px] font-black text-gray-500 uppercase tracking-widest mt-1">Pre-Trip Safety Checklist</p>
+           <p className="text-xs font-black text-gray-500 uppercase tracking-widest mt-1">Pre-Trip Safety Checklist</p>
         </div>
       </div>
 
@@ -78,7 +78,7 @@ export default function SafetyCheck() {
                    </div>
                    <div className="text-left">
                       <p className={`text-sm font-bold ${checks[item.id] ? 'text-emerald-900' : 'text-gray-900'}`}>{item.label}</p>
-                      <p className="text-[10px] font-medium text-gray-400 mt-0.5">{item.desc}</p>
+                      <p className="text-xs font-medium text-gray-500 mt-0.5">{item.desc}</p>
                    </div>
                 </div>
                 <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${checks[item.id] ? 'bg-emerald-500 border-emerald-500' : 'border-gray-200'}`}>
@@ -110,3 +110,5 @@ export default function SafetyCheck() {
     </div>
   );
 }
+
+

@@ -10,9 +10,9 @@ import { useAuthStore } from '../../store/authStore';
 // Dynamic Network Stages for sequential custody transfer
 const NETWORK_STAGES = [
   { id: 1, type: 'Pickup', label: 'First Mile Pickup', location: 'Customer Site (Bondi)', actor: 'Local Courier', status: 'Completed', icon: PackageCheck },
-  { id: 2, type: 'Sorting', label: 'Inbound Sorting', location: 'Sydney Central Hub', actor: 'Depot Manager', status: 'Completed', icon: MapPin },
-  { id: 3, type: 'Inter-Hub', label: 'Hub Transfer (Trunk)', location: 'Sydney Hub → Melbourne Hub', actor: 'Line-haul Truck', status: 'Active', icon: Truck },
-  { id: 4, type: 'Sorting', label: 'Outbound Sorting', location: 'Melbourne Terminal', actor: 'Hub Supervisor', status: 'Pending', icon: Circle },
+  { id: 2, type: 'Sorting', label: 'Inbound Sorting', location: 'Sydney Central Depot', actor: 'Depot Manager', status: 'Completed', icon: MapPin },
+  { id: 3, type: 'Inter-Depot', label: 'Depot Transfer (Trunk)', location: 'Sydney Depot → Melbourne Depot', actor: 'Line-haul Truck', status: 'Active', icon: Truck },
+  { id: 4, type: 'Sorting', label: 'Outbound Sorting', location: 'Melbourne Terminal', actor: 'Depot Supervisor', status: 'Pending', icon: Circle },
   { id: 5, type: 'Delivery', label: 'Last Mile Delivery', location: 'Melbourne CBD', actor: 'Local Courier', status: 'Pending', icon: FileSignature },
 ];
 
@@ -30,7 +30,7 @@ export default function DispatchJobDetail() {
   const [exceptionActive, setExceptionActive] = useState(false);
   const [showPodModal, setShowPodModal] = useState(false);
   const [podStatus, setPodStatus] = useState('pending');
-  const [deliveryMode, setDeliveryMode] = useState('hub'); // 'hub' | 'door'
+  const [deliveryMode, setDeliveryMode] = useState('Depot'); // 'Depot' | 'door'
   const [showAssignModal, setShowAssignModal] = useState(false);
   const [selectedDriver, setSelectedDriver] = useState(null);
   const [assigned, setAssigned] = useState(false);
@@ -46,9 +46,9 @@ export default function DispatchJobDetail() {
 
   return (
     <div className="w-full max-w-[1440px] mx-auto pb-16">
-      <button onClick={() => navigate('/dispatch/shipments')}
+      <button onClick={() => navigate('/dispatch/loads')}
         className="flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-gray-900 mb-6 transition-colors">
-        <ArrowLeft size={16} /> Back to Shipments
+        <ArrowLeft size={16} /> Back to Loads
       </button>
 
       {/* Success Success Toast */}
@@ -59,7 +59,7 @@ export default function DispatchJobDetail() {
           </div>
           <div>
             <p className="font-black text-sm uppercase tracking-tight">Resource Allocated</p>
-            <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mt-0.5">{selectedDriver?.name} assigned to mission</p>
+            <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mt-0.5">{selectedDriver?.name} assigned to mission</p>
           </div>
           <button onClick={() => setShowSuccess(false)} className="ml-4 text-gray-500 hover:text-white">
             <X size={18} />
@@ -72,15 +72,15 @@ export default function DispatchJobDetail() {
         <div>
           <div className="flex items-center gap-3 flex-wrap">
             <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{id || 'SHP-9055'}</h1>
-            <span className={`badge font-bold uppercase tracking-widest text-[10px] ${exceptionActive ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`}>
+            <span className={`badge font-bold uppercase tracking-widest text-xs ${exceptionActive ? 'bg-red-100 text-red-600' : 'bg-blue-100 text-blue-600'}`}>
               ● {assigned ? 'Assigned' : 'In Progress'}
             </span>
-            <span className={`badge font-bold uppercase tracking-widest text-[10px] ${deliveryMode === 'hub' ? 'bg-indigo-100 text-indigo-700' : 'bg-emerald-100 text-emerald-700'}`}>
-              {deliveryMode === 'hub' ? '🏢 Hub-to-Hub' : '🚪 Door-to-Door'}
+            <span className={`badge font-bold uppercase tracking-widest text-xs ${deliveryMode === 'Depot' ? 'bg-indigo-100 text-indigo-700' : 'bg-emerald-100 text-emerald-700'}`}>
+              {deliveryMode === 'Depot' ? '🏢 Depot-to-Depot' : '🚪 Door-to-Door'}
             </span>
           </div>
           <p className="text-sm font-bold text-gray-500 mt-2 flex items-center gap-2">
-            Acme Corp Logistics <span className="text-gray-300">•</span> Sydney Central Hub → Melbourne Hub
+            Acme Corp Logistics <span className="text-gray-300">•</span> Sydney Central Depot → Melbourne Depot
           </p>
         </div>
         <div className="flex gap-3">
@@ -135,14 +135,14 @@ export default function DispatchJobDetail() {
                       )}
                     </div>
                     <div className={`w-full ${!isCurrent && !isCompleted ? 'opacity-30' : ''}`}>
-                      <p className={`text-[10px] font-black uppercase tracking-widest ${isCurrent ? 'text-yellow-700' : 'text-gray-400'}`}>{stage.type}</p>
+                      <p className={`text-xs font-black uppercase tracking-widest ${isCurrent ? 'text-yellow-700' : 'text-gray-400'}`}>{stage.type}</p>
                       <p className={`text-sm font-bold mt-0.5 ${isCurrent ? 'text-gray-900' : 'text-gray-600'}`}>{stage.label}</p>
                       <div className="flex justify-between items-end mt-1">
-                        <p className="text-[10px] text-gray-500 font-medium leading-relaxed">
+                        <p className="text-xs text-gray-500 font-medium leading-relaxed">
                           {stage.location} <span className="text-gray-300 mx-1">/</span> {stage.actor}
                         </p>
                         {!isCompleted && isCurrent && (
-                          <button onClick={() => setShowAssignModal(true)} className="text-[9px] font-black uppercase tracking-widest text-[#FFCC00] bg-black px-2 py-0.5 rounded">Assign Resource</button>
+                          <button onClick={() => setShowAssignModal(true)} className="text-xs font-black uppercase tracking-widest text-[#FFCC00] bg-black px-2 py-0.5 rounded">Assign Resource</button>
                         )}
                       </div>
                     </div>
@@ -157,19 +157,19 @@ export default function DispatchJobDetail() {
             <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
               <Truck size={60} />
             </div>
-            <h2 className="text-[11px] font-black text-[#FFCC00] tracking-[0.2em] uppercase mb-6 flex items-center gap-2">
+            <h2 className="text-xs font-black text-[#FFCC00] tracking-[0.2em] uppercase mb-6 flex items-center gap-2">
               <ShieldAlert size={14} /> Terminal Operations
             </h2>
 
             <div className="space-y-6 relative z-10">
               <div className="p-4 bg-white/5 rounded-2xl border border-white/10">
-                <p className="text-[10px] font-black uppercase text-gray-500 tracking-widest mb-2">Current Asset Allocation</p>
+                <p className="text-xs font-black uppercase text-gray-500 tracking-widest mb-2">Current Asset Allocation</p>
                 {assigned ? (
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-yellow-400 text-black flex items-center justify-center font-black">{selectedDriver.initials}</div>
                     <div>
                       <p className="text-sm font-bold uppercase tracking-tight">{selectedDriver.name}</p>
-                      <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">{selectedDriver.vehicle} · {selectedDriver.rank}</p>
+                      <p className="text-xs text-gray-500 font-bold uppercase tracking-widest">{selectedDriver.vehicle} · {selectedDriver.rank}</p>
                     </div>
                   </div>
                 ) : (
@@ -186,7 +186,7 @@ export default function DispatchJobDetail() {
                 >
                   {assigned ? 'Reassign Resource' : 'Allocate Driver & Vehicle'}
                 </button>
-                <p className="text-[9px] text-center font-bold text-gray-500 uppercase tracking-widest px-4">
+                <p className="text-xs text-center font-bold text-gray-500 uppercase tracking-widest px-4">
                   Confirmed resources will receive automated SMS notifications.
                 </p>
               </div>
@@ -203,16 +203,16 @@ export default function DispatchJobDetail() {
               <h3 className="text-xs font-black uppercase tracking-widest text-gray-400">Consignor (Sender)</h3>
               <div>
                 <p className="text-sm font-bold text-gray-900">Acme Corp Logistics</p>
-                <p className="text-[11px] text-gray-500 font-medium mt-1">Warehouse 4, 12 Botany Rd, Alexandria NSW 2015</p>
-                <p className="text-[11px] text-gray-500 font-medium mt-0.5 pt-2 border-t border-gray-50">Contact: James Hargrove <br /><span className="font-bold text-hero-dark">+61 2 9283 1122</span></p>
+                <p className="text-xs text-gray-500 font-medium mt-1">Warehouse 4, 12 Botany Rd, Alexandria NSW 2015</p>
+                <p className="text-xs text-gray-500 font-medium mt-0.5 pt-2 border-t border-gray-50">Contact: James Hargrove <br /><span className="font-bold text-hero-dark">+61 2 9283 1122</span></p>
               </div>
             </div>
             <div className="card bg-white p-5 shadow-sm border border-gray-100 flex flex-col gap-3">
               <h3 className="text-xs font-black uppercase tracking-widest text-gray-400">Consignee (Receiver)</h3>
               <div>
                 <p className="text-sm font-bold text-gray-900">Tech Solutions Ltd</p>
-                <p className="text-[11px] text-gray-500 font-medium mt-1">1 Innovation Dr, Port Botany NSW 2036</p>
-                <p className="text-[11px] text-gray-500 font-medium mt-0.5 pt-2 border-t border-gray-50">Contact: Tom Carey <br /><span className="font-bold text-hero-dark">+61 2 9666 0011</span></p>
+                <p className="text-xs text-gray-500 font-medium mt-1">1 Innovation Dr, Port Botany NSW 2036</p>
+                <p className="text-xs text-gray-500 font-medium mt-0.5 pt-2 border-t border-gray-50">Contact: Tom Carey <br /><span className="font-bold text-hero-dark">+61 2 9666 0011</span></p>
               </div>
             </div>
           </div>
@@ -223,7 +223,7 @@ export default function DispatchJobDetail() {
             <p className="z-10 text-slate-500 font-bold tracking-widest uppercase text-sm flex items-center gap-2"><MapPin /> Map Vector Integration Zone</p>
             {assigned && (
               <div className="absolute bottom-4 right-4 bg-white/10 backdrop-blur-md border border-white/10 p-3 rounded-xl z-10 text-white shadow-xl">
-                <p className="text-[10px] font-black uppercase tracking-widest text-[#FACC15] mb-1">Driver Location</p>
+                <p className="text-xs font-black uppercase tracking-widest text-[#FACC15] mb-1">Driver Location</p>
                 <p className="text-sm font-bold truncate max-w-[200px]">M1 Motorway, Sydney North</p>
                 <p className="text-xs text-slate-300 mt-1">Signal strength high</p>
               </div>
@@ -232,7 +232,7 @@ export default function DispatchJobDetail() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="card bg-white p-5 shadow-sm border border-gray-100 flex flex-col gap-4">
-              <h3 className="text-xs font-black uppercase tracking-widest text-gray-400">Shipment Metadata</h3>
+              <h3 className="text-xs font-black uppercase tracking-widest text-gray-400">Load Metadata</h3>
               <div className="space-y-4">
                 <div className="flex justify-between border-b border-gray-50 pb-2">
                   <span className="text-xs font-bold text-gray-500">Commodity</span>
@@ -248,16 +248,16 @@ export default function DispatchJobDetail() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-xs font-bold text-gray-500">Service</span>
-                  <span className="text-[10px] font-black text-black bg-[#FFCC00] px-2 py-0.5 rounded uppercase tracking-widest">Normal</span>
+                  <span className="text-xs font-black text-black bg-[#FFCC00] px-2 py-0.5 rounded uppercase tracking-widest">Normal</span>
                 </div>
               </div>
             </div>
 
             <div className="card bg-white p-5 shadow-sm border border-gray-100 flex flex-col gap-4 text-center justify-center">
-              <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Document Control</p>
+              <p className="text-xs font-black text-gray-400 uppercase tracking-widest">Document Control</p>
               <div className="flex flex-col gap-2">
-                <button className="py-2.5 bg-gray-50 border border-gray-100 hover:bg-gray-100 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">Download Waybill</button>
-                <button className="py-2.5 bg-gray-50 border border-gray-100 hover:bg-gray-100 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">Consignee POD</button>
+                <button className="py-2.5 bg-gray-50 border border-gray-100 hover:bg-gray-100 rounded-xl text-xs font-black uppercase tracking-widest transition-all">Download Waybill</button>
+                <button className="py-2.5 bg-gray-50 border border-gray-100 hover:bg-gray-100 rounded-xl text-xs font-black uppercase tracking-widest transition-all">Consignee POD</button>
               </div>
             </div>
           </div>
@@ -279,11 +279,11 @@ export default function DispatchJobDetail() {
                     <div className="w-10 h-10 rounded-lg bg-[#111] text-[#FFCC00] flex items-center justify-center font-black">{driver.initials}</div>
                     <div>
                       <p className="text-sm font-bold text-gray-900">{driver.name}</p>
-                      <p className="text-[10px] font-black uppercase tracking-widest text-gray-500 mt-0.5">{driver.vehicle} · {driver.rank}</p>
+                      <p className="text-xs font-black uppercase tracking-widest text-gray-500 mt-0.5">{driver.vehicle} · {driver.rank}</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className={`text-[9px] font-black uppercase tracking-widest ${driver.status === 'On Duty' ? 'text-emerald-500' : 'text-amber-500'}`}>{driver.availability}</p>
+                    <p className={`text-xs font-black uppercase tracking-widest ${driver.status === 'On Duty' ? 'text-emerald-500' : 'text-amber-500'}`}>{driver.availability}</p>
                   </div>
                 </div>
               ))}
@@ -313,7 +313,7 @@ export default function DispatchJobDetail() {
                     </div>
                     <div>
                       <h2 className="text-lg font-black text-white tracking-tight uppercase">Handover Authorized</h2>
-                      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">Secure Proof of Delivery</p>
+                      <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-0.5">Secure Proof of Delivery</p>
                     </div>
                  </div>
                  <button onClick={() => setShowPodModal(false)} className="w-8 h-8 flex items-center justify-center text-gray-400 hover:bg-white/10 rounded-lg transition-colors">
@@ -338,3 +338,4 @@ export default function DispatchJobDetail() {
     </div>
   );
 }
+

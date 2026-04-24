@@ -46,15 +46,15 @@ export default function Settlements() {
       {/* Summary Cards */}
       <div className="grid grid-cols-3 gap-4 px-2 mb-2">
         <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Total Payout</p><p className="text-2xl font-black text-emerald-600 mt-0.5">${total.toFixed(2)}</p></div>
+          <div><p className="text-xs text-gray-400 uppercase font-bold tracking-widest">Total Payout</p><p className="text-2xl font-black text-emerald-600 mt-0.5">${total.toFixed(2)}</p></div>
           <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-emerald-50 text-emerald-500"><DollarSign size={20}/></div>
         </div>
         <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Drivers</p><p className="text-2xl font-black text-blue-600 mt-0.5">{drivers.length}</p></div>
+          <div><p className="text-xs text-gray-400 uppercase font-bold tracking-widest">Drivers</p><p className="text-2xl font-black text-blue-600 mt-0.5">{drivers.length}</p></div>
           <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-blue-50 text-blue-500"><Users size={20}/></div>
         </div>
         <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-between">
-          <div><p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Total Trips</p><p className="text-2xl font-black text-gray-900 mt-0.5">{drivers.reduce((s, d) => s + d.trips, 0)}</p></div>
+          <div><p className="text-xs text-gray-400 uppercase font-bold tracking-widest">Total Trips</p><p className="text-2xl font-black text-gray-900 mt-0.5">{drivers.reduce((s, d) => s + d.trips, 0)}</p></div>
           <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-gray-50 text-gray-400"><CheckCircle2 size={20}/></div>
         </div>
       </div>
@@ -70,7 +70,7 @@ export default function Settlements() {
 
         <div className="overflow-x-auto">
           <table className="w-full text-left">
-            <thead className="bg-[#FAFAFA] text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+            <thead className="bg-[#FAFAFA] text-xs font-bold text-gray-400 uppercase tracking-wider">
               <tr>
                 <th className="px-6 py-4">Driver</th>
                 <th className="px-6 py-4 text-right">Trips</th>
@@ -101,9 +101,9 @@ export default function Settlements() {
                   <td className="px-6 py-5 text-right font-black text-[#111]">${d.total.toFixed(2)}</td>
                   <td className="px-6 py-5">
                     {processed ? (
-                      <span className="text-[10px] font-bold px-3 py-1 rounded-md border bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]">✓ Paid</span>
+                      <span className="text-xs font-bold px-3 py-1 rounded-md border bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]">✓ Paid</span>
                     ) : (
-                      <span className="text-[10px] font-bold px-3 py-1 rounded-md border bg-yellow-50 text-yellow-700 border-yellow-200">Ready</span>
+                      <span className="text-xs font-bold px-3 py-1 rounded-md border bg-yellow-50 text-yellow-700 border-yellow-200">Ready</span>
                     )}
                   </td>
                 </tr>
@@ -122,3 +122,4 @@ export default function Settlements() {
     </div>
   );
 }
+

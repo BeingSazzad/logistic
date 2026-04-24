@@ -41,7 +41,7 @@ const NotFound = () => {
           </div>
 
           <p className="text-slate-400 text-lg mb-10 max-w-md mx-auto leading-relaxed">
-            This shipment didn't reach its destination. The page you're looking for is currently experiencing a <span className="text-yellow-400 font-semibold underline decoration-yellow-400/30 underline-offset-4">navigation error</span>.
+            This Load didn't reach its destination. The page you're looking for is currently experiencing a <span className="text-yellow-400 font-semibold underline decoration-yellow-400/30 underline-offset-4">navigation error</span>.
           </p>
 
           {/* Buttons */}

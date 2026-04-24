@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { HeadphonesIcon, AlertCircle, CheckCircle2, MessageSquare, Search, Filter, ExternalLink } from 'lucide-react';
 
 const initialTickets = [
-  { id: 'TKT-041', tenant: 'HERO Logistics',  user: 'Sarah Mitchell', issue: 'Cannot create shipment — 500 error on submit', priority: 'High',   status: 'open',     created: '2 hrs ago', replies: [] },
+  { id: 'TKT-041', tenant: 'HERO Logistics',  user: 'Sarah Mitchell', issue: 'Cannot create Load — 500 error on submit', priority: 'High',   status: 'open',     created: '2 hrs ago', replies: [] },
   { id: 'TKT-040', tenant: 'FastMove AU',     user: 'James Brown',    issue: 'Dispatch page loads very slowly (>10s)',          priority: 'Medium', status: 'open',     created: '4 hrs ago', replies: [] },
   { id: 'TKT-039', tenant: 'OzFreight Co',    user: 'Lisa Park',      issue: 'Driver GPS not updating on map',                  priority: 'High',   status: 'resolved', created: '1 day ago', 
     replies: [
@@ -105,7 +105,7 @@ export default function PlatformSupport() {
                       <div className="flex items-center gap-2 mb-0.5">
                         <span className="font-mono text-xs text-gray-400">{t.id}</span>
                         <span className="font-bold text-sm text-gray-900">{t.tenant}</span>
-                        <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded ${pCfg.bg} ${pCfg.text}`}>{t.priority}</span>
+                        <span className={`text-xs font-black uppercase px-2 py-0.5 rounded ${pCfg.bg} ${pCfg.text}`}>{t.priority}</span>
                       </div>
                       <p className="text-sm font-medium text-gray-700">{t.issue}</p>
                       <p className="text-xs text-gray-400 mt-0.5">{t.user} · {t.created}</p>
@@ -149,3 +149,4 @@ export default function PlatformSupport() {
     </div>
   );
 }
+

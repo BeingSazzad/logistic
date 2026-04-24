@@ -21,19 +21,19 @@ export default function WarehouseDashboard() {
       <div className="flex justify-between items-center mb-2 px-2">
         <div>
           <h1 className="hero-h1">Overview</h1>
-          <p className="hero-body text-hero-neutral mt-1">
+          <p className="hero-body text-gray-600 mt-1">
             Zone: <span className="font-bold text-hero-dark">SYD-CENTRAL-A14</span> &nbsp;·&nbsp; Station: <span className="font-bold text-hero-dark">WH-SCAN-01</span>
           </p>
         </div>
         <div className="flex items-center gap-4 bg-white px-5 py-2.5 rounded-lg border border-gray-200 shadow-sm">
           <div className="flex flex-col items-end">
-            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Active Shift</span>
+            <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Active Shift</span>
             <span className="text-sm font-black text-gray-900">06:00 → 15:00</span>
           </div>
           <div className="w-px h-6 bg-gray-200"></div>
           <div className="flex flex-col">
-            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Scanner</span>
-            <span className="text-[10px] font-bold text-emerald-500 uppercase flex items-center gap-1">
+            <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Scanner</span>
+            <span className="text-xs font-bold text-emerald-500 uppercase flex items-center gap-1">
               <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Connected
             </span>
           </div>
@@ -51,8 +51,8 @@ export default function WarehouseDashboard() {
             <ArrowDownToLine size={26} strokeWidth={2.5} className="text-black" />
           </div>
           <div>
-            <h3 className="font-black text-black uppercase text-sm tracking-widest">Receive Shipment</h3>
-            <p className="text-[10px] font-bold text-black/60 uppercase mt-0.5">Incoming Handover Scan</p>
+            <h3 className="font-black text-black uppercase text-sm tracking-widest">Receive Load</h3>
+            <p className="text-xs font-bold text-black/60 uppercase mt-0.5">Incoming Handover Scan</p>
           </div>
         </button>
 
@@ -63,7 +63,7 @@ export default function WarehouseDashboard() {
           </div>
           <div>
             <h3 className="font-bold text-gray-900 text-sm">Inventory Lookup</h3>
-            <p className="text-[10px] font-bold text-gray-400 uppercase mt-0.5">Scan to locate parcel</p>
+            <p className="text-xs font-bold text-gray-400 uppercase mt-0.5">Scan to locate parcel</p>
           </div>
         </button>
 
@@ -73,8 +73,8 @@ export default function WarehouseDashboard() {
             <ArrowUpFromLine size={26} strokeWidth={2.5} />
           </div>
           <div>
-            <h3 className="font-black text-white uppercase text-sm tracking-widest">Dispatch Shipment</h3>
-            <p className="text-[10px] font-bold text-gray-500 uppercase mt-0.5">Outbound Verification</p>
+            <h3 className="font-black text-white uppercase text-sm tracking-widest">Dispatch Load</h3>
+            <p className="text-xs font-bold text-gray-500 uppercase mt-0.5">Outbound Verification</p>
           </div>
         </button>
 
@@ -88,7 +88,7 @@ export default function WarehouseDashboard() {
           ].map((a, i) => (
             <button key={i} className={`p-4 rounded-xl border shadow-sm flex flex-col items-center justify-center gap-2 transition-colors group ${a.bg || 'bg-white border-gray-100 hover:bg-gray-50'}`}>
               <a.icon size={20} className={`text-gray-400 ${a.hoverColor}`} />
-              <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{a.label}</span>
+              <span className="text-xs font-black text-gray-400 uppercase tracking-widest">{a.label}</span>
             </button>
           ))}
         </div>
@@ -105,11 +105,11 @@ export default function WarehouseDashboard() {
               <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest flex items-center gap-2">
                 <Clock size={14} className="text-blue-500"/> Current Flow Queue
               </h3>
-              <button className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">All Nodes →</button>
+              <button className="text-xs font-bold text-blue-600 uppercase tracking-widest">All Nodes →</button>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-left">
-                <thead className="bg-[#FAFAFA] text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100">
+                <thead className="bg-[#FAFAFA] text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100">
                   <tr>
                     <th className="px-6 py-4">Reference</th>
                     <th className="px-6 py-4">Type / Flow</th>
@@ -122,14 +122,14 @@ export default function WarehouseDashboard() {
                     <tr key={task.id} className="hover:bg-gray-50/50 transition-colors group cursor-pointer">
                       <td className="px-6 py-5">
                         <div className="font-bold text-[#111] text-[15px]">{task.id}</div>
-                        <div className="text-[11px] text-gray-400 font-medium mt-0.5">{task.items} Listed Items</div>
+                        <div className="text-xs text-gray-400 font-medium mt-0.5">{task.items} Listed Items</div>
                       </td>
                       <td className="px-6 py-5">
                         <div className="flex items-center gap-2 mb-2">
                           <span className={`w-2 h-2 rounded-full ${task.type === 'Inbound' ? 'bg-[#FFCC00]' : 'bg-blue-500'}`}></span>
                           <span className="text-sm font-bold text-[#111]">{task.type}</span>
                         </div>
-                        <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded border ${
+                        <span className={`text-xs font-bold uppercase tracking-widest px-2 py-0.5 rounded border ${
                           task.priority === 'Critical' ? 'bg-[#FEF2F2] text-[#DC2626] border-[#FEE2E2] animate-pulse' :
                           task.priority === 'High'     ? 'bg-yellow-50 text-yellow-700 border-yellow-200' :
                                                          'bg-gray-50 text-gray-500 border-gray-200'
@@ -144,13 +144,13 @@ export default function WarehouseDashboard() {
                           </div>
                           <div>
                             <div className="text-sm font-bold text-[#111] uppercase">{task.vehicle}</div>
-                            <div className="text-[10px] text-gray-400 font-medium mt-0.5">{task.gate} Assigned</div>
+                            <div className="text-xs text-gray-400 font-medium mt-0.5">{task.gate} Assigned</div>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-5">
                         <div className="font-bold text-[#111] text-sm">{task.eta}</div>
-                        <div className="text-[10px] text-gray-400 font-medium mt-0.5 uppercase">Scheduled</div>
+                        <div className="text-xs text-gray-400 font-medium mt-0.5 uppercase">Scheduled</div>
                       </td>
                     </tr>
                   ))}
@@ -165,11 +165,11 @@ export default function WarehouseDashboard() {
           
           {/* Capacity */}
           <div className="bg-[#111] rounded-xl p-6 text-white border border-gray-800 shadow-sm">
-            <h4 className="text-[10px] font-bold uppercase text-gray-500 tracking-widest mb-6">Zone Storage Capacity</h4>
+            <h4 className="text-xs font-bold uppercase text-gray-500 tracking-widest mb-6">Zone Storage Capacity</h4>
             <div className="flex items-end justify-between gap-4 mb-3">
               <div>
                 <span className="text-4xl font-black text-white">78%</span>
-                <span className="text-[10px] font-bold text-gray-400 uppercase mt-1 tracking-widest block">Utilized Area</span>
+                <span className="text-xs font-bold text-gray-400 uppercase mt-1 tracking-widest block">Utilized Area</span>
               </div>
               <span className="text-xs font-black text-[#FFCC00]">22% FREE</span>
             </div>
@@ -178,11 +178,11 @@ export default function WarehouseDashboard() {
             </div>
             <div className="mt-6 pt-6 border-t border-white/10 grid grid-cols-2 gap-4">
               <div>
-                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest block mb-1">Pallet Slots</span>
+                <span className="text-xs font-bold text-gray-500 uppercase tracking-widest block mb-1">Pallet Slots</span>
                 <span className="text-sm font-black text-white">412 / 600</span>
               </div>
               <div>
-                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest block mb-1">Cold Chain</span>
+                <span className="text-xs font-bold text-gray-500 uppercase tracking-widest block mb-1">Cold Chain</span>
                 <span className="text-sm font-black text-white">84 / 100</span>
               </div>
             </div>
@@ -190,7 +190,7 @@ export default function WarehouseDashboard() {
 
           {/* Dock Status */}
           <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex flex-col gap-3">
-            <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Primary Dock Status</h4>
+            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Primary Dock Status</h4>
             {[
               { gate: 'DOCK-1', vehicle: 'VAN-08',  status: 'Occupied', cls: 'bg-yellow-50 text-yellow-700 border-yellow-200' },
               { gate: 'DOCK-2', vehicle: '—',       status: 'Empty',    cls: 'bg-[#F0FDF4] text-[#16A34A] border-[#DCFCE7]' },
@@ -200,9 +200,9 @@ export default function WarehouseDashboard() {
               <div key={i} className="flex justify-between items-center bg-gray-50/50 p-3 rounded-lg border border-gray-100">
                 <div>
                   <span className="text-xs font-black text-[#111] uppercase">{g.gate}</span>
-                  <p className="text-[10px] text-gray-400 font-medium mt-0.5">{g.vehicle}</p>
+                  <p className="text-xs text-gray-400 font-medium mt-0.5">{g.vehicle}</p>
                 </div>
-                <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md border ${g.cls}`}>{g.status}</span>
+                <span className={`text-xs font-bold uppercase tracking-widest px-2.5 py-1 rounded-md border ${g.cls}`}>{g.status}</span>
               </div>
             ))}
           </div>
@@ -212,3 +212,5 @@ export default function WarehouseDashboard() {
     </div>
   );
 }
+
+

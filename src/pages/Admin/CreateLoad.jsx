@@ -6,7 +6,7 @@ import {
   Navigation, Scale, Box, User, Phone,
   Layers, Fingerprint, Shield, Search,
   CheckCircle2, X, ChevronDown, Mail, CreditCard, Building2,
-  Plus, Trash2, Copy, ChevronUp, Car, Boxes, AlertCircle, Barcode
+  Plus, Trash2, Copy, ChevronUp, Car, Boxes, AlertCircle
 } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 
@@ -44,12 +44,12 @@ const createItem = (id) => ({
   collapsed: false,
 });
 
-export default function DispatchCreateJob() {
+export default function AdminCreateLoad() {
   const user = useAuthStore(state => state.user);
   const navigate = useNavigate();
   const [priority, setPriority] = useState('Normal');
   const [paymentBy, setPaymentBy] = useState('Sender');
-  const [transferType, setTransferType] = useState('Direct');
+  const [transferType, setTransferType] = useState('Direct'); 
   const [selectedNiche, setSelectedNiche] = useState('freight'); // Global niche selection for the load
 
   // Sender state
@@ -57,12 +57,6 @@ export default function DispatchCreateJob() {
   const [senderSearch, setSenderSearch] = useState('');
   const [selectedSender, setSelectedSender] = useState(null);
   const [showSenderDropdown, setShowSenderDropdown] = useState(false);
-
-  // Receiver state
-  const [receiverMode, setReceiverMode] = useState('registered');
-  const [receiverSearch, setReceiverSearch] = useState('');
-  const [selectedReceiver, setSelectedReceiver] = useState(null);
-  const [showReceiverDropdown, setShowReceiverDropdown] = useState(false);
 
   // Multi-item state
   const [items, setItems] = useState([createItem(1)]);
@@ -88,28 +82,6 @@ export default function DispatchCreateJob() {
     setShowSenderDropdown(false);
   };
   const clearSender = () => { setSelectedSender(null); setSenderSearch(''); };
-
-  const receiverResults = REGISTERED_USERS.filter(u =>
-    receiverSearch.length > 1 && (
-      u.name.toLowerCase().includes(receiverSearch.toLowerCase()) ||
-      u.phone.includes(receiverSearch) ||
-      u.email.toLowerCase().includes(receiverSearch.toLowerCase())
-    )
-  );
-
-  const selectReceiver = (u) => {
-    setSelectedReceiver(u);
-    setReceiverSearch(u.name);
-    setShowReceiverDropdown(false);
-  };
-  const clearReceiver = () => { setSelectedReceiver(null); setReceiverSearch(''); };
-  
-  const copyReceiverFromSender = () => {
-    if (selectedSender) {
-      setSelectedReceiver(selectedSender);
-      setReceiverMode('registered');
-    }
-  };
 
   // Item helpers
   const addItem = () => {
@@ -152,7 +124,7 @@ export default function DispatchCreateJob() {
       <div className="flex justify-between items-center mb-2 px-2">
         <div className="flex items-center gap-4">
           <button
-            onClick={() => navigate('/dispatch/loads')}
+            onClick={() => navigate('/admin/loads')}
             className="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-all shadow-sm"
           >
             <ArrowLeft size={20} />
@@ -166,7 +138,7 @@ export default function DispatchCreateJob() {
           </div>
         </div>
         <div className="flex gap-4">
-          <button onClick={() => navigate('/dispatch/loads')} className="btn btn-outline text-gray-600">
+          <button onClick={() => navigate('/admin/loads')} className="btn btn-outline text-gray-600">
             Cancel
           </button>
           <button className="btn btn-primary pl-6 pr-8">
@@ -189,7 +161,7 @@ export default function DispatchCreateJob() {
               </div>
               <div className="text-left">
                 <p className="text-[13px] font-bold uppercase tracking-wide">{niche.label}</p>
-              </div>
+                </div>
             </button>
           ))}
         </div>
@@ -338,131 +310,6 @@ export default function DispatchCreateJob() {
             </div>
           </div>
 
-          {/* RECEIVER */}
-          <div className="bg-white rounded-2xl shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)] border border-gray-100 overflow-hidden transition-all">
-            <div className="p-5 border-b border-gray-100 bg-[#FAFAFA] flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
-                  <User size={20} />
-                </div>
-                <div>
-                  <h2 className="text-sm font-black text-gray-900 uppercase tracking-wide">Receiver Identity</h2>
-                  <p className="text-xs text-gray-400 font-bold uppercase mt-0.5 tracking-widest">Destination Party</p>
-                </div>
-              </div>
-              <div className="flex bg-gray-100 p-1 rounded-xl border border-gray-200/60">
-                {['guest', 'registered'].map(mode => (
-                  <button
-                    key={mode}
-                    onClick={() => { setReceiverMode(mode); clearReceiver(); }}
-                    className={`px-5 py-2 text-xs font-black rounded-lg transition-all uppercase tracking-widest ${receiverMode === mode ? 'bg-white text-gray-900 shadow-sm border border-gray-200/50' : 'text-gray-500 hover:text-gray-700'}`}
-                  >
-                    {mode === 'guest' ? 'Quick Guest' : 'Existing Client'}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="p-6">
-              <div className="flex justify-end mb-4">
-                <button onClick={copyReceiverFromSender} className="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1.5">
-                  <Copy size={12} /> Same as Sender
-                </button>
-              </div>
-              {receiverMode === 'guest' ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="md:col-span-2">
-                    <label className="block text-xs font-semibold text-gray-500 mb-2 ml-1">Legal Name / Company *</label>
-                    <div className="relative group">
-                      <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-emerald-500 transition-colors" size={16} />
-                      <input type="text" placeholder="e.g. Jane Smith or Target Store" className="input pl-11 !rounded-xl" />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-500 mb-2 ml-1">Contact Phone</label>
-                    <div className="relative group">
-                      <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-emerald-500 transition-colors" size={16} />
-                      <input type="text" placeholder="+61 4XX XXX XXX" className="input pl-11 !rounded-xl" />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-500 mb-2 ml-1">Delivery Address</label>
-                    <div className="relative group">
-                      <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-emerald-500 transition-colors" size={16} />
-                      <input type="text" placeholder="Suburb, State, Postcode" className="input pl-11 !rounded-xl" />
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-500 mb-2 ml-1">Secure Customer Search *</label>
-                    <div className="relative">
-                      <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
-                      <input
-                        type="text"
-                        value={receiverSearch}
-                        onChange={e => { setReceiverSearch(e.target.value); setShowReceiverDropdown(true); setSelectedReceiver(null); }}
-                        onFocus={() => setShowReceiverDropdown(true)}
-                        placeholder="Search by name, phone, or email..."
-                        className="input pl-11 pr-11 !rounded-xl"
-                      />
-                      {receiverSearch && (
-                        <button onClick={clearReceiver} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700">
-                          <X size={15} />
-                        </button>
-                      )}
-                    </div>
-                    {showReceiverDropdown && receiverResults.length > 0 && !selectedReceiver && (
-                      <div className="mt-2 bg-white border border-gray-200 rounded-2xl shadow-2xl overflow-hidden z-20 relative animate-in slide-in-from-top-2">
-                        {receiverResults.map(u => (
-                          <button key={u.id} onClick={() => selectReceiver(u)} className="w-full flex items-center gap-4 p-4 hover:bg-emerald-50 text-left border-b border-gray-50 last:border-0 transition-all">
-                            <div className="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center text-[#FFCC00] font-black text-xs shrink-0 shadow-lg">
-                              {u.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
-                            </div>
-                            <div className="min-w-0">
-                              <p className="font-black text-sm text-gray-900 truncate">{u.name}</p>
-                              <p className="text-xs text-gray-400 uppercase tracking-widest font-black">{u.phone} · {u.type}</p>
-                            </div>
-                            <span className="text-xs text-gray-400 font-black uppercase tracking-widest shrink-0 border border-gray-100 px-2 py-0.5 rounded-md ml-auto">{u.id}</span>
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {selectedReceiver && (
-                    <div className="bg-emerald-600 rounded-2xl p-6 relative overflow-hidden shadow-xl shadow-emerald-200 animate-in zoom-in-95">
-                      <div className="absolute top-0 right-0 p-12 -mr-6 -mt-6 bg-white/10 rounded-full blur-3xl"></div>
-                      <div className="flex items-center gap-6 relative z-10">
-                        <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white font-black text-xl border border-white/30 shadow-lg shrink-0">
-                          {selectedReceiver.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-3 mb-1.5">
-                            <h4 className="font-black text-white text-lg tracking-tight">{selectedReceiver.name}</h4>
-                            <span className="text-xs font-black text-white bg-white/20 border border-white/30 px-2.5 py-0.5 rounded uppercase tracking-widest">ID: {selectedReceiver.id}</span>
-                          </div>
-                          <div className="grid grid-cols-2 gap-y-1.5 gap-x-6">
-                            <p className="text-xs font-bold text-emerald-100 flex items-center gap-2"><Phone size={12} className="opacity-70" />{selectedReceiver.phone}</p>
-                            <p className="text-xs font-bold text-emerald-100 flex items-center gap-2"><Mail size={12} className="opacity-70" />{selectedReceiver.email}</p>
-                            <p className="text-xs font-bold text-emerald-100 flex items-center gap-2 col-span-2"><MapPin size={12} className="opacity-70" />{selectedReceiver.address}</p>
-                          </div>
-                        </div>
-                        <div className="flex flex-col items-end gap-3 shrink-0">
-                          <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-emerald-600 shadow-lg">
-                            <CheckCircle2 size={18} strokeWidth={3} />
-                          </div>
-                          <button onClick={clearReceiver} className="text-xs text-white/70 hover:text-white font-black uppercase tracking-widest transition-colors border-b border-white/30 pb-0.5">Switch Client</button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-
           {/* ── MULTI-ITEM SECTION ── */}
           <div className="flex flex-col gap-4">
             <div className="flex justify-between items-center px-1">
@@ -516,7 +363,7 @@ export default function DispatchCreateJob() {
 
                 {!item.collapsed && (
                   <div className="border-t border-gray-50 p-6 flex flex-col gap-6 animate-in slide-in-from-top-2 duration-300">
-
+                    
                     {/* Niche Specific Fields */}
                     {item.niche === 'car' ? (
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-blue-50/30 p-5 rounded-2xl border border-blue-100/50">
@@ -539,7 +386,7 @@ export default function DispatchCreateJob() {
                       </div>
                     ) : item.niche === 'dangerous' ? (
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-orange-50/30 p-5 rounded-2xl border border-orange-100/50">
-                        <div className="md:col-span-3 mb-2 flex items-center gap-2">
+                         <div className="md:col-span-3 mb-2 flex items-center gap-2">
                           <AlertCircle size={16} className="text-orange-600" />
                           <h4 className="text-xs font-bold text-orange-900 uppercase tracking-wide">Hazardous Declaration</h4>
                         </div>
@@ -550,10 +397,10 @@ export default function DispatchCreateJob() {
                         <div>
                           <label className="block text-xs font-semibold text-orange-700 mb-2 ml-1">Hazard Class</label>
                           <select value={item.hazardClass} onChange={e => updateItem(item.id, 'hazardClass', e.target.value)} className="input !bg-white !border-orange-200 !rounded-xl">
-                            <option>Class 1: Explosives</option>
-                            <option>Class 2: Gases</option>
-                            <option>Class 3: Flammable Liquids</option>
-                            <option>Class 4: Flammable Solids</option>
+                             <option>Class 1: Explosives</option>
+                             <option>Class 2: Gases</option>
+                             <option>Class 3: Flammable Liquids</option>
+                             <option>Class 4: Flammable Solids</option>
                           </select>
                         </div>
                         <div>
@@ -574,9 +421,9 @@ export default function DispatchCreateJob() {
                         <div>
                           <label className="block text-xs font-semibold text-violet-700 mb-2 ml-1">Packaging Group</label>
                           <select value={item.packaging} onChange={e => updateItem(item.id, 'packaging', e.target.value)} className="input !bg-white !border-violet-200 !rounded-xl">
-                            <option>Pallets</option>
-                            <option>Skids</option>
-                            <option>Tote Boxes</option>
+                             <option>Pallets</option>
+                             <option>Skids</option>
+                             <option>Tote Boxes</option>
                           </select>
                         </div>
                       </div>
@@ -592,12 +439,12 @@ export default function DispatchCreateJob() {
                         <input type="number" value={item.weight} onChange={e => updateItem(item.id, 'weight', e.target.value)} className="input !rounded-xl" />
                       </div>
                       <div className="md:col-span-2">
-                        <label className="block text-xs font-semibold text-gray-500 mb-2 ml-1">Dimensions (L x W x H cm)</label>
-                        <div className="grid grid-cols-3 gap-2">
-                          <input type="text" placeholder="L" className="input !rounded-xl text-center px-1" />
-                          <input type="text" placeholder="W" className="input !rounded-xl text-center px-1" />
-                          <input type="text" placeholder="H" className="input !rounded-xl text-center px-1" />
-                        </div>
+                         <label className="block text-xs font-semibold text-gray-500 mb-2 ml-1">Dimensions (L x W x H cm)</label>
+                         <div className="grid grid-cols-3 gap-2">
+                            <input type="text" placeholder="L" className="input !rounded-xl text-center px-1" />
+                            <input type="text" placeholder="W" className="input !rounded-xl text-center px-1" />
+                            <input type="text" placeholder="H" className="input !rounded-xl text-center px-1" />
+                         </div>
                       </div>
                     </div>
 
@@ -647,17 +494,6 @@ export default function DispatchCreateJob() {
                           </div>
                         )}
                       </div>
-                    </div>
-                    <div className="pt-4 border-t border-gray-100 flex justify-end">
-                      <button 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          alert(`Shipping Label Generated for Item #${idx + 1}`);
-                        }}
-                        className="flex items-center gap-2 bg-gray-50 hover:bg-[#FFCC00] hover:text-black hover:border-[#FFCC00] text-gray-700 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all border border-gray-200 shadow-sm active:scale-95"
-                      >
-                        <Barcode size={16} /> Generate Shipping Label
-                      </button>
                     </div>
                   </div>
                 )}
@@ -733,14 +569,14 @@ export default function DispatchCreateJob() {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-gray-400">GST (10%)</span>
-                  <span className="text-sm font-bold">${((items.length * 420 + totalWeight * 2.5 + 45 + (priority === 'Direct' ? 450 : (priority === 'Express' ? 120 : 0))) * 0.1).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                  <span className="text-sm font-bold">${((items.length * 420 + totalWeight * 2.5 + 45 + (priority === 'Direct' ? 450 : (priority === 'Express' ? 120 : 0))) * 0.1).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                 </div>
                 <div className="flex justify-between items-center pt-3 border-t border-white/10">
                   <span className="text-sm font-bold text-[#FFCC00]">
                     {paymentBy === 'Sender' ? 'Total Charged' : 'Total Due'}
                   </span>
                   <span className="text-2xl font-black">
-                    ${((items.length * 420 + totalWeight * 2.5 + 45 + (priority === 'Direct' ? 450 : (priority === 'Express' ? 120 : 0))) * 1.1).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    ${((items.length * 420 + totalWeight * 2.5 + 45 + (priority === 'Direct' ? 450 : (priority === 'Express' ? 120 : 0))) * 1.1).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
                   </span>
                 </div>
               </div>
@@ -760,3 +596,10 @@ export default function DispatchCreateJob() {
     </div>
   );
 }
+
+
+
+
+
+
+

@@ -38,7 +38,7 @@ export default function CustomerLayout() {
               <span className="font-black text-[#111] text-lg tracking-tighter uppercase">HERO</span>
             </div>
             <span className="w-px h-4 bg-gray-200 mx-1" />
-            <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest">Customer Portal</span>
+            <span className="text-xs text-gray-400 font-black uppercase tracking-widest">Customer Portal</span>
           </div>
 
           {/* Nav Links */}
@@ -46,7 +46,7 @@ export default function CustomerLayout() {
             {navItems.map(({ to, label, icon: Icon, end }) => (
               <NavLink key={to} to={to} end={end}>
                 {({ isActive }) => (
-                  <div className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[11px] font-black uppercase tracking-widest transition-all ${
+                  <div className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${
                     isActive
                       ? 'bg-[#FFCC00] text-[#111]'
                       : 'text-gray-500 hover:text-[#111] hover:bg-gray-100'
@@ -70,7 +70,7 @@ export default function CustomerLayout() {
             </div>
             <button
               onClick={() => navigate('/login')}
-              className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-red-500 transition-colors ml-1"
+              className="flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-gray-400 hover:text-red-500 transition-colors ml-1"
             >
               <LogOut size={13} />
               Sign Out
@@ -85,3 +85,4 @@ export default function CustomerLayout() {
     </div>
   );
 }
+

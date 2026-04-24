@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { 
-  Map, Zap, Search, Truck, MapPin, Navigation, Clock, 
-  Satellite, Layers, Maximize2, Crosshair, Bell, Info,
-  ChevronRight, Phone, MessageCircle, AlertTriangle, Package
+  Search, Truck, MapPin, Navigation, Clock, 
+  Layers, Maximize2, Crosshair, Bell, AlertTriangle,
+  Phone, Activity
 } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 
 const activeVehicles = [
   { id: 'TRK-102', branchId: 'SYD-CENTRAL', driver: 'Jack Taylor', status: 'Moving', speed: '45 km/h', loc: 'Hume Highway, Goulburn', eta: '45 mins', carga: 'Perishables', temp: '-2°C' },
   { id: 'VAN-08',  branchId: 'SYD-CENTRAL', driver: 'Liam Smith', status: 'Stopped', speed: '0 km/h', loc: 'Albury Stopover',     eta: 'Delayed', carga: 'Electronics', temp: 'N/A' },
-  { id: 'TRK-05',  branchId: 'MEL-HUB',     driver: 'Noah Williams',  status: 'Moving', speed: '62 km/h', loc: 'Pacific Highway, NSW',   eta: '1h 15m', carga: 'Heavy Mach.', temp: 'N/A' },
+  { id: 'TRK-05',  branchId: 'MEL-Depot',     driver: 'Noah Williams',  status: 'Moving', speed: '62 km/h', loc: 'Pacific Highway, NSW',   eta: '1h 15m', carga: 'Heavy Mach.', temp: 'N/A' },
   { id: 'VAN-14',  branchId: 'SYD-CENTRAL', driver: 'Oliver Brown',   status: 'Loading', speed: '0 km/h', loc: 'Warehouse A, Sydney',          eta: 'Pending', carga: 'Textiles', temp: '22°C' },
   { id: 'TRK-900', branchId: 'BNE-PORT',    driver: 'Ethan Hunt',     status: 'Moving', speed: '88 km/h', loc: 'Gateway Bridge, BNE',    eta: '15 mins', carga: 'Vip Parcel', temp: 'N/A' },
 ];
@@ -39,10 +39,10 @@ export default function DispatchTracking() {
       <div className="flex justify-between items-center mb-6 shrink-0">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 tracking-tight flex items-center gap-3">
-             <Satellite className="text-blue-500" size={24}/> Fleet GPS Monitor
+             <Crosshair className="text-blue-500" size={24}/> Mobile GPS Monitor
           </h1>
           <p className="text-sm font-bold text-gray-400 mt-1 uppercase tracking-widest flex items-center gap-2">
-             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Network Synchronized • 0s Delay
+             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Driver Phone Signal • Live Tracking
           </p>
         </div>
         <div className="flex gap-2">
@@ -66,12 +66,12 @@ export default function DispatchTracking() {
             </div>
             <div className="flex gap-2 mt-4">
               <div className="flex-1 flex flex-col items-center justify-center p-3 bg-emerald-50 text-emerald-700 rounded-2xl border border-emerald-100 shadow-sm relative overflow-hidden group">
-                <span className="text-[9px] font-black uppercase tracking-widest relative z-10">Active</span>
+                <span className="text-xs font-black uppercase tracking-widest relative z-10">Active</span>
                 <span className="text-2xl font-black relative z-10">24</span>
                 <Truck size={30} className="absolute -right-2 -bottom-2 opacity-10 group-hover:rotate-12 transition-transform"/>
               </div>
               <div className="flex-1 flex flex-col items-center justify-center p-3 bg-red-50 text-red-700 rounded-2xl border border-red-100 shadow-sm relative overflow-hidden group">
-                <span className="text-[9px] font-black uppercase tracking-widest relative z-10">Alerts</span>
+                <span className="text-xs font-black uppercase tracking-widest relative z-10">Alerts</span>
                 <span className="text-2xl font-black relative z-10">03</span>
                 <AlertTriangle size={30} className="absolute -right-2 -bottom-2 opacity-10 group-hover:rotate-12 transition-transform"/>
               </div>
@@ -92,12 +92,12 @@ export default function DispatchTracking() {
                      </div>
                      <div>
                         <p className="font-black text-gray-900 text-sm tracking-tight">{v.id}</p>
-                        <p className="text-[10px] font-black text-[#FFCC00] bg-gray-900 px-2 py-0.5 rounded shadow-sm inline-block mt-1 uppercase tracking-widest">{v.driver}</p>
+                        <p className="text-xs font-black text-[#FFCC00] bg-gray-900 px-2 py-0.5 rounded shadow-sm inline-block mt-1 uppercase tracking-widest">{v.driver}</p>
                      </div>
                   </div>
                   <div className="text-right">
-                     <span className={`text-[10px] font-black uppercase tracking-widest ${v.status === 'Moving' ? 'text-emerald-500' : 'text-gray-400'}`}>{v.status}</span>
-                     <p className="text-[10px] font-bold text-gray-400 mt-1 uppercase truncate max-w-[80px]">{v.loc.split(',')[1] || v.loc}</p>
+                     <span className={`text-xs font-black uppercase tracking-widest ${v.status === 'Moving' ? 'text-emerald-500' : 'text-gray-400'}`}>{v.status}</span>
+                     <p className="text-xs font-bold text-gray-400 mt-1 uppercase truncate max-w-[80px]">{v.loc.split(',')[1] || v.loc}</p>
                   </div>
                 </div>
                 
@@ -125,11 +125,11 @@ export default function DispatchTracking() {
            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)] pointer-events-none"></div>
 
            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-             <div className="w-24 h-24 rounded-full border border-[#FFCC00]/20 flex items-center justify-center animate-[ping_3s_infinite] absolute"></div>
+             <div className="w-24 h-24 rounded-full border border-blue-500/20 flex items-center justify-center animate-[ping_3s_infinite] absolute"></div>
              <div className="text-center relative z-10 px-12">
-               <Crosshair size={48} strokeWidth={1} className="text-[#FFCC00]/20 mx-auto mb-6" />
-               <h4 className="text-white font-black text-xl tracking-tight mb-2">Satellite Telemetry Locked</h4>
-               <p className="text-gray-500 text-sm max-w-sm mx-auto font-medium">Coordinate synchronization active. Select a vehicle from the telemetry board to focus tracking.</p>
+               <Crosshair size={48} strokeWidth={1} className="text-blue-500/20 mx-auto mb-6" />
+               <h4 className="text-white font-black text-xl tracking-tight mb-2">Driver GPS Active</h4>
+               <p className="text-gray-500 text-sm max-w-sm mx-auto font-medium">Tracking via driver mobile application. Coordinates update every 30 seconds.</p>
              </div>
            </div>
            
@@ -138,12 +138,12 @@ export default function DispatchTracking() {
               <div className="bg-gray-900/80 backdrop-blur-md border border-white/10 p-4 rounded-3xl shadow-2xl pointer-events-auto">
                  <div className="flex items-center gap-4">
                     <div className="flex flex-col">
-                       <span className="text-[9px] font-black text-[#FFCC00] uppercase tracking-widest mb-1">Active HUB</span>
-                       <span className="text-sm font-black text-white px-3 py-1 bg-[#FFCC00]/10 border border-[#FFCC00]/20 rounded-xl shadow-inner">{user.branchName}</span>
+                       <span className="text-xs font-black text-[#FFCC00] uppercase tracking-widest mb-1">Mobile App Signal</span>
+                       <span className="text-sm font-black text-white px-3 py-1 bg-[#FFCC00]/10 border border-[#FFCC00]/20 rounded-xl shadow-inner">{user.branchName} Node</span>
                     </div>
                     <div className="w-px h-10 bg-white/10"></div>
                     <div className="flex flex-col">
-                       <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1">Signal</span>
+                       <span className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">Signal</span>
                        <div className="flex gap-0.5 items-end h-4">
                           {[20, 60, 40, 100].map((h, i) => <div key={i} className="w-1 bg-emerald-500 rounded-t-full" style={{ height: `${h}%` }}></div>)}
                        </div>
@@ -176,12 +176,12 @@ export default function DispatchTracking() {
                       
                       <div className="grid grid-cols-3 gap-6">
                          {[
-                           { label: 'Cargo Type', val: selectedVehicle.carga, icon: Package },
-                           { label: 'Temp Monitor', val: selectedVehicle.temp, icon: Info },
-                           { label: 'Speed Limit', val: '80 km/h', icon: Navigation },
+                           { label: 'Tracking Source', val: 'Mobile App GPS', icon: Phone },
+                           { label: 'Device Status', val: 'Online / Active', icon: Activity },
+                           { label: 'Last Signal', val: '2m ago', icon: Navigation },
                          ].map((item, i) => (
                            <div key={i} className="flex flex-col bg-white/5 p-3 rounded-2xl border border-white/5">
-                              <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest flex items-center gap-1.5 mb-1"><item.icon size={10}/> {item.label}</span>
+                              <span className="text-xs font-black text-gray-500 uppercase tracking-widest flex items-center gap-1.5 mb-1"><item.icon size={10}/> {item.label}</span>
                               <span className="text-sm font-black text-white">{item.val}</span>
                            </div>
                          ))}
@@ -204,3 +204,4 @@ export default function DispatchTracking() {
     </div>
   );
 }
+

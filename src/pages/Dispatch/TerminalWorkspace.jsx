@@ -7,10 +7,10 @@ import {
 } from 'lucide-react';
 
 const MOCK_INBOUND = [
-  { id: 'SHP-9041', destination: 'Sydney Local', type: 'Local', origin: 'Brisbane Hub', status: 'Arrived', weight: '12kg' },
-  { id: 'SHP-9042', destination: 'Melbourne Hub', type: 'Hub Transfer', origin: 'Sydney Hub', status: 'In Transit', weight: '450kg' },
-  { id: 'SHP-9043', destination: 'Sydney Local', type: 'Local', origin: 'Perth Hub', status: 'Arrived', weight: '5kg' },
-  { id: 'SHP-9044', destination: 'Brisbane Hub', type: 'Hub Transfer', origin: 'Sydney Hub', status: 'In Transit', weight: '22kg' },
+  { id: 'SHP-9041', destination: 'Sydney Local', type: 'Local', origin: 'Brisbane Depot', status: 'Arrived', weight: '12kg' },
+  { id: 'SHP-9042', destination: 'Melbourne Depot', type: 'Depot Transfer', origin: 'Sydney Depot', status: 'In Transit', weight: '450kg' },
+  { id: 'SHP-9043', destination: 'Sydney Local', type: 'Local', origin: 'Perth Depot', status: 'Arrived', weight: '5kg' },
+  { id: 'SHP-9044', destination: 'Brisbane Depot', type: 'Depot Transfer', origin: 'Sydney Depot', status: 'In Transit', weight: '22kg' },
 ];
 
 export default function TerminalWorkspace() {
@@ -43,7 +43,7 @@ export default function TerminalWorkspace() {
           <div>
             <h1 className="hero-h1">Terminal Sortation</h1>
             <p className="hero-body mt-1 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-hero-success animate-pulse"></span> Sydney Hub Node 01 • Active Inbound
+              <span className="w-1.5 h-1.5 rounded-full bg-hero-success animate-pulse"></span> Sydney Depot Node 01 • Active Inbound
             </p>
           </div>
         </div>
@@ -64,7 +64,7 @@ export default function TerminalWorkspace() {
         <div>
           <h3 className="font-bold text-sm uppercase tracking-widest mb-1">What is this Workspace?</h3>
           <p className="text-xs font-medium leading-relaxed opacity-90">
-            This module is used by Warehouse Staff when large line-haul trucks arrive at a Terminal. Workers scan every incoming box. The "Smart Sorter" instantly checks the <strong>Full Network Manifest</strong> (the master list of all cross-country jobs) to decide if the box should go out on a <strong>Local Delivery Van</strong> or be loaded onto another <strong>Line-haul Truck</strong> for the next Hub.
+            This module is used by Warehouse Staff when large line-haul trucks arrive at a Terminal. Workers scan every incoming box. The "Smart Sorter" instantly checks the <strong>Full Network Manifest</strong> (the master list of all cross-country jobs) to decide if the box should go out on a <strong>Local Delivery Van</strong> or be loaded onto another <strong>Line-haul Truck</strong> for the next Depot.
           </p>
           <p className="text-xs font-bold mt-2 text-blue-700 bg-blue-100/50 inline-block px-2 py-1 rounded">
             💡 Try scanning: <span className="font-black">SHP-9041</span> or <span className="font-black">SHP-9042</span>
@@ -88,7 +88,7 @@ export default function TerminalWorkspace() {
                      type="text"
                      value={scanInput}
                      onChange={(e) => setScanInput(e.target.value.toUpperCase())}
-                     placeholder="Enter / Scan Shipment ID..."
+                     placeholder="Enter / Scan Load ID..."
                      className="w-full bg-gray-50 border border-gray-200 focus:border-hero-primary focus:bg-white rounded-hero-md py-5 pl-16 pr-6 text-xl font-bold tracking-tight text-hero-dark transition-all outline-none"
                    />
                 </form>
@@ -143,7 +143,7 @@ export default function TerminalWorkspace() {
              </div>
              <div className="divide-y divide-gray-100">
                 {sortList.map((item, idx) => (
-                  <div key={idx} className="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors cursor-pointer" onClick={() => navigate(`/dispatch/shipments/${item.id}`)}>
+                  <div key={idx} className="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors cursor-pointer" onClick={() => navigate(`/dispatch/loads/${item.id}`)}>
                      <div className="flex items-center gap-4">
                         <div className={`w-8 h-8 rounded-hero-sm flex items-center justify-center ${item.type === 'Local' ? 'bg-hero-success/10 text-hero-success' : 'bg-blue-50 text-blue-600'}`}>
                            {item.type === 'Local' ? <MapPin size={16} /> : <ArrowRight size={16} />}
@@ -167,7 +167,7 @@ export default function TerminalWorkspace() {
               
               <div className="space-y-4">
                  {MOCK_INBOUND.filter(i => i.status === 'In Transit').map(item => (
-                   <div key={item.id} className="flex items-center justify-between group cursor-pointer" onClick={() => navigate(`/dispatch/shipments/${item.id}`)}>
+                   <div key={item.id} className="flex items-center justify-between group cursor-pointer" onClick={() => navigate(`/dispatch/loads/${item.id}`)}>
                       <div className="flex items-center gap-3">
                          <div className="w-8 h-8 rounded-hero-sm bg-white/10 flex items-center justify-center text-gray-400 group-hover:text-hero-primary transition-all">
                             <Truck size={14} />
@@ -183,7 +183,7 @@ export default function TerminalWorkspace() {
               </div>
 
               <button 
-                 onClick={() => navigate('/dispatch/shipments')}
+                 onClick={() => navigate('/dispatch/loads')}
                  className="w-full mt-6 py-2.5 bg-white/10 hover:bg-white/20 rounded-hero-sm text-xs font-bold uppercase tracking-widest transition-all"
               >
                  View Full Manifest
@@ -196,7 +196,7 @@ export default function TerminalWorkspace() {
                  <h4 className="hero-metadata !text-hero-warning">Sorting Protocol</h4>
               </div>
               <p className="text-xs font-medium text-hero-dark/70 leading-relaxed">
-                 Ensure every scan is cross-referenced with the digital manifest (the master list of active network shipments). Unrecognized items must be quarantined immediately to Section X.
+                 Ensure every scan is cross-referenced with the digital manifest (the master list of active network Loads). Unrecognized items must be quarantined immediately to Section X.
               </p>
            </div>
         </div>

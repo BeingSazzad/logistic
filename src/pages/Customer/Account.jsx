@@ -23,7 +23,7 @@ export default function CustomerAccount() {
                 <f.icon size={18} className="text-gray-500" />
               </div>
               <div className="flex-1">
-                <p className="text-xs text-gray-400 font-semibold">{f.label}</p>
+                <p className="text-xs text-gray-600 font-semibold">{f.label}</p>
                 <p className="text-sm font-semibold text-gray-900 mt-0.5">{f.value}</p>
               </div>
             </div>
@@ -46,7 +46,7 @@ export default function CustomerAccount() {
         <h3 className="font-bold text-gray-900 mb-4">Notification Preferences</h3>
         <div className="space-y-3">
           {[
-            { label: 'Shipment status SMS', enabled: true },
+            { label: 'Load status SMS', enabled: true },
             { label: 'Delivery confirmation email', enabled: true },
             { label: 'Invoice email', enabled: true },
             { label: 'Payment reminder email', enabled: false },
@@ -61,3 +61,4 @@ export default function CustomerAccount() {
     </div>
   );
 }
+
