@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import {
   Search, Plus, Truck, X, CheckCircle2, AlertCircle,
   Printer, Barcode, Filter, ChevronDown, Tag, Calendar,
-  Hash, Car, MapPin, Loader2
+  Hash, Car, MapPin, Loader2, Fingerprint
 } from 'lucide-react';
 
 // ── Mock Data ──────────────────────────────────────────────────────────────
