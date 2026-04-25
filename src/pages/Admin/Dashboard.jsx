@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useLoadStore } from '../../store/LoadStore';
+import { useLoadStore } from '../../store/loadStore';
 import DashboardUI from '../../components/Admin/DashboardUI';
 
 export default function AdminDashboard() {
